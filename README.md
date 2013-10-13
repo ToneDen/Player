@@ -5,9 +5,10 @@ A pure JS customizable audio player for your SoundCloud.
 
 JS API, 15 band equalizer visualization, responsive, customizable.
 
+=============
+
 The MIT License (MIT)
 
-=============
 Copyright (c) [2013] [ToneDen]
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of
