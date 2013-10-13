@@ -1,4 +1,6 @@
-tonedenplayer
+An Audio Player, By ToneDen
 =============
 
-A Soundcloud fueled audio player, made by ToneDen
+A pure JS customizable audio player for your SoundCloud. 
+
+JS API, 15 band equalizer visualization, responsive, customizable.
