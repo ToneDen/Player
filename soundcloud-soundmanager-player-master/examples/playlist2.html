@@ -1,68 +1,38 @@
 <!DOCTYPE html>
-<!--[if IE 8]> 				 <html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
-
+<html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width">
-<title>Foundation 4</title>
-
-
-<link rel="stylesheet" href="css/foundation.css">
-<link rel="stylesheet" href="css/style.css">
-
-
-<script src="js/vendor/custom.modernizr.js"></script>
-
+        <meta charset="utf-8" />
+        <title>Playlist Example</title>
+		<link rel="stylesheet" href="css/style.css" type="text/css" media="screen" charset="utf-8">
 </head>
 <body>
-	<div id="player", class="row">
-		<div class="small-12 large-12 columns">
-			<div class="controls small-12 large-1 columns">
-				<!-- <div class="stop"></div> -->
-				<div class="prev"></div>
-				<div class="play"></div>
-				<div class="next"></div>
-			</div>
-			<div id="waveform" class="small-12 large-6 columns">
-    			<!-- <div class="buffer"></div>
-    			<div class="played"></div>
-    			<img> -->
-			</div>
-			<div class="title small-12 large-4 columns">
-				<div class="track-user"></div> -
-				<div class="track-title"></div>
-			</div>
+	
 
-			<div class="actions small-12 large-1 columns"></div>
-
+	<div id="player">
+		<div class="controls">
+			<div class="play"></div>
+			<!-- <div class="stop"></div> -->
+			<div class="prev"></div>
+			<div class="next"></div>
+		</div>
+		
+		<div id="waveform">
 		</div>
 	</div>
-
-<!-- 
+	
+	
 	<ol id="playlist">
 	</ol>
- -->
-	<script src='//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js'></script>
+	
+	
+	
+	<script src="../lib/jquery-1.8.2.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../lib/soundmanager2-nodebug-jsmin.js" type="text/javascript" charset="utf-8"></script>
 
-	<script>
-	document.write('<script src=' +
-	('__proto__' in {} ? 'js/vendor/zepto' : 'js/vendor/jquery') +
-	'.js><\/script>')
-	</script>
-
-	<script src="js/foundation.min.js"></script>
-
-	<script>
-	$(document).foundation();
-	</script>
-
-	<script src="js/soundmanager2-nodebug-jsmin.js" type="text/javascript" charset="utf-8"></script>
-
-	<script src="js/sc-player.js" type="text/javascript" charset="utf-8"></script>
-	<script src="js/waveform.js" type="text/javascript" charset="utf-8"></script>
-	<script src="js/sc-player-waveform.js" type="text/javascript" charset="utf-8"></script>
-
+    <script src="../sc-player.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../waveform.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../sc-player-waveform.js" type="text/javascript" charset="utf-8"></script>
+	
 	<script type="text/javascript" charset="utf-8">
 		$controls = $(".controls");
 		
@@ -80,18 +50,8 @@
 
 		var waveform = new Waveform({
 		    container: $("#waveform").get(0),
-		    innerColor: function(x,y) {
-		    	return '#' + "ffffff";
-		    },
-		    data: [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5]
+		    innerColor: "#7C85CC"
 		});
-
-		// var scwaveform = new SCWaveform(scplayer, {scrub:true}, {
-		//       container: "#waveform"
-		//     , buffer: $("#waveform").find('.buffer')
-		//     , playbar: $("#waveform").find('.played')
-		//     , waveform: $("#waveform").find('> img')
-		// });
 
 		$controls.on("click", 'div', function(e){
 			e.preventDefault();
@@ -113,7 +73,7 @@
 
 		scplayer.on('scplayer.track.bindable', function(e, track, sound){
 		    //get waveform.js to pull the waveform form the track
-		    // waveform.dataFromSoundCloudTrack(track);
+		    waveform.dataFromSoundCloudTrack(track);
 		    //get the waveform update functions back, pass your sweet colors here
 		    var waveform_updater = waveform.optionsForSyncedStream({
 		          playedColor: "#9D95DF"
@@ -139,9 +99,8 @@
 				(function(x,$li){
 					//lookup the track info
 					scplayer.track_info(x).done(function(track){
-						console.log(track);
-						$(".track-user").html(track.user.username);
-						$(".track-title").html(track.title);
+						//console.log(track);
+						$li.html(track.title);
 					});
 				})(x,$li);			
 			}
@@ -155,7 +114,7 @@
 		});
 		
 		//click playlist tracks
-		$("li", "#playlist").on('click', function(e){
+		$("li", "#playlist").live('click', function(e){
 			var $this = $(this);
 			scplayer.goto($this.data('index')).play();
 		});
