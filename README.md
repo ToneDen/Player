@@ -9,6 +9,17 @@ JS API, 15 band equalizer visualization, responsive, customizable.
 
 =============
 
+Dev Setup:
+
+1. Add the following lines to /etc/hosts:
+..* 0.0.0.0 publisher.dev
+..* 0.0.0.0 widget.dev
+2. CD into test directory.
+3. Run `python -m SimpleHTTPServer`
+4. Open a browser and visit publisher.dev:8000.
+
+=============
+
 The MIT License (MIT)
 
 Copyright (c) [2013] [ToneDen]
