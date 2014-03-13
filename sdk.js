@@ -3,5 +3,4 @@
 
     ToneDen.player = function(options) {
     };
-
 })(this);

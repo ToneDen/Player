@@ -5,16 +5,22 @@
     </head>
     <body>
         <h1>Publisher Test Page</h1>
+        <script src="//widget.dev/ToneDen.js"></script>
+        <script>
+            ToneDenReady = window.ToneDenReady || [];
+            ToneDenReady.push(function() {
+                console.log('ToneDen callback in sync loader.');
+                ToneDen.init(function() {
+                    console.log('Sync inited.');
+                });
+            });
+        </script>
         <script>
             (function() {
                 var script = document.createElement('script');
 
                 script.type = 'text/javascript';
                 script.async = true;
-
-                // Append a timestamp to the script URL so that the browser
-                // treats this as a separate file (doesn't cache the response from
-                // earlier).
                 script.src = "//widget.dev/ToneDen.js"
 
                 var entry = document.getElementsByTagName('script')[0];
@@ -23,7 +29,9 @@
 
             ToneDenReady = window.ToneDenReady || [];
             ToneDenReady.push(function() {
+                console.log('ToneDen callback in async loader.');
                 ToneDen.init(function() {
+                    console.log('Async inited.');
                     ToneDen.player({
                         dom: '#player',
                         tracks: []

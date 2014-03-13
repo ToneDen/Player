@@ -5,7 +5,8 @@
         return;
     }
 
-    function getScriptUrl() {
+    // Gets the domain that the script was loaded from.
+    function getBaseUrl() {
         var scripts = document.getElementsByTagName('script');
         var element;
         var src;
@@ -14,14 +15,15 @@
             element = scripts[i];
             src = element.src;
 
-            if (src && /toneden-player\.js/.test(src)) {
-                return src;
+            if (src && /ToneDen\.js/.test(src)) {
+                return /(.+\/)ToneDen\.js/.exec(src)[1];
             }
         }
 
         return null;
     }
 
+    // Helper function to asynchronously load a script.
     function loadScript(url, callback) {
         var script = document.createElement('script');
         script.async = true;
@@ -42,11 +44,19 @@
     }
 
     ToneDen.init = function(callback) {
-        var scriptUrl = getScriptUrl();
-        var baseUrl = /(.+\/)ToneDen\.js/.exec(scriptUrl)[1];
+        var baseUrl = getBaseUrl();
 
         loadScript(baseUrl + 'sdk.js', callback);
     }
 
     window.ToneDen = ToneDen;
+
+    // Call all callbacks that the publisher has registered.
+    if(window.ToneDenReady && window.ToneDenReady.length) {
+        var callbackLength = window.ToneDenReady.length;
+
+        for(var i = 0; i < callbackLength; i++) {
+            window.ToneDenReady[i]();
+        }
+    }
 })(this);
