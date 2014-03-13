@@ -12,8 +12,8 @@ JS API, 15 band equalizer visualization, responsive, customizable.
 Dev Setup:
 
 1. Add the following lines to /etc/hosts:
-..* 0.0.0.0 publisher.dev
-..* 0.0.0.0 widget.dev
+..* 127.0.0.1 publisher.dev
+..* 127.0.0.1 widget.dev
 2. CD into test directory.
 3. Run `python -m SimpleHTTPServer`
 4. Open a browser and visit publisher.dev:8000.

@@ -5,6 +5,31 @@
     </head>
     <body>
         <h1>Publisher Test Page</h1>
-        <!-- script include snippet here -->
+        <script>
+            (function() {
+                var script = document.createElement('script');
+
+                script.type = 'text/javascript';
+                script.async = true;
+
+                // Append a timestamp to the script URL so that the browser
+                // treats this as a separate file (doesn't cache the response from
+                // earlier).
+                script.src = "//widget.dev/ToneDen.js"
+
+                var entry = document.getElementsByTagName('script')[0];
+                entry.parentNode.insertBefore(script, entry);
+            }());
+
+            ToneDenReady = window.ToneDenReady || [];
+            ToneDenReady.push(function() {
+                ToneDen.init(function() {
+                    ToneDen.player({
+                        dom: '#player',
+                        tracks: []
+                    });
+                });
+            });
+        </script>
     </body>
 </html>
