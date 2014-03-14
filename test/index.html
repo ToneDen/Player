@@ -5,23 +5,13 @@
     </head>
     <body>
         <h1>Publisher Test Page</h1>
-        <script src="//widget.dev/ToneDen.js"></script>
-        <script>
-            ToneDenReady = window.ToneDenReady || [];
-            ToneDenReady.push(function() {
-                console.log('ToneDen callback in sync loader.');
-                ToneDen.init(function() {
-                    console.log('Sync inited.');
-                });
-            });
-        </script>
         <script>
             (function() {
                 var script = document.createElement('script');
 
                 script.type = 'text/javascript';
                 script.async = true;
-                script.src = "//widget.dev/ToneDen.js"
+                script.src = "//widget.dev/loader/dist/sdk.load.js"
 
                 var entry = document.getElementsByTagName('script')[0];
                 entry.parentNode.insertBefore(script, entry);
