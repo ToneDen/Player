@@ -1,20 +1,17 @@
-define(['soundmanager2'], function(soundManager) {
+/**
+ * Refactored from: https://github.com/kilokeith/soundcloud-soundmanager-player
+ */
+define(['vendor/soundmanager2', 'vendor/jquery'], function(soundManager, jQuery) {
     //object slice
     __slice = [].slice;
 
-    //set the default options for SM2
-    //call setup for SM2, which inits all this
-    if(typeof soundManager != 'undefined'){
+    // Setup soundmanager2.
+    if(typeof soundManager !== 'undefined'){
         soundManager.setup({
-              //url: 'swf/'
-            debugMode: false
-            , debugFlash: false
-            , flashVersion: 9
-            , useFlashBlock: false
-            , useHighPerformance: true
-            , useHTML5Audio: true
-            , useFastPolling: true
-            , wmode: 'transparent'
+            debugMode: true,
+            useHighPerformance: true,
+            useHTML5Audio: true,
+            wmode: 'transparent'
         });
     }
 
@@ -56,555 +53,710 @@ define(['soundmanager2'], function(soundManager) {
         scplayer.track.stopped
     */
 
-    //SoudCloud Player class
+    //SoundCloud Player class
     //v0.9.6
     var SoundCloudPlayer = function(tracks, config){
         var defaults = {
-              loop: false
-            , start_on: 0
-            , autoplay: false
-            , autoswitch: true //for playlists
-            , volume: 100
-            , toggle_pause: true //should pause act as a toggle?
-            , cache: true //caches the SC track lookup. Browser should handle the audio
-            , preload: false //prefetch the sc track data
-            , debug: false
+            loop: false,
+            start_on: 0,
+            autoplay: false,
+            autoswitch: true, //for playlists
+            volume: 100,
+            toggle_pause: true, //should pause act as a toggle?
+            cache: true, //caches the SC track lookup. Browser should handle the audio
+            preload: false, //prefetch the sc track data
+            debug: false
         }
-        , sc_resolve_url = "http://api.soundcloud.com/resolve?url=http://soundcloud.com"
-        , urlregex = new RegExp(/[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&//=]*)?/gi);
-        
+        var sc_resolve_url = "http://api.soundcloud.com/resolve?url=http://soundcloud.com";
+        var urlregex = new RegExp(/[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&//=]*)?/gi);
+
         //keep ref to local scope
-        var _this = this, $this = jQuery(this);
-        
+        var self = this, $this = jQuery(this);
+
         //local vars
         this.tracks = [];
         this.config = jQuery.extend(defaults, config);
-        this.current_track_index = this.config.start_on;
-        this.current_track = null;
+        this.currentTrackIndex = this.config.start_on;
+        this.currentTrack = null;
         this.sound = null;
 
         //flag for if we're already inited
         this.inited = false;
-        
+
         //hold a state so when you hit play it'll play on the correct sound when it's ready
-        this.play_when_ready = false;
-        //hold a cache for SC lookups
+        this.playWhenReady = false;
+        // Cache for SoundCloud lookups.
         this.cache = {};
-        
-        //setup
+
+        // Initialization function.
         this.init = function(){
-            //don't re-init
-            if(_this.inited) return;
-            
-            _this.change_track();
-            _this.trigger('scplayer.init');
-            if(_this.config.autoplay) _this.play();
-            //set flag
-            _this.inited = true;
+            if(self.inited) {
+                return;
+            }
+
+            self.changeTrack();
+            self.trigger('scplayer.init');
+
+            if(self.config.autoplay) {
+                self.play();
+            }
+
+            self.inited = true;
         };
-        
-        //load a track form a trimmed SC url
-        this.change_track = function(index){
-            _this.log('change_track');
-            //destroy the old sound
-            if(_this.sound){
-                _this.sound.destruct();
-                _this.sound = null;
+
+        // Load a track from a trimmed SC url
+        this.changeTrack = function(index){
+            var i;
+            var url;
+
+            self.log('changeTrack');
+
+            // Destroy the old sound
+            if(self.sound){
+                self.sound.destruct();
+                self.sound = null;
             }
-            
-            
-            var i = (typeof index != 'undefined' )? index : _this.current_track_index;
-            if( index != _this.current_track_index || !index){
-                var url = _this.tracks[i];
-                _this.resolve_track(url, _this.set_sound);
-                _this.trigger('scplayer.changing_track', i);
+
+            if(typeof index !== 'undefined') {
+                i = index;
+            } else {
+                i = self.currentTrackIndex;
             }
-            return _this;
+
+            if(index !== self.currentTrackIndex || !index) {
+                url = self.tracks[i];
+                self.resolveTrack(url, self.setSound);
+
+                self.trigger('scplayer.changing_track', i);
+            }
+
+            return self;
         }
-        
-        
+
         /* ---- public methods ---- */
-        
-        //playlist related methods
+
+        // Playlist related methods
         this.play = function(){
-            _this.log('play');
-            //if the sound it there and ready, get to it
-            if( _this.sound && _this.sound.readyState == 3 ){
-                _this.sound.play();
-            }else{
-                //or hold a state to come back to when ready
-                _this.play_when_ready = true;
+            self.log('play');
+
+            // If the sound is there and ready, get to it.
+            // If not, hold a state to come back to when ready.
+            if(self.sound && self.sound.readyState == 3) {
+                self.sound.play();
+            } else {
+                self.playWhenReady = true;
             }
-            _this.trigger('scplayer.play', _this.current_track_index);
-            
-            return _this;
+
+            self.trigger('scplayer.play', self.currentTrackIndex);
+
+            return self;
         };
+
         this.pause = function(force){
-            force = (force != null) ? force : false;
-            if(_this.sound){
-                if(_this.config.toggle_pause && !force) _this.sound.togglePause();
-                else _this.sound.pause();
-                _this.trigger('scplayer.pause', _this.sound.paused);
+            if(!force) {
+                force = false;
             }
-            return _this;
+
+            if(self.sound) {
+                if(self.config.toggle_pause && !force) {
+                    self.sound.togglePause();
+                } else {
+                    self.sound.pause();
+                }
+
+                self.trigger('scplayer.pause', self.sound.paused);
+            }
+
+            return self;
         };
+
         this.resume = function(force){
-            force = (force != null) ? force : false;
-            if(_this.sound){
-                if(_this.config.toggle_pause && !force) _this.sound.togglePause();
-                else _this.sound.resume();
-                _this.trigger('scplayer.pause', _this.sound.paused);
+            if(!force) {
+                force = false;
             }
-            return _this;
-        };
-        this.stop = function(){
-            if(_this.sound) _this.sound.stop();
-            _this.trigger('scplayer.stop');
-            _this.log('stop');
-            return _this;
-        };
-        this.next = function(autoplay){
-            _this.log('next');
-            //play the next track?
-            _this.play_when_ready = (typeof autoplay != 'undefined')? autoplay : _this.config.autoswitch;
-            _this.log(_this.play_when_ready);
-            
-            if( _this.tracks[ _this.current_track_index+1 ] ){
-                _this.current_track_index++;
-                _this.change_track();
-                _this.trigger('scplayer.playlist.next', _this.current_track_index-1, _this.current_track_index);
-                _this.log('has next');
-            }else if( _this.config.loop ){
-                _this.current_track_index = 0;
-                _this.change_track();
-                _this.trigger('scplayer.playlist.looped');
-                _this.log('looped');
-            }else{
-                _this.current_track_index = _this.tracks.length-1
-                _this.trigger('scplayer.playlist.ended');
-                _this.log('no mas');
+
+            if(self.sound) {
+                if(self.config.toggle_pause && !force) {
+                    self.sound.togglePause();
+                } else {
+                    self.sound.resume();
+                }
+
+                self.trigger('scplayer.pause', self.sound.paused);
             }
-            return _this;
+
+            return self;
         };
+
+        this.stop = function() {
+            if(self.sound) {
+                self.sound.stop();
+            }
+
+            self.trigger('scplayer.stop');
+            self.log('stop');
+
+            return self;
+        };
+
+        this.next = function(autoplay) {
+            self.log('next');
+
+            // Play the next track?
+            if(typeof autoplay === 'undefined') {
+                self.playWhenReady = self.config.autoswitch;
+            } else {
+                self.playWhenReady = autoplay;
+            }
+
+            self.log(self.playWhenReady);
+
+            if(self.tracks[self.currentTrackIndex + 1]) {
+                self.currentTrackIndex += 1;
+                self.changeTrack();
+
+                self.trigger('scplayer.playlist.next', self.currentTrackIndex-1, self.currentTrackIndex);
+                self.log('has next');
+            } else if(self.config.loop) {
+                self.currentTrackIndex = 0;
+                self.changeTrack();
+
+                self.trigger('scplayer.playlist.looped');
+                self.log('looped');
+            } else {
+                self.currentTrackIndex = self.tracks.length - 1;
+
+                self.trigger('scplayer.playlist.ended');
+                self.log('no mas');
+            }
+
+            return self;
+        };
+
         this.prev = function(autoplay){
-            //play the next track?
-            _this.play_when_ready = (typeof autoplay != 'undefined')? autoplay : _this.config.autoswitch;
-            
-            if( _this.tracks[ _this.current_track_index-1 ] ){
-                _this.current_track_index--;
-                _this.change_track();
-                _this.trigger('scplayer.playlist.prev');
-            }else if( _this.config.loop ){
-                _this.current_track_index = _this.tracks.length-1;
-                _this.change_track();
-                _this.trigger('scplayer.playlist.looped');
-            }else{
-                _this.current_track_index = 0;
-                _this.trigger('scplayer.playlist.restarted');
+            // Play the next track?
+            if(typeof autoplay === 'undefined') {
+                self.playWhenReady = self.config.autoswitch;
+            } else {
+                self.playWhenReady = autoplay;
             }
-            return _this;
+
+            if(self.tracks[self.currentTrackIndex - 1]) {
+                self.currentTrackIndex -= 1;
+                self.changeTrack();
+
+                self.trigger('scplayer.playlist.prev');
+            } else if(self.config.loop) {
+                self.currentTrackIndex = self.tracks.length - 1;
+                self.changeTrack();
+
+                self.trigger('scplayer.playlist.looped');
+            } else {
+                self.currentTrackIndex = 0;
+                self.trigger('scplayer.playlist.restarted');
+            }
+
+            return self;
         };
+
         this.goto = function(index, autoplay){
-            _this.log('goto');
-            //play the next track?
-            _this.play_when_ready = (typeof autoplay != 'undefined')? autoplay : _this.config.autoswitch;
-            
-            if( _this.tracks[ index ] ){
-                _this.current_track_index = index;
-                _this.trigger('scplayer.playlist.goto');
-                _this.change_track();
+            self.log('goto');
+
+            // Play the next track?
+            if(typeof autoplay === 'undefined') {
+                self.playWhenReady = self.config.autoswitch;
+            } else {
+                self.playWhenReady = autoplay;
             }
-            return _this;
+
+            if(self.tracks[index]) {
+                self.currentTrackIndex = index;
+
+                self.trigger('scplayer.playlist.goto');
+                self.changeTrack();
+            }
+
+            return self;
         };
-        
-        //sound related methods
-        this.restart_track = function(){
-            _this.position(0);
-            return _this;
+
+        // Sound related methods
+        this.restartTrack = function() {
+            self.position(0);
+            return self;
         };
-        this.mute = function(){
-            if(_this.sound) _this.sound.toggleMute();
-            _this.trigger('scplayer.mute', _this.sound.muted);
-            return _this;
+
+        this.mute = function() {
+            if(self.sound) {
+                self.sound.toggleMute();
+            }
+
+            self.trigger('scplayer.mute', self.sound.muted);
+
+            return self;
         };
-        
-        //could we move to the next track
-        this.has_next = function(){
-            _this.log('has next');
-            if( _this.tracks[ _this.current_track_index+1 ] ){
+
+        // Could we move to the next track?
+        this.hasNext = function() {
+            self.log('has next');
+
+            if(self.tracks[self.currentTrackIndex + 1]) {
                 return true;
-            }else if( _this.config.loop && _this.tracks.length > 1 ){
+            } else if(self.config.loop && self.tracks.length > 1) {
                 return true;
             }
+
             return false;
         };
-        //could we move to the prev track
-        this.has_prev = function(){
-            if( _this.tracks[ _this.current_track_index-1 ] ){
+
+        // Could we move to the previous track?
+        this.hasPrev = function() {
+            if(self.tracks[self.currentTrackIndex - 1]) {
                 return true;
-            }else if( _this.config.loop && _this.tracks.length > 1 ){
+            } else if(self.config.loop && self.tracks.length > 1) {
                 return true;
             }
+
             return false;
         };
-        
-        
-        this.get_time = function(){
+
+
+        this.getTime = function() {
             var time = this.position();
-            var ms = time % 1000
-              , s = Math.floor((time / 1000) % 60)
-              , m = Math.floor((time / (60 * 1000)) % 60)
-              , h = Math.floor((time / (60 * 60 * 1000)) % 24)
-              ;
-            var t = m + ':' + _this.pad(s);
-            if(h > 0) t = h + ':' + t;
+            var ms = time % 1000;
+            var s = Math.floor((time / 1000) % 60);
+            var m = Math.floor((time / (60 * 1000)) % 60);
+            var h = Math.floor((time / (60 * 60 * 1000)) % 24);
+            var t = m + ':' + self.pad(s);
+
+            if(h > 0) {
+                t = h + ':' + t;
+            }
+
             return t;
         };
-        
-        this.position = function(pos){
-            if(_this.sound){
-                if(pos || pos === 0){
+
+        this.position = function(pos) {
+            if(self.sound) {
+                if(pos || pos === 0) {
                     //limit to bounds
-                    pos = Math.min(_this.sound.duration, pos);
+                    pos = Math.min(self.sound.duration, pos);
                     pos = Math.max(0, pos);
+
+                    self.trigger('scplayer.position', pos);
+
                     //setter
-                    _this.trigger('scplayer.position', pos);
-                    return _this.sound.setPosition(pos);
-                }else{
+                    return self.sound.setPosition(pos);
+                } else {
+                    self.trigger('scplayer.position', self.sound.position);
+
                     //getter
-                    _this.trigger('scplayer.position', _this.sound.position);
-                    return _this.sound.position;
+                    return self.sound.position;
                 }
+            } else {
+                return 0;
             }
-            
-            return 0;
         };
-        this.volume = function(vol){
-            if(_this.sound){
-                if(vol || vol === 0){
+
+        this.volume = function(vol) {
+            if(self.sound) {
+                if(vol || vol === 0) {
                     //limit to bounds
                     vol = Math.min(100, vol);
                     vol = Math.max(0, vol);
+
+                    self.trigger('scplayer.volume', vol);
+
                     //setter
-                    _this.trigger('scplayer.volume', vol);
-                    _this.config.volume = vol;
-                    return _this.sound.setVolume(vol);
-                }else{
+                    self.config.volume = vol;
+                    return self.sound.setVolume(vol);
+                } else {
+                    self.trigger('scplayer.volume', self.sound.volume);
+
                     //getter
-                    _this.trigger('scplayer.volume', _this.sound.volume);
-                    return _this.sound.volume;
+                    return self.sound.volume;
                 }
+            } else {
+                return self.config.volume;
             }
-            
-            return _this.config.volume;
         };
-        //seeking
-        this.seek = function(relative){
-            // Calculate a new position given the click's relative position and the track's duration.
-            var pos = _this.current_track.duration * relative;
-            _this.position(pos);
-            return _this;
+
+        // Move to a new position in the song given a click location in the
+        // form of a fraction of the song length.
+        this.seek = function(relative) {
+            var pos = self.currentTrack.duration * relative;
+            self.position(pos);
+
+            return self;
         };
-        //looping
-        this.loop = function(do_loop){
-            if(do_loop){
-                _this.config.loop = do_loop;
-                _this.trigger('scplayer.loop_changed', _this.config.loop);
+
+        // Loop to the start of the playlist.
+        this.loop = function(doLoop){
+            if(doLoop){
+                self.config.loop = doLoop;
+                self.trigger('scplayer.loop_changed', self.config.loop);
             }
-            return _this.config.loop;
+
+            return self.config.loop;
         };
-        
-        //lookup a track's data, from cache or do a lookup. Takes id or url
-        this.track_info = function(id){
-            if( _this.isNumeric(id) ){
-                id = _this.tracks[id];
+
+        // Lookup a track's data, either from cache or do a lookup. Takes id or url.
+        this.trackInfo = function(id){
+            if(self.isNumeric(id)) {
+                id = self.tracks[id];
             }
-            return _this.resolve_track(id);
+
+            return self.resolveTrack(id);
         };
-        
-        //events - using jquery
+
+        // Use jquery to register events.
         this.on = function(evnt, cb){
             return $this.on(evnt, cb);
         };
+
         this.trigger = function(evnt){
             var args = (arguments.length > 1) ? __slice.call(arguments, 1) : [];
+
             return $this.trigger(evnt, args);
         };
-        
-        //does whatever we can to mark for garbage collection
+
+        // Readies player for garbage collection.
         this.destroy = function(){
-            if(_this.sound) _this.sound.destruct()
-            _this.tracks = [];
+            if(self.sound) {
+                self.sound.destruct();
+            }
+
+            self.tracks = [];
             $this.off();
             $this.remove();
-            _this.tracks = null;
-            _this.track = null;
-            _this = null;
-            delete _this.tracks;
-            delete _this.track;
-            delete _this;
-            delete this;
+            self.tracks = null;
+            self.track = null;
+            self = null;
+            delete self.tracks;
+            delete self.track;
         };
+
         /* ---- private methods ---- */
-        _this.get_track = function(){ return _this.current_track; };
-        _this.get_track_index = function(){ return _this.current_track_index; };
-        _this.get_sound = function(){ return _this.sound; };
-        _this.get_playlist = function(){ return _this.tracks; };
-        
-        _this.set_cache = function(url, track){
-            if(_this.config.cache === true){
-                _this.cache[url] = track;
+
+        self.getTrack = function() {
+            return self.currentTrack;
+        };
+
+        self.getTrackIndex = function() {
+            return self.currentTrackIndex;
+        };
+
+        self.getSound = function() {
+            return self.sound;
+        };
+
+        self.getPlaylist = function() {
+            return self.tracks;
+        };
+
+        self.setCache = function(url, track) {
+            if(self.config.cache === true) {
+                self.cache[url] = track;
             }
         };
-        _this.get_cache = function(url){
-            if(_this.config.cache === true){
-                return _this.cache[url] || null;
+
+        self.getCache = function(url) {
+            if(self.config.cache === true) {
+                return self.cache[url] || null;
             }
+
             return null;
         };
-        _this.set_sound = function(track){
-            _this.log('set_sound');
-            //
-            _this.trigger('scplayer.track.info_loaded', track);
-            //store the current track object
-            _this.current_track = track;
-            //get a SC url
+
+        self.setSound = function(track) {
+            self.log('setSound');
+            self.trigger('scplayer.track.info_loaded', track);
+
+            // Store the current track object
+            self.currentTrack = track;
+
+            // Get a SC url
             var url = track.stream_url;
-            url += (url.indexOf("secret_token") == -1) ? '?' : '&';
-            url += 'consumer_key=' + _this.config.consumer_key;
-            
-            //
-            //setup the SM2 sound object
-            _this.sound = soundManager.createSound({
-                  autoLoad: true
-                , id: 'track_' + track.id
-                , multiShot: false
-                , loops: 1
-                , url: url
-                , volume: _this.config.volume
-                , whileloading: function() {
-                    //only whole number percents
+
+            if(url.indexOf('secret_token') === -1) {
+                url += '?';
+            } else {
+                url += '&';
+            }
+
+            url += 'consumer_key=' + self.config.consumer_key;
+
+            // Setup the SM2 sound object.
+            self.sound = soundManager.createSound({
+                autoLoad: true,
+                id: 'track_' + track.id,
+                multiShot: false,
+                loops: 1,
+                url: url,
+                volume: self.config.volume,
+                whileloading: function() {
+                    // Only use whole number percents.
                     var percent = Math.round(this.bytesLoaded / this.bytesTotal * 100);
-                    _this.trigger('scplayer.track.whileloading', percent);
-                }
-                , whileplaying: function() {
-                    //round to nearest 10th of a percent for performance
+                    self.trigger('scplayer.track.whileloading', percent);
+                },
+                whileplaying: function() {
+                    // Round to nearest 10th of a percent for performance
                     var percent = Math.round(this.position / track.duration * 100 * 10) / 10;
-                    _this.trigger('scplayer.track.whileplaying', percent);
-                }
-                , onplay: function() {
-                    _this.log('track.onplay');
-                    _this.trigger('scplayer.track.played');
-                }
-                , onresume: function() {
-                    _this.trigger('scplayer.track.resumed');
-                }
-                , onstop: function() {
-                    _this.trigger('scplayer.track.stopped');	
-                }
-                , onpause: function() {
-                    _this.trigger('scplayer.track.paused');
-                }
-                , onfinish: function() { 
-                    _this.trigger('scplayer.track.finished');
-                }
-                , onload: function() {
-                    _this.log('onload');
-                    _this.trigger('scplayer.track.ready', _this.current_track_index, _this.current_track);
+                    self.trigger('scplayer.track.whileplaying', percent);
+                },
+                onplay: function() {
+                    self.log('track.onplay');
+                    self.trigger('scplayer.track.played');
+                },
+                onresume: function() {
+                    self.trigger('scplayer.track.resumed');
+                },
+                onstop: function() {
+                    self.trigger('scplayer.track.stopped');
+                },
+                onpause: function() {
+                    self.trigger('scplayer.track.paused');
+                },
+                onfinish: function() {
+                    self.trigger('scplayer.track.finished');
+                },
+                onload: function() {
+                    self.log('onload');
+                    self.trigger('scplayer.track.ready', self.currentTrackIndex, self.currentTrack);
                 }
             });
-            
-            //
-            _this.trigger('scplayer.track.bindable', track, _this.sound);
+
+            self.trigger('scplayer.track.bindable', track, self.sound);
         };
-        
-        //gets a SC url and goes to SC to fetch the track data
-        _this.resolve_track = function(url, cb){
-            //new promise
+
+        // Gets a SC url and goes to SC to fetch the track data.
+        self.resolveTrack = function(url, cb) {
             var promise = new jQuery.Deferred();
-            
-            //allow non SC tracks (watch for bugs)
-            //look for a url, but not soundcloud.com
-            if( url.match(urlregex) && url.search(/soundcloud\.com/i) === -1){
-                var _track = {stream_url:url, id:0, permalink_url:url, duration:0};
+
+            // allow non SC tracks (watch for bugs)
+            // look for a url, but not soundcloud.com
+            if(url.match(urlregex) && url.search(/soundcloud\.com/i) === -1) {
+                var _track = {
+                    stream_url:url,
+                    id:0,
+                    permalink_url:url,
+                    duration:0
+                };
+
                 promise.resolve(_track);
             }
-            
-            //auto trim urls
+
+            // trim url
             url = url.replace(/https?\:\/\/soundcloud\.com/gi, "");
-            
-            //if we're cahcing check cache first
-            if( _this.config.cache === true ){
-                var track = _this.get_cache(url);
-                if(track && cb){
-                    
-                    promise.done(function(){
+
+            // if we're caching, check cache first
+            if(self.config.cache === true ) {
+                var track = self.getCache(url);
+
+                if(track && cb) {
+                    promise.done(function() {
                         cb(track);
                     }).resolve();
+
                     return promise;
                 }
             }
-            
-            //define a complete condition for the promise
-            promise.done(function(_track){
-                if( _track.tracks && _track.tracks.length > 0 ){
-                    var tracks = _this.parse_tracks(url, _track.tracks);
+
+            // Define a complete condition for the promise.
+            promise.done(function(_track) {
+                if(_track.tracks && _track.tracks.length > 0) {
+                    var tracks = self.parseTracks(url, _track.tracks);
                     _track = tracks[0];
-                }else{
-                    //maybe cache the track
-                    if( _this.config.cache === true ) _this.set_cache(url, _track);
+                } else {
+                    // maybe cache the track
+                    if(self.config.cache === true) {
+                        self.setCache(url, _track);
+                    }
                 }
-                if(cb) cb(_track);
+
+                if(cb) {
+                    cb(_track);
+                }
             });
-            
-            //call the ajax
+
+            // Call the ajax
             jQuery.ajax({
-                  url: sc_resolve_url+url+
-                    '&format=json'+
-                    '&consumer_key='+_this.config.consumer_key+
-                    '&callback=?'
-                , dataType: 'jsonp'
-                , error: function(jqXHR, textStatus, errorThrown){
+                url: sc_resolve_url + url +
+                    '&format=json' +
+                    '&consumer_key=' +self.config.consumer_key +
+                    '&callback=?',
+                dataType: 'jsonp',
+                error: function(jqXHR, textStatus, errorThrown){
                     promise.reject(jqXHR, textStatus, errorThrown);
-                }
-                , success: function(_track){
+                },
+                success: function(_track){
                     promise.resolve(_track);
                 }
             });
+
             return promise;
         };
-        
-        //preload the SC track info
-        _this.preload_sc_tracks = function(cb){
+
+        // Preload the SC track info.
+        self.preloadSCTracks = function(cb) {
             var promises = [];
-            for(var x=0, l=_this.tracks.length; x<l; x++){
-                var _track = _this.tracks[x];
-                var promise = _this.resolve_track(_track);
+
+            for(var x = 0, l = self.tracks.length; x < l; x++) {
+                var _track = self.tracks[x];
+                var promise = self.resolveTrack(_track);
+
                 promises.push(promise);
             }
-            
-            //have to do apply to pass many promises as list instead of array
-            jQuery.when.apply(jQuery, promises).then(
-                function(){
-                    _this.trigger('scplayer.playlist.preloaded');
-                    if(cb) cb();
-                },
-                function(){
-                    _this.log('promises failed to preload tracks');
-                }
-            );
-        };
-        
-        //save track to the cache
-        _this.parse_tracks = function(url, _tracks){
-            var set_tracks = [], track_urls = []
-              , start_index = _this.tracks.indexOf(url);
 
-            for(var x=0, l=_tracks.length; x<l; x++){
+            // Have to do apply to pass many promises as list instead of array.
+            jQuery.when.apply(jQuery, promises).then(function() {
+                self.trigger('scplayer.playlist.preloaded');
+
+                if(cb) {
+                    cb();
+                }
+            }, function() {
+                self.log('promises failed to preload tracks');
+            });
+        };
+
+        self.parseTracks = function(url, _tracks) {
+            var set_tracks = [];
+            var track_urls = [];
+            var start_index = self.tracks.indexOf(url);
+
+            for(var x = 0, l = _tracks.length; x < l; x++) {
                 var _track = _tracks[x];
-                //slice out track url - begins with http://soundcloud.com/
+
+                // Slice out track url - begins with http://soundcloud.com/
                 var trackurl = _track.permalink_url.substring(21);
-                
-                //cache tracks
-                if( _this.config.cache === true ) _this.set_cache(trackurl, _track);
+
+                // Cache tracks
+                if(self.config.cache === true) {
+                    self.setCache(trackurl, _track);
+                }
+
                 set_tracks.push(_track);
                 track_urls.push(trackurl);
             }
-            //splice at start_index, delete 1, splice in expanded tracks
+
+            // Splice at start_index, delete 1, splice in expanded tracks.
             var args = [start_index, 1].concat(track_urls);
-            //add tracks to playlist
-            _this.tracks.splice.apply(_this.tracks, args);
-            
+
+            // Add tracks to playlist
+            self.tracks.splice.apply(self.tracks, args);
+
             return set_tracks;
         };
-        
 
-        _this.add_tracks = function(tracks){
-            //take a single string or array of strings
-            if(typeof tracks == 'string') tracks = [tracks];
-            //tracks were passed
-            if(tracks != null && tracks.length > 0){
-                //add the tracks to the tracks array
-                _this.tracks = _this.tracks.concat(tracks);
 
-                //preload SC data? or init
-                if(_this.config.preload == true) _this.preload_sc_tracks.call(_this, _this.init);
-                else _this.init.call(_this);
+        self.addTracks = function(tracks) {
+            // take a single string or array of strings
+            if(typeof tracks === 'string') {
+                tracks = [tracks];
+            }
+
+            if(tracks != null && tracks.length > 0) {
+                // add the tracks to the tracks array
+                self.tracks = self.tracks.concat(tracks);
+
+                // preload SC data? or init
+                if(self.config.preload == true) {
+                    self.preloadSCTracks.call(self, self.init);
+                } else {
+                    self.init.call(self);
+                }
             }
         };
 
-        _this.log = function(){
-            if(_this.config.debug && window.console) console.log.apply(console, arguments);
+        self.log = function() {
+            if(self.config.debug && window.console) {
+                console.log.apply(console, arguments);
+            }
         };
-        
-        //helper utilities
-        _this.isNumeric = function(n) {
+
+        // Helper utilities
+        self.isNumeric = function(n) {
             return !isNaN(parseFloat(n)) && isFinite(n);
         };
-        _this.pad = function(num) {
-             return (num < 10 ? '0' : '') + num;
+
+        self.pad = function(num) {
+            if(num < 10) {
+                return '0' + num;
+            } else {
+                return '' + num;
+            }
         };
-        
+
         /* internal events */
-        _this.on('scplayer.track.ready', function(e){
-            _this.log('track.onready!!!');
-            if( _this.play_when_ready == true ){
-                _this.play();
-                _this.play_when_ready = false;
+        self.on('scplayer.track.ready', function(e) {
+            self.log('track.onready!!!');
+
+            if(self.playWhenReady == true) {
+                self.play();
+                self.playWhenReady = false;
             }
         });
-        _this.on('scplayer.track.finished', function(e){
-            _this.log('track finished');
-            if(_this.config.autoswitch && (_this.config.loop || _this.has_next())){
-                _this.log('finished and autoswitch');
-                _this.next().play();
+
+        self.on('scplayer.track.finished', function(e) {
+            self.log('track finished');
+
+            if(self.config.autoswitch && (self.config.loop || self.hasNext())) {
+                self.log('finished and autoswitch');
+
+                self.next().play();
             }
         });
-        //this shouldn't be necessary, but we want to make sure.
-        _this.on('scplayer.playlist.ended', function(e){
-            _this.log('playlist ended');
-            if(!_this.config.loop) _this.stop();
+
+        // This shouldn't be necessary, but we want to make sure.
+        self.on('scplayer.playlist.ended', function(e) {
+            self.log('playlist ended');
+
+            if(!self.config.loop) {
+                self.stop();
+            }
         });
-        
-        
-        
+
         //init everything when we're sure SM2 has loaded
         soundManager.onready(function() {
-            _this.log('SOUNDMANAGER2 ready!!');
-            //load the tracks
-            _this.add_tracks(tracks);
+            self.log('SOUNDMANAGER2 ready!!');
+
+            // Load tracks.
+            self.addTracks(tracks);
         });
-        //detect timeout for loading SM2 swf
+
+        // Detect timeout for loading SM2 swf.
         soundManager.ontimeout(function() {
-            if(window.console) console.log('SOUNDMANAGER2 TIMEDOUT!!');
+            self.log('SOUNDMANAGER2 TIMEDOUT!!');
         });
-        
+
         //expose only the public methods
         return {
-              play: 		this.play
-            , pause: 		this.pause
-            , resume: 		this.resume
-            , stop: 		this.stop
-            , next: 		this.next
-            , prev: 		this.prev
-            , mute: 		this.mute
-            , get_time: 	this.get_time
-            , volume: 		this.volume
-            , restart_track: this.restart_track
-            , goto: 		this.goto
-            , position: 	this.position
-            , seek: 		this.seek
-            , track_info: 	this.track_info
-            , has_next:		this.has_next
-            , has_prev:		this.has_prev
-            , on: 			this.on
-            , trigger: 		this.trigger
-            , track: 		this.get_track 		//expose the current track playing
-            , track_index: 	this.get_track_index //expose the current track index
-            , sound: 		this.get_sound 		//expose the current SM2 object
-            , playlist: 	this.get_playlist 	//expose the playlist
-            , destroy: 		this.destroy 		//make all internals for garbage collection
-            , add_tracks: 	this.add_tracks 		//append tracks to a player
+            play: this.play,
+            pause: this.pause,
+            resume: this.resume,
+            stop: this.stop,
+            next: this.next,
+            prev: this.prev,
+            mute: this.mute,
+            getTime: this.getTime,
+            volume: this.volume,
+            restartTrack: this.restartTrack,
+            goto: this.goto,
+            position: this.position,
+            seek: this.seek,
+            trackInfo: this.trackInfo,
+            hasNext: this.hasNext,
+            hasPrev: this.hasPrev,
+            on: this.on,
+            trigger: this.trigger,
+            track: this.getTrack,
+            trackIndex: this.getTrackIndex,
+            sound: this.getSound,
+            playlist: this.getPlaylist,
+            destroy: this.destroy,
+            addTracks: this.addTracks
         };
     };
+
+    return SoundCloudPlayer;
 });
