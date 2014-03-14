@@ -9,7 +9,6 @@ var exports;
 var ToneDen;
 
 config = {
-    //namespace: 'ToneDen',
     baseUrl: '//widget.dev/sdk'
 };
 
@@ -2100,7 +2099,7 @@ var requirejs, require, define;
 
 // Default loader parameters.
 var defaultParameters = {
-    baseUrl: config.baseUrl
+    baseUrl: 'static.toneden.io/sdk'
 };
 
 require([], function() {
@@ -2110,19 +2109,12 @@ require([], function() {
 
     var parameters = defaultParameters;
 
-    // If we have a custom baseUrl set, we're in a dev environment.
-    // This means we need to explicitly define requirejs' functions
-    // as globals, because requirejs isn't getting loaded by the
-    // optimizer.
-    if(parameters.baseUrl !== defaultParameters.baseUrl) {
-        // exports is the window.
-        exports.define = ToneDen.define;
-        exports.require = ToneDen.require;
-        exports.requirejs = ToneDen.requirejs;
-    }
+    exports.define = ToneDen.define;
+    exports.require = ToneDen.require;
+    exports.requirejs = ToneDen.requirejs;
 
     ToneDen.require.config({
-        baseUrl: parameters.baseUrl + '/js'
+        baseUrl: 'http://widget.dev/sdk' + '/js'
     });
 
     ToneDen.require(['sdk'], function(sdk) {
