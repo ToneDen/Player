@@ -19,7 +19,7 @@ var defaultParameters = {
     baseUrl: 'static.toneden.io/sdk'
 };
 
-require([], function() {
+require(['utils'], function(utils) {
     ToneDen.define = define;
     ToneDen.require = require;
     ToneDen.requirejs = requirejs;
@@ -36,6 +36,12 @@ require([], function() {
     });
 
     ToneDen.require(['sdk'], function(sdk) {
-        ToneDen.sdk = sdk;
+        ToneDen = utils.extend(ToneDen, sdk);
+
+        if(window.ToneDenReady && window.ToneDenReady.length > 0) {
+            for(var i = 0; i < ToneDenReady.length; i++) {
+                ToneDenReady[i]();
+            }
+        }
     });
 });

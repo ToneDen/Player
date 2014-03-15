@@ -71,7 +71,8 @@ define(['vendor/soundmanager2', 'vendor/jquery'], function(soundManager, jQuery)
         var urlregex = new RegExp(/[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&//=]*)?/gi);
 
         //keep ref to local scope
-        var self = this, $this = jQuery(this);
+        var self = this;
+        var $this = jQuery(this);
 
         //local vars
         this.tracks = [];

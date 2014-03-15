@@ -20,12 +20,9 @@
             ToneDenReady = window.ToneDenReady || [];
             ToneDenReady.push(function() {
                 console.log('ToneDen callback in async loader.');
-                ToneDen.init(function() {
-                    console.log('Async inited.');
-                    ToneDen.player({
-                        dom: '#player',
-                        tracks: []
-                    });
+                ToneDen.player({
+                    dom: '#player',
+                    tracks: []
                 });
             });
         </script>
