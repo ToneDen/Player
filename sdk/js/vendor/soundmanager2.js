@@ -30,10 +30,11 @@
  * Also, as you may note: Whoa, reliable cross-platform/device audio support is hard! ;)
  */
 
-(function(window, _undefined) {
+define([], function() {
 
 "use strict";
 
+var _undefined = undefined;
 var soundManager = null;
 
 /**
@@ -5983,7 +5984,9 @@ if (window.SM2_DEFER === undefined || !SM2_DEFER) {
  * ------------------------------
  */
 
-window.SoundManager = SoundManager; // constructor
-window.soundManager = soundManager; // public API, flash callbacks etc.
+return soundManager;
+});
+//window.SoundManager = SoundManager; // constructor
+//window.soundManager = soundManager; // public API, flash callbacks etc.
 
-}(window));
+

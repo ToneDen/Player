@@ -5,6 +5,8 @@
     </head>
     <body>
         <h1>Publisher Test Page</h1>
+        <div id="player">
+        </div>
         <script>
             (function() {
                 var script = document.createElement('script');
@@ -19,10 +21,9 @@
 
             ToneDenReady = window.ToneDenReady || [];
             ToneDenReady.push(function() {
-                console.log('ToneDen callback in async loader.');
                 ToneDen.player({
                     dom: '#player',
-                    tracks: []
+                    tracks: ['/royalbassrecords/sets/dubstep/']
                 });
             });
         </script>

@@ -1,7 +1,7 @@
 /**
  * Refactored from: https://github.com/kilokeith/soundcloud-soundmanager-player
  */
-define(['vendor/soundmanager2', 'vendor/jquery'], function(soundManager, jQuery) {
+define(['vendor/soundmanager2', 'jquery'], function(soundManager, jQuery) {
     //object slice
     __slice = [].slice;
 
@@ -9,6 +9,7 @@ define(['vendor/soundmanager2', 'vendor/jquery'], function(soundManager, jQuery)
     if(typeof soundManager !== 'undefined'){
         soundManager.setup({
             debugMode: true,
+            url: 'swf',
             useHighPerformance: true,
             useHTML5Audio: true,
             wmode: 'transparent'
@@ -484,7 +485,7 @@ define(['vendor/soundmanager2', 'vendor/jquery'], function(soundManager, jQuery)
                 url += '&';
             }
 
-            url += 'consumer_key=' + self.config.consumer_key;
+            url += 'consumer_key=' + self.config.consumerKey;
 
             // Setup the SM2 sound object.
             self.sound = soundManager.createSound({
@@ -583,7 +584,7 @@ define(['vendor/soundmanager2', 'vendor/jquery'], function(soundManager, jQuery)
             jQuery.ajax({
                 url: sc_resolve_url + url +
                     '&format=json' +
-                    '&consumer_key=' +self.config.consumer_key +
+                    '&consumer_key=' +self.config.consumerKey +
                     '&callback=?',
                 dataType: 'jsonp',
                 error: function(jqXHR, textStatus, errorThrown){

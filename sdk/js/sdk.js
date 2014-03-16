@@ -2,7 +2,9 @@ require.config({
     namespace: 'ToneDen',
     paths: {
         hbs: 'vendor/hbs',
-        soundmanager2: 'vendor/soundmanager2'
+        jquery: 'vendor/jquery',
+        soundmanager2: 'vendor/soundmanager2',
+        underscore: 'vendor/underscore'
     },
     shim: {
         soundmanager2: {
