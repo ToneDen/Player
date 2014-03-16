@@ -14,6 +14,8 @@ require.config({
 });
 
 define(['player'], function(player) {
+    ToneDen.ready = true;
+
     return {
         player: player
     };

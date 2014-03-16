@@ -1,4 +1,4 @@
 #! bin/sh
-cd loader && grunt dev
+cd loader && grunt $1
 cd ..
-cd sdk && grunt dev
+cd sdk && grunt $1

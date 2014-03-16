@@ -23,9 +23,39 @@
             ToneDenReady.push(function() {
                 ToneDen.player({
                     dom: '#player',
-                    tracks: ['/royalbassrecords/sets/dubstep/']
+                    tracks: [
+                        '/mutantbreakz/mutantbreakz-quest-mix-lady-1',
+                        '/birdsoundsdaband/sets/bird-sounds-ep'
+                    ]
                 });
             });
         </script>
+        <br>
+        <br>
+        <div id="player2">
+        <script>
+            (function() {
+                var script = document.createElement('script');
+
+                script.type = 'text/javascript';
+                script.async = true;
+                script.src = "//widget.dev/loader/dist/sdk.loader.js"
+
+                var entry = document.getElementsByTagName('script')[0];
+                entry.parentNode.insertBefore(script, entry);
+            }());
+
+            ToneDenReady = window.ToneDenReady || [];
+            ToneDenReady.push(function() {
+                ToneDen.player({
+                    dom: '#player2',
+                    tracks: [
+                        '/liquidcomplex/sea-of-voices-porter-robinson',
+                        'https://soundcloud.com/stbeethoven/run'
+                    ]
+                });
+            });
+        </script>
+        </div>
     </body>
 </html>

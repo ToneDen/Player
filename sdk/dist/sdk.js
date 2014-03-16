@@ -7387,7 +7387,7 @@ ToneDen.define('vendor/sc-player',['vendor/soundmanager2', 'jquery'], function(s
     // Setup soundmanager2.
     if(typeof soundManager !== 'undefined'){
         soundManager.setup({
-            debugMode: true,
+            debugMode: false,
             url: 'swf',
             useHighPerformance: true,
             useHTML5Audio: true,
@@ -12970,15 +12970,10 @@ ToneDen.define('hbs!templates/player',['hbs','hbs/handlebars'], function( hbs, H
 var t = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
   this.compilerInfo = [4,'>= 1.0.0'];
 helpers = this.merge(helpers, Handlebars.helpers);
-  var buffer = "", stack1, helper, functionType="function", escapeExpression=this.escapeExpression;
+  
 
 
-  buffer += "<div>\n    This is the player.\n    <br>\n    I am playing ";
-  if (helper = helpers.tracks) { stack1 = helper.call(depth0, {hash:{}}); }
-  else { helper = (depth0 && depth0.tracks); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{}}) : helper; }
-  buffer += escapeExpression(stack1)
-    + ".\n    <br>\n    <div class=\"controls\">\n        <a class=\"play\">Play</a>\n        <a class=\"pause\">Pause</a>\n    </div>\n</div>\n";
-  return buffer;
+  return "<div>\n    <div class=\"title\">\n    </div>\n    <br>\n    <div class=\"controls\">\n        <a class=\"play\">Play</a>\n        <a class=\"pause\">Pause</a>\n        <br>\n        <a class=\"prev\">Previous</a>\n        <a class=\"next\">Next</a>\n    </div>\n</div>\n";
   });
 return t;
 });
@@ -12993,8 +12988,9 @@ ToneDen.define('player',['jquery', 'underscore', 'vendor/sc-player', 'hbs!templa
         // Parameters for the SoundCloud player.
         var playerParameters = {
             consumerKey: '6f85bdf51b0a19b7ab2df7b969233901',
-            toggle_pause: true,
-            preload: true
+            debug: false,
+            preload: true,
+            toggle_pause: true
         }
 
         // Setup the parameters object with the given arguments.
@@ -13019,14 +13015,14 @@ ToneDen.define('player',['jquery', 'underscore', 'vendor/sc-player', 'hbs!templa
         });
 
         if(location) {
-            console.log(html);
             location.html(html);
         } else {
-            console.error('ToneDen player: the location specified does not exist.');
+            console.error('ToneDen Player: the location specified does not exist.');
             return;
         }
 
         var playerInstance = new scPlayer(tracks, playerParameters);
+        var titleArea = location.find('.title');
 
         // Set up listeners.
         location.find('.controls').on('click', function(e) {
@@ -13044,6 +13040,12 @@ ToneDen.define('player',['jquery', 'underscore', 'vendor/sc-player', 'hbs!templa
             } else if(target.hasClass('prev')) {
                 playerInstance.prev();
             }
+        });
+
+        // Hook into SC player events.
+        playerInstance.on('scplayer.changing_track', function(event, trackIndex) {
+            var track = playerInstance.track();
+            titleArea.html(track.title);
         });
 
         return playerInstance;
@@ -13066,6 +13068,8 @@ ToneDen.require.config({
 });
 
 ToneDen.define('sdk',['player'], function(player) {
+    ToneDen.ready = true;
+
     return {
         player: player
     };

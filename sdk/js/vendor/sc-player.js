@@ -8,7 +8,7 @@ define(['vendor/soundmanager2', 'jquery'], function(soundManager, jQuery) {
     // Setup soundmanager2.
     if(typeof soundManager !== 'undefined'){
         soundManager.setup({
-            debugMode: true,
+            debugMode: false,
             url: 'swf',
             useHighPerformance: true,
             useHTML5Audio: true,

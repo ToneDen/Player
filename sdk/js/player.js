@@ -7,8 +7,9 @@ define(['jquery', 'underscore', 'vendor/sc-player', 'hbs!templates/player'], fun
         // Parameters for the SoundCloud player.
         var playerParameters = {
             consumerKey: '6f85bdf51b0a19b7ab2df7b969233901',
-            toggle_pause: true,
-            preload: true
+            debug: false,
+            preload: true,
+            toggle_pause: true
         }
 
         // Setup the parameters object with the given arguments.
@@ -33,14 +34,14 @@ define(['jquery', 'underscore', 'vendor/sc-player', 'hbs!templates/player'], fun
         });
 
         if(location) {
-            console.log(html);
             location.html(html);
         } else {
-            console.error('ToneDen player: the location specified does not exist.');
+            console.error('ToneDen Player: the location specified does not exist.');
             return;
         }
 
         var playerInstance = new scPlayer(tracks, playerParameters);
+        var titleArea = location.find('.title');
 
         // Set up listeners.
         location.find('.controls').on('click', function(e) {
@@ -58,6 +59,12 @@ define(['jquery', 'underscore', 'vendor/sc-player', 'hbs!templates/player'], fun
             } else if(target.hasClass('prev')) {
                 playerInstance.prev();
             }
+        });
+
+        // Hook into SC player events.
+        playerInstance.on('scplayer.changing_track', function(event, trackIndex) {
+            var track = playerInstance.track();
+            titleArea.html(track.title);
         });
 
         return playerInstance;

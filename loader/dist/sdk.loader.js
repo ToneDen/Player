@@ -2139,10 +2139,6 @@ require(['utils'], function(utils) {
 
     var parameters = defaultParameters;
 
-    /*exports.define = ToneDen.define;
-    exports.require = ToneDen.require;
-    exports.requirejs = ToneDen.requirejs;*/
-
     ToneDen.require.config({
         baseUrl: 'http://widget.dev/sdk/dist/',
         enforceDefine: true
