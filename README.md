@@ -3,7 +3,7 @@ An Audio Player, By ToneDen
 
 A pure JS customizable audio player for your SoundCloud. 
 
-JS API, 15 band equalizer visualization, responsive, customizable.
+JS API, responsive, customizable.
 
 ![alt tag](https://raw.github.com/tim-thimmaiah/tonedenplayer/master/img/mockupv1.png)
 
