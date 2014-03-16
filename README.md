@@ -5,7 +5,7 @@ A pure JS customizable audio player for your SoundCloud.
 
 JS API, responsive, customizable.
 
-![alt tag](https://raw.github.com/tim-thimmaiah/tonedenplayer/master/img/mockupv1.png)
+![alt tag](https://raw.github.com/tim-thimmaiah/tonedenplayer/master/mockupv1.png)
 
 =============
 
