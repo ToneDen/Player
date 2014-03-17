@@ -12,9 +12,12 @@ JS API, responsive, customizable.
 Dev Setup:
 
 1. Add the following lines to /etc/hosts:
+```
 127.0.0.1 publisher.dev
 127.0.0.1 widget.dev
+```
 2. Add the following lines to /etc/apache2/extra/https-vhosts.conf:  
+```
 VirtualHost *:80>  
     DocumentRoot "<repo location>/tonedenplayer/test"  
     ServerName publisher.dev  
@@ -23,6 +26,7 @@ VirtualHost *:80>
     DocumentRoot "<repo location>/tonedenplayer"  
     ServerName widget.dev  
 </VirtualHost>  
+```
 
 =============
 

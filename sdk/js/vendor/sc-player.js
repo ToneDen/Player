@@ -402,12 +402,12 @@ define(['vendor/soundmanager2', 'jquery'], function(soundManager, jQuery) {
         };
 
         // Lookup a track's data, either from cache or do a lookup. Takes id or url.
-        this.trackInfo = function(id){
+        this.trackInfo = function(id, cb){
             if(self.isNumeric(id)) {
                 id = self.tracks[id];
             }
 
-            return self.resolveTrack(id);
+            return self.resolveTrack(id, cb);
         };
 
         // Use jquery to register events.
@@ -441,6 +441,21 @@ define(['vendor/soundmanager2', 'jquery'], function(soundManager, jQuery) {
 
         self.getTrack = function() {
             return self.currentTrack;
+        };
+
+        self.getTracks = function(callback) {
+            var urls = self.getPlaylist();
+            var trackObjects = [];
+
+            for(var i = 0; i < urls.length; i++) {
+                self.trackInfo(urls[i], function(info) {
+                    trackObjects.push(info);
+
+                    if(trackObjects.length === urls.length) {
+                        return callback(trackObjects);
+                    }
+                });
+            }
         };
 
         self.getTrackIndex = function() {
@@ -752,6 +767,7 @@ define(['vendor/soundmanager2', 'jquery'], function(soundManager, jQuery) {
             on: this.on,
             trigger: this.trigger,
             track: this.getTrack,
+            tracks: this.getTracks,
             trackIndex: this.getTrackIndex,
             sound: this.getSound,
             playlist: this.getPlaylist,
