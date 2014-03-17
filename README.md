@@ -3,9 +3,9 @@ An Audio Player, By ToneDen
 
 A pure JS customizable audio player for your SoundCloud. 
 
-JS API, 15 band equalizer visualization, responsive, customizable.
+JS API, responsive, customizable.
 
-![alt tag](https://raw.github.com/tim-thimmaiah/tonedenplayer/master/img/mockupv1.png)
+![alt tag](https://raw.github.com/tim-thimmaiah/tonedenplayer/master/mockupv1.png)
 
 =============
 
@@ -28,7 +28,7 @@ VirtualHost *:80>
 
 The MIT License (MIT)
 
-Copyright (c) [2013] [ToneDen]
+Copyright (c) [2014] [ToneDen]
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of
 this software and associated documentation files (the "Software"), to deal in
