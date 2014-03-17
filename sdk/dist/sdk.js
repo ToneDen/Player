@@ -15750,7 +15750,11 @@ function program1(depth0,data) {
   if (helper = helpers.artwork_url) { stack1 = helper.call(depth0, {hash:{}}); }
   else { helper = (depth0 && depth0.artwork_url); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{}}) : helper; }
   buffer += escapeExpression(stack1)
-    + "\"></img>\n                </a>\n            </div>\n            <div class=\"waveform\" large-5 columns>\n            </div>\n        </div>\n        <div class=\"info row\">\n            <div class=\"song-name large-6 columns\">\n                ";
+    + "\" />\n                </a>\n            </div>\n            <div class=\"waveform\" large-5 columns>\n                <img src=\"";
+  if (helper = helpers.waveform_url) { stack1 = helper.call(depth0, {hash:{}}); }
+  else { helper = (depth0 && depth0.waveform_url); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{}}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "\" />\n            </div>\n        </div>\n        <div class=\"info row\">\n            <div class=\"song-name large-6 columns\">\n                ";
   if (helper = helpers.title) { stack1 = helper.call(depth0, {hash:{}}); }
   else { helper = (depth0 && depth0.title); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{}}) : helper; }
   buffer += escapeExpression(stack1)
