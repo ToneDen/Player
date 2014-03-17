@@ -15753,7 +15753,7 @@ function program1(depth0,data) {
   if (helper = helpers.waveform_url) { stack1 = helper.call(depth0, {hash:{},data:data}); }
   else { helper = (depth0 && depth0.waveform_url); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
   buffer += escapeExpression(stack1)
-    + "\" />\n            </div>\n        </div>\n        <div class=\"info row\">\n            <div class=\"song-name large-6 columns\">\n                ";
+    + "\" />\n                <div class=\"buffer\" />\n                <div class=\"played\" />\n            </div>\n        </div>\n        <div class=\"info row\">\n            <div class=\"song-name large-6 columns\">\n                ";
   if (helper = helpers.title) { stack1 = helper.call(depth0, {hash:{},data:data}); }
   else { helper = (depth0 && depth0.title); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
   buffer += escapeExpression(stack1)
@@ -15924,6 +15924,7 @@ ToneDen.define('player',['jquery', 'underscore', 'vendor/sc-player', 'vendor/han
 
         var dom = parameters.dom;
         var urls = parameters.urls;
+
         var container = $(dom);
 
         if(container) {
@@ -15984,6 +15985,14 @@ ToneDen.define('player',['jquery', 'underscore', 'vendor/sc-player', 'vendor/han
             container.find('.play').attr('src', staticUrl + 'img/play.png');
         });
 
+        playerInstance.on('scplayer.track.whileloading', function(e, percent){
+            container.find('.buffer').css('width', percent + '%');
+        });
+
+        playerInstance.on('scplayer.track.whileplaying', function(e, percent){
+            container.find('.played').css('width', percent + '%');
+        });
+
         playerInstance.on('scplayer.playlist.preloaded', function(e) {
             playerInstance.tracks(function(tracks) {
                 console.log(tracks);
@@ -15995,6 +16004,9 @@ ToneDen.define('player',['jquery', 'underscore', 'vendor/sc-player', 'vendor/han
         });
 
         playerInstance.on('scplayer.changing_track', function(e, trackIndex) {
+            container.find('.played').css('width', '0%');
+            container.find('.buffer').css('width', '0%');
+
             playerInstance.tracks(function(tracks) {
                 rerender(container, {
                     nowPlaying: playerInstance.track(),

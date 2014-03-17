@@ -44,6 +44,7 @@ define(['jquery', 'underscore', 'vendor/sc-player', 'vendor/handlebars', 'hbs!te
 
         var dom = parameters.dom;
         var urls = parameters.urls;
+
         var container = $(dom);
 
         if(container) {
@@ -104,6 +105,14 @@ define(['jquery', 'underscore', 'vendor/sc-player', 'vendor/handlebars', 'hbs!te
             container.find('.play').attr('src', staticUrl + 'img/play.png');
         });
 
+        playerInstance.on('scplayer.track.whileloading', function(e, percent){
+            container.find('.buffer').css('width', percent + '%');
+        });
+
+        playerInstance.on('scplayer.track.whileplaying', function(e, percent){
+            container.find('.played').css('width', percent + '%');
+        });
+
         playerInstance.on('scplayer.playlist.preloaded', function(e) {
             playerInstance.tracks(function(tracks) {
                 console.log(tracks);
@@ -115,6 +124,9 @@ define(['jquery', 'underscore', 'vendor/sc-player', 'vendor/handlebars', 'hbs!te
         });
 
         playerInstance.on('scplayer.changing_track', function(e, trackIndex) {
+            container.find('.played').css('width', '0%');
+            container.find('.buffer').css('width', '0%');
+
             playerInstance.tracks(function(tracks) {
                 rerender(container, {
                     nowPlaying: playerInstance.track(),
