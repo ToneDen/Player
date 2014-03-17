@@ -5,6 +5,7 @@ module.exports = function(grunt) {
                 'dist'
             ],
             post: [
+                'dist/all.css',
                 'dist/compiled.js',
                 'dist/compiled.min.js',
                 'dist/templates.js'
@@ -25,6 +26,16 @@ module.exports = function(grunt) {
                 ],
                 dest: 'dist/sdk.js'
             }
+        },
+        cssmin: {
+            dev: {
+                src: 'css/*',
+                dest: 'dist/all.css'
+            },
+            production: {
+                src: 'css/*',
+                dest: 'dist/all.css'
+            },
         },
         requirejs: {
             compile: {
@@ -47,13 +58,18 @@ module.exports = function(grunt) {
         }
     });
 
-    grunt.registerTask('wrap', 'Wraps files in an IIFE.', function() {
-        var path = 'dist/sdk.js';
-        var before = '(function() {\n';
-        var after = '\n})();';
-        var content = grunt.file.read(path);
+    grunt.registerTask('injectCSS', 'Injects CSS into the javascript as a variable.', function() {
+        var before = 'var css=\'';
+        var css = grunt.file.read('dist/all.css');
 
-        grunt.file.write(path, before + content + after);
+        css = css.replace(/'/g, '\\\'');
+        css = css.replace(/\n/g, '\' +\n\'');
+
+        var after = '\'\n';
+
+        var sdk = grunt.file.read('dist/sdk.js');
+
+        grunt.file.write('dist/sdk.js', before + css + after + sdk);
     });
 
     grunt.registerTask('default', [
@@ -61,7 +77,8 @@ module.exports = function(grunt) {
         'requirejs',
         'uglify',
         'concat:production',
-        //'wrap',
+        'cssmin:production',
+        'injectCSS',
         'clean:post'
     ]);
 
@@ -69,7 +86,8 @@ module.exports = function(grunt) {
         'clean:pre',
         'requirejs',
         'concat:dev',
-        //'wrap',
+        'cssmin:dev',
+        'injectCSS',
         'clean:post'
     ]);
 
