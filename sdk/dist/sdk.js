@@ -15736,88 +15736,140 @@ ToneDen.define('hbs',[
 ToneDen.define('hbs!templates/player',['hbs','hbs/handlebars'], function( hbs, Handlebars ){ 
 var t = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
   this.compilerInfo = [4,'>= 1.0.0'];
-helpers = this.merge(helpers, Handlebars.helpers);
+helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   var buffer = "", stack1, functionType="function", escapeExpression=this.escapeExpression, self=this;
 
 function program1(depth0,data) {
   
   var buffer = "", stack1, helper;
   buffer += "\n        <div class=\"header row\">\n            <div class=\"cover large-7 columns\">\n                <a href=\"";
-  if (helper = helpers.permalink_url) { stack1 = helper.call(depth0, {hash:{}}); }
-  else { helper = (depth0 && depth0.permalink_url); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{}}) : helper; }
+  if (helper = helpers.permalink_url) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.permalink_url); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
   buffer += escapeExpression(stack1)
-    + "\">\n                    <img src=\"";
-  if (helper = helpers.artwork_url) { stack1 = helper.call(depth0, {hash:{}}); }
-  else { helper = (depth0 && depth0.artwork_url); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{}}) : helper; }
-  buffer += escapeExpression(stack1)
-    + "\" />\n                </a>\n            </div>\n            <div class=\"waveform\" large-5 columns>\n                <img src=\"";
-  if (helper = helpers.waveform_url) { stack1 = helper.call(depth0, {hash:{}}); }
-  else { helper = (depth0 && depth0.waveform_url); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{}}) : helper; }
+    + "\">\n                    ";
+  stack1 = helpers['if'].call(depth0, (depth0 && depth0.artwork_url), {hash:{},inverse:self.program(4, program4, data),fn:self.program(2, program2, data),data:data});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\n                </a>\n            </div>\n            <div class=\"waveform\" large-5 columns>\n                <img src=\"";
+  if (helper = helpers.waveform_url) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.waveform_url); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
   buffer += escapeExpression(stack1)
     + "\" />\n            </div>\n        </div>\n        <div class=\"info row\">\n            <div class=\"song-name large-6 columns\">\n                ";
-  if (helper = helpers.title) { stack1 = helper.call(depth0, {hash:{}}); }
-  else { helper = (depth0 && depth0.title); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{}}) : helper; }
+  if (helper = helpers.title) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.title); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
   buffer += escapeExpression(stack1)
     + "\n            </div>\n            <div class=\"artist-name large-6 columns\">\n                "
     + escapeExpression(((stack1 = ((stack1 = (depth0 && depth0.user)),stack1 == null || stack1 === false ? stack1 : stack1.username)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
-    + "\n            </div>\n        </div>\n        <div class=\"social row\">\n            <div class=\"follow large-3 columns\">\n                <a class=\"follow-link\">\n                    FOLLOW\n                </a>\n            </div>\n            <div class=\"current-song-info large-6 columns\">\n                <div class=\"track-info-plays large-3 columns\">\n                    ";
-  if (helper = helpers.playback_count) { stack1 = helper.call(depth0, {hash:{}}); }
-  else { helper = (depth0 && depth0.playback_count); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{}}) : helper; }
+    + "\n            </div>\n        </div>\n        <div class=\"social row\">\n            <div class=\"follow large-3 columns\">\n                <a class=\"follow-link\" target=\"_blank\">\n                    FOLLOW\n                </a>\n            </div>\n            <div class=\"current-song-info large-6 columns\">\n                <div class=\"track-info-plays large-3 columns\">\n                    ";
+  if (helper = helpers.playback_count) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.playback_count); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
   buffer += escapeExpression(stack1)
     + "\n                </div>\n                <div class=\"track-info-favorites large-3 columns\">\n                    ";
-  if (helper = helpers.favoritings_count) { stack1 = helper.call(depth0, {hash:{}}); }
-  else { helper = (depth0 && depth0.favoritings_count); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{}}) : helper; }
+  if (helper = helpers.favoritings_count) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.favoritings_count); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
   buffer += escapeExpression(stack1)
     + "\n                </div>\n                <div class=\"track-info-comments large-3 columns\">\n                    ";
-  if (helper = helpers.comment_count) { stack1 = helper.call(depth0, {hash:{}}); }
-  else { helper = (depth0 && depth0.comment_count); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{}}) : helper; }
+  if (helper = helpers.comment_count) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.comment_count); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
   buffer += escapeExpression(stack1)
     + "\n                </div>\n                <div class=\"track-info-downloads large-3 columns\">\n                    ";
-  if (helper = helpers.download_count) { stack1 = helper.call(depth0, {hash:{}}); }
-  else { helper = (depth0 && depth0.download_count); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{}}) : helper; }
+  if (helper = helpers.download_count) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.download_count); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
   buffer += escapeExpression(stack1)
-    + "\n                </div>\n            </div>\n            <div class=\"buy large-3 columns\">\n                <a class=\"buy-link\">\n                    BUY\n                </a>\n            </div>\n        </div>\n    ";
+    + "\n                </div>\n            </div>\n            ";
+  stack1 = helpers['if'].call(depth0, (depth0 && depth0.purchase_url), {hash:{},inverse:self.noop,fn:self.program(6, program6, data),data:data});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\n        </div>\n    ";
+  return buffer;
+  }
+function program2(depth0,data) {
+  
+  var buffer = "", stack1, helper;
+  buffer += "\n                        <img src=\"";
+  if (helper = helpers.artwork_url) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.artwork_url); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "\" />\n                    ";
   return buffer;
   }
 
-function program3(depth0,data) {
+function program4(depth0,data) {
+  
+  var buffer = "", stack1;
+  buffer += "\n                        <img src=\""
+    + escapeExpression(((stack1 = ((stack1 = (depth0 && depth0.user)),stack1 == null || stack1 === false ? stack1 : stack1.avatar_url)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
+    + "\" />\n                    ";
+  return buffer;
+  }
+
+function program6(depth0,data) {
   
   var buffer = "", stack1, helper;
-  buffer += "\n            <div class=\"track-info row\">\n                <div class=\"track-info-name large-5 columns\">\n                    ";
-  if (helper = helpers.title) { stack1 = helper.call(depth0, {hash:{}}); }
-  else { helper = (depth0 && depth0.title); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{}}) : helper; }
+  buffer += "\n                <div class=\"buy large-3 columns\">\n                    <a class=\"buy-link\" href=\"";
+  if (helper = helpers.purchase_url) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.purchase_url); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "\" target=\"_blank\">\n                        BUY\n                    </a>\n                </div>\n            ";
+  return buffer;
+  }
+
+function program8(depth0,data) {
+  
+  var buffer = "", stack1, helper;
+  buffer += "\n            ";
+  stack1 = helpers['if'].call(depth0, (depth0 && depth0.playing), {hash:{},inverse:self.program(11, program11, data),fn:self.program(9, program9, data),data:data});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\n                <div class=\"track-info-name large-5 columns\">\n                    ";
+  if (helper = helpers.title) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.title); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
   buffer += escapeExpression(stack1)
     + "\n                </div>\n                <div class=\"track-info-social large-7 columns\">\n                    <div class=\"track-info-plays large-3 columns\">\n                        ";
-  if (helper = helpers.playback_count) { stack1 = helper.call(depth0, {hash:{}}); }
-  else { helper = (depth0 && depth0.playback_count); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{}}) : helper; }
+  if (helper = helpers.playback_count) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.playback_count); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
   buffer += escapeExpression(stack1)
     + "\n                    </div>\n                    <div class=\"track-info-favorites large-3 columns\">\n                        ";
-  if (helper = helpers.favoritings_count) { stack1 = helper.call(depth0, {hash:{}}); }
-  else { helper = (depth0 && depth0.favoritings_count); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{}}) : helper; }
+  if (helper = helpers.favoritings_count) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.favoritings_count); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
   buffer += escapeExpression(stack1)
     + "\n                    </div>\n                    <div class=\"track-info-comments large-3 columns\">\n                        ";
-  if (helper = helpers.comment_count) { stack1 = helper.call(depth0, {hash:{}}); }
-  else { helper = (depth0 && depth0.comment_count); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{}}) : helper; }
+  if (helper = helpers.comment_count) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.comment_count); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
   buffer += escapeExpression(stack1)
     + "\n                    </div>\n                    <div class=\"track-info-downloads large-3 columns\">\n                        ";
-  if (helper = helpers.download_count) { stack1 = helper.call(depth0, {hash:{}}); }
-  else { helper = (depth0 && depth0.download_count); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{}}) : helper; }
+  if (helper = helpers.download_count) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.download_count); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
   buffer += escapeExpression(stack1)
     + "\n                    </div>\n                </div>\n            </div>\n        ";
   return buffer;
   }
+function program9(depth0,data) {
+  
+  var buffer = "", stack1;
+  buffer += "\n                <div class=\"track-info row playing\" data-index="
+    + escapeExpression(((stack1 = (data == null || data === false ? data : data.index)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
+    + ">\n            ";
+  return buffer;
+  }
+
+function program11(depth0,data) {
+  
+  var buffer = "", stack1;
+  buffer += "\n                <div class=\"track-info row\" data-index="
+    + escapeExpression(((stack1 = (data == null || data === false ? data : data.index)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
+    + ">\n            ";
+  return buffer;
+  }
 
   buffer += "<div class=\"12 columns\">\n    ";
-  stack1 = helpers['with'].call(depth0, (depth0 && depth0.nowPlaying), {hash:{},inverse:self.noop,fn:self.program(1, program1, data)});
+  stack1 = helpers['with'].call(depth0, (depth0 && depth0.nowPlaying), {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\n    <div class=\"controls row\">\n        <div class=\"buttons small-centered\">\n            <a class=\"prev\">\n                <img src=\""
+  buffer += "\n    <div class=\"controls row\">\n        <div class=\"buttons small-centered\">\n            <img src=\""
     + escapeExpression(((stack1 = (depth0 && depth0.staticUrl)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
-    + "img/prev.svg\" />\n            </a>\n            <a class=\"play\">\n                <img src=\""
+    + "img/prev.svg\" class=\"prev\" />\n            <img src=\""
     + escapeExpression(((stack1 = (depth0 && depth0.staticUrl)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
-    + "img/play.png\" />\n            </a>\n            <a class=\"next\">\n                <img src=\""
+    + "img/play.png\" class=\"play\" />\n            <img src=\""
     + escapeExpression(((stack1 = (depth0 && depth0.staticUrl)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
-    + "img/next.svg\" />\n            </a>\n        </div>\n    </div>\n    <div class=\"playlist row\">\n        ";
-  stack1 = helpers.each.call(depth0, (depth0 && depth0.tracks), {hash:{},inverse:self.noop,fn:self.program(3, program3, data)});
+    + "img/next.svg\" class=\"next\" />\n        </div>\n    </div>\n    <div class=\"playlist row\">\n        ";
+  stack1 = helpers.each.call(depth0, (depth0 && depth0.tracks), {hash:{},inverse:self.noop,fn:self.program(8, program8, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
   buffer += "\n    </div>\n</div>\n";
   return buffer;
@@ -15827,8 +15879,19 @@ return t;
 /* END_TEMPLATE */
 ;
 ToneDen.define('player',['jquery', 'underscore', 'vendor/sc-player', 'vendor/handlebars', 'hbs!templates/player'], function($, _, scPlayer, Handlebars, template) {
+    var staticUrl = '//widget.dev/sdk/';
+
     function rerender(container, parameters) {
-        parameters.staticUrl = '//widget.dev/sdk/';
+        parameters = JSON.parse(JSON.stringify(parameters));
+        parameters.staticUrl = staticUrl;
+
+        if(parameters.nowPlaying) {
+            for(var i = 0; i < parameters.tracks.length; i++) {
+                if(parameters.tracks[i].title === parameters.nowPlaying.title) {
+                    parameters.tracks[i].playing = true;
+                }
+            }
+        }
 
         container.html(template(parameters));
     }
@@ -15882,10 +15945,6 @@ ToneDen.define('player',['jquery', 'underscore', 'vendor/sc-player', 'vendor/han
 
 			if(target.hasClass('play')) {
                 playerInstance.pause();
-            } else if(target.hasClass('pause')) {
-                playerInstance.pause();
-            } else if(target.hasClass('stop')) {
-                playerInstance.stop();
             } else if(target.hasClass('next')) {
                 playerInstance.next();
             } else if(target.hasClass('prev')) {
@@ -15893,8 +15952,39 @@ ToneDen.define('player',['jquery', 'underscore', 'vendor/sc-player', 'vendor/han
             }
         });
 
+        container.on('click', '.track-info', function(e) {
+            var row = $(this);
+            var cls = row.attr('class');
+            var index = Number(row.attr('data-index'));
+
+            if(cls.indexOf('playing') === -1) {
+                playerInstance.goto(index);
+            }
+        });
+
         // Hook into SC player events.
-        playerInstance.on('scplayer.playlist.preloaded', function(event) {
+        playerInstance.on('scplayer.play', function(e) {
+            container.find('.play').attr('src', staticUrl + 'img/pause.svg');
+        });
+
+        playerInstance.on('scplayer.pause', function(e) {
+            var paused = playerInstance.sound().paused;
+            var src;
+            
+            if(paused) {
+                src = staticUrl + 'img/play.png';
+            } else {
+                src = staticUrl + 'img/pause.svg';
+            }
+
+            container.find('.play').attr('src', src);
+        });
+
+        playerInstance.on('scplayer.stop', function(e) {
+            container.find('.play').attr('src', staticUrl + 'img/play.png');
+        });
+
+        playerInstance.on('scplayer.playlist.preloaded', function(e) {
             playerInstance.tracks(function(tracks) {
                 console.log(tracks);
                 rerender(container, {
@@ -15904,7 +15994,7 @@ ToneDen.define('player',['jquery', 'underscore', 'vendor/sc-player', 'vendor/han
             });
         });
 
-        playerInstance.on('scplayer.changing_track', function(event, trackIndex) {
+        playerInstance.on('scplayer.changing_track', function(e, trackIndex) {
             playerInstance.tracks(function(tracks) {
                 rerender(container, {
                     nowPlaying: playerInstance.track(),
