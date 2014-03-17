@@ -7782,12 +7782,12 @@ ToneDen.define('vendor/sc-player',['vendor/soundmanager2', 'jquery'], function(s
         };
 
         // Lookup a track's data, either from cache or do a lookup. Takes id or url.
-        this.trackInfo = function(id){
+        this.trackInfo = function(id, cb){
             if(self.isNumeric(id)) {
                 id = self.tracks[id];
             }
 
-            return self.resolveTrack(id);
+            return self.resolveTrack(id, cb);
         };
 
         // Use jquery to register events.
@@ -7821,6 +7821,21 @@ ToneDen.define('vendor/sc-player',['vendor/soundmanager2', 'jquery'], function(s
 
         self.getTrack = function() {
             return self.currentTrack;
+        };
+
+        self.getTracks = function(callback) {
+            var urls = self.getPlaylist();
+            var trackObjects = [];
+
+            for(var i = 0; i < urls.length; i++) {
+                self.trackInfo(urls[i], function(info) {
+                    trackObjects.push(info);
+
+                    if(trackObjects.length === urls.length) {
+                        return callback(trackObjects);
+                    }
+                });
+            }
         };
 
         self.getTrackIndex = function() {
@@ -8132,6 +8147,7 @@ ToneDen.define('vendor/sc-player',['vendor/soundmanager2', 'jquery'], function(s
             on: this.on,
             trigger: this.trigger,
             track: this.getTrack,
+            tracks: this.getTracks,
             trackIndex: this.getTrackIndex,
             sound: this.getSound,
             playlist: this.getPlaylist,
@@ -12971,17 +12987,65 @@ ToneDen.define('hbs!templates/player',['hbs','hbs/handlebars'], function( hbs, H
 var t = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
   this.compilerInfo = [4,'>= 1.0.0'];
 helpers = this.merge(helpers, Handlebars.helpers);
+  var buffer = "", stack1, functionType="function", escapeExpression=this.escapeExpression, self=this;
+
+function program1(depth0,data) {
   
+  var buffer = "", stack1, helper;
+  buffer += "\n            <div class=\"cover\">\n                <img src=\"";
+  if (helper = helpers.artwork_url) { stack1 = helper.call(depth0, {hash:{}}); }
+  else { helper = (depth0 && depth0.artwork_url); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{}}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "\"></img>\n            </div>\n            <div class=\"waveform\"/>\n        ";
+  return buffer;
+  }
 
+function program3(depth0,data) {
+  
+  var buffer = "", stack1, helper;
+  buffer += "\n            <div class=\"track-info\">\n                <div class=\"track-info-name\">\n                    ";
+  if (helper = helpers.title) { stack1 = helper.call(depth0, {hash:{}}); }
+  else { helper = (depth0 && depth0.title); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{}}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "\n                </div>\n                <div class=\"track-info-social\">\n                    <div class=\"track-info-plays\">\n                        ";
+  if (helper = helpers.playback_count) { stack1 = helper.call(depth0, {hash:{}}); }
+  else { helper = (depth0 && depth0.playback_count); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{}}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "\n                    </div>\n                    <div class=\"track-info-favorites\">\n                        ";
+  if (helper = helpers.favoritings_count) { stack1 = helper.call(depth0, {hash:{}}); }
+  else { helper = (depth0 && depth0.favoritings_count); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{}}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "\n                    </div>\n                    <div class=\"track-info-comments\">\n                        ";
+  if (helper = helpers.comment_count) { stack1 = helper.call(depth0, {hash:{}}); }
+  else { helper = (depth0 && depth0.comment_count); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{}}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "\n                    </div>\n                    <div class=\"track-info-downloads\">\n                        ";
+  if (helper = helpers.download_count) { stack1 = helper.call(depth0, {hash:{}}); }
+  else { helper = (depth0 && depth0.download_count); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{}}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "\n                    </div>\n                </div>\n            </div>\n        ";
+  return buffer;
+  }
 
-  return "<div>\n    <div class=\"title\">\n    </div>\n    <br>\n    <div class=\"controls\">\n        <a class=\"play\">Play</a>\n        <a class=\"pause\">Pause</a>\n        <br>\n        <a class=\"prev\">Previous</a>\n        <a class=\"next\">Next</a>\n    </div>\n</div>\n";
+  buffer += "<div>\n    <div class=\"header\">\n        ";
+  stack1 = helpers['with'].call(depth0, (depth0 && depth0.nowPlaying), {hash:{},inverse:self.noop,fn:self.program(1, program1, data)});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\n    </div>\n    <div class=\"info\">\n        <div class=\"song-name\">\n        </div>\n        <div class=\"artist-name\">\n        </div>\n    </div>\n    <div class=\"social\">\n        <div class=\"follow\">\n        </div>\n        <div class=\"current-song-info\">\n        </div>\n        <div class=\"buy\">\n        </div>\n    </div>\n    <div class=\"controls\">\n        <a class=\"prev\">Previous</a>\n        <a class=\"play\">Play</a>\n        <a class=\"next\">Next</a>\n    </div>\n    <div class=\"playlist\">\n        ";
+  stack1 = helpers.each.call(depth0, (depth0 && depth0.tracks), {hash:{},inverse:self.noop,fn:self.program(3, program3, data)});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\n    </div>\n</div>\n";
+  return buffer;
   });
 return t;
 });
 /* END_TEMPLATE */
 ;
 ToneDen.define('player',['jquery', 'underscore', 'vendor/sc-player', 'hbs!templates/player'], function($, _, scPlayer, template) {
-    return function(tracks, dom, options) {
+    function rerender(container, template, parameters) {
+        container.html(template(parameters));
+    }
+
+    return function(urls, dom, options) {
         // Default parameters go here.
         var parameters = {
         };
@@ -12998,35 +13062,35 @@ ToneDen.define('player',['jquery', 'underscore', 'vendor/sc-player', 'hbs!templa
         if(arguments.length === 1 && typeof arguments[0] === 'object') {
             _.extend(parameters, arguments[0]);
         } else {
-            parameters.tracks = tracks;
+            parameters.urls = urls;
             parameters.dom = dom;
 
-            delete options.tracks;
+            delete options.urls;
             delete options.dom;
 
             _.extend(parameters, options);
         }
 
         var dom = parameters.dom;
-        var tracks = parameters.tracks;
+        var urls = parameters.urls;
 
-        var location = $(dom);
+        var container = $(dom);
         var html = template({
-            tracks: tracks
+            tracks: []
         });
 
-        if(location) {
-            location.html(html);
+        if(container) {
+            container.html(html);
         } else {
-            console.error('ToneDen Player: the location specified does not exist.');
+            console.error('ToneDen Player: the container specified does not exist.');
             return;
         }
 
-        var playerInstance = new scPlayer(tracks, playerParameters);
-        var titleArea = location.find('.title');
+        var playerInstance = new scPlayer(urls, playerParameters);
+        var titleArea = container.find('.title');
 
         // Set up listeners.
-        location.find('.controls').on('click', function(e) {
+        container.on('click', '.controls', function(e) {
             e.preventDefault();
             var target = $(e.target);
 
@@ -13044,9 +13108,22 @@ ToneDen.define('player',['jquery', 'underscore', 'vendor/sc-player', 'hbs!templa
         });
 
         // Hook into SC player events.
+        playerInstance.on('scplayer.playlist.preloaded', function(event) {
+            playerInstance.tracks(function(tracks) {
+                rerender(container, template, {
+                    nowPlaying: playerInstance.track(),
+                    tracks: tracks
+                });
+            });
+        });
+
         playerInstance.on('scplayer.changing_track', function(event, trackIndex) {
-            var track = playerInstance.track();
-            titleArea.html(track.title);
+            playerInstance.tracks(function(tracks) {
+                rerender(container, template, {
+                    nowPlaying: playerInstance.track(),
+                    tracks: tracks
+                });
+            });
         });
 
         return playerInstance;

@@ -1,5 +1,9 @@
 define(['jquery', 'underscore', 'vendor/sc-player', 'hbs!templates/player'], function($, _, scPlayer, template) {
-    return function(tracks, dom, options) {
+    function rerender(container, template, parameters) {
+        container.html(template(parameters));
+    }
+
+    return function(urls, dom, options) {
         // Default parameters go here.
         var parameters = {
         };
@@ -16,35 +20,35 @@ define(['jquery', 'underscore', 'vendor/sc-player', 'hbs!templates/player'], fun
         if(arguments.length === 1 && typeof arguments[0] === 'object') {
             _.extend(parameters, arguments[0]);
         } else {
-            parameters.tracks = tracks;
+            parameters.urls = urls;
             parameters.dom = dom;
 
-            delete options.tracks;
+            delete options.urls;
             delete options.dom;
 
             _.extend(parameters, options);
         }
 
         var dom = parameters.dom;
-        var tracks = parameters.tracks;
+        var urls = parameters.urls;
 
-        var location = $(dom);
+        var container = $(dom);
         var html = template({
-            tracks: tracks
+            tracks: []
         });
 
-        if(location) {
-            location.html(html);
+        if(container) {
+            container.html(html);
         } else {
-            console.error('ToneDen Player: the location specified does not exist.');
+            console.error('ToneDen Player: the container specified does not exist.');
             return;
         }
 
-        var playerInstance = new scPlayer(tracks, playerParameters);
-        var titleArea = location.find('.title');
+        var playerInstance = new scPlayer(urls, playerParameters);
+        var titleArea = container.find('.title');
 
         // Set up listeners.
-        location.find('.controls').on('click', function(e) {
+        container.on('click', '.controls', function(e) {
             e.preventDefault();
             var target = $(e.target);
 
@@ -62,9 +66,22 @@ define(['jquery', 'underscore', 'vendor/sc-player', 'hbs!templates/player'], fun
         });
 
         // Hook into SC player events.
+        playerInstance.on('scplayer.playlist.preloaded', function(event) {
+            playerInstance.tracks(function(tracks) {
+                rerender(container, template, {
+                    nowPlaying: playerInstance.track(),
+                    tracks: tracks
+                });
+            });
+        });
+
         playerInstance.on('scplayer.changing_track', function(event, trackIndex) {
-            var track = playerInstance.track();
-            titleArea.html(track.title);
+            playerInstance.tracks(function(tracks) {
+                rerender(container, template, {
+                    nowPlaying: playerInstance.track(),
+                    tracks: tracks
+                });
+            });
         });
 
         return playerInstance;

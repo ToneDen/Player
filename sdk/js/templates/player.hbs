@@ -1,12 +1,52 @@
 <div>
-    <div class="title">
+    <div class="header">
+        {{#with nowPlaying}}
+            <div class="cover">
+                <img src="{{artwork_url}}"></img>
+            </div>
+            <div class="waveform"/>
+        {{/with}}
     </div>
-    <br>
+    <div class="info">
+        <div class="song-name">
+        </div>
+        <div class="artist-name">
+        </div>
+    </div>
+    <div class="social">
+        <div class="follow">
+        </div>
+        <div class="current-song-info">
+        </div>
+        <div class="buy">
+        </div>
+    </div>
     <div class="controls">
-        <a class="play">Play</a>
-        <a class="pause">Pause</a>
-        <br>
         <a class="prev">Previous</a>
+        <a class="play">Play</a>
         <a class="next">Next</a>
+    </div>
+    <div class="playlist">
+        {{#each tracks}}
+            <div class="track-info">
+                <div class="track-info-name">
+                    {{title}}
+                </div>
+                <div class="track-info-social">
+                    <div class="track-info-plays">
+                        {{playback_count}}
+                    </div>
+                    <div class="track-info-favorites">
+                        {{favoritings_count}}
+                    </div>
+                    <div class="track-info-comments">
+                        {{comment_count}}
+                    </div>
+                    <div class="track-info-downloads">
+                        {{download_count}}
+                    </div>
+                </div>
+            </div>
+        {{/each}}
     </div>
 </div>
