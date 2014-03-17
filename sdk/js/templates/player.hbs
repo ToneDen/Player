@@ -1,48 +1,79 @@
-<div>
-    <div class="header">
-        {{#with nowPlaying}}
-            <div class="cover">
-                <img src="{{artwork_url}}"></img>
+<div class="12 columns">
+    {{#with nowPlaying}}
+        <div class="header row">
+            <div class="cover large-7 columns">
+                <a href="{{permalink_url}}">
+                    <img src="{{artwork_url}}"></img>
+                </a>
             </div>
-            <div class="waveform"/>
-        {{/with}}
+            <div class="waveform" large-5 columns>
+            </div>
+        </div>
+        <div class="info row">
+            <div class="song-name large-6 columns">
+                {{title}}
+            </div>
+            <div class="artist-name large-6 columns">
+                {{user.username}}
+            </div>
+        </div>
+        <div class="social row">
+            <div class="follow large-3 columns">
+                <a class="follow-link">
+                    FOLLOW
+                </a>
+            </div>
+            <div class="current-song-info large-6 columns">
+                <div class="track-info-plays large-3 columns">
+                    {{playback_count}}
+                </div>
+                <div class="track-info-favorites large-3 columns">
+                    {{favoritings_count}}
+                </div>
+                <div class="track-info-comments large-3 columns">
+                    {{comment_count}}
+                </div>
+                <div class="track-info-downloads large-3 columns">
+                    {{download_count}}
+                </div>
+            </div>
+            <div class="buy large-3 columns">
+                <a class="buy-link">
+                    BUY
+                </a>
+            </div>
+        </div>
+    {{/with}}
+    <div class="controls row">
+        <div class="buttons small-centered">
+            <a class="prev">
+                <img src="{{this.staticUrl}}img/prev.svg" />
+            </a>
+            <a class="play">
+                <img src="{{this.staticUrl}}img/play.png" />
+            </a>
+            <a class="next">
+                <img src="{{this.staticUrl}}img/next.svg" />
+            </a>
+        </div>
     </div>
-    <div class="info">
-        <div class="song-name">
-        </div>
-        <div class="artist-name">
-        </div>
-    </div>
-    <div class="social">
-        <div class="follow">
-        </div>
-        <div class="current-song-info">
-        </div>
-        <div class="buy">
-        </div>
-    </div>
-    <div class="controls">
-        <a class="prev">Previous</a>
-        <a class="play">Play</a>
-        <a class="next">Next</a>
-    </div>
-    <div class="playlist">
+    <div class="playlist row">
         {{#each tracks}}
-            <div class="track-info">
-                <div class="track-info-name">
+            <div class="track-info row">
+                <div class="track-info-name large-5 columns">
                     {{title}}
                 </div>
-                <div class="track-info-social">
-                    <div class="track-info-plays">
+                <div class="track-info-social large-7 columns">
+                    <div class="track-info-plays large-3 columns">
                         {{playback_count}}
                     </div>
-                    <div class="track-info-favorites">
+                    <div class="track-info-favorites large-3 columns">
                         {{favoritings_count}}
                     </div>
-                    <div class="track-info-comments">
+                    <div class="track-info-comments large-3 columns">
                         {{comment_count}}
                     </div>
-                    <div class="track-info-downloads">
+                    <div class="track-info-downloads large-3 columns">
                         {{download_count}}
                     </div>
                 </div>

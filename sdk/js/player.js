@@ -1,5 +1,7 @@
-define(['jquery', 'underscore', 'vendor/sc-player', 'hbs!templates/player'], function($, _, scPlayer, template) {
-    function rerender(container, template, parameters) {
+define(['jquery', 'underscore', 'vendor/sc-player', 'vendor/handlebars', 'hbs!templates/player'], function($, _, scPlayer, Handlebars, template) {
+    function rerender(container, parameters) {
+        parameters.staticUrl = '//widget.dev/sdk/';
+
         container.html(template(parameters));
     }
 
@@ -31,14 +33,12 @@ define(['jquery', 'underscore', 'vendor/sc-player', 'hbs!templates/player'], fun
 
         var dom = parameters.dom;
         var urls = parameters.urls;
-
         var container = $(dom);
-        var html = template({
-            tracks: []
-        });
 
         if(container) {
-            container.html(html);
+            rerender(container, {
+                tracks: []
+            });
         } else {
             console.error('ToneDen Player: the container specified does not exist.');
             return;
@@ -68,7 +68,8 @@ define(['jquery', 'underscore', 'vendor/sc-player', 'hbs!templates/player'], fun
         // Hook into SC player events.
         playerInstance.on('scplayer.playlist.preloaded', function(event) {
             playerInstance.tracks(function(tracks) {
-                rerender(container, template, {
+                console.log(tracks);
+                rerender(container, {
                     nowPlaying: playerInstance.track(),
                     tracks: tracks
                 });
@@ -77,7 +78,7 @@ define(['jquery', 'underscore', 'vendor/sc-player', 'hbs!templates/player'], fun
 
         playerInstance.on('scplayer.changing_track', function(event, trackIndex) {
             playerInstance.tracks(function(tracks) {
-                rerender(container, template, {
+                rerender(container, {
                     nowPlaying: playerInstance.track(),
                     tracks: tracks
                 });
