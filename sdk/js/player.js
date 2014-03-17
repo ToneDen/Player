@@ -1,6 +1,17 @@
 define(['jquery', 'underscore', 'vendor/sc-player', 'vendor/handlebars', 'hbs!templates/player'], function($, _, scPlayer, Handlebars, template) {
+    var staticUrl = '//widget.dev/sdk/';
+
     function rerender(container, parameters) {
-        parameters.staticUrl = '//widget.dev/sdk/';
+        parameters = JSON.parse(JSON.stringify(parameters));
+        parameters.staticUrl = staticUrl;
+
+        if(parameters.nowPlaying) {
+            for(var i = 0; i < parameters.tracks.length; i++) {
+                if(parameters.tracks[i].title === parameters.nowPlaying.title) {
+                    parameters.tracks[i].playing = true;
+                }
+            }
+        }
 
         container.html(template(parameters));
     }
@@ -33,6 +44,7 @@ define(['jquery', 'underscore', 'vendor/sc-player', 'vendor/handlebars', 'hbs!te
 
         var dom = parameters.dom;
         var urls = parameters.urls;
+
         var container = $(dom);
 
         if(container) {
@@ -54,10 +66,6 @@ define(['jquery', 'underscore', 'vendor/sc-player', 'vendor/handlebars', 'hbs!te
 
 			if(target.hasClass('play')) {
                 playerInstance.pause();
-            } else if(target.hasClass('pause')) {
-                playerInstance.pause();
-            } else if(target.hasClass('stop')) {
-                playerInstance.stop();
             } else if(target.hasClass('next')) {
                 playerInstance.next();
             } else if(target.hasClass('prev')) {
@@ -65,8 +73,47 @@ define(['jquery', 'underscore', 'vendor/sc-player', 'vendor/handlebars', 'hbs!te
             }
         });
 
+        container.on('click', '.track-info', function(e) {
+            var row = $(this);
+            var cls = row.attr('class');
+            var index = Number(row.attr('data-index'));
+
+            if(cls.indexOf('playing') === -1) {
+                playerInstance.goto(index);
+            }
+        });
+
         // Hook into SC player events.
-        playerInstance.on('scplayer.playlist.preloaded', function(event) {
+        playerInstance.on('scplayer.play', function(e) {
+            container.find('.play').attr('src', staticUrl + 'img/pause.svg');
+        });
+
+        playerInstance.on('scplayer.pause', function(e) {
+            var paused = playerInstance.sound().paused;
+            var src;
+            
+            if(paused) {
+                src = staticUrl + 'img/play.png';
+            } else {
+                src = staticUrl + 'img/pause.svg';
+            }
+
+            container.find('.play').attr('src', src);
+        });
+
+        playerInstance.on('scplayer.stop', function(e) {
+            container.find('.play').attr('src', staticUrl + 'img/play.png');
+        });
+
+        playerInstance.on('scplayer.track.whileloading', function(e, percent){
+            container.find('.buffer').css('width', percent + '%');
+        });
+
+        playerInstance.on('scplayer.track.whileplaying', function(e, percent){
+            container.find('.played').css('width', percent + '%');
+        });
+
+        playerInstance.on('scplayer.playlist.preloaded', function(e) {
             playerInstance.tracks(function(tracks) {
                 console.log(tracks);
                 rerender(container, {
@@ -76,7 +123,10 @@ define(['jquery', 'underscore', 'vendor/sc-player', 'vendor/handlebars', 'hbs!te
             });
         });
 
-        playerInstance.on('scplayer.changing_track', function(event, trackIndex) {
+        playerInstance.on('scplayer.changing_track', function(e, trackIndex) {
+            container.find('.played').css('width', '0%');
+            container.find('.buffer').css('width', '0%');
+
             playerInstance.tracks(function(tracks) {
                 rerender(container, {
                     nowPlaying: playerInstance.track(),

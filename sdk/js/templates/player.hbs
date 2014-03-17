@@ -3,11 +3,17 @@
         <div class="header row">
             <div class="cover large-7 columns">
                 <a href="{{permalink_url}}">
-                    <img src="{{artwork_url}}" />
+                    {{#if artwork_url}}
+                        <img src="{{artwork_url}}" />
+                    {{else}}
+                        <img src="{{user.avatar_url}}" />
+                    {{/if}}
                 </a>
             </div>
             <div class="waveform" large-5 columns>
                 <img src="{{waveform_url}}" />
+                <div class="buffer" />
+                <div class="played" />
             </div>
         </div>
         <div class="info row">
@@ -20,7 +26,7 @@
         </div>
         <div class="social row">
             <div class="follow large-3 columns">
-                <a class="follow-link">
+                <a class="follow-link" target="_blank">
                     FOLLOW
                 </a>
             </div>
@@ -38,29 +44,29 @@
                     {{download_count}}
                 </div>
             </div>
-            <div class="buy large-3 columns">
-                <a class="buy-link">
-                    BUY
-                </a>
-            </div>
+            {{#if purchase_url}}
+                <div class="buy large-3 columns">
+                    <a class="buy-link" href="{{purchase_url}}" target="_blank">
+                        BUY
+                    </a>
+                </div>
+            {{/if}}
         </div>
     {{/with}}
     <div class="controls row">
         <div class="buttons small-centered">
-            <a class="prev">
-                <img src="{{this.staticUrl}}img/prev.svg" />
-            </a>
-            <a class="play">
-                <img src="{{this.staticUrl}}img/play.png" />
-            </a>
-            <a class="next">
-                <img src="{{this.staticUrl}}img/next.svg" />
-            </a>
+            <img src="{{this.staticUrl}}img/prev.svg" class="prev" />
+            <img src="{{this.staticUrl}}img/play.png" class="play" />
+            <img src="{{this.staticUrl}}img/next.svg" class="next" />
         </div>
     </div>
     <div class="playlist row">
         {{#each tracks}}
-            <div class="track-info row">
+            {{#if playing}}
+                <div class="track-info row playing" data-index={{@index}}>
+            {{else}}
+                <div class="track-info row" data-index={{@index}}>
+            {{/if}}
                 <div class="track-info-name large-5 columns">
                     {{title}}
                 </div>
