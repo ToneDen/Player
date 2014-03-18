@@ -18,25 +18,41 @@ body {
 	/*border-top: 10px solid transparent;*/
 }
 
-#player { }
-	#player .controls {
-	}
-		#player .controls div {
-			display: inline-block;
-			text-align: center;
-			color: white;
-			opacity: 0.75;
-			cursor: pointer;
-		}
-		#player .controls div:hover {
-			opacity: 1;
-			background-color: #F18900;
-		}
-		#player .controls .play { background-image: url("../img/play.png"); margin: 2px; }
-		#player .controls .pause { background-image: url("../img/pause.svg"); }
-		#player .controls .stop { background-image: url("../img/stop.svg"); }
-		#player .controls .next { background-image: url("../img/next.svg"); width: 21px; height: 21px; }
-		#player .controls .prev { background-image: url("../img/prev.svg"); width: 21px; height: 21px; }
+#player .controls {
+/*width: 150px;*/
+}
+
+#player .controls div {
+display: inline-block;
+text-align: center;
+color: white;
+opacity: 0.75;
+cursor: pointer;
+}
+
+#player .controls div:hover {
+opacity: 1;
+background-color: #F18900;
+}
+
+#player .controls .play { background-image: url("../img/play.png"); margin: 2px; }
+#player .controls .pause { background-image: url("../img/pause.svg"); }
+#player .controls .stop { background-image: url("../img/stop.svg"); }
+#player .controls .next { background-image: url("../img/next.svg"); width: 21px; height: 21px; }
+#player .controls .prev { background-image: url("../img/prev.svg"); width: 21px; height: 21px; }
+
+#header {
+	height: 150px;
+}
+
+#header .cover {
+	display: table;
+}
+
+#header .cover a {
+	display: table-cell;
+	vertical-align: middle;
+}
 
 #waveform {
 	/*width: 100%;*/
@@ -148,7 +164,7 @@ body {
 	  .column.small-uncentered.opposite,
 	  .columns.small-uncentered.opposite {
 	    float: right; }
-    
+
 	.small-1 {
 	width: 8.33333%; }
 
