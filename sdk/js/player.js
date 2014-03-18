@@ -56,6 +56,21 @@ define(['jquery', 'underscore', 'vendor/sc-player', 'vendor/handlebars', 'hbs!te
             return;
         }
 
+        // Helper functions.
+        function changePlayButton(paused) {
+            var playClass = 'fa-play-circle-o';
+            var pauseClass = 'fa-pause';
+            var playButton = container.find('.play');
+
+            if(paused) {
+                playButton.removeClass(pauseClass);
+                playButton.addClass(playClass);
+            } else {
+                playButton.removeClass(playClass);
+                playButton.addClass(pauseClass);
+            }
+        }
+
         var playerInstance = new scPlayer(urls, playerParameters);
         var titleArea = container.find('.title');
 
@@ -85,20 +100,12 @@ define(['jquery', 'underscore', 'vendor/sc-player', 'vendor/handlebars', 'hbs!te
 
         // Hook into SC player events.
         playerInstance.on('scplayer.play', function(e) {
-            container.find('.play').attr('src', staticUrl + 'img/pause.svg');
+            changePlayButton(false);
         });
 
         playerInstance.on('scplayer.pause', function(e) {
             var paused = playerInstance.sound().paused;
-            var src;
-
-            if(paused) {
-                src = staticUrl + 'img/play.png';
-            } else {
-                src = staticUrl + 'img/pause.svg';
-            }
-
-            container.find('.play').attr('src', src);
+            changePlayButton(paused);
         });
 
         playerInstance.on('scplayer.stop', function(e) {
