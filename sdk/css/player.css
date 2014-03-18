@@ -1,6 +1,14 @@
 body {
-	background: url(../img/squary.jpg) no-repeat;
-	background-size: cover;
+	background: white;
+	color: #222222;
+	padding: 0;
+	margin: 0;
+	font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
+	font-weight: normal;
+	font-style: normal;
+	line-height: 1;
+	position: relative;
+	cursor: default; 
 }
 
 #player {
@@ -84,4 +92,101 @@ body {
 
 .player-divider {
 
+}
+
+/*General*/
+
+.row {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 0;
+  margin-bottom: 0;
+  max-width: 62.5em;
+  *zoom: 1; }
+  .row:before, .row:after {
+    content: " ";
+    display: table; }
+  .row:after {
+    clear: both; }
+  .row.collapse > .column,
+  .row.collapse > .columns {
+    padding-left: 0;
+    padding-right: 0; }
+  .row.collapse .row {
+    margin-left: 0;
+    margin-right: 0; }
+  .row .row {
+    width: auto;
+    margin-left: -0.9375em;
+    margin-right: -0.9375em;
+    margin-top: 0;
+    margin-bottom: 0;
+    max-width: none;
+    *zoom: 1; }
+    .row .row:before, .row .row:after {
+      content: " ";
+      display: table; }
+    .row .row:after {
+      clear: both; }
+    .row .row.collapse {
+      width: auto;
+      margin: 0;
+      max-width: none;
+      *zoom: 1; }
+      .row .row.collapse:before, .row .row.collapse:after {
+        content: " ";
+        display: table; }
+      .row .row.collapse:after {
+        clear: both; }
+
+.column,
+.columns {
+  padding-left: 0.9375em;
+  padding-right: 0.9375em;
+  width: 100%;
+  float: left; }
+
+ .left {
+  float: left !important; }
+
+.right {
+  float: right !important; }
+
+@media only screen {
+	.small-1 {
+	width: 8.33333%; }
+
+	.small-2 {
+	width: 16.66667%; }
+
+	.small-3 {
+	width: 25%; }
+
+	.small-4 {
+	width: 33.33333%; }
+
+	.small-5 {
+	width: 41.66667%; }
+
+	.small-6 {
+	width: 50%; }
+
+	.small-7 {
+	width: 58.33333%; }
+
+	.small-8 {
+	width: 66.66667%; }
+
+	.small-9 {
+	width: 75%; }
+
+	.small-10 {
+	width: 83.33333%; }
+
+	.small-11 {
+	width: 91.66667%; }
+
+	.small-12 {
+	width: 100%; }
 }
