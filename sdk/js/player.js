@@ -115,7 +115,6 @@ define(['jquery', 'underscore', 'vendor/sc-player', 'vendor/handlebars', 'hbs!te
 
         playerInstance.on('scplayer.playlist.preloaded', function(e) {
             playerInstance.tracks(function(tracks) {
-                console.log(tracks);
                 rerender(container, {
                     nowPlaying: playerInstance.track(),
                     tracks: tracks

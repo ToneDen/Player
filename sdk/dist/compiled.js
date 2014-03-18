@@ -16004,7 +16004,6 @@ ToneDen.define('player',['jquery', 'underscore', 'vendor/sc-player', 'vendor/han
 
         playerInstance.on('scplayer.playlist.preloaded', function(e) {
             playerInstance.tracks(function(tracks) {
-                console.log(tracks);
                 rerender(container, {
                     nowPlaying: playerInstance.track(),
                     tracks: tracks
