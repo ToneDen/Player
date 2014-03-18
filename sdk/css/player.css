@@ -27,20 +27,9 @@ body {
 .player .controls div {
 display: inline-block;
 text-align: center;
-color: white;
 opacity: 0.75;
 cursor: pointer;
 }
-
-#player .controls div:hover {
-opacity: 1;
-}
-
-#player .controls .play { background-image: url("../img/play.png"); margin: 2px; }
-#player .controls .pause { background-image: url("../img/pause.svg"); }
-#player .controls .stop { background-image: url("../img/stop.svg"); }
-#player .controls .next { background-image: url("../img/next.svg"); width: 21px; height: 21px; }
-#player .controls .prev { background-image: url("../img/prev.svg"); width: 21px; height: 21px; }
 
 .header {
 	height: 100%;
@@ -89,6 +78,34 @@ opacity: 1;
 
 .controls {
 	padding: 30px;
+	color: #222;
+	border-top: 1px solid;
+	border-bottom: 1px solid;
+}
+
+.player-prev {
+	font-size: 36px;
+}
+
+.player-prev:hover {
+	opacity: 1;
+}
+
+.player-play {
+	font-size: 42px;
+	margin:0px 20px;
+}
+
+.player-play:hover {
+	opacity: 1;
+}
+
+.player-next {
+	font-size: 36px;
+}
+
+.player-next:hover {
+	opacity: 1;
 }
 
 .track-content {
