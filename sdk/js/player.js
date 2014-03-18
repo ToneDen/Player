@@ -65,8 +65,10 @@ define(['jquery', 'underscore', 'vendor/sc-player', 'vendor/handlebars', 'hbs!te
             var target = $(e.target);
 
             if(target.hasClass('play')) {
+                playerInstance.play();
+            } else if(target.hasClass('pause')) {
                 playerInstance.pause();
-            } else if(target.hasClass('next')) {
+            }else if(target.hasClass('next')) {
                 playerInstance.next();
             } else if(target.hasClass('prev')) {
                 playerInstance.prev();
@@ -85,24 +87,26 @@ define(['jquery', 'underscore', 'vendor/sc-player', 'vendor/handlebars', 'hbs!te
 
         // Hook into SC player events.
         playerInstance.on('scplayer.play', function(e) {
-            container.find('.play').attr('src', staticUrl + 'img/pause.svg');
+            container.find('.play').hide();
+            container.find('.pause').show();
         });
 
         playerInstance.on('scplayer.pause', function(e) {
             var paused = playerInstance.sound().paused;
-            var src;
+            var playClass;
 
             if(paused) {
-                src = staticUrl + 'img/play.png';
+                container.find('.play').hide();
+                container.find('.pause').show();
             } else {
-                src = staticUrl + 'img/pause.svg';
+                container.find('.play').show();
+                container.find('.pause').hide();
             }
-
-            container.find('.play').attr('src', src);
         });
 
         playerInstance.on('scplayer.stop', function(e) {
-            container.find('.play').attr('src', staticUrl + 'img/play.png');
+            container.find('.play').show();
+            container.find('.pause').hide();
         });
 
         playerInstance.on('scplayer.track.whileloading', function(e, percent){
