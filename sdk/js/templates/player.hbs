@@ -63,35 +63,42 @@
             </div>
         </div>
         <div class="row playlist">
-            {{#each tracks}}
-                {{#if playing}}
-                    <div class="track-info row playing" data-index={{@index}}>
-                {{else}}
-                    <div class="track-info row" data-index={{@index}}>
-                {{/if}}
-                    <div class="track-info-name small-5 columns">
-                        {{title}}
-                    </div>
-                    <div class="track-info-social small-7 columns">
-                        <div class="track-info-plays small-3 columns">
-                            <i class="fa fa-play-circle fw playlist-social-icon"></i>
-                            {{playback_count}}
-                        </div>
-                        <div class="track-info-favorites small-3 columns">
-                            <i class="fa fa-heart fw playlist-social-icon"></i>
-                            {{favoritings_count}}
-                        </div>
-                        <div class="track-info-comments small-3 columns">
-                            <i class="fa fa-comments fw playlist-social-icon"></i>
-                            {{comment_count}}
-                        </div>
-                        <div class="track-info-downloads small-3 columns">
-                            <i class="fa fa-download fw playlist-social-icon"></i>
-                            {{download_count}}
-                        </div>
-                    </div>
-                </div>
-            {{/each}}
+            <table class="playlist-table">
+                {{#each tracks}}
+                    <tr>
+                        {{#if playing}}
+                            <td><i class="fa fa-play-circle fw current-play-icon playing" data-index={{@index}}></i></td>
+                        {{else}}
+                            <td><div class="track-info row" data-index={{@index}}></td>
+                        {{/if}}
+                            <td>
+                                <div class="track-info-name small-12 columns">
+                                    {{title}}
+                                </div>
+                            </td>
+                            <td>
+                                <div class="track-info-social small-12 columns">
+                                    <div class="track-info-plays small-3 columns">
+                                        <i class="fa fa-play-circle fw playlist-social-icon"></i>
+                                        {{playback_count}}
+                                    </div>
+                                    <div class="track-info-favorites small-3 columns">
+                                        <i class="fa fa-heart fw playlist-social-icon"></i>
+                                        {{favoritings_count}}
+                                    </div>
+                                    <div class="track-info-comments small-3 columns">
+                                        <i class="fa fa-comments fw playlist-social-icon"></i>
+                                        {{comment_count}}
+                                    </div>
+                                    <div class="track-info-downloads small-3 columns">
+                                        <i class="fa fa-download fw playlist-social-icon"></i>
+                                        {{download_count}}
+                                    </div>
+                                </div>
+                            </td>
+                    </tr>
+                {{/each}}
+            </div>
         </div>
     </div>
 </div>

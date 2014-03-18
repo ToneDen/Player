@@ -154,7 +154,14 @@ cursor: pointer;
 }
 
 .playlist {
-	padding: 20px;
+	font-size: 12px;
+}
+
+.playlist-table {
+	width: 100%;
+}
+
+.current-play-icon {
 	font-size: 14px;
 }
 
@@ -356,4 +363,27 @@ cursor: pointer;
   button.round, .button.round {
     -webkit-border-radius: 1000px;
     border-radius: 1000px; }
+}
+
+table {
+  margin-bottom: 1.25rem;}
+  table thead,
+  table tfoot {}
+    table thead tr th,
+    table thead tr td,
+    table tfoot tr th,
+    table tfoot tr td {
+      padding: 0.5rem 0.625rem 0.625rem;
+      text-align: left; }
+  table tr th,
+  table tr td {
+    padding: 0.5625rem 0.625rem; }
+  table tr.even, table tr.alt, table tr:nth-of-type(even) {}
+  table thead tr th,
+  table tfoot tr th,
+  table tbody tr td,
+  table tr td,
+  table tfoot tr td {
+    display: table-cell;
+    line-height: 1.125rem; }
 }
