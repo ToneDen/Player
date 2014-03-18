@@ -141,6 +141,8 @@ define(['jquery', 'underscore', 'vendor/sc-player', 'vendor/handlebars', 'hbs!te
             });
         });
 
+        //Interactions
+
         return playerInstance;
     };
 });
