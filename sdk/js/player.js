@@ -64,7 +64,7 @@ define(['jquery', 'underscore', 'vendor/sc-player', 'vendor/handlebars', 'hbs!te
             e.preventDefault();
             var target = $(e.target);
 
-			if(target.hasClass('play')) {
+            if(target.hasClass('play')) {
                 playerInstance.pause();
             } else if(target.hasClass('next')) {
                 playerInstance.next();
@@ -91,7 +91,7 @@ define(['jquery', 'underscore', 'vendor/sc-player', 'vendor/handlebars', 'hbs!te
         playerInstance.on('scplayer.pause', function(e) {
             var paused = playerInstance.sound().paused;
             var src;
-            
+
             if(paused) {
                 src = staticUrl + 'img/play.png';
             } else {

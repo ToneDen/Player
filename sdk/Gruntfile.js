@@ -35,7 +35,7 @@ module.exports = function(grunt) {
             production: {
                 src: 'css/*',
                 dest: 'dist/all.css'
-            },
+            }
         },
         requirejs: {
             compile: {
@@ -55,6 +55,14 @@ module.exports = function(grunt) {
                 ],
                 dest: 'dist/compiled.min.js'
             }
+        },
+        watch: {
+            files: [
+                'css/*',
+                'img/*',
+                'js/*'
+            ],
+            tasks: 'dev'
         }
     });
 
