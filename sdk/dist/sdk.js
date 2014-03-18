@@ -7447,7 +7447,8 @@ ToneDen.define('vendor/sc-player',['vendor/soundmanager2', 'jquery'], function(s
             cache: true, //caches the SC track lookup. Browser should handle the audio
             preload: false, //prefetch the sc track data
             debug: false
-        }
+        };
+
         var sc_resolve_url = "http://api.soundcloud.com/resolve?url=http://soundcloud.com";
         var urlregex = new RegExp(/[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&//=]*)?/gi);
 

@@ -58,9 +58,9 @@ module.exports = function(grunt) {
         },
         watch: {
             files: [
-                'css/*',
-                'img/*',
-                'js/*'
+                'css/**',
+                'img/**',
+                'js/**'
             ],
             tasks: 'dev'
         }
