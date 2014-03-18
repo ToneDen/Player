@@ -56,6 +56,21 @@ define(['jquery', 'underscore', 'vendor/sc-player', 'vendor/handlebars', 'hbs!te
             return;
         }
 
+        // Helper functions.
+        function changePlayButton(paused) {
+            var playClass = 'fa-play-circle-o';
+            var pauseClass = 'fa-pause';
+            var playButton = container.find('.play');
+
+            if(paused) {
+                playButton.removeClass(pauseClass);
+                playButton.addClass(playClass);
+            } else {
+                playButton.removeClass(playClass);
+                playButton.addClass(pauseClass);
+            }
+        }
+
         var playerInstance = new scPlayer(urls, playerParameters);
         var titleArea = container.find('.title');
 
@@ -65,10 +80,8 @@ define(['jquery', 'underscore', 'vendor/sc-player', 'vendor/handlebars', 'hbs!te
             var target = $(e.target);
 
             if(target.hasClass('play')) {
-                playerInstance.play();
-            } else if(target.hasClass('pause')) {
                 playerInstance.pause();
-            }else if(target.hasClass('next')) {
+            } else if(target.hasClass('next')) {
                 playerInstance.next();
             } else if(target.hasClass('prev')) {
                 playerInstance.prev();
@@ -87,26 +100,16 @@ define(['jquery', 'underscore', 'vendor/sc-player', 'vendor/handlebars', 'hbs!te
 
         // Hook into SC player events.
         playerInstance.on('scplayer.play', function(e) {
-            container.find('.play').hide();
-            container.find('.pause').show();
+            changePlayButton(false);
         });
 
         playerInstance.on('scplayer.pause', function(e) {
             var paused = playerInstance.sound().paused;
-            var playClass;
-
-            if(paused) {
-                container.find('.play').hide();
-                container.find('.pause').show();
-            } else {
-                container.find('.play').show();
-                container.find('.pause').hide();
-            }
+            changePlayButton(paused);
         });
 
         playerInstance.on('scplayer.stop', function(e) {
-            container.find('.play').show();
-            container.find('.pause').hide();
+            container.find('.play').attr('src', staticUrl + 'img/play.png');
         });
 
         playerInstance.on('scplayer.track.whileloading', function(e, percent){
