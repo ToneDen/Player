@@ -92,7 +92,7 @@ cursor: pointer;
 }
 
 .player-play {
-	font-size: 42px;
+	font-size: 48px;
 	margin:0px 20px;
 }
 
@@ -133,6 +133,7 @@ cursor: pointer;
 
 .playlist {
 	padding: 20px;
+	font-size: 14px;
 }
 
 /*General*/
