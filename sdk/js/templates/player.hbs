@@ -68,12 +68,12 @@
                     {{#if playing}}
                         <tr class="playing">
                     {{else}}
-                        <tr>
+                        <tr class="track-info" data-index={{@index}}>
                     {{/if}}
                         {{#if playing}}
                             <td><i class="fa fa-play-circle fw current-play-icon" data-index={{@index}}></i></td>
                         {{else}}
-                            <td><div class="track-info row" data-index={{@index}}></td>
+                            <td><div class="track-info" data-index={{@index}}></td>
                         {{/if}}
                             <td>
                                 <div class="track-info-name small-12 columns">

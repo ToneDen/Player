@@ -22,6 +22,9 @@ body {
 
 .player {
 	background: rgba(255,255,255,0.8);
+  transition: all 0.5s;
+  -webkit-transition: all 0.5s;
+    -moz-transition: all 0.5s;  
 }
 
 .player .controls div {
