@@ -60,7 +60,8 @@ module.exports = function(grunt) {
             files: [
                 'css/*',
                 'img/*',
-                'js/*'
+                'js/*',
+                'js/templates/*'
             ],
             tasks: 'dev'
         }

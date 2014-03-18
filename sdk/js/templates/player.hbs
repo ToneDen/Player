@@ -1,4 +1,4 @@
-<div class="small-10 columns columns-centered">
+<div class="small-12 columns">
     {{#with nowPlaying}}
         <div class="header row">
             <div class="cover small-7 columns">
@@ -10,11 +10,8 @@
                     {{/if}}
                 </a>
             </div>
-{{!--             <div class="waveform small-5 columns">
-                <img src="{{waveform_url}}" />
-                <div class="buffer" />
-                <div class="played" />
-            </div> --}}
+            <div class="waveform small-5 columns">
+            </div>
         </div>
         <div class="info row">
             <div class="song-name small-6 columns">
@@ -54,7 +51,7 @@
         </div>
     {{/with}}
     <div class="controls row">
-        <div class="buttons small-centered">
+        <div class="buttons small-12 columns">
             <img src="{{this.staticUrl}}img/prev.svg" class="prev" />
             <img src="{{this.staticUrl}}img/play.png" class="play" />
             <img src="{{this.staticUrl}}img/next.svg" class="next" />

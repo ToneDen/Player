@@ -13,37 +13,20 @@ body {
 
 #player {
 	width: 100%;
-	max-width: 90.5em;
-	height: 40px;
+	height: 100%;
 	background: rgba(255,255,255,0.8);
-	position: fixed;
-	bottom: 0;
 	/*border-top: 10px solid transparent;*/
 }
 
 #player { }
 	#player .controls {
-		margin: 5px;
-		padding:0px;
-		/*width: 150px;*/
 	}
 		#player .controls div {
 			display: inline-block;
-			padding: 2px;
-			margin: 5px;
 			text-align: center;
-			width: 28px;
-			height: 28px;
-			line-height: 16px;
 			color: white;
 			opacity: 0.75;
 			cursor: pointer;
-			background: no-repeat center center;
-			-webkit-background-size: cover;
-			-moz-background-size: cover;
-			-ms-background-size: cover;
-			background-size: cover;
-			border-radius: 50%;
 		}
 		#player .controls div:hover {
 			opacity: 1;
@@ -118,8 +101,6 @@ body {
     margin-right: 0; }
   .row .row {
     width: auto;
-    margin-left: -0.9375em;
-    margin-right: -0.9375em;
     margin-top: 0;
     margin-bottom: 0;
     max-width: none;
@@ -142,8 +123,6 @@ body {
 
 .column,
 .columns {
-  padding-left: 0.9375em;
-  padding-right: 0.9375em;
   width: 100%;
   float: left; }
 
@@ -154,6 +133,22 @@ body {
   float: right !important; }
 
 @media only screen {
+	.column.small-centered,
+	  .columns.small-centered {
+	    margin-left: auto;
+	    margin-right: auto;
+	    float: none !important; }
+
+	  .column.small-uncentered,
+	  .columns.small-uncentered {
+	    margin-left: 0;
+	    margin-right: 0;
+	    float: left !important; }
+
+	  .column.small-uncentered.opposite,
+	  .columns.small-uncentered.opposite {
+	    float: right; }
+    
 	.small-1 {
 	width: 8.33333%; }
 
