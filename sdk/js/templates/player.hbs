@@ -1,73 +1,34 @@
-<div class="small-12 columns">
-    {{#with nowPlaying}}
-        <div class="header row">
-            <div class="cover small-7 columns">
-                <a href="{{permalink_url}}">
-                    {{#if artwork_url}}
-                        <img src="{{artwork_url}}" />
-                    {{else}}
-                        <img src="{{user.avatar_url}}" />
-                    {{/if}}
-                </a>
-            </div>
-            <div class="waveform small-5 columns">
-            </div>
-        </div>
-        <div class="info row">
-            <div class="song-name small-6 columns">
-                {{title}}
-            </div>
-            <div class="artist-name small-6 columns">
-                {{user.username}}
-            </div>
-        </div>
-        <div class="social row">
-            <div class="follow small-3 columns">
-                <a class="follow-link" target="_blank">
-                    FOLLOW
-                </a>
-            </div>
-            <div class="current-song-info small-6 columns">
-                <div class="track-info-plays small-3 columns">
-                    {{playback_count}}
-                </div>
-                <div class="track-info-favorites small-3 columns">
-                    {{favoritings_count}}
-                </div>
-                <div class="track-info-comments small-3 columns">
-                    {{comment_count}}
-                </div>
-                <div class="track-info-downloads small-3 columns">
-                    {{download_count}}
-                </div>
-            </div>
-            {{#if purchase_url}}
-                <div class="buy small-3 columns">
-                    <a class="buy-link" href="{{purchase_url}}" target="_blank">
-                        BUY
+<div class="row">
+    <div class="small-8 columns small-centered">
+        {{#with nowPlaying}}
+            <div class="header row">
+                <div class="cover small-7 columns">
+                    <a href="{{permalink_url}}">
+                        {{#if artwork_url}}
+                            <img src="{{artwork_url}}" />
+                        {{else}}
+                            <img src="{{user.avatar_url}}" />
+                        {{/if}}
                     </a>
                 </div>
-            {{/if}}
-        </div>
-    {{/with}}
-    <div class="controls row">
-        <div class="buttons small-12 columns">
-            <img src="{{this.staticUrl}}img/prev.svg" class="prev" />
-            <img src="{{this.staticUrl}}img/play.png" class="play" />
-            <img src="{{this.staticUrl}}img/next.svg" class="next" />
-        </div>
-    </div>
-    <div class="playlist row">
-        {{#each tracks}}
-            {{#if playing}}
-                <div class="track-info row playing" data-index={{@index}}>
-            {{else}}
-                <div class="track-info row" data-index={{@index}}>
-            {{/if}}
-                <div class="track-info-name small-5 columns">
+                <div class="waveform small-5 columns">
+                </div>
+            </div>
+            <div class="info row">
+                <div class="song-name small-6 columns">
                     {{title}}
                 </div>
-                <div class="track-info-social small-7 columns">
+                <div class="artist-name small-6 columns">
+                    {{user.username}}
+                </div>
+            </div>
+            <div class="social row">
+                <div class="follow small-3 columns">
+                    <a class="follow-link" target="_blank">
+                        FOLLOW
+                    </a>
+                </div>
+                <div class="current-song-info small-6 columns">
                     <div class="track-info-plays small-3 columns">
                         {{playback_count}}
                     </div>
@@ -81,7 +42,48 @@
                         {{download_count}}
                     </div>
                 </div>
+                {{#if purchase_url}}
+                    <div class="buy small-3 columns">
+                        <a class="buy-link" href="{{purchase_url}}" target="_blank">
+                            BUY
+                        </a>
+                    </div>
+                {{/if}}
             </div>
-        {{/each}}
+        {{/with}}
+        <div class="controls row">
+            <div class="buttons small-12 columns">
+                <img src="{{this.staticUrl}}img/prev.svg" class="prev" />
+                <img src="{{this.staticUrl}}img/play.png" class="play" />
+                <img src="{{this.staticUrl}}img/next.svg" class="next" />
+            </div>
+        </div>
+        <div class="playlist row">
+            {{#each tracks}}
+                {{#if playing}}
+                    <div class="track-info row playing" data-index={{@index}}>
+                {{else}}
+                    <div class="track-info row" data-index={{@index}}>
+                {{/if}}
+                    <div class="track-info-name small-5 columns">
+                        {{title}}
+                    </div>
+                    <div class="track-info-social small-7 columns">
+                        <div class="track-info-plays small-3 columns">
+                            {{playback_count}}
+                        </div>
+                        <div class="track-info-favorites small-3 columns">
+                            {{favoritings_count}}
+                        </div>
+                        <div class="track-info-comments small-3 columns">
+                            {{comment_count}}
+                        </div>
+                        <div class="track-info-downloads small-3 columns">
+                            {{download_count}}
+                        </div>
+                    </div>
+                </div>
+            {{/each}}
+        </div>
     </div>
 </div>
