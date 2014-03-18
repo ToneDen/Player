@@ -65,9 +65,13 @@
         <div class="row playlist">
             <table class="playlist-table">
                 {{#each tracks}}
-                    <tr>
+                    {{#if playing}}
+                        <tr class="playing">
+                    {{else}}
+                        <tr>
+                    {{/if}}
                         {{#if playing}}
-                            <td><i class="fa fa-play-circle fw current-play-icon playing" data-index={{@index}}></i></td>
+                            <td><i class="fa fa-play-circle fw current-play-icon" data-index={{@index}}></i></td>
                         {{else}}
                             <td><div class="track-info row" data-index={{@index}}></td>
                         {{/if}}

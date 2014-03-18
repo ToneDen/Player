@@ -161,8 +161,22 @@ cursor: pointer;
 	width: 100%;
 }
 
+.playlist-table tr {
+	cursor: pointer;
+	opacity: 0.5;
+}
+
+.playlist-table tbody tr:hover {
+	cursor: pointer;
+	opacity: 1;
+}
+
 .current-play-icon {
 	font-size: 14px;
+}
+
+.playlist-table tbody tr.playing {
+	opacity: 1;
 }
 
 /*General*/
