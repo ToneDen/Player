@@ -1,9 +1,8 @@
 body {
-	background: white;
+	font-family: 'Raleway', sans-serif;
 	color: #222222;
 	padding: 0;
 	margin: 0;
-	font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
 	font-weight: normal;
 	font-style: normal;
 	line-height: 1;
@@ -13,50 +12,42 @@ body {
 
 #player {
 	width: 100%;
-	max-width: 90.5em;
-	height: 40px;
-	background: rgba(255,255,255,0.8);
-	position: fixed;
-	bottom: 0;
+	height: 100%;
 	/*border-top: 10px solid transparent;*/
 }
 
-#player { }
-	#player .controls {
-		margin: 5px;
-		padding:0px;
-		/*width: 150px;*/
-	}
-		#player .controls div {
-			display: inline-block;
-			padding: 2px;
-			margin: 5px;
-			text-align: center;
-			width: 28px;
-			height: 28px;
-			line-height: 16px;
-			color: white;
-			opacity: 0.75;
-			cursor: pointer;
-			background: no-repeat center center;
-			-webkit-background-size: cover;
-			-moz-background-size: cover;
-			-ms-background-size: cover;
-			background-size: cover;
-			border-radius: 50%;
-		}
-		#player .controls div:hover {
-			opacity: 1;
-			background-color: #F18900;
-		}
-		#player .controls .play { background-image: url("../img/play.png"); margin: 2px; }
-		#player .controls .pause { background-image: url("../img/pause.svg"); }
-		#player .controls .stop { background-image: url("../img/stop.svg"); }
-		#player .controls .next { background-image: url("../img/next.svg"); width: 21px; height: 21px; }
-		#player .controls .prev { background-image: url("../img/prev.svg"); width: 21px; height: 21px; }
+#player .controls {
+/*width: 150px;*/
+}
+
+.player {
+	background: rgba(255,255,255,0.8);
+}
+
+.player .controls div {
+display: inline-block;
+text-align: center;
+opacity: 0.75;
+cursor: pointer;
+}
+
+.header {
+	height: 100%;
+	padding: 20px;
+}
+
+.cover {
+	height: 100%;
+	display: table;
+}
+
+.cover a {
+	display: table-cell;
+	vertical-align: middle;
+}
 
 #waveform {
-	/*width: 100%;*/
+	/*width: 100%;*/9
 	height: 40px;
 	margin:10px;
 	position: relative;
@@ -71,7 +62,75 @@ body {
 #playlist { display: none;}
 	#playlist .active { font-weight: bold; }
 
+.info {
+	border-top: 1px solid #AFAFAF;
+	border-bottom: 1px solid #AFAFAF;
+	padding: 15px;
+	font-weight: bold;
+}
+
+.artist-name {
+	text-align: right;
+}
+
+.social {
+}
+
+.follow-link {
+	letter-spacing: 2px;
+	font-weight: 200;
+	font-size: 14px;
+}
+
+.current-song-info {
+	font-size: 14px;
+	padding-top: 1rem;
+	padding-right: 2rem;
+	padding-bottom: 1.0625rem;
+	padding-left: 2rem;
+}
+
+.current-song-social-icon {
+	font-size: 14px;
+}
+
+.controls {
+	padding: 20px;
+	color: #222;
+	border-top: 1px solid #AFAFAF;
+	border-bottom: 1px solid #AFAFAF;
+}
+
+.player-prev {
+	font-size: 36px;
+}
+
+.player-prev:hover {
+	opacity: 1;
+}
+
+.player-play {
+	font-size: 48px;
+	margin:0px 20px;
+}
+
+.player-play:hover {
+	opacity: 1;
+}
+
+.player-next {
+	font-size: 36px;
+}
+
+.player-next:hover {
+	opacity: 1;
+}
+
 .track-content {
+}
+
+.playlist-social-icon {
+	font-size: 12px;
 }
 
 .title {
@@ -92,6 +151,32 @@ body {
 
 .player-divider {
 
+}
+
+.playlist {
+	font-size: 12px;
+}
+
+.playlist-table {
+	width: 100%;
+}
+
+.playlist-table tr {
+	cursor: pointer;
+	opacity: 0.5;
+}
+
+.playlist-table tbody tr:hover {
+	cursor: pointer;
+	opacity: 1;
+}
+
+.current-play-icon {
+	font-size: 14px;
+}
+
+.playlist-table tbody tr.playing {
+	opacity: 1;
 }
 
 /*General*/
@@ -118,8 +203,6 @@ body {
     margin-right: 0; }
   .row .row {
     width: auto;
-    margin-left: -0.9375em;
-    margin-right: -0.9375em;
     margin-top: 0;
     margin-bottom: 0;
     max-width: none;
@@ -142,8 +225,6 @@ body {
 
 .column,
 .columns {
-  padding-left: 0.9375em;
-  padding-right: 0.9375em;
   width: 100%;
   float: left; }
 
@@ -154,6 +235,22 @@ body {
   float: right !important; }
 
 @media only screen {
+	.column.small-centered,
+	  .columns.small-centered {
+	    margin-left: auto;
+	    margin-right: auto;
+	    float: none !important; }
+
+	  .column.small-uncentered,
+	  .columns.small-uncentered {
+	    margin-left: 0;
+	    margin-right: 0;
+	    float: left !important; }
+
+	  .column.small-uncentered.opposite,
+	  .columns.small-uncentered.opposite {
+	    float: right; }
+
 	.small-1 {
 	width: 8.33333%; }
 
@@ -189,4 +286,118 @@ body {
 
 	.small-12 {
 	width: 100%; }
+
+	button, .button {
+  border-style: solid;
+  border-width: 0px;
+  cursor: pointer;
+  line-height: normal;
+  position: relative;
+  text-decoration: none;
+  text-align: center;
+  display: inline-block;
+  padding-top: 1rem;
+  padding-right: 2rem;
+  padding-bottom: 1.0625rem;
+  padding-left: 2rem;
+  /*     @else                            { font-size: $padding - rem-calc(2); } */
+  background-color: #2ba6cb;
+  border-color: #2285a2;
+  color: white;
+  -webkit-transition: background-color 300ms ease-out;
+  -moz-transition: background-color 300ms ease-out;
+  transition: background-color 300ms ease-out;
+  padding-top: 1rem;
+  padding-right: 2rem;
+  padding-bottom: 1.0625rem;
+  padding-left: 2rem;
+  /*     @else                            { font-size: $padding - rem-calc(2); } */ }
+  button:hover, button:focus, .button:hover, .button:focus {
+    background-color: #2285a2; }
+  button:hover, button:focus, .button:hover, .button:focus {
+    color: white; }
+  button.secondary, .button.secondary {
+    background-color: #e9e9e9;
+    border-color: #bababa;
+    color: #333333; }
+    button.secondary:hover, button.secondary:focus, .button.secondary:hover, .button.secondary:focus {
+      background-color: #bababa; }
+    button.secondary:hover, button.secondary:focus, .button.secondary:hover, .button.secondary:focus {
+      color: #333333; }
+  button.success, .button.success {
+    background-color: #5da423;
+    border-color: #4a831c;
+    color: white; }
+    button.success:hover, button.success:focus, .button.success:hover, .button.success:focus {
+      background-color: #4a831c; }
+    button.success:hover, button.success:focus, .button.success:hover, .button.success:focus {
+      color: white; }
+  button.alert, .button.alert {
+    background-color: #c60f13;
+    border-color: #9e0c0f;
+    color: white; }
+    button.alert:hover, button.alert:focus, .button.alert:hover, .button.alert:focus {
+      background-color: #9e0c0f; }
+    button.alert:hover, button.alert:focus, .button.alert:hover, .button.alert:focus {
+      color: white; }
+  button.large, .button.large {
+    padding-top: 1.125rem;
+    padding-right: 2.25rem;
+    padding-bottom: 1.1875rem;
+    padding-left: 2.25rem;
+    font-size: 1.25rem;
+    /*     @else                            { font-size: $padding - rem-calc(2); } */ }
+  button.small, .button.small {
+    padding-top: 0.875rem;
+    padding-right: 1.75rem;
+    padding-bottom: 0.9375rem;
+    padding-left: 1.75rem;
+    font-size: 0.8125rem;
+    /*     @else                            { font-size: $padding - rem-calc(2); } */ }
+  button.tiny, .button.tiny {
+    padding-top: 0.625rem;
+    padding-right: 1.25rem;
+    padding-bottom: 0.6875rem;
+    padding-left: 1.25rem;
+    font-size: 0.6875rem;
+    /*     @else                            { font-size: $padding - rem-calc(2); } */ }
+  button.expand, .button.expand {
+    padding-right: 0;
+    padding-left: 0;
+    width: 100%; }
+  button.left-align, .button.left-align {
+    text-align: left;
+    text-indent: 0.75rem; }
+  button.right-align, .button.right-align {
+    text-align: right;
+    padding-right: 0.75rem; }
+  button.radius, .button.radius {
+    -webkit-border-radius: 3px;
+    border-radius: 3px; }
+  button.round, .button.round {
+    -webkit-border-radius: 1000px;
+    border-radius: 1000px; }
+}
+
+table {
+  margin-bottom: 1.25rem;}
+  table thead,
+  table tfoot {}
+    table thead tr th,
+    table thead tr td,
+    table tfoot tr th,
+    table tfoot tr td {
+      padding: 0.5rem 0.625rem 0.625rem;
+      text-align: left; }
+  table tr th,
+  table tr td {
+    padding: 0.5625rem 0.625rem; }
+  table tr.even, table tr.alt, table tr:nth-of-type(even) {}
+  table thead tr th,
+  table tfoot tr th,
+  table tbody tr td,
+  table tr td,
+  table tfoot tr td {
+    display: table-cell;
+    line-height: 1.125rem; }
 }
