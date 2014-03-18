@@ -1,5 +1,5 @@
 <div class="row">
-    <div class="small-8 columns small-centered">
+    <div class="small-8 columns small-centered player">
         {{#with nowPlaying}}
             <div class="header row">
                 <div class="cover small-7 columns">
@@ -14,7 +14,7 @@
                 <div class="waveform small-5 columns">
                 </div>
             </div>
-            <div class="info row">
+            <div class="row info ">
                 <div class="song-name small-6 columns">
                     {{title}}
                 </div>
@@ -22,7 +22,7 @@
                     {{user.username}}
                 </div>
             </div>
-            <div class="social row">
+            <div class="row social">
                 <div class="follow small-3 columns">
                     <a class="follow-link" target="_blank">
                         FOLLOW
@@ -51,14 +51,14 @@
                 {{/if}}
             </div>
         {{/with}}
-        <div class="controls row">
+        <div class="row controls">
             <div class="buttons small-12 columns">
                 <img src="{{this.staticUrl}}img/prev.svg" class="prev" />
                 <img src="{{this.staticUrl}}img/play.png" class="play" />
                 <img src="{{this.staticUrl}}img/next.svg" class="next" />
             </div>
         </div>
-        <div class="playlist row">
+        <div class="row playlist">
             {{#each tracks}}
                 {{#if playing}}
                     <div class="track-info row playing" data-index={{@index}}>
