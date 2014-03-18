@@ -15995,15 +15995,12 @@ ToneDen.define('player',['jquery', 'underscore', 'vendor/sc-player', 'vendor/han
 
         playerInstance.on('scplayer.playlist.preloaded', function(e) {
             playerInstance.tracks(function(tracks) {
-                console.log(tracks);
                 rerender(container, {
                     nowPlaying: playerInstance.track(),
                     tracks: tracks
                 });
             });
         });
-
-        console.log('derp');
 
         playerInstance.on('scplayer.changing_track', function(e, trackIndex) {
             container.find('.played').css('width', '0%');
