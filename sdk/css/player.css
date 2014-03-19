@@ -22,6 +22,9 @@ body {
 
 .player {
 	background: rgba(255,255,255,0.8);
+  transition: all 0.5s;
+  -webkit-transition: all 0.5s;
+    -moz-transition: all 0.5s;  
 }
 
 .player .controls div {
@@ -65,8 +68,16 @@ cursor: pointer;
 .info {
 	border-top: 1px solid #AFAFAF;
 	border-bottom: 1px solid #AFAFAF;
-	padding: 15px;
 	font-weight: bold;
+  padding: 0px 15px;
+}
+
+.song-name {
+  line-height: 50px;
+}
+
+.artist-name {
+  line-height: 50px;
 }
 
 .artist-name {
@@ -103,30 +114,59 @@ cursor: pointer;
 
 .player-prev {
 	font-size: 36px;
+  line-height: 48px;
+  vertical-align: top;
+  opacity: 0.8;
+  transition: all 0.5s;
+  -webkit-transition: all 0.5s;
+    -moz-transition: all 0.5s;  
 }
 
 .player-prev:hover {
-	opacity: 1;
+	opacity: 1; 
+  -webkit-transform: translateX(-5px);
+    transform: translateX(-5px);
+
 }
 
 .player-play {
 	font-size: 48px;
-	margin:0px 20px;
+  width: 150px;
+  opacity: 0.8;
+  transition: opacity 0.5s;
+  -webkit-transition: opacity 0.5s;
+    -moz-transition: opacity 0.5s;   
 }
 
 .player-play:hover {
-	opacity: 1;
-}
+	opacity: 1;}
 
 .player-next {
 	font-size: 36px;
+  line-height: 48px;
+  vertical-align: top;
+  opacity: 0.8;
+  transition: all 0.5s;
+  -webkit-transition: all 0.5s;
+    -moz-transition: all 0.5s;  
 }
 
 .player-next:hover {
 	opacity: 1;
+  -webkit-transform: translateX(5px);
+    transform: translateX(5px);
 }
 
 .track-content {
+}
+
+.fa-pause {
+  font-size: 30px;
+  line-height: 48px;
+  vertical-align:middle;
+  transition: all 0.5s;
+  -webkit-transition: all 0.5s;
+    -moz-transition: all 0.5s;
 }
 
 .playlist-social-icon {
@@ -233,6 +273,63 @@ cursor: pointer;
 
 .right {
   float: right !important; }
+
+/*Animations*/
+@-webkit-keyframes fadeInRight {
+  0% {
+    -webkit-transform: translateX(0px);
+    transform: translateX(0px);
+  }
+
+  100% {
+    -webkit-transform: translateX(5px);
+    transform: translateX(5px);
+  }
+}
+
+@keyframes fadeInRight {
+  0% {
+    -webkit-transform: translateX(0px);
+    -ms-transform: translateX(0px);
+    transform: translateX(0px);
+  }
+
+  100% {
+    -webkit-transform: translateX(5px);
+    -ms-transform: translateX(5px);
+    transform: translateX(5px);
+  }
+}
+
+@-webkit-keyframes fadeOutDown {
+  0% {
+    opacity: 1;
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+  }
+
+  100% {
+    opacity: 0;
+    -webkit-transform: translateY(5px);
+    transform: translateY(5px);
+  }
+}
+
+@keyframes fadeOutDown {
+  0% {
+    opacity: 1;
+    -webkit-transform: translateY(0);
+    -ms-transform: translateY(0);
+    transform: translateY(0);
+  }
+
+  100% {
+    opacity: 0;
+    -webkit-transform: translateY(5px);
+    -ms-transform: translateY(5px);
+    transform: translateY(5px);
+  }
+}
 
 @media only screen {
 	.column.small-centered,
@@ -379,8 +476,7 @@ cursor: pointer;
     border-radius: 1000px; }
 }
 
-table {
-  margin-bottom: 1.25rem;}
+table {}
   table thead,
   table tfoot {}
     table thead tr th,
