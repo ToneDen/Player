@@ -87,9 +87,17 @@ cursor: pointer;
 .social {
 }
 
+.follow-link {
+  border-right: 1px solid #AFAFAF !important;
+}
+
+.buy-link {
+  border-left: 1px solid #AFAFAF !important;
+}
+
 .follow-link, .buy-link {
 	letter-spacing: 2px;
-	font-weight: 200;
+	font-weight: 400;
 	font-size: 14px;
 }
 
@@ -403,9 +411,7 @@ cursor: pointer;
   padding-bottom: 1.0625rem;
   padding-left: 2rem;
   /*     @else                            { font-size: $padding - rem-calc(2); } */
-  background-color: #2ba6cb;
-  border-color: #2285a2;
-  color: white;
+  color: #222;
   -webkit-transition: background-color 300ms ease-out;
   -moz-transition: background-color 300ms ease-out;
   transition: background-color 300ms ease-out;
