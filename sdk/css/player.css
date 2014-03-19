@@ -126,7 +126,7 @@ cursor: pointer;
 
 .player-prev {
 	font-size: 36px;
-  line-height: 48px;
+  line-height: 50px !important;
   vertical-align: top;
   opacity: 0.8;
   transition: all 0.2s;
@@ -144,7 +144,7 @@ cursor: pointer;
 .player-play {
   width: 150px;
   opacity: 0.8;
-  line-height:48px;    
+  line-height:50px !important;    
 }
 
 .fa-play-circle-o {
@@ -161,7 +161,7 @@ cursor: pointer;
 
 .player-next {
 	font-size: 36px;
-  line-height: 48px;
+  line-height: 50px !important;
   vertical-align: top;
   opacity: 0.8;
   transition: all 0.2s;
