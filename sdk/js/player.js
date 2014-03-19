@@ -19,6 +19,8 @@ define(['jquery', 'underscore', 'vendor/sc-player', 'vendor/handlebars', 'hbs!te
     return function(urls, dom, options) {
         // Default parameters go here.
         var parameters = {
+            debug: false,
+            skin: 'light'
         };
 
         // Parameters for the SoundCloud player.
@@ -29,7 +31,8 @@ define(['jquery', 'underscore', 'vendor/sc-player', 'vendor/handlebars', 'hbs!te
             toggle_pause: true
         }
 
-        // Setup the parameters object with the given arguments.
+        // Setup the parameters object with the given arguments and
+        // override the default parameters with the given options.
         if(arguments.length === 1 && typeof arguments[0] === 'object') {
             _.extend(parameters, arguments[0]);
         } else {
@@ -47,16 +50,17 @@ define(['jquery', 'underscore', 'vendor/sc-player', 'vendor/handlebars', 'hbs!te
 
         var container = $(dom);
 
-        if(container) {
-            rerender(container, {
-                tracks: []
-            });
-        } else {
-            console.error('ToneDen Player: the container specified does not exist.');
-            return;
+        // Helper functions.
+        function log(message, isError) {
+            if(window.console) {
+                if(!isError && parameters.debug) {
+                    console.log(message);
+                } else if(level === 'error') {
+                    console.error(message);
+                }
+            }
         }
 
-        // Helper functions.
         function changePlayButton(paused) {
             var playClass = 'fa-play-circle-o';
             var pauseClass = 'fa-pause';
@@ -69,6 +73,15 @@ define(['jquery', 'underscore', 'vendor/sc-player', 'vendor/handlebars', 'hbs!te
                 playButton.removeClass(playClass);
                 playButton.addClass(pauseClass);
             }
+        }
+
+        if(container) {
+            rerender(container, {
+                tracks: []
+            });
+        } else {
+            log('ToneDen Player: the container specified does not exist.', 'error');
+            return;
         }
 
         var playerInstance = new scPlayer(urls, playerParameters);
@@ -122,6 +135,7 @@ define(['jquery', 'underscore', 'vendor/sc-player', 'vendor/handlebars', 'hbs!te
 
         playerInstance.on('scplayer.playlist.preloaded', function(e) {
             playerInstance.tracks(function(tracks) {
+                log(tracks);
                 rerender(container, {
                     nowPlaying: playerInstance.track(),
                     tracks: tracks

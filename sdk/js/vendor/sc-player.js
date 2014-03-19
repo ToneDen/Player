@@ -69,7 +69,8 @@ define(['vendor/soundmanager2', 'jquery'], function(soundManager, jQuery) {
             debug: false
         };
 
-        var sc_resolve_url = "http://api.soundcloud.com/resolve?url=http://soundcloud.com";
+        var sc_resolve_url = 'https://api.soundcloud.com/resolve?url=http://soundcloud.com';
+        var scApiUrl = 'https://api.soundcloud.com/';
         var urlregex = new RegExp(/[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&//=]*)?/gi);
 
         //keep ref to local scope
@@ -546,9 +547,12 @@ define(['vendor/soundmanager2', 'jquery'], function(soundManager, jQuery) {
             self.trigger('scplayer.track.bindable', track, self.sound);
         };
 
+        self.getComments = function(track, cb) {
+        };
+
         // Gets a SC url and goes to SC to fetch the track data.
         self.resolveTrack = function(url, cb) {
-            var promise = new jQuery.Deferred();
+            var trackPromise = new jQuery.Deferred();
 
             // allow non SC tracks (watch for bugs)
             // look for a url, but not soundcloud.com
@@ -560,58 +564,61 @@ define(['vendor/soundmanager2', 'jquery'], function(soundManager, jQuery) {
                     duration:0
                 };
 
-                promise.resolve(_track);
+                trackPromise.resolve(_track);
             }
 
             // trim url
             url = url.replace(/https?\:\/\/soundcloud\.com/gi, "");
 
+            var cached = self.getCache(url);
+
             // if we're caching, check cache first
-            if(self.config.cache === true ) {
-                var track = self.getCache(url);
-
-                if(track && cb) {
-                    promise.done(function() {
-                        cb(track);
+            if(self.config.cache === true && cached) {
+                if(cb) {
+                    trackPromise.done(function() {
+                        cb(cached);
                     }).resolve();
-
-                    return promise;
                 }
+            } else {
+                // Define a complete condition for the promise.
+                trackPromise.done(function(_track) {
+                    if(cb) {
+                        return cb(_track);
+                    }
+                });
+
+                // Call the ajax
+                jQuery.ajax({
+                    url: sc_resolve_url + url +
+                        '&format=json' +
+                        '&consumer_key=' +self.config.consumerKey +
+                        '&callback=?',
+                    dataType: 'jsonp',
+                    error: function(jqXHR, textStatus, errorThrown){
+                        trackPromise.reject(jqXHR, textStatus, errorThrown);
+                    },
+                    success: function(_track){
+                        if(_track.tracks && _track.tracks.length > 0) {
+                            self.parseTracks(url, _track.tracks, function(tracks) {
+                                _track = tracks[0];
+
+                                trackPromise.resolve(_track);
+                            });
+                        } else {
+                            // maybe cache the track
+                            self.processTrack(track, function(_track) {
+                                if(self.config.cache === true) {
+                                    self.setCache(url, _track);
+                                }
+
+                                trackPromise.resolve(_track);
+                            });
+                        }
+                    }
+                });
             }
 
-            // Define a complete condition for the promise.
-            promise.done(function(_track) {
-                if(_track.tracks && _track.tracks.length > 0) {
-                    var tracks = self.parseTracks(url, _track.tracks);
-                    _track = tracks[0];
-                } else {
-                    // maybe cache the track
-                    if(self.config.cache === true) {
-                        self.setCache(url, _track);
-                    }
-                }
-
-                if(cb) {
-                    cb(_track);
-                }
-            });
-
-            // Call the ajax
-            jQuery.ajax({
-                url: sc_resolve_url + url +
-                    '&format=json' +
-                    '&consumer_key=' +self.config.consumerKey +
-                    '&callback=?',
-                dataType: 'jsonp',
-                error: function(jqXHR, textStatus, errorThrown){
-                    promise.reject(jqXHR, textStatus, errorThrown);
-                },
-                success: function(_track){
-                    promise.resolve(_track);
-                }
-            });
-
-            return promise;
+            return trackPromise;
         };
 
         // Preload the SC track info.
@@ -637,35 +644,66 @@ define(['vendor/soundmanager2', 'jquery'], function(soundManager, jQuery) {
             });
         };
 
-        self.parseTracks = function(url, _tracks) {
-            var set_tracks = [];
-            var track_urls = [];
+        // Helper function that is called on every track returned from SoundCloud.
+        // Use this to modify any fields on the track.
+        self.processTrack = function(track, cb) {
+            var trackCommentsUrl = scApiUrl + 'tracks/' + track.id +
+                '/comments.json?consumer_key=' + self.config.consumerKey;
+
+            // Change the artwork_url to a larger format.
+            track.artwork_url = track.artwork_url.replace('large.jpg', 't500x500.jpg');
+
+            // Get the track's comments and attach them to the track object.
+            jQuery.ajax({
+                url: trackCommentsUrl,
+                error: function(jqXHR, textStatus, errorThrown){
+                    track.comments = [];
+
+                    return cb(track);
+                },
+                success: function(comments){
+                    track.comments = comments;
+
+                    return cb(track);
+                }
+            });
+        };
+
+        self.parseTracks = function(url, _tracks, cb) {
+            var setTracks = [];
+            var trackUrls = [];
             var start_index = self.tracks.indexOf(url);
+            var tracksProcessed = 0;
 
             for(var x = 0, l = _tracks.length; x < l; x++) {
                 var _track = _tracks[x];
 
-                // Slice out track url - begins with http://soundcloud.com/
-                var trackurl = _track.permalink_url.substring(21);
+                self.processTrack(_track, function(_track) {
+                    // Slice out track url - begins with http://soundcloud.com/
+                    var trackUrl = _track.permalink_url.substring(21);
 
-                // Cache tracks
-                if(self.config.cache === true) {
-                    self.setCache(trackurl, _track);
-                }
+                    // Cache tracks
+                    if(self.config.cache === true) {
+                        self.setCache(trackUrl, _track);
+                    }
 
-                set_tracks.push(_track);
-                track_urls.push(trackurl);
+                    setTracks.push(_track);
+                    trackUrls.push(trackUrl);
+
+                    tracksProcessed += 1;
+
+                    if(tracksProcessed === l) {
+                        // Splice at start_index, delete 1, splice in expanded tracks.
+                        var args = [start_index, 1].concat(trackUrls);
+
+                        // Add tracks to playlist
+                        self.tracks.splice.apply(self.tracks, args);
+
+                        return cb(setTracks);
+                    }
+                });
             }
-
-            // Splice at start_index, delete 1, splice in expanded tracks.
-            var args = [start_index, 1].concat(track_urls);
-
-            // Add tracks to playlist
-            self.tracks.splice.apply(self.tracks, args);
-
-            return set_tracks;
         };
-
 
         self.addTracks = function(tracks) {
             // take a single string or array of strings
