@@ -87,7 +87,7 @@ cursor: pointer;
 .social {
 }
 
-.follow-link {
+.follow-link, .buy-link {
 	letter-spacing: 2px;
 	font-weight: 200;
 	font-size: 14px;
@@ -95,10 +95,9 @@ cursor: pointer;
 
 .current-song-info {
 	font-size: 14px;
+  text-align: center;
 	padding-top: 1rem;
-	padding-right: 2rem;
 	padding-bottom: 1.0625rem;
-	padding-left: 2rem;
 }
 
 .current-song-social-icon {
