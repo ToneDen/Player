@@ -37,6 +37,7 @@ cursor: pointer;
 .header {
 	height: 100%;
 	padding: 20px;
+  text-align: center;
 }
 
 .cover {
@@ -47,6 +48,10 @@ cursor: pointer;
 .cover a {
 	display: table-cell;
 	vertical-align: middle;
+}
+
+.cover a img {
+  max-height: 250px;
 }
 
 #waveform {
@@ -124,9 +129,9 @@ cursor: pointer;
   line-height: 48px;
   vertical-align: top;
   opacity: 0.8;
-  transition: all 0.5s;
-  -webkit-transition: all 0.5s;
-    -moz-transition: all 0.5s;  
+  transition: all 0.2s;
+  -webkit-transition: all 0.2s;
+    -moz-transition: all 0.2s;  
 }
 
 .player-prev:hover {
@@ -137,25 +142,31 @@ cursor: pointer;
 }
 
 .player-play {
-	font-size: 48px;
   width: 150px;
   opacity: 0.8;
-  transition: opacity 0.5s;
-  -webkit-transition: opacity 0.5s;
-    -moz-transition: opacity 0.5s;   
+  line-height:48px;    
 }
 
-.player-play:hover {
-	opacity: 1;}
+.fa-play-circle-o {
+  font-size: 42px;
+  transition: all 0.2s;
+  -webkit-transition: all 0.2s;
+    -moz-transition: all 0.2s;
+}
+
+.fa-play-circle-o:hover {
+	opacity: 1;
+  font-size: 48px;
+}
 
 .player-next {
 	font-size: 36px;
   line-height: 48px;
   vertical-align: top;
   opacity: 0.8;
-  transition: all 0.5s;
-  -webkit-transition: all 0.5s;
-    -moz-transition: all 0.5s;  
+  transition: all 0.2s;
+  -webkit-transition: all 0.2s;
+    -moz-transition: all 0.2s;  
 }
 
 .player-next:hover {
@@ -164,16 +175,18 @@ cursor: pointer;
     transform: translateX(5px);
 }
 
-.track-content {
-}
-
 .fa-pause {
   font-size: 30px;
   line-height: 48px;
   vertical-align:middle;
-  transition: all 0.5s;
-  -webkit-transition: all 0.5s;
-    -moz-transition: all 0.5s;
+  opacity: 0.8;
+  transition: all 0.2s;
+  -webkit-transition: all 0.2s;
+    -moz-transition: all 0.2s;
+}
+
+.fa-pause:hover {
+    opacity: 1;
 }
 
 .playlist-social-icon {
@@ -216,14 +229,31 @@ cursor: pointer;
 .playlist-table tbody tr:hover {
 	cursor: pointer;
 	opacity: 1;
+  border-bottom: 1px solid rgba(175, 175, 175, 0.5);
 }
 
 .current-play-icon {
 	font-size: 14px;
 }
 
+.playlist-table {
+  border-spacing: 0px;
+  border:0;
+}
+
 .playlist-table tbody tr.playing {
 	opacity: 1;
+}
+
+.playlist-table tbody tr:hover td, .playlist-table tbody tr.playing td {
+  border-bottom: 1px solid rgba(175, 175, 175, 0.5);
+}
+
+.playlist-table tbody tr td {
+  border-right:0px;
+  border-left:0px;
+  border-top:0px;
+  border-bottom: 1px solid #AFAFAF;
 }
 
 /*General*/
