@@ -1,8 +1,8 @@
 <div class="row">
-    <div class="small-8 columns small-centered player">
+    <div class="large-8 small-12 columns large-centered player">
         {{#with nowPlaying}}
             <div class="header row">
-                <div class="cover small-7 columns">
+                <div class="cover large-7 small-6 columns">
                     <a href="{{permalink_url}}">
                         {{#if artwork_url}}
                             <img src="{{artwork_url}}" />
@@ -11,43 +11,49 @@
                         {{/if}}
                     </a>
                 </div>
-                <div class="waveform small-5 columns">
+                <div class="waveform large-5 small-6columns">
                 </div>
             </div>
             <div class="row info ">
-                <div class="song-name small-6 columns">
+                <div class="song-name large-6 small-6 columns">
                     {{title}}
                 </div>
-                <div class="artist-name small-6 columns">
+                <div class="artist-name large-6 small-6 columns">
                     {{user.username}}
                 </div>
             </div>
             <div class="row social">
-                <div class="follow small-3 columns">
+                <div class="follow large-3 small-12 columns">
                     <a class="button expand follow-link" target="_blank">
                         FOLLOW
                     </a>
                 </div>
-                <div class="current-song-info small-6 columns">
-                    <div class="track-info-plays small-3 columns">
+                <div class="current-song-info large-6 columns small-12">
+                    <div class="track-info-plays large-3 small-3 columns">
                         <i class="fa fa-play-circle fw current-song-social-icon"></i>
                         {{playback_count}}
                     </div>
-                    <div class="track-info-favorites small-3 columns">
+                    <div class="track-info-favorites large-3 small-3 columns">
                         <i class="fa fa-heart fw current-song-social-icon"></i>
                         {{favoritings_count}}
                     </div>
-                    <div class="track-info-comments small-3 columns">
+                    <div class="track-info-comments large-3 small-3 columns">
                         <i class="fa fa-comments fw current-song-social-icon"></i>
                         {{comment_count}}
                     </div>
-                    <div class="track-info-downloads small-3 columns">
+                    <div class="track-info-downloads large-3 small-3 columns">
                         <i class="fa fa-download fw current-song-social-icon"></i>
                         {{download_count}}
                     </div>
                 </div>
                 {{#if purchase_url}}
-                    <div class="buy small-3 columns">
+                    <div class="buy large-3 small-12 columns">
+                        <a class="buy-link" href="{{purchase_url}}" target="_blank">
+                            BUY
+                        </a>
+                    </div>
+                {{else}}
+                    <div class="buy large-3 small-12 columns">
                         <a class="buy-link" href="{{purchase_url}}" target="_blank">
                             BUY
                         </a>
@@ -56,7 +62,7 @@
             </div>
         {{/with}}
         <div class="row controls">
-            <div class="buttons small-12 columns">
+            <div class="buttons large-12 small-12 columns">
                 <i class="fa fa-angle-double-left fw player-prev prev"></i>
                 <i class="fa fa-play-circle-o fw player-play play"></i>
                 <i class="fa fa-angle-double-right fw player-next next"></i>
@@ -76,25 +82,25 @@
                             <td><div class="track-info" data-index={{@index}}></td>
                         {{/if}}
                             <td>
-                                <div class="track-info-name small-12 columns">
+                                <div class="track-info-name large-12 small-12columns">
                                     {{title}}
                                 </div>
                             </td>
                             <td>
-                                <div class="track-info-social small-12 columns">
-                                    <div class="track-info-plays small-3 columns">
+                                <div class="track-info-social large-12 small-12 columns">
+                                    <div class="track-info-plays  small-3 large-3 columns">
                                         <i class="fa fa-play-circle fw playlist-social-icon"></i>
                                         {{playback_count}}
                                     </div>
-                                    <div class="track-info-favorites small-3 columns">
+                                    <div class="track-info-favorites small-3 large-3 columns">
                                         <i class="fa fa-heart fw playlist-social-icon"></i>
                                         {{favoritings_count}}
                                     </div>
-                                    <div class="track-info-comments small-3 columns">
+                                    <div class="track-info-comments large-3 small-3 columns">
                                         <i class="fa fa-comments fw playlist-social-icon"></i>
                                         {{comment_count}}
                                     </div>
-                                    <div class="track-info-downloads small-3 columns">
+                                    <div class="track-info-downloads large-3 small-3 columns">
                                         <i class="fa fa-download fw playlist-social-icon"></i>
                                         {{download_count}}
                                     </div>
