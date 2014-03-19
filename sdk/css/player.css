@@ -1,5 +1,6 @@
 body {
-	font-family: 'Raleway', sans-serif;
+  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+  font-weight: 300;
 	color: #222222;
 	padding: 0;
 	margin: 0;
@@ -74,7 +75,7 @@ cursor: pointer;
 	border-top: 1px solid #AFAFAF;
 	border-bottom: 1px solid #AFAFAF;
 	font-weight: bold;
-  padding: 0px 15px;
+  padding: 0px 45px;
 }
 
 .song-name {
@@ -112,6 +113,8 @@ cursor: pointer;
 }
 
 .current-song-info {
+  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+  font-weight: 300;
 	font-size: 14px;
   text-align: center;
 	padding-top: 1rem;
@@ -202,6 +205,11 @@ cursor: pointer;
 	border-left: 1px solid #D6D6D6;
 	margin-left: 40px;
 	height: 40px;
+}
+
+.track-info-social {
+  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+  font-weight: 300;
 }
 
 .track-user, .track-title {
