@@ -14,6 +14,8 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-player', 'ven
         }
 
         container.html(template(parameters));
+
+        container.find('.scrubber-slider').simpleSlider();
     }
 
     return function(urls, dom, options) {
@@ -113,6 +115,10 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-player', 'ven
             }
         });
 
+        container.bind('slider:changed', 'scrubber-slider', function(e, slider) {
+            playerInstance.seek(slider.ratio);
+        });
+
         // Hook into SC player events.
         playerInstance.on('scplayer.play', function(e) {
             changePlayButton(false);
@@ -127,12 +133,14 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-player', 'ven
             container.find('.play').attr('src', staticUrl + 'img/play.png');
         });
 
-        playerInstance.on('scplayer.track.whileloading', function(e, percent){
+        playerInstance.on('scplayer.track.whileloading', function(e, percent) {
             container.find('.buffer').css('width', percent + '%');
         });
 
-        playerInstance.on('scplayer.track.whileplaying', function(e, percent){
-            container.find('.played').css('width', percent + '%');
+        playerInstance.on('scplayer.track.whileplaying', function(e, percent) {
+            var ratio = percent / 100;
+
+            container.find('.scrubber-slider').simpleSlider('setRatio', ratio);
         });
 
         playerInstance.on('scplayer.playlist.preloaded', function(e) {
