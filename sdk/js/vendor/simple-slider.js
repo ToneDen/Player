@@ -125,21 +125,21 @@ define(['jquery'], function($) {
       return item;
     };
 
-    SimpleSlider.prototype.setRatio = function(ratio) {
+    SimpleSlider.prototype.setRatio = function(ratio, silent) {
       var value;
       ratio = Math.min(1, ratio);
       ratio = Math.max(0, ratio);
       value = this.ratioToValue(ratio);
       this.setSliderPositionFromValue(value);
-      return this.valueChanged(value, ratio, "setRatio");
+      return this.valueChanged(value, ratio, "setRatio", silent);
     };
 
-    SimpleSlider.prototype.setValue = function(value) {
+    SimpleSlider.prototype.setValue = function(value, silent) {
       var ratio;
       value = this.nearestValidValue(value);
       ratio = this.valueToRatio(value);
       this.setSliderPositionFromValue(value);
-      return this.valueChanged(value, ratio, "setValue");
+      return this.valueChanged(value, ratio, "setValue", silent);
     };
 
     SimpleSlider.prototype.trackEvent = function(e) {
@@ -299,7 +299,11 @@ define(['jquery'], function($) {
         trigger: trigger,
         el: this.slider
       };
-      return this.input.val(value).trigger($.Event("change", eventData)).trigger("slider:changed", eventData);
+      if(!silent) {
+        return this.input.val(value).trigger($.Event("change", eventData)).trigger("slider:changed", eventData);
+      } else {
+        return this.input.val(value).trigger($.Event("change", eventData));
+      }
     };
 
     return SimpleSlider;
