@@ -4,6 +4,14 @@ define(['hbs/handlebars'], function(Handlebars) {
         var minutes = Math.floor(totalSeconds / 60);
         var seconds = totalSeconds - minutes * 60;
 
+        if(isNaN(minutes)) {
+            minutes = '';
+        }
+
+        if(isNaN(seconds)) {
+            return '';
+        }
+
         return minutes + ':' + seconds;
     }
 
