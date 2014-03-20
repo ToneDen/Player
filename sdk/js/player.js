@@ -1,4 +1,4 @@
-define(['jquery', 'underscore', 'vendor/sc-player', 'vendor/handlebars', 'hbs!templates/player'], function($, _, scPlayer, Handlebars, template) {
+define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-player', 'vendor/handlebars', 'hbs!templates/player'], function($, SimpleSlider, _, scPlayer, Handlebars, template) {
     var staticUrl = '//widget.dev/sdk/';
 
     function rerender(container, parameters) {
