@@ -286,7 +286,7 @@ define(['jquery'], function($) {
       }
     };
 
-    SimpleSlider.prototype.valueChanged = function(value, ratio, trigger) {
+    SimpleSlider.prototype.valueChanged = function(value, ratio, trigger, silent) {
       var eventData;
       if (value.toString() === this.value.toString()) {
         return;
