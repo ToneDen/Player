@@ -9,13 +9,14 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-player', 'ven
             for(var i = 0; i < parameters.tracks.length; i++) {
                 if(parameters.tracks[i].title === parameters.nowPlaying.title) {
                     parameters.tracks[i].playing = true;
+                    container.find('.stop-time').html(parameters.tracks[i].duration);
                 }
             }
         }
 
         container.html(template(parameters));
 
-        container.find('.scrubber-slider').simpleSlider();
+        container.find('.scrubber-slider').simpleSlider({highlight: true});
     }
 
     return function(urls, dom, options) {
@@ -166,7 +167,7 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-player', 'ven
         });
 
         //Interactions
-
+        console.log(playerInstance);
         return playerInstance;
     };
 });
