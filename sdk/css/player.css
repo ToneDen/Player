@@ -339,6 +339,9 @@ cursor: pointer;
 }
 
 .slider > .dragger:hover {
+   background: #f8f8f8;
+  background: linear-gradient(to bottom, #f8f8f8 0%,#e4e5e7 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f8f8f8', endColorstr='#e4e5e7',GradientType=0 );
 }
 
 
@@ -352,6 +355,7 @@ cursor: pointer;
 
 .slider > .highlight-track {
   border-color: #AFAFAF;
+  background: #7C85CC;
 }
 
 /*General*/
