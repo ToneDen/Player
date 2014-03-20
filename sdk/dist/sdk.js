@@ -8361,12 +8361,12 @@ ToneDen.define('vendor/sc-player',['vendor/soundmanager2', 'jquery'], function(s
                             });
                         } else {
                             // maybe cache the track
-                            self.processTrack(track, function(_track) {
+                            self.processTrack(_track, function(track) {
                                 if(self.config.cache === true) {
-                                    self.setCache(url, _track);
+                                    self.setCache(url, track);
                                 }
 
-                                trackPromise.resolve(_track);
+                                trackPromise.resolve(track);
                             });
                         }
                     }
@@ -8553,7 +8553,7 @@ ToneDen.define('vendor/sc-player',['vendor/soundmanager2', 'jquery'], function(s
             }
         });
 
-        //init everything when we're sure SM2 has loaded
+        // Init everything when we're sure SM2 has loaded
         soundManager.onready(function() {
             self.log('SOUNDMANAGER2 ready!!');
 
@@ -16177,6 +16177,18 @@ ToneDen.define('templates/helpers/msToTimestamp',['hbs/handlebars'], function(Ha
         var minutes = Math.floor(totalSeconds / 60);
         var seconds = totalSeconds - minutes * 60;
 
+        if(isNaN(minutes)) {
+            minutes = '';
+        }
+
+        if(isNaN(seconds)) {
+            return '';
+        }
+
+        if(seconds < 10) {
+            seconds = '0' + seconds;
+        }
+
         return minutes + ':' + seconds;
     }
 
@@ -16349,7 +16361,7 @@ return t;
 });
 /* END_TEMPLATE */
 ;
-ToneDen.define('player',['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-player', 'vendor/handlebars', 'hbs!templates/player'], function($, SimpleSlider, _, scPlayer, Handlebars, template) {
+ToneDen.define('player',['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-player', 'vendor/handlebars', 'hbs!templates/player', 'templates/helpers/msToTimestamp'], function($, SimpleSlider, _, scPlayer, Handlebars, template, msToTimestamp) {
     var staticUrl = '//widget.dev/sdk/';
 
     function rerender(container, parameters) {
@@ -16368,14 +16380,6 @@ ToneDen.define('player',['jquery', 'vendor/simple-slider', 'underscore', 'vendor
         container.html(template(parameters));
 
         container.find('.scrubber-slider').simpleSlider({highlight: true});
-    }
-
-    function msToTimestamp(milliseconds) {
-        var totalSeconds = Math.round(milliseconds / 1000);
-        var minutes = Math.floor(totalSeconds / 60);
-        var seconds = totalSeconds - minutes * 60;
-
-        return minutes + ':' + seconds;
     }
 
     return function(urls, dom, options) {
