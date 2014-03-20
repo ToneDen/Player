@@ -20,16 +20,9 @@ define(['jquery', 'underscore', 'vendor/sc-player', 'vendor/handlebars', 'hbs!te
         // Default parameters go here.
         var parameters = {
             debug: false,
-            skin: 'light'
+            skin: 'light',
+            tracksPerArtist: 5
         };
-
-        // Parameters for the SoundCloud player.
-        var playerParameters = {
-            consumerKey: '6f85bdf51b0a19b7ab2df7b969233901',
-            debug: false,
-            preload: true,
-            toggle_pause: true
-        }
 
         // Setup the parameters object with the given arguments and
         // override the default parameters with the given options.
@@ -43,6 +36,15 @@ define(['jquery', 'underscore', 'vendor/sc-player', 'vendor/handlebars', 'hbs!te
             delete options.dom;
 
             _.extend(parameters, options);
+        }
+
+        // Parameters for the SoundCloud player.
+        var playerParameters = {
+            consumerKey: '6f85bdf51b0a19b7ab2df7b969233901',
+            debug: parameters.debug,
+            preload: true,
+            togglePause: true,
+            tracksPerArtist: parameters.tracksPerArtist
         }
 
         var dom = parameters.dom;

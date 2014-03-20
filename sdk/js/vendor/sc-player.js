@@ -58,15 +58,16 @@ define(['vendor/soundmanager2', 'jquery'], function(soundManager, jQuery) {
     //v0.9.6
     var SoundCloudPlayer = function(tracks, config){
         var defaults = {
-            loop: false,
-            start_on: 0,
             autoplay: false,
-            autoswitch: true, //for playlists
-            volume: 100,
-            toggle_pause: true, //should pause act as a toggle?
-            cache: true, //caches the SC track lookup. Browser should handle the audio
-            preload: false, //prefetch the sc track data
-            debug: false
+            autoswitch: true, // For playlists
+            cache: true, // Caches the SC track lookup. Browser should handle the audio
+            debug: false,
+            loop: false,
+            preload: false, // Prefetch the sc track data
+            startOn: 0,
+            togglePause: true, //Should pause act as a toggle?
+            tracksPerArtist: 5, // When given an artist URL, how many tracks to load?
+            volume: 100
         };
 
         var sc_resolve_url = 'https://api.soundcloud.com/resolve?url=http://soundcloud.com';
@@ -80,7 +81,7 @@ define(['vendor/soundmanager2', 'jquery'], function(soundManager, jQuery) {
         //local vars
         this.tracks = [];
         this.config = jQuery.extend(defaults, config);
-        this.currentTrackIndex = this.config.start_on;
+        this.currentTrackIndex = this.config.startOn;
         this.currentTrack = null;
         this.sound = null;
 
@@ -162,7 +163,7 @@ define(['vendor/soundmanager2', 'jquery'], function(soundManager, jQuery) {
             }
 
             if(self.sound) {
-                if(self.config.toggle_pause && !force) {
+                if(self.config.togglePause && !force) {
                     self.sound.togglePause();
                 } else {
                     self.sound.pause();
@@ -180,7 +181,7 @@ define(['vendor/soundmanager2', 'jquery'], function(soundManager, jQuery) {
             }
 
             if(self.sound) {
-                if(self.config.toggle_pause && !force) {
+                if(self.config.togglePause && !force) {
                     self.sound.togglePause();
                 } else {
                     self.sound.resume();
@@ -547,9 +548,6 @@ define(['vendor/soundmanager2', 'jquery'], function(soundManager, jQuery) {
             self.trigger('scplayer.track.bindable', track, self.sound);
         };
 
-        self.getComments = function(track, cb) {
-        };
-
         // Gets a SC url and goes to SC to fetch the track data.
         self.resolveTrack = function(url, cb) {
             var trackPromise = new jQuery.Deferred();
@@ -598,7 +596,16 @@ define(['vendor/soundmanager2', 'jquery'], function(soundManager, jQuery) {
                         trackPromise.reject(jqXHR, textStatus, errorThrown);
                     },
                     success: function(_track){
-                        if(_track.tracks && _track.tracks.length > 0) {
+                        // Three types of 'tracks': users, sets, and individual tracks.
+                        if(_track.kind === 'user') {
+                            self.getTracksForUser(_track, self.config.tracksPerArtist, function(tracks) {
+                                self.parseTracks(url, tracks, function(tracks) {
+                                    _track = tracks[0];
+
+                                    trackPromise.resolve(_track);
+                                });
+                            });
+                        } else if(_track.tracks && _track.tracks.length > 0) {
                             self.parseTracks(url, _track.tracks, function(tracks) {
                                 _track = tracks[0];
 
@@ -619,6 +626,38 @@ define(['vendor/soundmanager2', 'jquery'], function(soundManager, jQuery) {
             }
 
             return trackPromise;
+        };
+
+        // Gets tracks for a given user.
+        self.getTracksForUser = function(user, numTracks, cb) {
+            var tracksUrl = scApiUrl + 'users/' + user.id + '/tracks.json?' +
+                'consumer_key=' + self.config.consumerKey;
+
+            jQuery.ajax({
+                url: tracksUrl,
+                error: function(jqXHR, textStatus, errorThrown) {
+                    return cb([]);
+                },
+                success: function(tracks) {
+                    tracks = tracks.slice(0, Math.min(numTracks, tracks.length));
+
+                    return cb(tracks);
+                }
+            });
+        }
+
+        // Get the comments for a given track.
+        self.getComments = function(track, cb) {
+            var trackCommentsUrl = scApiUrl + 'tracks/' + track.id +
+                '/comments.json?consumer_key=' + self.config.consumerKey;
+
+            jQuery.ajax({
+                url: trackCommentsUrl,
+                error: function(jqXHR, textStatus, errorThrown) {
+                    return cb([]);
+                },
+                success: cb
+            });
         };
 
         // Preload the SC track info.
@@ -651,21 +690,15 @@ define(['vendor/soundmanager2', 'jquery'], function(soundManager, jQuery) {
                 '/comments.json?consumer_key=' + self.config.consumerKey;
 
             // Change the artwork_url to a larger format.
-            track.artwork_url = track.artwork_url.replace('large.jpg', 't500x500.jpg');
+            if(track.artwork_url) {
+                track.artwork_url = track.artwork_url.replace('large.jpg', 't500x500.jpg');
+            }
 
             // Get the track's comments and attach them to the track object.
-            jQuery.ajax({
-                url: trackCommentsUrl,
-                error: function(jqXHR, textStatus, errorThrown){
-                    track.comments = [];
+            self.getComments(track, function(comments) {
+                track.comments = comments;
 
-                    return cb(track);
-                },
-                success: function(comments){
-                    track.comments = comments;
-
-                    return cb(track);
-                }
+                return cb(track);
             });
         };
 
