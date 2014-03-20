@@ -49,10 +49,20 @@ cursor: pointer;
 .cover a {
 	display: table-cell;
 	vertical-align: middle;
+  -webkit-animation: fadeIn 1s; /* Safari and Chrome */
+     -moz-animation: fadeIn 1s; /* Firefox */
+      -ms-animation: fadeIn 1s; /* Internet Explorer */
+       -o-animation: fadeIn 1s; /* Opera */
+          animation: fadeIn 1s;
 }
 
 .cover a img {
   max-height: 250px;
+  -webkit-animation: fadeIn 1s; /* Safari and Chrome */
+     -moz-animation: fadeIn 1s; /* Firefox */
+      -ms-animation: fadeIn 1s; /* Internet Explorer */
+       -o-animation: fadeIn 1s; /* Opera */
+          animation: fadeIn 1s;
 }
 
 #waveform {
@@ -80,14 +90,21 @@ cursor: pointer;
 
 .song-name {
   line-height: 50px;
+  -webkit-animation: fadeInLeft 1s; /* Safari and Chrome */
+     -moz-animation: fadeInLeft 1s; /* Firefox */
+      -ms-animation: fadeInLeft 1s; /* Internet Explorer */
+       -o-animation: fadeInLeft 1s; /* Opera */
+          animation: fadeInLeft 1s;
 }
 
 .artist-name {
+  text-align: right;
   line-height: 50px;
-}
-
-.artist-name {
-	text-align: right;
+  -webkit-animation: fadeInLeft 1s; /* Safari and Chrome */
+     -moz-animation: fadeInLeft 1s; /* Firefox */
+      -ms-animation: fadeInLeft 1s; /* Internet Explorer */
+       -o-animation: fadeInLeft 1s; /* Opera */
+          animation: fadeInLeft 1s;
 }
 
 .social {
@@ -195,6 +212,37 @@ cursor: pointer;
 
 .fa-pause:hover {
     opacity: 1;
+}
+
+.scrubber {
+  line-height: 50px;
+  text-align: center;
+  border-bottom: 1px solid #AFAFAF;
+  padding: 0px 20px;
+}
+
+.scrubber-box {
+  display: inline-block;
+}
+
+.scrub-bar-box {
+  display: table;
+}
+
+.scrub-bar {
+  display: table-cell;
+  vertical-align: middle;
+  line-height: 50px;
+  height: 5px;
+  border-radius: 20px;
+  border: 1px solid #AFAFAF;
+  width: 100%;
+  margin-bottom: 3px;
+}
+
+.start-time, .stop-time {
+  font-size: 12px;
+  text-align: center;
 }
 
 .playlist-social-icon {
@@ -325,6 +373,61 @@ cursor: pointer;
   float: right !important; }
 
 /*Animations*/
+@-webkit-keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes fadeInLeft {
+  0% {
+    opacity: 0;
+    -webkit-transform: translateX(-20px);
+    transform: translateX(-20px);
+  }
+
+  100% {
+    opacity: 1;
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeInLeft {
+  0% {
+    opacity: 0;
+    -webkit-transform: translateX(-20px);
+    -ms-transform: translateX(-20px);
+    transform: translateX(-20px);
+  }
+
+  100% {
+    opacity: 1;
+    -webkit-transform: translateX(0);
+    -ms-transform: translateX(0);
+    transform: translateX(0);
+  }
+}
+
+.fadeInLeft {
+  -webkit-animation-name: fadeInLeft;
+  animation-name: fadeInLeft;
+}
+
 @-webkit-keyframes fadeInRight {
   0% {
     -webkit-transform: translateX(0px);
