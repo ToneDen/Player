@@ -140,7 +140,7 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-player', 'ven
         playerInstance.on('scplayer.track.whileplaying', function(e, percent) {
             var ratio = percent / 100;
 
-            container.find('.scrubber-slider').simpleSlider('setRatio', ratio);
+            container.find('.scrubber-slider').simpleSlider('setRatio', ratio, true);
         });
 
         playerInstance.on('scplayer.playlist.preloaded', function(e) {
