@@ -19,6 +19,14 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-player', 'ven
         container.find('.scrubber-slider').simpleSlider({highlight: true});
     }
 
+    function msToTimestamp(milliseconds) {
+        var totalSeconds = Math.round(milliseconds / 1000);
+        var minutes = Math.floor(totalSeconds / 60);
+        var seconds = totalSeconds - minutes * 60;
+
+        return minutes + ':' + seconds;
+    }
+
     return function(urls, dom, options) {
         // Default parameters go here.
         var parameters = {
@@ -140,8 +148,12 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-player', 'ven
 
         playerInstance.on('scplayer.track.whileplaying', function(e, percent) {
             var ratio = percent / 100;
+            var timeIn = msToTimestamp(playerInstance.position());
+            var timeLeft = msToTimestamp(playerInstance.track().duration - playerInstance.position());
 
             container.find('.scrubber-slider').simpleSlider('setRatio', ratio, true);
+            container.find('.start-time').html(timeIn);
+            container.find('.stop-time').html(timeLeft);
         });
 
         playerInstance.on('scplayer.playlist.preloaded', function(e) {
