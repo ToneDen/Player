@@ -613,12 +613,12 @@ define(['vendor/soundmanager2', 'jquery'], function(soundManager, jQuery) {
                             });
                         } else {
                             // maybe cache the track
-                            self.processTrack(track, function(_track) {
+                            self.processTrack(_track, function(track) {
                                 if(self.config.cache === true) {
-                                    self.setCache(url, _track);
+                                    self.setCache(url, track);
                                 }
 
-                                trackPromise.resolve(_track);
+                                trackPromise.resolve(track);
                             });
                         }
                     }
@@ -805,7 +805,7 @@ define(['vendor/soundmanager2', 'jquery'], function(soundManager, jQuery) {
             }
         });
 
-        //init everything when we're sure SM2 has loaded
+        // Init everything when we're sure SM2 has loaded
         soundManager.onready(function() {
             self.log('SOUNDMANAGER2 ready!!');
 

@@ -1,4 +1,4 @@
-define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-player', 'vendor/handlebars', 'hbs!templates/player'], function($, SimpleSlider, _, scPlayer, Handlebars, template) {
+define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-player', 'vendor/handlebars', 'hbs!templates/player', 'templates/helpers/msToTimestamp'], function($, SimpleSlider, _, scPlayer, Handlebars, template, msToTimestamp) {
     var staticUrl = '//widget.dev/sdk/';
 
     function rerender(container, parameters) {
@@ -17,14 +17,6 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-player', 'ven
         container.html(template(parameters));
 
         container.find('.scrubber-slider').simpleSlider({highlight: true});
-    }
-
-    function msToTimestamp(milliseconds) {
-        var totalSeconds = Math.round(milliseconds / 1000);
-        var minutes = Math.floor(totalSeconds / 60);
-        var seconds = totalSeconds - minutes * 60;
-
-        return minutes + ':' + seconds;
     }
 
     return function(urls, dom, options) {
