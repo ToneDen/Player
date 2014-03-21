@@ -219,6 +219,11 @@ cursor: pointer;
   text-align: center;
   border-bottom: 1px solid #AFAFAF;
   padding: 0px 20px;
+  -webkit-animation: fadeIn 1s; /* Safari and Chrome */
+     -moz-animation: fadeIn 1s; /* Firefox */
+      -ms-animation: fadeIn 1s; /* Internet Explorer */
+       -o-animation: fadeIn 1s; /* Opera */
+          animation: fadeIn 1s;
 }
 
 .scrubber-box {
