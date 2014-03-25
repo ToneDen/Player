@@ -1,3 +1,4 @@
+var css='body{font-family:HelveticaNeue-Light,"Helvetica Neue Light","Helvetica Neue",Helvetica,Arial,"Lucida Grande",sans-serif;color:#222;padding:0;margin:0;font-weight:400;font-style:normal;line-height:1;position:relative;cursor:default}#player{width:100%;height:100%}.player{background:rgba(255,255,255,.8);transition:all .5s;-webkit-transition:all .5s;-moz-transition:all .5s}.player .controls div{display:inline-block;text-align:center;opacity:.75;cursor:pointer}.header{height:100%;padding:20px;text-align:center}.cover{height:100%;display:table}.cover a{display:table-cell;vertical-align:middle;-webkit-animation:fadeIn 1s;-moz-animation:fadeIn 1s;-ms-animation:fadeIn 1s;-o-animation:fadeIn 1s;animation:fadeIn 1s}.cover a img{max-height:250px;-webkit-animation:fadeIn 1s;-moz-animation:fadeIn 1s;-ms-animation:fadeIn 1s;-o-animation:fadeIn 1s;animation:fadeIn 1s}#waveform{9 height:40px;position:relative;margin:0;border-left:1px solid #D6D6D6}#waveform .buffer,#waveform .played,#waveform>img{position:absolute;width:0;height:100%}#waveform .buffer{background-color:#222}#waveform .played{background-color:#333}#waveform>img{width:100%}#playlist{display:none}#playlist .active{font-weight:700}.info{border-top:1px solid #AFAFAF;border-bottom:1px solid #AFAFAF;font-weight:700;padding:0 45px}.song-name{margin:10px 0;text-align:center;font-size:14px;font-weight:400;-webkit-animation:fadeInLeft 1s;-moz-animation:fadeInLeft 1s;-ms-animation:fadeInLeft 1s;-o-animation:fadeInLeft 1s;animation:fadeInLeft 1s}.artist-name{margin:10px 0;text-align:center;-webkit-animation:fadeInLeft 1s;-moz-animation:fadeInLeft 1s;-ms-animation:fadeInLeft 1s;-o-animation:fadeInLeft 1s;animation:fadeInLeft 1s}.follow-link{border-right:1px solid #AFAFAF!important}.buy-link{border-left:1px solid #AFAFAF!important}.buy-link,.follow-link{letter-spacing:2px;font-weight:400;font-size:14px}.buy-link:hover,.follow-link:hover{background:rgba(255,255,255,.8);color:#222}.current-song-info{font-family:HelveticaNeue-Light,"Helvetica Neue Light","Helvetica Neue",Helvetica,Arial,"Lucida Grande",sans-serif;font-weight:300;font-size:14px;text-align:center;padding-top:1rem;padding-bottom:1.0625rem}.current-song-social-icon{font-size:14px}.controls{padding:20px;color:#222;border-top:1px solid #AFAFAF;border-bottom:1px solid #AFAFAF}.player-prev{font-size:36px;line-height:50px!important;vertical-align:top;opacity:.8;transition:all .2s;-webkit-transition:all .2s;-moz-transition:all .2s}.player-prev:hover{opacity:1;-webkit-transform:translateX(-5px);transform:translateX(-5px)}.player-play{width:150px;opacity:.8;line-height:50px!important}.fa-play-circle-o{font-size:42px;transition:all .2s;-webkit-transition:all .2s;-moz-transition:all .2s}.fa-play-circle-o:hover{opacity:1;font-size:48px}.player-next{font-size:36px;line-height:50px!important;vertical-align:top;opacity:.8;transition:all .2s;-webkit-transition:all .2s;-moz-transition:all .2s}.player-next:hover{opacity:1;-webkit-transform:translateX(5px);transform:translateX(5px)}.fa-pause{font-size:30px;line-height:48px;vertical-align:middle;opacity:.8;transition:all .2s;-webkit-transition:all .2s;-moz-transition:all .2s}.fa-pause:hover{opacity:1}.scrubber{line-height:50px;text-align:center;border-bottom:1px solid #AFAFAF;padding:0 20px;-webkit-animation:fadeIn 1s;-moz-animation:fadeIn 1s;-ms-animation:fadeIn 1s;-o-animation:fadeIn 1s;animation:fadeIn 1s}.scrubber-box{display:inline-block}.scrub-bar-box{display:table;padding:24px 0}.scrub-bar{display:table-cell;vertical-align:middle;line-height:50px;height:5px;border-radius:20px;border:1px solid #AFAFAF;width:100%;margin-bottom:3px}.start-time,.stop-time{font-size:12px;text-align:center}.playlist-social-icon{font-size:12px}.title{border-left:1px solid #D6D6D6;margin-left:40px;height:40px}.track-info-social{font-family:HelveticaNeue-Light,"Helvetica Neue Light","Helvetica Neue",Helvetica,Arial,"Lucida Grande",sans-serif;font-weight:300}.track-title,.track-user{font-size:12px;display:inline-block;margin:14px 10px}.track-title{font-weight:700}.playlist{font-size:12px}.playlist-table{width:100%}.playlist-table tr{cursor:pointer;opacity:.5}.playlist-table tbody tr:hover{cursor:pointer;opacity:1;border-bottom:1px solid rgba(175,175,175,.5)}.current-play-icon{font-size:14px}.playlist-table{border-spacing:0;border:0}.playlist-table tbody tr.playing{opacity:1}.playlist-table tbody tr.playing td,.playlist-table tbody tr:hover td{border-bottom:1px solid rgba(175,175,175,.5)}.playlist-table tbody tr td{border-right:0;border-left:0;border-top:0;border-bottom:1px solid #AFAFAF}.slider{width:100%;display:table-cell;vertical-align:middle;line-height:50px}.slider>.dragger{background:#e4e5e7;background:linear-gradient(to bottom,#e4e5e7 0,#d0d3d8 100%);filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=\'#e4e5e7\', endColorstr=\'#d0d3d8\', GradientType=0);-webkit-border-radius:10px;-moz-border-radius:10px;border-radius:10px;border:1px solid #AFAFAF;width:16px;height:16px}.slider>.dragger:hover{background:#f8f8f8;background:linear-gradient(to bottom,#f8f8f8 0,#e4e5e7 100%);filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=\'#f8f8f8\', endColorstr=\'#e4e5e7\', GradientType=0)}.slider>.highlight-track,.slider>.track{-webkit-border-radius:8px;-moz-border-radius:8px;border-radius:8px;border:1px solid #AFAFAF;height:4px}.slider>.highlight-track{border-color:#AFAFAF;background:#222}.row{width:100%;margin-left:auto;margin-right:auto;margin-top:0;margin-bottom:0;max-width:62.5em;*zoom:1}.row:after,.row:before{content:" ";display:table}.row:after{clear:both}.row.collapse>.column,.row.collapse>.columns{padding-left:0;padding-right:0}.row.collapse .row{margin-left:0;margin-right:0}.row .row{width:auto;margin-top:0;margin-bottom:0;max-width:none;*zoom:1}.row .row:after,.row .row:before{content:" ";display:table}.row .row:after{clear:both}.row .row.collapse{width:auto;margin:0;max-width:none;*zoom:1}.row .row.collapse:after,.row .row.collapse:before{content:" ";display:table}.row .row.collapse:after{clear:both}.column,.columns{width:100%;float:left}.left{float:left!important}.right{float:right!important}@-webkit-keyframes fadeIn{0%{opacity:0}100%{opacity:1}}@keyframes fadeIn{0%{opacity:0}100%{opacity:1}}@-webkit-keyframes fadeInLeft{0%{opacity:0;-webkit-transform:translateX(-20px);transform:translateX(-20px)}100%{opacity:1;-webkit-transform:translateX(0);transform:translateX(0)}}@keyframes fadeInLeft{0%{opacity:0;-webkit-transform:translateX(-20px);-ms-transform:translateX(-20px);transform:translateX(-20px)}100%{opacity:1;-webkit-transform:translateX(0);-ms-transform:translateX(0);transform:translateX(0)}}.fadeInLeft{-webkit-animation-name:fadeInLeft;animation-name:fadeInLeft}@-webkit-keyframes fadeInRight{0%{-webkit-transform:translateX(0px);transform:translateX(0px)}100%{-webkit-transform:translateX(5px);transform:translateX(5px)}}@keyframes fadeInRight{0%{-webkit-transform:translateX(0px);-ms-transform:translateX(0px);transform:translateX(0px)}100%{-webkit-transform:translateX(5px);-ms-transform:translateX(5px);transform:translateX(5px)}}@-webkit-keyframes fadeOutDown{0%{opacity:1;-webkit-transform:translateY(0);transform:translateY(0)}100%{opacity:0;-webkit-transform:translateY(5px);transform:translateY(5px)}}@keyframes fadeOutDown{0%{opacity:1;-webkit-transform:translateY(0);-ms-transform:translateY(0);transform:translateY(0)}100%{opacity:0;-webkit-transform:translateY(5px);-ms-transform:translateY(5px);transform:translateY(5px)}}@media only screen{.column.small-centered,.columns.small-centered{margin-left:auto;margin-right:auto;float:none!important}.column.small-uncentered,.columns.small-uncentered{margin-left:0;margin-right:0;float:left!important}.column.small-uncentered.opposite,.columns.small-uncentered.opposite{float:right}.small-1{width:8.33333%}.small-2{width:16.66667%}.small-3{width:25%}.small-4{width:33.33333%}.small-5{width:41.66667%}.small-6{width:50%}.small-7{width:58.33333%}.small-8{width:66.66667%}.small-9{width:75%}.small-10{width:83.33333%}.small-11{width:91.66667%}.small-12{width:100%}[class*=column]+[class*=column]:last-child{float:right}[class*=column]+[class*=column].end{float:left}.button,button{border-style:solid;border-width:0;cursor:pointer;line-height:normal;position:relative;text-decoration:none;text-align:center;display:inline-block;color:#222;-webkit-transition:background-color 300ms ease-out;-moz-transition:background-color 300ms ease-out;transition:background-color 300ms ease-out;padding-top:1rem;padding-right:2rem;padding-bottom:1.0625rem;padding-left:2rem}.button.secondary,button.secondary{background-color:#e9e9e9;border-color:#bababa;color:#333}.button.secondary:focus,.button.secondary:hover,button.secondary:focus,button.secondary:hover{background-color:#bababa;color:#333}.button.success,button.success{background-color:#5da423;border-color:#4a831c;color:#fff}.button.success:focus,.button.success:hover,button.success:focus,button.success:hover{background-color:#4a831c;color:#fff}.button.alert,button.alert{background-color:#c60f13;border-color:#9e0c0f;color:#fff}.button.alert:focus,.button.alert:hover,button.alert:focus,button.alert:hover{background-color:#9e0c0f;color:#fff}.button.large,button.large{padding-top:1.125rem;padding-right:2.25rem;padding-bottom:1.1875rem;padding-left:2.25rem;font-size:1.25rem}.button.small,button.small{padding-top:.875rem;padding-right:1.75rem;padding-bottom:.9375rem;padding-left:1.75rem;font-size:.8125rem}.button.tiny,button.tiny{padding-top:.625rem;padding-right:1.25rem;padding-bottom:.6875rem;padding-left:1.25rem;font-size:.6875rem}.button.expand,button.expand{padding-right:0;padding-left:0;width:100%}.button.left-align,button.left-align{text-align:left;text-indent:.75rem}.button.right-align,button.right-align{text-align:right;padding-right:.75rem}.button.radius,button.radius{-webkit-border-radius:3px;border-radius:3px}.button.round,button.round{-webkit-border-radius:1000px;border-radius:1000px}}table tfoot tr td,table tfoot tr th,table thead tr td,table thead tr th{padding:.5rem .625rem .625rem;text-align:left}table tr td,table tr th{padding:.5625rem .625rem}table tbody tr td,table tfoot tr td,table tfoot tr th,table thead tr th,table tr td{display:table-cell;line-height:1.125rem}@media only screen and (min-width:40.063em){.column.medium-centered,.columns.medium-centered{margin-left:auto;margin-right:auto;float:none!important}.column.medium-uncentered,.columns.medium-uncentered{margin-left:0;margin-right:0;float:left!important}.column.medium-uncentered.opposite,.columns.medium-uncentered.opposite{float:right}.medium-1{width:8.33333%}.medium-2{width:16.66667%}.medium-3{width:25%}.medium-4{width:33.33333%}.medium-5{width:41.66667%}.medium-6{width:50%}.medium-7{width:58.33333%}.medium-8{width:66.66667%}.medium-9{width:75%}.medium-10{width:83.33333%}.medium-11{width:91.66667%}.medium-12{width:100%}[class*=column]+[class*=column]:last-child{float:right}[class*=column]+[class*=column].end{float:left}}@media only screen and (min-width:64.063em){.column.large-centered,.columns.large-centered{margin-left:auto;margin-right:auto;float:none!important}.column.large-uncentered,.columns.large-uncentered{margin-left:0;margin-right:0;float:left!important}.column.large-uncentered.opposite,.columns.large-uncentered.opposite{float:right}.large-1{width:8.33333%}.large-2{width:16.66667%}.large-3{width:25%}.large-4{width:33.33333%}.large-5{width:41.66667%}.large-6{width:50%}.large-7{width:58.33333%}.large-8{width:66.66667%}.large-9{width:75%}.large-10{width:83.33333%}.large-11{width:91.66667%}.large-12{width:100%}[class*=column]+[class*=column]:last-child{float:right}[class*=column]+[class*=column].end{float:left}}body{background:url(https://s3-us-west-1.amazonaws.com/toneden-static/production/images/template/bg/squary.jpg) no-repeat center center fixed;-webkit-background-size:cover;-moz-background-size:cover;-o-background-size:cover;background-size:cover;font-weight:400}#player{width:1000px;height:1000px;margin:100px auto}'
 /*! jQuery v1.11.0 | (c) 2005, 2014 jQuery Foundation, Inc. | jquery.org/license */
 !function(a,b){"object"==typeof module&&"object"==typeof module.exports?module.exports=a.document?b(a,!0):function(a){if(!a.document)throw new Error("jQuery requires a window with a document");return b(a)}:b(a)}("undefined"!=typeof window?window:this,function(a,b){var c=[],d=c.slice,e=c.concat,f=c.push,g=c.indexOf,h={},i=h.toString,j=h.hasOwnProperty,k="".trim,l={},m="1.11.0",n=function(a,b){return new n.fn.init(a,b)},o=/^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g,p=/^-ms-/,q=/-([\da-z])/gi,r=function(a,b){return b.toUpperCase()};n.fn=n.prototype={jquery:m,constructor:n,selector:"",length:0,toArray:function(){return d.call(this)},get:function(a){return null!=a?0>a?this[a+this.length]:this[a]:d.call(this)},pushStack:function(a){var b=n.merge(this.constructor(),a);return b.prevObject=this,b.context=this.context,b},each:function(a,b){return n.each(this,a,b)},map:function(a){return this.pushStack(n.map(this,function(b,c){return a.call(b,c,b)}))},slice:function(){return this.pushStack(d.apply(this,arguments))},first:function(){return this.eq(0)},last:function(){return this.eq(-1)},eq:function(a){var b=this.length,c=+a+(0>a?b:0);return this.pushStack(c>=0&&b>c?[this[c]]:[])},end:function(){return this.prevObject||this.constructor(null)},push:f,sort:c.sort,splice:c.splice},n.extend=n.fn.extend=function(){var a,b,c,d,e,f,g=arguments[0]||{},h=1,i=arguments.length,j=!1;for("boolean"==typeof g&&(j=g,g=arguments[h]||{},h++),"object"==typeof g||n.isFunction(g)||(g={}),h===i&&(g=this,h--);i>h;h++)if(null!=(e=arguments[h]))for(d in e)a=g[d],c=e[d],g!==c&&(j&&c&&(n.isPlainObject(c)||(b=n.isArray(c)))?(b?(b=!1,f=a&&n.isArray(a)?a:[]):f=a&&n.isPlainObject(a)?a:{},g[d]=n.extend(j,f,c)):void 0!==c&&(g[d]=c));return g},n.extend({expando:"jQuery"+(m+Math.random()).replace(/\D/g,""),isReady:!0,error:function(a){throw new Error(a)},noop:function(){},isFunction:function(a){return"function"===n.type(a)},isArray:Array.isArray||function(a){return"array"===n.type(a)},isWindow:function(a){return null!=a&&a==a.window},isNumeric:function(a){return a-parseFloat(a)>=0},isEmptyObject:function(a){var b;for(b in a)return!1;return!0},isPlainObject:function(a){var b;if(!a||"object"!==n.type(a)||a.nodeType||n.isWindow(a))return!1;try{if(a.constructor&&!j.call(a,"constructor")&&!j.call(a.constructor.prototype,"isPrototypeOf"))return!1}catch(c){return!1}if(l.ownLast)for(b in a)return j.call(a,b);for(b in a);return void 0===b||j.call(a,b)},type:function(a){return null==a?a+"":"object"==typeof a||"function"==typeof a?h[i.call(a)]||"object":typeof a},globalEval:function(b){b&&n.trim(b)&&(a.execScript||function(b){a.eval.call(a,b)})(b)},camelCase:function(a){return a.replace(p,"ms-").replace(q,r)},nodeName:function(a,b){return a.nodeName&&a.nodeName.toLowerCase()===b.toLowerCase()},each:function(a,b,c){var d,e=0,f=a.length,g=s(a);if(c){if(g){for(;f>e;e++)if(d=b.apply(a[e],c),d===!1)break}else for(e in a)if(d=b.apply(a[e],c),d===!1)break}else if(g){for(;f>e;e++)if(d=b.call(a[e],e,a[e]),d===!1)break}else for(e in a)if(d=b.call(a[e],e,a[e]),d===!1)break;return a},trim:k&&!k.call("\ufeff\xa0")?function(a){return null==a?"":k.call(a)}:function(a){return null==a?"":(a+"").replace(o,"")},makeArray:function(a,b){var c=b||[];return null!=a&&(s(Object(a))?n.merge(c,"string"==typeof a?[a]:a):f.call(c,a)),c},inArray:function(a,b,c){var d;if(b){if(g)return g.call(b,a,c);for(d=b.length,c=c?0>c?Math.max(0,d+c):c:0;d>c;c++)if(c in b&&b[c]===a)return c}return-1},merge:function(a,b){var c=+b.length,d=0,e=a.length;while(c>d)a[e++]=b[d++];if(c!==c)while(void 0!==b[d])a[e++]=b[d++];return a.length=e,a},grep:function(a,b,c){for(var d,e=[],f=0,g=a.length,h=!c;g>f;f++)d=!b(a[f],f),d!==h&&e.push(a[f]);return e},map:function(a,b,c){var d,f=0,g=a.length,h=s(a),i=[];if(h)for(;g>f;f++)d=b(a[f],f,c),null!=d&&i.push(d);else for(f in a)d=b(a[f],f,c),null!=d&&i.push(d);return e.apply([],i)},guid:1,proxy:function(a,b){var c,e,f;return"string"==typeof b&&(f=a[b],b=a,a=f),n.isFunction(a)?(c=d.call(arguments,2),e=function(){return a.apply(b||this,c.concat(d.call(arguments)))},e.guid=a.guid=a.guid||n.guid++,e):void 0},now:function(){return+new Date},support:l}),n.each("Boolean Number String Function Array Date RegExp Object Error".split(" "),function(a,b){h["[object "+b+"]"]=b.toLowerCase()});function s(a){var b=a.length,c=n.type(a);return"function"===c||n.isWindow(a)?!1:1===a.nodeType&&b?!0:"array"===c||0===b||"number"==typeof b&&b>0&&b-1 in a}var t=function(a){var b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s="sizzle"+-new Date,t=a.document,u=0,v=0,w=eb(),x=eb(),y=eb(),z=function(a,b){return a===b&&(j=!0),0},A="undefined",B=1<<31,C={}.hasOwnProperty,D=[],E=D.pop,F=D.push,G=D.push,H=D.slice,I=D.indexOf||function(a){for(var b=0,c=this.length;c>b;b++)if(this[b]===a)return b;return-1},J="checked|selected|async|autofocus|autoplay|controls|defer|disabled|hidden|ismap|loop|multiple|open|readonly|required|scoped",K="[\\x20\\t\\r\\n\\f]",L="(?:\\\\.|[\\w-]|[^\\x00-\\xa0])+",M=L.replace("w","w#"),N="\\["+K+"*("+L+")"+K+"*(?:([*^$|!~]?=)"+K+"*(?:(['\"])((?:\\\\.|[^\\\\])*?)\\3|("+M+")|)|)"+K+"*\\]",O=":("+L+")(?:\\(((['\"])((?:\\\\.|[^\\\\])*?)\\3|((?:\\\\.|[^\\\\()[\\]]|"+N.replace(3,8)+")*)|.*)\\)|)",P=new RegExp("^"+K+"+|((?:^|[^\\\\])(?:\\\\.)*)"+K+"+$","g"),Q=new RegExp("^"+K+"*,"+K+"*"),R=new RegExp("^"+K+"*([>+~]|"+K+")"+K+"*"),S=new RegExp("="+K+"*([^\\]'\"]*?)"+K+"*\\]","g"),T=new RegExp(O),U=new RegExp("^"+M+"$"),V={ID:new RegExp("^#("+L+")"),CLASS:new RegExp("^\\.("+L+")"),TAG:new RegExp("^("+L.replace("w","w*")+")"),ATTR:new RegExp("^"+N),PSEUDO:new RegExp("^"+O),CHILD:new RegExp("^:(only|first|last|nth|nth-last)-(child|of-type)(?:\\("+K+"*(even|odd|(([+-]|)(\\d*)n|)"+K+"*(?:([+-]|)"+K+"*(\\d+)|))"+K+"*\\)|)","i"),bool:new RegExp("^(?:"+J+")$","i"),needsContext:new RegExp("^"+K+"*[>+~]|:(even|odd|eq|gt|lt|nth|first|last)(?:\\("+K+"*((?:-\\d)?\\d*)"+K+"*\\)|)(?=[^-]|$)","i")},W=/^(?:input|select|textarea|button)$/i,X=/^h\d$/i,Y=/^[^{]+\{\s*\[native \w/,Z=/^(?:#([\w-]+)|(\w+)|\.([\w-]+))$/,$=/[+~]/,_=/'|\\/g,ab=new RegExp("\\\\([\\da-f]{1,6}"+K+"?|("+K+")|.)","ig"),bb=function(a,b,c){var d="0x"+b-65536;return d!==d||c?b:0>d?String.fromCharCode(d+65536):String.fromCharCode(d>>10|55296,1023&d|56320)};try{G.apply(D=H.call(t.childNodes),t.childNodes),D[t.childNodes.length].nodeType}catch(cb){G={apply:D.length?function(a,b){F.apply(a,H.call(b))}:function(a,b){var c=a.length,d=0;while(a[c++]=b[d++]);a.length=c-1}}}function db(a,b,d,e){var f,g,h,i,j,m,p,q,u,v;if((b?b.ownerDocument||b:t)!==l&&k(b),b=b||l,d=d||[],!a||"string"!=typeof a)return d;if(1!==(i=b.nodeType)&&9!==i)return[];if(n&&!e){if(f=Z.exec(a))if(h=f[1]){if(9===i){if(g=b.getElementById(h),!g||!g.parentNode)return d;if(g.id===h)return d.push(g),d}else if(b.ownerDocument&&(g=b.ownerDocument.getElementById(h))&&r(b,g)&&g.id===h)return d.push(g),d}else{if(f[2])return G.apply(d,b.getElementsByTagName(a)),d;if((h=f[3])&&c.getElementsByClassName&&b.getElementsByClassName)return G.apply(d,b.getElementsByClassName(h)),d}if(c.qsa&&(!o||!o.test(a))){if(q=p=s,u=b,v=9===i&&a,1===i&&"object"!==b.nodeName.toLowerCase()){m=ob(a),(p=b.getAttribute("id"))?q=p.replace(_,"\\$&"):b.setAttribute("id",q),q="[id='"+q+"'] ",j=m.length;while(j--)m[j]=q+pb(m[j]);u=$.test(a)&&mb(b.parentNode)||b,v=m.join(",")}if(v)try{return G.apply(d,u.querySelectorAll(v)),d}catch(w){}finally{p||b.removeAttribute("id")}}}return xb(a.replace(P,"$1"),b,d,e)}function eb(){var a=[];function b(c,e){return a.push(c+" ")>d.cacheLength&&delete b[a.shift()],b[c+" "]=e}return b}function fb(a){return a[s]=!0,a}function gb(a){var b=l.createElement("div");try{return!!a(b)}catch(c){return!1}finally{b.parentNode&&b.parentNode.removeChild(b),b=null}}function hb(a,b){var c=a.split("|"),e=a.length;while(e--)d.attrHandle[c[e]]=b}function ib(a,b){var c=b&&a,d=c&&1===a.nodeType&&1===b.nodeType&&(~b.sourceIndex||B)-(~a.sourceIndex||B);if(d)return d;if(c)while(c=c.nextSibling)if(c===b)return-1;return a?1:-1}function jb(a){return function(b){var c=b.nodeName.toLowerCase();return"input"===c&&b.type===a}}function kb(a){return function(b){var c=b.nodeName.toLowerCase();return("input"===c||"button"===c)&&b.type===a}}function lb(a){return fb(function(b){return b=+b,fb(function(c,d){var e,f=a([],c.length,b),g=f.length;while(g--)c[e=f[g]]&&(c[e]=!(d[e]=c[e]))})})}function mb(a){return a&&typeof a.getElementsByTagName!==A&&a}c=db.support={},f=db.isXML=function(a){var b=a&&(a.ownerDocument||a).documentElement;return b?"HTML"!==b.nodeName:!1},k=db.setDocument=function(a){var b,e=a?a.ownerDocument||a:t,g=e.defaultView;return e!==l&&9===e.nodeType&&e.documentElement?(l=e,m=e.documentElement,n=!f(e),g&&g!==g.top&&(g.addEventListener?g.addEventListener("unload",function(){k()},!1):g.attachEvent&&g.attachEvent("onunload",function(){k()})),c.attributes=gb(function(a){return a.className="i",!a.getAttribute("className")}),c.getElementsByTagName=gb(function(a){return a.appendChild(e.createComment("")),!a.getElementsByTagName("*").length}),c.getElementsByClassName=Y.test(e.getElementsByClassName)&&gb(function(a){return a.innerHTML="<div class='a'></div><div class='a i'></div>",a.firstChild.className="i",2===a.getElementsByClassName("i").length}),c.getById=gb(function(a){return m.appendChild(a).id=s,!e.getElementsByName||!e.getElementsByName(s).length}),c.getById?(d.find.ID=function(a,b){if(typeof b.getElementById!==A&&n){var c=b.getElementById(a);return c&&c.parentNode?[c]:[]}},d.filter.ID=function(a){var b=a.replace(ab,bb);return function(a){return a.getAttribute("id")===b}}):(delete d.find.ID,d.filter.ID=function(a){var b=a.replace(ab,bb);return function(a){var c=typeof a.getAttributeNode!==A&&a.getAttributeNode("id");return c&&c.value===b}}),d.find.TAG=c.getElementsByTagName?function(a,b){return typeof b.getElementsByTagName!==A?b.getElementsByTagName(a):void 0}:function(a,b){var c,d=[],e=0,f=b.getElementsByTagName(a);if("*"===a){while(c=f[e++])1===c.nodeType&&d.push(c);return d}return f},d.find.CLASS=c.getElementsByClassName&&function(a,b){return typeof b.getElementsByClassName!==A&&n?b.getElementsByClassName(a):void 0},p=[],o=[],(c.qsa=Y.test(e.querySelectorAll))&&(gb(function(a){a.innerHTML="<select t=''><option selected=''></option></select>",a.querySelectorAll("[t^='']").length&&o.push("[*^$]="+K+"*(?:''|\"\")"),a.querySelectorAll("[selected]").length||o.push("\\["+K+"*(?:value|"+J+")"),a.querySelectorAll(":checked").length||o.push(":checked")}),gb(function(a){var b=e.createElement("input");b.setAttribute("type","hidden"),a.appendChild(b).setAttribute("name","D"),a.querySelectorAll("[name=d]").length&&o.push("name"+K+"*[*^$|!~]?="),a.querySelectorAll(":enabled").length||o.push(":enabled",":disabled"),a.querySelectorAll("*,:x"),o.push(",.*:")})),(c.matchesSelector=Y.test(q=m.webkitMatchesSelector||m.mozMatchesSelector||m.oMatchesSelector||m.msMatchesSelector))&&gb(function(a){c.disconnectedMatch=q.call(a,"div"),q.call(a,"[s!='']:x"),p.push("!=",O)}),o=o.length&&new RegExp(o.join("|")),p=p.length&&new RegExp(p.join("|")),b=Y.test(m.compareDocumentPosition),r=b||Y.test(m.contains)?function(a,b){var c=9===a.nodeType?a.documentElement:a,d=b&&b.parentNode;return a===d||!(!d||1!==d.nodeType||!(c.contains?c.contains(d):a.compareDocumentPosition&&16&a.compareDocumentPosition(d)))}:function(a,b){if(b)while(b=b.parentNode)if(b===a)return!0;return!1},z=b?function(a,b){if(a===b)return j=!0,0;var d=!a.compareDocumentPosition-!b.compareDocumentPosition;return d?d:(d=(a.ownerDocument||a)===(b.ownerDocument||b)?a.compareDocumentPosition(b):1,1&d||!c.sortDetached&&b.compareDocumentPosition(a)===d?a===e||a.ownerDocument===t&&r(t,a)?-1:b===e||b.ownerDocument===t&&r(t,b)?1:i?I.call(i,a)-I.call(i,b):0:4&d?-1:1)}:function(a,b){if(a===b)return j=!0,0;var c,d=0,f=a.parentNode,g=b.parentNode,h=[a],k=[b];if(!f||!g)return a===e?-1:b===e?1:f?-1:g?1:i?I.call(i,a)-I.call(i,b):0;if(f===g)return ib(a,b);c=a;while(c=c.parentNode)h.unshift(c);c=b;while(c=c.parentNode)k.unshift(c);while(h[d]===k[d])d++;return d?ib(h[d],k[d]):h[d]===t?-1:k[d]===t?1:0},e):l},db.matches=function(a,b){return db(a,null,null,b)},db.matchesSelector=function(a,b){if((a.ownerDocument||a)!==l&&k(a),b=b.replace(S,"='$1']"),!(!c.matchesSelector||!n||p&&p.test(b)||o&&o.test(b)))try{var d=q.call(a,b);if(d||c.disconnectedMatch||a.document&&11!==a.document.nodeType)return d}catch(e){}return db(b,l,null,[a]).length>0},db.contains=function(a,b){return(a.ownerDocument||a)!==l&&k(a),r(a,b)},db.attr=function(a,b){(a.ownerDocument||a)!==l&&k(a);var e=d.attrHandle[b.toLowerCase()],f=e&&C.call(d.attrHandle,b.toLowerCase())?e(a,b,!n):void 0;return void 0!==f?f:c.attributes||!n?a.getAttribute(b):(f=a.getAttributeNode(b))&&f.specified?f.value:null},db.error=function(a){throw new Error("Syntax error, unrecognized expression: "+a)},db.uniqueSort=function(a){var b,d=[],e=0,f=0;if(j=!c.detectDuplicates,i=!c.sortStable&&a.slice(0),a.sort(z),j){while(b=a[f++])b===a[f]&&(e=d.push(f));while(e--)a.splice(d[e],1)}return i=null,a},e=db.getText=function(a){var b,c="",d=0,f=a.nodeType;if(f){if(1===f||9===f||11===f){if("string"==typeof a.textContent)return a.textContent;for(a=a.firstChild;a;a=a.nextSibling)c+=e(a)}else if(3===f||4===f)return a.nodeValue}else while(b=a[d++])c+=e(b);return c},d=db.selectors={cacheLength:50,createPseudo:fb,match:V,attrHandle:{},find:{},relative:{">":{dir:"parentNode",first:!0}," ":{dir:"parentNode"},"+":{dir:"previousSibling",first:!0},"~":{dir:"previousSibling"}},preFilter:{ATTR:function(a){return a[1]=a[1].replace(ab,bb),a[3]=(a[4]||a[5]||"").replace(ab,bb),"~="===a[2]&&(a[3]=" "+a[3]+" "),a.slice(0,4)},CHILD:function(a){return a[1]=a[1].toLowerCase(),"nth"===a[1].slice(0,3)?(a[3]||db.error(a[0]),a[4]=+(a[4]?a[5]+(a[6]||1):2*("even"===a[3]||"odd"===a[3])),a[5]=+(a[7]+a[8]||"odd"===a[3])):a[3]&&db.error(a[0]),a},PSEUDO:function(a){var b,c=!a[5]&&a[2];return V.CHILD.test(a[0])?null:(a[3]&&void 0!==a[4]?a[2]=a[4]:c&&T.test(c)&&(b=ob(c,!0))&&(b=c.indexOf(")",c.length-b)-c.length)&&(a[0]=a[0].slice(0,b),a[2]=c.slice(0,b)),a.slice(0,3))}},filter:{TAG:function(a){var b=a.replace(ab,bb).toLowerCase();return"*"===a?function(){return!0}:function(a){return a.nodeName&&a.nodeName.toLowerCase()===b}},CLASS:function(a){var b=w[a+" "];return b||(b=new RegExp("(^|"+K+")"+a+"("+K+"|$)"))&&w(a,function(a){return b.test("string"==typeof a.className&&a.className||typeof a.getAttribute!==A&&a.getAttribute("class")||"")})},ATTR:function(a,b,c){return function(d){var e=db.attr(d,a);return null==e?"!="===b:b?(e+="","="===b?e===c:"!="===b?e!==c:"^="===b?c&&0===e.indexOf(c):"*="===b?c&&e.indexOf(c)>-1:"$="===b?c&&e.slice(-c.length)===c:"~="===b?(" "+e+" ").indexOf(c)>-1:"|="===b?e===c||e.slice(0,c.length+1)===c+"-":!1):!0}},CHILD:function(a,b,c,d,e){var f="nth"!==a.slice(0,3),g="last"!==a.slice(-4),h="of-type"===b;return 1===d&&0===e?function(a){return!!a.parentNode}:function(b,c,i){var j,k,l,m,n,o,p=f!==g?"nextSibling":"previousSibling",q=b.parentNode,r=h&&b.nodeName.toLowerCase(),t=!i&&!h;if(q){if(f){while(p){l=b;while(l=l[p])if(h?l.nodeName.toLowerCase()===r:1===l.nodeType)return!1;o=p="only"===a&&!o&&"nextSibling"}return!0}if(o=[g?q.firstChild:q.lastChild],g&&t){k=q[s]||(q[s]={}),j=k[a]||[],n=j[0]===u&&j[1],m=j[0]===u&&j[2],l=n&&q.childNodes[n];while(l=++n&&l&&l[p]||(m=n=0)||o.pop())if(1===l.nodeType&&++m&&l===b){k[a]=[u,n,m];break}}else if(t&&(j=(b[s]||(b[s]={}))[a])&&j[0]===u)m=j[1];else while(l=++n&&l&&l[p]||(m=n=0)||o.pop())if((h?l.nodeName.toLowerCase()===r:1===l.nodeType)&&++m&&(t&&((l[s]||(l[s]={}))[a]=[u,m]),l===b))break;return m-=e,m===d||m%d===0&&m/d>=0}}},PSEUDO:function(a,b){var c,e=d.pseudos[a]||d.setFilters[a.toLowerCase()]||db.error("unsupported pseudo: "+a);return e[s]?e(b):e.length>1?(c=[a,a,"",b],d.setFilters.hasOwnProperty(a.toLowerCase())?fb(function(a,c){var d,f=e(a,b),g=f.length;while(g--)d=I.call(a,f[g]),a[d]=!(c[d]=f[g])}):function(a){return e(a,0,c)}):e}},pseudos:{not:fb(function(a){var b=[],c=[],d=g(a.replace(P,"$1"));return d[s]?fb(function(a,b,c,e){var f,g=d(a,null,e,[]),h=a.length;while(h--)(f=g[h])&&(a[h]=!(b[h]=f))}):function(a,e,f){return b[0]=a,d(b,null,f,c),!c.pop()}}),has:fb(function(a){return function(b){return db(a,b).length>0}}),contains:fb(function(a){return function(b){return(b.textContent||b.innerText||e(b)).indexOf(a)>-1}}),lang:fb(function(a){return U.test(a||"")||db.error("unsupported lang: "+a),a=a.replace(ab,bb).toLowerCase(),function(b){var c;do if(c=n?b.lang:b.getAttribute("xml:lang")||b.getAttribute("lang"))return c=c.toLowerCase(),c===a||0===c.indexOf(a+"-");while((b=b.parentNode)&&1===b.nodeType);return!1}}),target:function(b){var c=a.location&&a.location.hash;return c&&c.slice(1)===b.id},root:function(a){return a===m},focus:function(a){return a===l.activeElement&&(!l.hasFocus||l.hasFocus())&&!!(a.type||a.href||~a.tabIndex)},enabled:function(a){return a.disabled===!1},disabled:function(a){return a.disabled===!0},checked:function(a){var b=a.nodeName.toLowerCase();return"input"===b&&!!a.checked||"option"===b&&!!a.selected},selected:function(a){return a.parentNode&&a.parentNode.selectedIndex,a.selected===!0},empty:function(a){for(a=a.firstChild;a;a=a.nextSibling)if(a.nodeType<6)return!1;return!0},parent:function(a){return!d.pseudos.empty(a)},header:function(a){return X.test(a.nodeName)},input:function(a){return W.test(a.nodeName)},button:function(a){var b=a.nodeName.toLowerCase();return"input"===b&&"button"===a.type||"button"===b},text:function(a){var b;return"input"===a.nodeName.toLowerCase()&&"text"===a.type&&(null==(b=a.getAttribute("type"))||"text"===b.toLowerCase())},first:lb(function(){return[0]}),last:lb(function(a,b){return[b-1]}),eq:lb(function(a,b,c){return[0>c?c+b:c]}),even:lb(function(a,b){for(var c=0;b>c;c+=2)a.push(c);return a}),odd:lb(function(a,b){for(var c=1;b>c;c+=2)a.push(c);return a}),lt:lb(function(a,b,c){for(var d=0>c?c+b:c;--d>=0;)a.push(d);return a}),gt:lb(function(a,b,c){for(var d=0>c?c+b:c;++d<b;)a.push(d);return a})}},d.pseudos.nth=d.pseudos.eq;for(b in{radio:!0,checkbox:!0,file:!0,password:!0,image:!0})d.pseudos[b]=jb(b);for(b in{submit:!0,reset:!0})d.pseudos[b]=kb(b);function nb(){}nb.prototype=d.filters=d.pseudos,d.setFilters=new nb;function ob(a,b){var c,e,f,g,h,i,j,k=x[a+" "];if(k)return b?0:k.slice(0);h=a,i=[],j=d.preFilter;while(h){(!c||(e=Q.exec(h)))&&(e&&(h=h.slice(e[0].length)||h),i.push(f=[])),c=!1,(e=R.exec(h))&&(c=e.shift(),f.push({value:c,type:e[0].replace(P," ")}),h=h.slice(c.length));for(g in d.filter)!(e=V[g].exec(h))||j[g]&&!(e=j[g](e))||(c=e.shift(),f.push({value:c,type:g,matches:e}),h=h.slice(c.length));if(!c)break}return b?h.length:h?db.error(a):x(a,i).slice(0)}function pb(a){for(var b=0,c=a.length,d="";c>b;b++)d+=a[b].value;return d}function qb(a,b,c){var d=b.dir,e=c&&"parentNode"===d,f=v++;return b.first?function(b,c,f){while(b=b[d])if(1===b.nodeType||e)return a(b,c,f)}:function(b,c,g){var h,i,j=[u,f];if(g){while(b=b[d])if((1===b.nodeType||e)&&a(b,c,g))return!0}else while(b=b[d])if(1===b.nodeType||e){if(i=b[s]||(b[s]={}),(h=i[d])&&h[0]===u&&h[1]===f)return j[2]=h[2];if(i[d]=j,j[2]=a(b,c,g))return!0}}}function rb(a){return a.length>1?function(b,c,d){var e=a.length;while(e--)if(!a[e](b,c,d))return!1;return!0}:a[0]}function sb(a,b,c,d,e){for(var f,g=[],h=0,i=a.length,j=null!=b;i>h;h++)(f=a[h])&&(!c||c(f,d,e))&&(g.push(f),j&&b.push(h));return g}function tb(a,b,c,d,e,f){return d&&!d[s]&&(d=tb(d)),e&&!e[s]&&(e=tb(e,f)),fb(function(f,g,h,i){var j,k,l,m=[],n=[],o=g.length,p=f||wb(b||"*",h.nodeType?[h]:h,[]),q=!a||!f&&b?p:sb(p,m,a,h,i),r=c?e||(f?a:o||d)?[]:g:q;if(c&&c(q,r,h,i),d){j=sb(r,n),d(j,[],h,i),k=j.length;while(k--)(l=j[k])&&(r[n[k]]=!(q[n[k]]=l))}if(f){if(e||a){if(e){j=[],k=r.length;while(k--)(l=r[k])&&j.push(q[k]=l);e(null,r=[],j,i)}k=r.length;while(k--)(l=r[k])&&(j=e?I.call(f,l):m[k])>-1&&(f[j]=!(g[j]=l))}}else r=sb(r===g?r.splice(o,r.length):r),e?e(null,g,r,i):G.apply(g,r)})}function ub(a){for(var b,c,e,f=a.length,g=d.relative[a[0].type],i=g||d.relative[" "],j=g?1:0,k=qb(function(a){return a===b},i,!0),l=qb(function(a){return I.call(b,a)>-1},i,!0),m=[function(a,c,d){return!g&&(d||c!==h)||((b=c).nodeType?k(a,c,d):l(a,c,d))}];f>j;j++)if(c=d.relative[a[j].type])m=[qb(rb(m),c)];else{if(c=d.filter[a[j].type].apply(null,a[j].matches),c[s]){for(e=++j;f>e;e++)if(d.relative[a[e].type])break;return tb(j>1&&rb(m),j>1&&pb(a.slice(0,j-1).concat({value:" "===a[j-2].type?"*":""})).replace(P,"$1"),c,e>j&&ub(a.slice(j,e)),f>e&&ub(a=a.slice(e)),f>e&&pb(a))}m.push(c)}return rb(m)}function vb(a,b){var c=b.length>0,e=a.length>0,f=function(f,g,i,j,k){var m,n,o,p=0,q="0",r=f&&[],s=[],t=h,v=f||e&&d.find.TAG("*",k),w=u+=null==t?1:Math.random()||.1,x=v.length;for(k&&(h=g!==l&&g);q!==x&&null!=(m=v[q]);q++){if(e&&m){n=0;while(o=a[n++])if(o(m,g,i)){j.push(m);break}k&&(u=w)}c&&((m=!o&&m)&&p--,f&&r.push(m))}if(p+=q,c&&q!==p){n=0;while(o=b[n++])o(r,s,g,i);if(f){if(p>0)while(q--)r[q]||s[q]||(s[q]=E.call(j));s=sb(s)}G.apply(j,s),k&&!f&&s.length>0&&p+b.length>1&&db.uniqueSort(j)}return k&&(u=w,h=t),r};return c?fb(f):f}g=db.compile=function(a,b){var c,d=[],e=[],f=y[a+" "];if(!f){b||(b=ob(a)),c=b.length;while(c--)f=ub(b[c]),f[s]?d.push(f):e.push(f);f=y(a,vb(e,d))}return f};function wb(a,b,c){for(var d=0,e=b.length;e>d;d++)db(a,b[d],c);return c}function xb(a,b,e,f){var h,i,j,k,l,m=ob(a);if(!f&&1===m.length){if(i=m[0]=m[0].slice(0),i.length>2&&"ID"===(j=i[0]).type&&c.getById&&9===b.nodeType&&n&&d.relative[i[1].type]){if(b=(d.find.ID(j.matches[0].replace(ab,bb),b)||[])[0],!b)return e;a=a.slice(i.shift().value.length)}h=V.needsContext.test(a)?0:i.length;while(h--){if(j=i[h],d.relative[k=j.type])break;if((l=d.find[k])&&(f=l(j.matches[0].replace(ab,bb),$.test(i[0].type)&&mb(b.parentNode)||b))){if(i.splice(h,1),a=f.length&&pb(i),!a)return G.apply(e,f),e;break}}}return g(a,m)(f,b,!n,e,$.test(a)&&mb(b.parentNode)||b),e}return c.sortStable=s.split("").sort(z).join("")===s,c.detectDuplicates=!!j,k(),c.sortDetached=gb(function(a){return 1&a.compareDocumentPosition(l.createElement("div"))}),gb(function(a){return a.innerHTML="<a href='#'></a>","#"===a.firstChild.getAttribute("href")})||hb("type|href|height|width",function(a,b,c){return c?void 0:a.getAttribute(b,"type"===b.toLowerCase()?1:2)}),c.attributes&&gb(function(a){return a.innerHTML="<input/>",a.firstChild.setAttribute("value",""),""===a.firstChild.getAttribute("value")})||hb("value",function(a,b,c){return c||"input"!==a.nodeName.toLowerCase()?void 0:a.defaultValue}),gb(function(a){return null==a.getAttribute("disabled")})||hb(J,function(a,b,c){var d;return c?void 0:a[b]===!0?b.toLowerCase():(d=a.getAttributeNode(b))&&d.specified?d.value:null}),db}(a);n.find=t,n.expr=t.selectors,n.expr[":"]=n.expr.pseudos,n.unique=t.uniqueSort,n.text=t.getText,n.isXMLDoc=t.isXML,n.contains=t.contains;var u=n.expr.match.needsContext,v=/^<(\w+)\s*\/?>(?:<\/\1>|)$/,w=/^.[^:#\[\.,]*$/;function x(a,b,c){if(n.isFunction(b))return n.grep(a,function(a,d){return!!b.call(a,d,a)!==c});if(b.nodeType)return n.grep(a,function(a){return a===b!==c});if("string"==typeof b){if(w.test(b))return n.filter(b,a,c);b=n.filter(b,a)}return n.grep(a,function(a){return n.inArray(a,b)>=0!==c})}n.filter=function(a,b,c){var d=b[0];return c&&(a=":not("+a+")"),1===b.length&&1===d.nodeType?n.find.matchesSelector(d,a)?[d]:[]:n.find.matches(a,n.grep(b,function(a){return 1===a.nodeType}))},n.fn.extend({find:function(a){var b,c=[],d=this,e=d.length;if("string"!=typeof a)return this.pushStack(n(a).filter(function(){for(b=0;e>b;b++)if(n.contains(d[b],this))return!0}));for(b=0;e>b;b++)n.find(a,d[b],c);return c=this.pushStack(e>1?n.unique(c):c),c.selector=this.selector?this.selector+" "+a:a,c},filter:function(a){return this.pushStack(x(this,a||[],!1))},not:function(a){return this.pushStack(x(this,a||[],!0))},is:function(a){return!!x(this,"string"==typeof a&&u.test(a)?n(a):a||[],!1).length}});var y,z=a.document,A=/^(?:\s*(<[\w\W]+>)[^>]*|#([\w-]*))$/,B=n.fn.init=function(a,b){var c,d;if(!a)return this;if("string"==typeof a){if(c="<"===a.charAt(0)&&">"===a.charAt(a.length-1)&&a.length>=3?[null,a,null]:A.exec(a),!c||!c[1]&&b)return!b||b.jquery?(b||y).find(a):this.constructor(b).find(a);if(c[1]){if(b=b instanceof n?b[0]:b,n.merge(this,n.parseHTML(c[1],b&&b.nodeType?b.ownerDocument||b:z,!0)),v.test(c[1])&&n.isPlainObject(b))for(c in b)n.isFunction(this[c])?this[c](b[c]):this.attr(c,b[c]);return this}if(d=z.getElementById(c[2]),d&&d.parentNode){if(d.id!==c[2])return y.find(a);this.length=1,this[0]=d}return this.context=z,this.selector=a,this}return a.nodeType?(this.context=this[0]=a,this.length=1,this):n.isFunction(a)?"undefined"!=typeof y.ready?y.ready(a):a(n):(void 0!==a.selector&&(this.selector=a.selector,this.context=a.context),n.makeArray(a,this))};B.prototype=n.fn,y=n(z);var C=/^(?:parents|prev(?:Until|All))/,D={children:!0,contents:!0,next:!0,prev:!0};n.extend({dir:function(a,b,c){var d=[],e=a[b];while(e&&9!==e.nodeType&&(void 0===c||1!==e.nodeType||!n(e).is(c)))1===e.nodeType&&d.push(e),e=e[b];return d},sibling:function(a,b){for(var c=[];a;a=a.nextSibling)1===a.nodeType&&a!==b&&c.push(a);return c}}),n.fn.extend({has:function(a){var b,c=n(a,this),d=c.length;return this.filter(function(){for(b=0;d>b;b++)if(n.contains(this,c[b]))return!0})},closest:function(a,b){for(var c,d=0,e=this.length,f=[],g=u.test(a)||"string"!=typeof a?n(a,b||this.context):0;e>d;d++)for(c=this[d];c&&c!==b;c=c.parentNode)if(c.nodeType<11&&(g?g.index(c)>-1:1===c.nodeType&&n.find.matchesSelector(c,a))){f.push(c);break}return this.pushStack(f.length>1?n.unique(f):f)},index:function(a){return a?"string"==typeof a?n.inArray(this[0],n(a)):n.inArray(a.jquery?a[0]:a,this):this[0]&&this[0].parentNode?this.first().prevAll().length:-1},add:function(a,b){return this.pushStack(n.unique(n.merge(this.get(),n(a,b))))},addBack:function(a){return this.add(null==a?this.prevObject:this.prevObject.filter(a))}});function E(a,b){do a=a[b];while(a&&1!==a.nodeType);return a}n.each({parent:function(a){var b=a.parentNode;return b&&11!==b.nodeType?b:null},parents:function(a){return n.dir(a,"parentNode")},parentsUntil:function(a,b,c){return n.dir(a,"parentNode",c)},next:function(a){return E(a,"nextSibling")},prev:function(a){return E(a,"previousSibling")},nextAll:function(a){return n.dir(a,"nextSibling")},prevAll:function(a){return n.dir(a,"previousSibling")},nextUntil:function(a,b,c){return n.dir(a,"nextSibling",c)},prevUntil:function(a,b,c){return n.dir(a,"previousSibling",c)},siblings:function(a){return n.sibling((a.parentNode||{}).firstChild,a)},children:function(a){return n.sibling(a.firstChild)},contents:function(a){return n.nodeName(a,"iframe")?a.contentDocument||a.contentWindow.document:n.merge([],a.childNodes)}},function(a,b){n.fn[a]=function(c,d){var e=n.map(this,b,c);return"Until"!==a.slice(-5)&&(d=c),d&&"string"==typeof d&&(e=n.filter(d,e)),this.length>1&&(D[a]||(e=n.unique(e)),C.test(a)&&(e=e.reverse())),this.pushStack(e)}});var F=/\S+/g,G={};function H(a){var b=G[a]={};return n.each(a.match(F)||[],function(a,c){b[c]=!0}),b}n.Callbacks=function(a){a="string"==typeof a?G[a]||H(a):n.extend({},a);var b,c,d,e,f,g,h=[],i=!a.once&&[],j=function(l){for(c=a.memory&&l,d=!0,f=g||0,g=0,e=h.length,b=!0;h&&e>f;f++)if(h[f].apply(l[0],l[1])===!1&&a.stopOnFalse){c=!1;break}b=!1,h&&(i?i.length&&j(i.shift()):c?h=[]:k.disable())},k={add:function(){if(h){var d=h.length;!function f(b){n.each(b,function(b,c){var d=n.type(c);"function"===d?a.unique&&k.has(c)||h.push(c):c&&c.length&&"string"!==d&&f(c)})}(arguments),b?e=h.length:c&&(g=d,j(c))}return this},remove:function(){return h&&n.each(arguments,function(a,c){var d;while((d=n.inArray(c,h,d))>-1)h.splice(d,1),b&&(e>=d&&e--,f>=d&&f--)}),this},has:function(a){return a?n.inArray(a,h)>-1:!(!h||!h.length)},empty:function(){return h=[],e=0,this},disable:function(){return h=i=c=void 0,this},disabled:function(){return!h},lock:function(){return i=void 0,c||k.disable(),this},locked:function(){return!i},fireWith:function(a,c){return!h||d&&!i||(c=c||[],c=[a,c.slice?c.slice():c],b?i.push(c):j(c)),this},fire:function(){return k.fireWith(this,arguments),this},fired:function(){return!!d}};return k},n.extend({Deferred:function(a){var b=[["resolve","done",n.Callbacks("once memory"),"resolved"],["reject","fail",n.Callbacks("once memory"),"rejected"],["notify","progress",n.Callbacks("memory")]],c="pending",d={state:function(){return c},always:function(){return e.done(arguments).fail(arguments),this},then:function(){var a=arguments;return n.Deferred(function(c){n.each(b,function(b,f){var g=n.isFunction(a[b])&&a[b];e[f[1]](function(){var a=g&&g.apply(this,arguments);a&&n.isFunction(a.promise)?a.promise().done(c.resolve).fail(c.reject).progress(c.notify):c[f[0]+"With"](this===d?c.promise():this,g?[a]:arguments)})}),a=null}).promise()},promise:function(a){return null!=a?n.extend(a,d):d}},e={};return d.pipe=d.then,n.each(b,function(a,f){var g=f[2],h=f[3];d[f[1]]=g.add,h&&g.add(function(){c=h},b[1^a][2].disable,b[2][2].lock),e[f[0]]=function(){return e[f[0]+"With"](this===e?d:this,arguments),this},e[f[0]+"With"]=g.fireWith}),d.promise(e),a&&a.call(e,e),e},when:function(a){var b=0,c=d.call(arguments),e=c.length,f=1!==e||a&&n.isFunction(a.promise)?e:0,g=1===f?a:n.Deferred(),h=function(a,b,c){return function(e){b[a]=this,c[a]=arguments.length>1?d.call(arguments):e,c===i?g.notifyWith(b,c):--f||g.resolveWith(b,c)}},i,j,k;if(e>1)for(i=new Array(e),j=new Array(e),k=new Array(e);e>b;b++)c[b]&&n.isFunction(c[b].promise)?c[b].promise().done(h(b,k,c)).fail(g.reject).progress(h(b,j,i)):--f;return f||g.resolveWith(k,c),g.promise()}});var I;n.fn.ready=function(a){return n.ready.promise().done(a),this},n.extend({isReady:!1,readyWait:1,holdReady:function(a){a?n.readyWait++:n.ready(!0)},ready:function(a){if(a===!0?!--n.readyWait:!n.isReady){if(!z.body)return setTimeout(n.ready);n.isReady=!0,a!==!0&&--n.readyWait>0||(I.resolveWith(z,[n]),n.fn.trigger&&n(z).trigger("ready").off("ready"))}}});function J(){z.addEventListener?(z.removeEventListener("DOMContentLoaded",K,!1),a.removeEventListener("load",K,!1)):(z.detachEvent("onreadystatechange",K),a.detachEvent("onload",K))}function K(){(z.addEventListener||"load"===event.type||"complete"===z.readyState)&&(J(),n.ready())}n.ready.promise=function(b){if(!I)if(I=n.Deferred(),"complete"===z.readyState)setTimeout(n.ready);else if(z.addEventListener)z.addEventListener("DOMContentLoaded",K,!1),a.addEventListener("load",K,!1);else{z.attachEvent("onreadystatechange",K),a.attachEvent("onload",K);var c=!1;try{c=null==a.frameElement&&z.documentElement}catch(d){}c&&c.doScroll&&!function e(){if(!n.isReady){try{c.doScroll("left")}catch(a){return setTimeout(e,50)}J(),n.ready()}}()}return I.promise(b)};var L="undefined",M;for(M in n(l))break;l.ownLast="0"!==M,l.inlineBlockNeedsLayout=!1,n(function(){var a,b,c=z.getElementsByTagName("body")[0];c&&(a=z.createElement("div"),a.style.cssText="border:0;width:0;height:0;position:absolute;top:0;left:-9999px;margin-top:1px",b=z.createElement("div"),c.appendChild(a).appendChild(b),typeof b.style.zoom!==L&&(b.style.cssText="border:0;margin:0;width:1px;padding:1px;display:inline;zoom:1",(l.inlineBlockNeedsLayout=3===b.offsetWidth)&&(c.style.zoom=1)),c.removeChild(a),a=b=null)}),function(){var a=z.createElement("div");if(null==l.deleteExpando){l.deleteExpando=!0;try{delete a.test}catch(b){l.deleteExpando=!1}}a=null}(),n.acceptData=function(a){var b=n.noData[(a.nodeName+" ").toLowerCase()],c=+a.nodeType||1;return 1!==c&&9!==c?!1:!b||b!==!0&&a.getAttribute("classid")===b};var N=/^(?:\{[\w\W]*\}|\[[\w\W]*\])$/,O=/([A-Z])/g;function P(a,b,c){if(void 0===c&&1===a.nodeType){var d="data-"+b.replace(O,"-$1").toLowerCase();if(c=a.getAttribute(d),"string"==typeof c){try{c="true"===c?!0:"false"===c?!1:"null"===c?null:+c+""===c?+c:N.test(c)?n.parseJSON(c):c}catch(e){}n.data(a,b,c)}else c=void 0}return c}function Q(a){var b;for(b in a)if(("data"!==b||!n.isEmptyObject(a[b]))&&"toJSON"!==b)return!1;return!0}function R(a,b,d,e){if(n.acceptData(a)){var f,g,h=n.expando,i=a.nodeType,j=i?n.cache:a,k=i?a[h]:a[h]&&h;if(k&&j[k]&&(e||j[k].data)||void 0!==d||"string"!=typeof b)return k||(k=i?a[h]=c.pop()||n.guid++:h),j[k]||(j[k]=i?{}:{toJSON:n.noop}),("object"==typeof b||"function"==typeof b)&&(e?j[k]=n.extend(j[k],b):j[k].data=n.extend(j[k].data,b)),g=j[k],e||(g.data||(g.data={}),g=g.data),void 0!==d&&(g[n.camelCase(b)]=d),"string"==typeof b?(f=g[b],null==f&&(f=g[n.camelCase(b)])):f=g,f
 }}function S(a,b,c){if(n.acceptData(a)){var d,e,f=a.nodeType,g=f?n.cache:a,h=f?a[n.expando]:n.expando;if(g[h]){if(b&&(d=c?g[h]:g[h].data)){n.isArray(b)?b=b.concat(n.map(b,n.camelCase)):b in d?b=[b]:(b=n.camelCase(b),b=b in d?[b]:b.split(" ")),e=b.length;while(e--)delete d[b[e]];if(c?!Q(d):!n.isEmptyObject(d))return}(c||(delete g[h].data,Q(g[h])))&&(f?n.cleanData([a],!0):l.deleteExpando||g!=g.window?delete g[h]:g[h]=null)}}}n.extend({cache:{},noData:{"applet ":!0,"embed ":!0,"object ":"clsid:D27CDB6E-AE6D-11cf-96B8-444553540000"},hasData:function(a){return a=a.nodeType?n.cache[a[n.expando]]:a[n.expando],!!a&&!Q(a)},data:function(a,b,c){return R(a,b,c)},removeData:function(a,b){return S(a,b)},_data:function(a,b,c){return R(a,b,c,!0)},_removeData:function(a,b){return S(a,b,!0)}}),n.fn.extend({data:function(a,b){var c,d,e,f=this[0],g=f&&f.attributes;if(void 0===a){if(this.length&&(e=n.data(f),1===f.nodeType&&!n._data(f,"parsedAttrs"))){c=g.length;while(c--)d=g[c].name,0===d.indexOf("data-")&&(d=n.camelCase(d.slice(5)),P(f,d,e[d]));n._data(f,"parsedAttrs",!0)}return e}return"object"==typeof a?this.each(function(){n.data(this,a)}):arguments.length>1?this.each(function(){n.data(this,a,b)}):f?P(f,a,n.data(f,a)):void 0},removeData:function(a){return this.each(function(){n.removeData(this,a)})}}),n.extend({queue:function(a,b,c){var d;return a?(b=(b||"fx")+"queue",d=n._data(a,b),c&&(!d||n.isArray(c)?d=n._data(a,b,n.makeArray(c)):d.push(c)),d||[]):void 0},dequeue:function(a,b){b=b||"fx";var c=n.queue(a,b),d=c.length,e=c.shift(),f=n._queueHooks(a,b),g=function(){n.dequeue(a,b)};"inprogress"===e&&(e=c.shift(),d--),e&&("fx"===b&&c.unshift("inprogress"),delete f.stop,e.call(a,g,f)),!d&&f&&f.empty.fire()},_queueHooks:function(a,b){var c=b+"queueHooks";return n._data(a,c)||n._data(a,c,{empty:n.Callbacks("once memory").add(function(){n._removeData(a,b+"queue"),n._removeData(a,c)})})}}),n.fn.extend({queue:function(a,b){var c=2;return"string"!=typeof a&&(b=a,a="fx",c--),arguments.length<c?n.queue(this[0],a):void 0===b?this:this.each(function(){var c=n.queue(this,a,b);n._queueHooks(this,a),"fx"===a&&"inprogress"!==c[0]&&n.dequeue(this,a)})},dequeue:function(a){return this.each(function(){n.dequeue(this,a)})},clearQueue:function(a){return this.queue(a||"fx",[])},promise:function(a,b){var c,d=1,e=n.Deferred(),f=this,g=this.length,h=function(){--d||e.resolveWith(f,[f])};"string"!=typeof a&&(b=a,a=void 0),a=a||"fx";while(g--)c=n._data(f[g],a+"queueHooks"),c&&c.empty&&(d++,c.empty.add(h));return h(),e.promise(b)}});var T=/[+-]?(?:\d*\.|)\d+(?:[eE][+-]?\d+|)/.source,U=["Top","Right","Bottom","Left"],V=function(a,b){return a=b||a,"none"===n.css(a,"display")||!n.contains(a.ownerDocument,a)},W=n.access=function(a,b,c,d,e,f,g){var h=0,i=a.length,j=null==c;if("object"===n.type(c)){e=!0;for(h in c)n.access(a,b,h,c[h],!0,f,g)}else if(void 0!==d&&(e=!0,n.isFunction(d)||(g=!0),j&&(g?(b.call(a,d),b=null):(j=b,b=function(a,b,c){return j.call(n(a),c)})),b))for(;i>h;h++)b(a[h],c,g?d:d.call(a[h],h,b(a[h],c)));return e?a:j?b.call(a):i?b(a[0],c):f},X=/^(?:checkbox|radio)$/i;!function(){var a=z.createDocumentFragment(),b=z.createElement("div"),c=z.createElement("input");if(b.setAttribute("className","t"),b.innerHTML="  <link/><table></table><a href='/a'>a</a>",l.leadingWhitespace=3===b.firstChild.nodeType,l.tbody=!b.getElementsByTagName("tbody").length,l.htmlSerialize=!!b.getElementsByTagName("link").length,l.html5Clone="<:nav></:nav>"!==z.createElement("nav").cloneNode(!0).outerHTML,c.type="checkbox",c.checked=!0,a.appendChild(c),l.appendChecked=c.checked,b.innerHTML="<textarea>x</textarea>",l.noCloneChecked=!!b.cloneNode(!0).lastChild.defaultValue,a.appendChild(b),b.innerHTML="<input type='radio' checked='checked' name='t'/>",l.checkClone=b.cloneNode(!0).cloneNode(!0).lastChild.checked,l.noCloneEvent=!0,b.attachEvent&&(b.attachEvent("onclick",function(){l.noCloneEvent=!1}),b.cloneNode(!0).click()),null==l.deleteExpando){l.deleteExpando=!0;try{delete b.test}catch(d){l.deleteExpando=!1}}a=b=c=null}(),function(){var b,c,d=z.createElement("div");for(b in{submit:!0,change:!0,focusin:!0})c="on"+b,(l[b+"Bubbles"]=c in a)||(d.setAttribute(c,"t"),l[b+"Bubbles"]=d.attributes[c].expando===!1);d=null}();var Y=/^(?:input|select|textarea)$/i,Z=/^key/,$=/^(?:mouse|contextmenu)|click/,_=/^(?:focusinfocus|focusoutblur)$/,ab=/^([^.]*)(?:\.(.+)|)$/;function bb(){return!0}function cb(){return!1}function db(){try{return z.activeElement}catch(a){}}n.event={global:{},add:function(a,b,c,d,e){var f,g,h,i,j,k,l,m,o,p,q,r=n._data(a);if(r){c.handler&&(i=c,c=i.handler,e=i.selector),c.guid||(c.guid=n.guid++),(g=r.events)||(g=r.events={}),(k=r.handle)||(k=r.handle=function(a){return typeof n===L||a&&n.event.triggered===a.type?void 0:n.event.dispatch.apply(k.elem,arguments)},k.elem=a),b=(b||"").match(F)||[""],h=b.length;while(h--)f=ab.exec(b[h])||[],o=q=f[1],p=(f[2]||"").split(".").sort(),o&&(j=n.event.special[o]||{},o=(e?j.delegateType:j.bindType)||o,j=n.event.special[o]||{},l=n.extend({type:o,origType:q,data:d,handler:c,guid:c.guid,selector:e,needsContext:e&&n.expr.match.needsContext.test(e),namespace:p.join(".")},i),(m=g[o])||(m=g[o]=[],m.delegateCount=0,j.setup&&j.setup.call(a,d,p,k)!==!1||(a.addEventListener?a.addEventListener(o,k,!1):a.attachEvent&&a.attachEvent("on"+o,k))),j.add&&(j.add.call(a,l),l.handler.guid||(l.handler.guid=c.guid)),e?m.splice(m.delegateCount++,0,l):m.push(l),n.event.global[o]=!0);a=null}},remove:function(a,b,c,d,e){var f,g,h,i,j,k,l,m,o,p,q,r=n.hasData(a)&&n._data(a);if(r&&(k=r.events)){b=(b||"").match(F)||[""],j=b.length;while(j--)if(h=ab.exec(b[j])||[],o=q=h[1],p=(h[2]||"").split(".").sort(),o){l=n.event.special[o]||{},o=(d?l.delegateType:l.bindType)||o,m=k[o]||[],h=h[2]&&new RegExp("(^|\\.)"+p.join("\\.(?:.*\\.|)")+"(\\.|$)"),i=f=m.length;while(f--)g=m[f],!e&&q!==g.origType||c&&c.guid!==g.guid||h&&!h.test(g.namespace)||d&&d!==g.selector&&("**"!==d||!g.selector)||(m.splice(f,1),g.selector&&m.delegateCount--,l.remove&&l.remove.call(a,g));i&&!m.length&&(l.teardown&&l.teardown.call(a,p,r.handle)!==!1||n.removeEvent(a,o,r.handle),delete k[o])}else for(o in k)n.event.remove(a,o+b[j],c,d,!0);n.isEmptyObject(k)&&(delete r.handle,n._removeData(a,"events"))}},trigger:function(b,c,d,e){var f,g,h,i,k,l,m,o=[d||z],p=j.call(b,"type")?b.type:b,q=j.call(b,"namespace")?b.namespace.split("."):[];if(h=l=d=d||z,3!==d.nodeType&&8!==d.nodeType&&!_.test(p+n.event.triggered)&&(p.indexOf(".")>=0&&(q=p.split("."),p=q.shift(),q.sort()),g=p.indexOf(":")<0&&"on"+p,b=b[n.expando]?b:new n.Event(p,"object"==typeof b&&b),b.isTrigger=e?2:3,b.namespace=q.join("."),b.namespace_re=b.namespace?new RegExp("(^|\\.)"+q.join("\\.(?:.*\\.|)")+"(\\.|$)"):null,b.result=void 0,b.target||(b.target=d),c=null==c?[b]:n.makeArray(c,[b]),k=n.event.special[p]||{},e||!k.trigger||k.trigger.apply(d,c)!==!1)){if(!e&&!k.noBubble&&!n.isWindow(d)){for(i=k.delegateType||p,_.test(i+p)||(h=h.parentNode);h;h=h.parentNode)o.push(h),l=h;l===(d.ownerDocument||z)&&o.push(l.defaultView||l.parentWindow||a)}m=0;while((h=o[m++])&&!b.isPropagationStopped())b.type=m>1?i:k.bindType||p,f=(n._data(h,"events")||{})[b.type]&&n._data(h,"handle"),f&&f.apply(h,c),f=g&&h[g],f&&f.apply&&n.acceptData(h)&&(b.result=f.apply(h,c),b.result===!1&&b.preventDefault());if(b.type=p,!e&&!b.isDefaultPrevented()&&(!k._default||k._default.apply(o.pop(),c)===!1)&&n.acceptData(d)&&g&&d[p]&&!n.isWindow(d)){l=d[g],l&&(d[g]=null),n.event.triggered=p;try{d[p]()}catch(r){}n.event.triggered=void 0,l&&(d[g]=l)}return b.result}},dispatch:function(a){a=n.event.fix(a);var b,c,e,f,g,h=[],i=d.call(arguments),j=(n._data(this,"events")||{})[a.type]||[],k=n.event.special[a.type]||{};if(i[0]=a,a.delegateTarget=this,!k.preDispatch||k.preDispatch.call(this,a)!==!1){h=n.event.handlers.call(this,a,j),b=0;while((f=h[b++])&&!a.isPropagationStopped()){a.currentTarget=f.elem,g=0;while((e=f.handlers[g++])&&!a.isImmediatePropagationStopped())(!a.namespace_re||a.namespace_re.test(e.namespace))&&(a.handleObj=e,a.data=e.data,c=((n.event.special[e.origType]||{}).handle||e.handler).apply(f.elem,i),void 0!==c&&(a.result=c)===!1&&(a.preventDefault(),a.stopPropagation()))}return k.postDispatch&&k.postDispatch.call(this,a),a.result}},handlers:function(a,b){var c,d,e,f,g=[],h=b.delegateCount,i=a.target;if(h&&i.nodeType&&(!a.button||"click"!==a.type))for(;i!=this;i=i.parentNode||this)if(1===i.nodeType&&(i.disabled!==!0||"click"!==a.type)){for(e=[],f=0;h>f;f++)d=b[f],c=d.selector+" ",void 0===e[c]&&(e[c]=d.needsContext?n(c,this).index(i)>=0:n.find(c,this,null,[i]).length),e[c]&&e.push(d);e.length&&g.push({elem:i,handlers:e})}return h<b.length&&g.push({elem:this,handlers:b.slice(h)}),g},fix:function(a){if(a[n.expando])return a;var b,c,d,e=a.type,f=a,g=this.fixHooks[e];g||(this.fixHooks[e]=g=$.test(e)?this.mouseHooks:Z.test(e)?this.keyHooks:{}),d=g.props?this.props.concat(g.props):this.props,a=new n.Event(f),b=d.length;while(b--)c=d[b],a[c]=f[c];return a.target||(a.target=f.srcElement||z),3===a.target.nodeType&&(a.target=a.target.parentNode),a.metaKey=!!a.metaKey,g.filter?g.filter(a,f):a},props:"altKey bubbles cancelable ctrlKey currentTarget eventPhase metaKey relatedTarget shiftKey target timeStamp view which".split(" "),fixHooks:{},keyHooks:{props:"char charCode key keyCode".split(" "),filter:function(a,b){return null==a.which&&(a.which=null!=b.charCode?b.charCode:b.keyCode),a}},mouseHooks:{props:"button buttons clientX clientY fromElement offsetX offsetY pageX pageY screenX screenY toElement".split(" "),filter:function(a,b){var c,d,e,f=b.button,g=b.fromElement;return null==a.pageX&&null!=b.clientX&&(d=a.target.ownerDocument||z,e=d.documentElement,c=d.body,a.pageX=b.clientX+(e&&e.scrollLeft||c&&c.scrollLeft||0)-(e&&e.clientLeft||c&&c.clientLeft||0),a.pageY=b.clientY+(e&&e.scrollTop||c&&c.scrollTop||0)-(e&&e.clientTop||c&&c.clientTop||0)),!a.relatedTarget&&g&&(a.relatedTarget=g===a.target?b.toElement:g),a.which||void 0===f||(a.which=1&f?1:2&f?3:4&f?2:0),a}},special:{load:{noBubble:!0},focus:{trigger:function(){if(this!==db()&&this.focus)try{return this.focus(),!1}catch(a){}},delegateType:"focusin"},blur:{trigger:function(){return this===db()&&this.blur?(this.blur(),!1):void 0},delegateType:"focusout"},click:{trigger:function(){return n.nodeName(this,"input")&&"checkbox"===this.type&&this.click?(this.click(),!1):void 0},_default:function(a){return n.nodeName(a.target,"a")}},beforeunload:{postDispatch:function(a){void 0!==a.result&&(a.originalEvent.returnValue=a.result)}}},simulate:function(a,b,c,d){var e=n.extend(new n.Event,c,{type:a,isSimulated:!0,originalEvent:{}});d?n.event.trigger(e,null,b):n.event.dispatch.call(b,e),e.isDefaultPrevented()&&c.preventDefault()}},n.removeEvent=z.removeEventListener?function(a,b,c){a.removeEventListener&&a.removeEventListener(b,c,!1)}:function(a,b,c){var d="on"+b;a.detachEvent&&(typeof a[d]===L&&(a[d]=null),a.detachEvent(d,c))},n.Event=function(a,b){return this instanceof n.Event?(a&&a.type?(this.originalEvent=a,this.type=a.type,this.isDefaultPrevented=a.defaultPrevented||void 0===a.defaultPrevented&&(a.returnValue===!1||a.getPreventDefault&&a.getPreventDefault())?bb:cb):this.type=a,b&&n.extend(this,b),this.timeStamp=a&&a.timeStamp||n.now(),void(this[n.expando]=!0)):new n.Event(a,b)},n.Event.prototype={isDefaultPrevented:cb,isPropagationStopped:cb,isImmediatePropagationStopped:cb,preventDefault:function(){var a=this.originalEvent;this.isDefaultPrevented=bb,a&&(a.preventDefault?a.preventDefault():a.returnValue=!1)},stopPropagation:function(){var a=this.originalEvent;this.isPropagationStopped=bb,a&&(a.stopPropagation&&a.stopPropagation(),a.cancelBubble=!0)},stopImmediatePropagation:function(){this.isImmediatePropagationStopped=bb,this.stopPropagation()}},n.each({mouseenter:"mouseover",mouseleave:"mouseout"},function(a,b){n.event.special[a]={delegateType:b,bindType:b,handle:function(a){var c,d=this,e=a.relatedTarget,f=a.handleObj;return(!e||e!==d&&!n.contains(d,e))&&(a.type=f.origType,c=f.handler.apply(this,arguments),a.type=b),c}}}),l.submitBubbles||(n.event.special.submit={setup:function(){return n.nodeName(this,"form")?!1:void n.event.add(this,"click._submit keypress._submit",function(a){var b=a.target,c=n.nodeName(b,"input")||n.nodeName(b,"button")?b.form:void 0;c&&!n._data(c,"submitBubbles")&&(n.event.add(c,"submit._submit",function(a){a._submit_bubble=!0}),n._data(c,"submitBubbles",!0))})},postDispatch:function(a){a._submit_bubble&&(delete a._submit_bubble,this.parentNode&&!a.isTrigger&&n.event.simulate("submit",this.parentNode,a,!0))},teardown:function(){return n.nodeName(this,"form")?!1:void n.event.remove(this,"._submit")}}),l.changeBubbles||(n.event.special.change={setup:function(){return Y.test(this.nodeName)?(("checkbox"===this.type||"radio"===this.type)&&(n.event.add(this,"propertychange._change",function(a){"checked"===a.originalEvent.propertyName&&(this._just_changed=!0)}),n.event.add(this,"click._change",function(a){this._just_changed&&!a.isTrigger&&(this._just_changed=!1),n.event.simulate("change",this,a,!0)})),!1):void n.event.add(this,"beforeactivate._change",function(a){var b=a.target;Y.test(b.nodeName)&&!n._data(b,"changeBubbles")&&(n.event.add(b,"change._change",function(a){!this.parentNode||a.isSimulated||a.isTrigger||n.event.simulate("change",this.parentNode,a,!0)}),n._data(b,"changeBubbles",!0))})},handle:function(a){var b=a.target;return this!==b||a.isSimulated||a.isTrigger||"radio"!==b.type&&"checkbox"!==b.type?a.handleObj.handler.apply(this,arguments):void 0},teardown:function(){return n.event.remove(this,"._change"),!Y.test(this.nodeName)}}),l.focusinBubbles||n.each({focus:"focusin",blur:"focusout"},function(a,b){var c=function(a){n.event.simulate(b,a.target,n.event.fix(a),!0)};n.event.special[b]={setup:function(){var d=this.ownerDocument||this,e=n._data(d,b);e||d.addEventListener(a,c,!0),n._data(d,b,(e||0)+1)},teardown:function(){var d=this.ownerDocument||this,e=n._data(d,b)-1;e?n._data(d,b,e):(d.removeEventListener(a,c,!0),n._removeData(d,b))}}}),n.fn.extend({on:function(a,b,c,d,e){var f,g;if("object"==typeof a){"string"!=typeof b&&(c=c||b,b=void 0);for(f in a)this.on(f,b,c,a[f],e);return this}if(null==c&&null==d?(d=b,c=b=void 0):null==d&&("string"==typeof b?(d=c,c=void 0):(d=c,c=b,b=void 0)),d===!1)d=cb;else if(!d)return this;return 1===e&&(g=d,d=function(a){return n().off(a),g.apply(this,arguments)},d.guid=g.guid||(g.guid=n.guid++)),this.each(function(){n.event.add(this,a,d,c,b)})},one:function(a,b,c,d){return this.on(a,b,c,d,1)},off:function(a,b,c){var d,e;if(a&&a.preventDefault&&a.handleObj)return d=a.handleObj,n(a.delegateTarget).off(d.namespace?d.origType+"."+d.namespace:d.origType,d.selector,d.handler),this;if("object"==typeof a){for(e in a)this.off(e,b,a[e]);return this}return(b===!1||"function"==typeof b)&&(c=b,b=void 0),c===!1&&(c=cb),this.each(function(){n.event.remove(this,a,c,b)})},trigger:function(a,b){return this.each(function(){n.event.trigger(a,b,this)})},triggerHandler:function(a,b){var c=this[0];return c?n.event.trigger(a,b,c,!0):void 0}});function eb(a){var b=fb.split("|"),c=a.createDocumentFragment();if(c.createElement)while(b.length)c.createElement(b.pop());return c}var fb="abbr|article|aside|audio|bdi|canvas|data|datalist|details|figcaption|figure|footer|header|hgroup|mark|meter|nav|output|progress|section|summary|time|video",gb=/ jQuery\d+="(?:null|\d+)"/g,hb=new RegExp("<(?:"+fb+")[\\s/>]","i"),ib=/^\s+/,jb=/<(?!area|br|col|embed|hr|img|input|link|meta|param)(([\w:]+)[^>]*)\/>/gi,kb=/<([\w:]+)/,lb=/<tbody/i,mb=/<|&#?\w+;/,nb=/<(?:script|style|link)/i,ob=/checked\s*(?:[^=]|=\s*.checked.)/i,pb=/^$|\/(?:java|ecma)script/i,qb=/^true\/(.*)/,rb=/^\s*<!(?:\[CDATA\[|--)|(?:\]\]|--)>\s*$/g,sb={option:[1,"<select multiple='multiple'>","</select>"],legend:[1,"<fieldset>","</fieldset>"],area:[1,"<map>","</map>"],param:[1,"<object>","</object>"],thead:[1,"<table>","</table>"],tr:[2,"<table><tbody>","</tbody></table>"],col:[2,"<table><tbody></tbody><colgroup>","</colgroup></table>"],td:[3,"<table><tbody><tr>","</tr></tbody></table>"],_default:l.htmlSerialize?[0,"",""]:[1,"X<div>","</div>"]},tb=eb(z),ub=tb.appendChild(z.createElement("div"));sb.optgroup=sb.option,sb.tbody=sb.tfoot=sb.colgroup=sb.caption=sb.thead,sb.th=sb.td;function vb(a,b){var c,d,e=0,f=typeof a.getElementsByTagName!==L?a.getElementsByTagName(b||"*"):typeof a.querySelectorAll!==L?a.querySelectorAll(b||"*"):void 0;if(!f)for(f=[],c=a.childNodes||a;null!=(d=c[e]);e++)!b||n.nodeName(d,b)?f.push(d):n.merge(f,vb(d,b));return void 0===b||b&&n.nodeName(a,b)?n.merge([a],f):f}function wb(a){X.test(a.type)&&(a.defaultChecked=a.checked)}function xb(a,b){return n.nodeName(a,"table")&&n.nodeName(11!==b.nodeType?b:b.firstChild,"tr")?a.getElementsByTagName("tbody")[0]||a.appendChild(a.ownerDocument.createElement("tbody")):a}function yb(a){return a.type=(null!==n.find.attr(a,"type"))+"/"+a.type,a}function zb(a){var b=qb.exec(a.type);return b?a.type=b[1]:a.removeAttribute("type"),a}function Ab(a,b){for(var c,d=0;null!=(c=a[d]);d++)n._data(c,"globalEval",!b||n._data(b[d],"globalEval"))}function Bb(a,b){if(1===b.nodeType&&n.hasData(a)){var c,d,e,f=n._data(a),g=n._data(b,f),h=f.events;if(h){delete g.handle,g.events={};for(c in h)for(d=0,e=h[c].length;e>d;d++)n.event.add(b,c,h[c][d])}g.data&&(g.data=n.extend({},g.data))}}function Cb(a,b){var c,d,e;if(1===b.nodeType){if(c=b.nodeName.toLowerCase(),!l.noCloneEvent&&b[n.expando]){e=n._data(b);for(d in e.events)n.removeEvent(b,d,e.handle);b.removeAttribute(n.expando)}"script"===c&&b.text!==a.text?(yb(b).text=a.text,zb(b)):"object"===c?(b.parentNode&&(b.outerHTML=a.outerHTML),l.html5Clone&&a.innerHTML&&!n.trim(b.innerHTML)&&(b.innerHTML=a.innerHTML)):"input"===c&&X.test(a.type)?(b.defaultChecked=b.checked=a.checked,b.value!==a.value&&(b.value=a.value)):"option"===c?b.defaultSelected=b.selected=a.defaultSelected:("input"===c||"textarea"===c)&&(b.defaultValue=a.defaultValue)}}n.extend({clone:function(a,b,c){var d,e,f,g,h,i=n.contains(a.ownerDocument,a);if(l.html5Clone||n.isXMLDoc(a)||!hb.test("<"+a.nodeName+">")?f=a.cloneNode(!0):(ub.innerHTML=a.outerHTML,ub.removeChild(f=ub.firstChild)),!(l.noCloneEvent&&l.noCloneChecked||1!==a.nodeType&&11!==a.nodeType||n.isXMLDoc(a)))for(d=vb(f),h=vb(a),g=0;null!=(e=h[g]);++g)d[g]&&Cb(e,d[g]);if(b)if(c)for(h=h||vb(a),d=d||vb(f),g=0;null!=(e=h[g]);g++)Bb(e,d[g]);else Bb(a,f);return d=vb(f,"script"),d.length>0&&Ab(d,!i&&vb(a,"script")),d=h=e=null,f},buildFragment:function(a,b,c,d){for(var e,f,g,h,i,j,k,m=a.length,o=eb(b),p=[],q=0;m>q;q++)if(f=a[q],f||0===f)if("object"===n.type(f))n.merge(p,f.nodeType?[f]:f);else if(mb.test(f)){h=h||o.appendChild(b.createElement("div")),i=(kb.exec(f)||["",""])[1].toLowerCase(),k=sb[i]||sb._default,h.innerHTML=k[1]+f.replace(jb,"<$1></$2>")+k[2],e=k[0];while(e--)h=h.lastChild;if(!l.leadingWhitespace&&ib.test(f)&&p.push(b.createTextNode(ib.exec(f)[0])),!l.tbody){f="table"!==i||lb.test(f)?"<table>"!==k[1]||lb.test(f)?0:h:h.firstChild,e=f&&f.childNodes.length;while(e--)n.nodeName(j=f.childNodes[e],"tbody")&&!j.childNodes.length&&f.removeChild(j)}n.merge(p,h.childNodes),h.textContent="";while(h.firstChild)h.removeChild(h.firstChild);h=o.lastChild}else p.push(b.createTextNode(f));h&&o.removeChild(h),l.appendChecked||n.grep(vb(p,"input"),wb),q=0;while(f=p[q++])if((!d||-1===n.inArray(f,d))&&(g=n.contains(f.ownerDocument,f),h=vb(o.appendChild(f),"script"),g&&Ab(h),c)){e=0;while(f=h[e++])pb.test(f.type||"")&&c.push(f)}return h=null,o},cleanData:function(a,b){for(var d,e,f,g,h=0,i=n.expando,j=n.cache,k=l.deleteExpando,m=n.event.special;null!=(d=a[h]);h++)if((b||n.acceptData(d))&&(f=d[i],g=f&&j[f])){if(g.events)for(e in g.events)m[e]?n.event.remove(d,e):n.removeEvent(d,e,g.handle);j[f]&&(delete j[f],k?delete d[i]:typeof d.removeAttribute!==L?d.removeAttribute(i):d[i]=null,c.push(f))}}}),n.fn.extend({text:function(a){return W(this,function(a){return void 0===a?n.text(this):this.empty().append((this[0]&&this[0].ownerDocument||z).createTextNode(a))},null,a,arguments.length)},append:function(){return this.domManip(arguments,function(a){if(1===this.nodeType||11===this.nodeType||9===this.nodeType){var b=xb(this,a);b.appendChild(a)}})},prepend:function(){return this.domManip(arguments,function(a){if(1===this.nodeType||11===this.nodeType||9===this.nodeType){var b=xb(this,a);b.insertBefore(a,b.firstChild)}})},before:function(){return this.domManip(arguments,function(a){this.parentNode&&this.parentNode.insertBefore(a,this)})},after:function(){return this.domManip(arguments,function(a){this.parentNode&&this.parentNode.insertBefore(a,this.nextSibling)})},remove:function(a,b){for(var c,d=a?n.filter(a,this):this,e=0;null!=(c=d[e]);e++)b||1!==c.nodeType||n.cleanData(vb(c)),c.parentNode&&(b&&n.contains(c.ownerDocument,c)&&Ab(vb(c,"script")),c.parentNode.removeChild(c));return this},empty:function(){for(var a,b=0;null!=(a=this[b]);b++){1===a.nodeType&&n.cleanData(vb(a,!1));while(a.firstChild)a.removeChild(a.firstChild);a.options&&n.nodeName(a,"select")&&(a.options.length=0)}return this},clone:function(a,b){return a=null==a?!1:a,b=null==b?a:b,this.map(function(){return n.clone(this,a,b)})},html:function(a){return W(this,function(a){var b=this[0]||{},c=0,d=this.length;if(void 0===a)return 1===b.nodeType?b.innerHTML.replace(gb,""):void 0;if(!("string"!=typeof a||nb.test(a)||!l.htmlSerialize&&hb.test(a)||!l.leadingWhitespace&&ib.test(a)||sb[(kb.exec(a)||["",""])[1].toLowerCase()])){a=a.replace(jb,"<$1></$2>");try{for(;d>c;c++)b=this[c]||{},1===b.nodeType&&(n.cleanData(vb(b,!1)),b.innerHTML=a);b=0}catch(e){}}b&&this.empty().append(a)},null,a,arguments.length)},replaceWith:function(){var a=arguments[0];return this.domManip(arguments,function(b){a=this.parentNode,n.cleanData(vb(this)),a&&a.replaceChild(b,this)}),a&&(a.length||a.nodeType)?this:this.remove()},detach:function(a){return this.remove(a,!0)},domManip:function(a,b){a=e.apply([],a);var c,d,f,g,h,i,j=0,k=this.length,m=this,o=k-1,p=a[0],q=n.isFunction(p);if(q||k>1&&"string"==typeof p&&!l.checkClone&&ob.test(p))return this.each(function(c){var d=m.eq(c);q&&(a[0]=p.call(this,c,d.html())),d.domManip(a,b)});if(k&&(i=n.buildFragment(a,this[0].ownerDocument,!1,this),c=i.firstChild,1===i.childNodes.length&&(i=c),c)){for(g=n.map(vb(i,"script"),yb),f=g.length;k>j;j++)d=i,j!==o&&(d=n.clone(d,!0,!0),f&&n.merge(g,vb(d,"script"))),b.call(this[j],d,j);if(f)for(h=g[g.length-1].ownerDocument,n.map(g,zb),j=0;f>j;j++)d=g[j],pb.test(d.type||"")&&!n._data(d,"globalEval")&&n.contains(h,d)&&(d.src?n._evalUrl&&n._evalUrl(d.src):n.globalEval((d.text||d.textContent||d.innerHTML||"").replace(rb,"")));i=c=null}return this}}),n.each({appendTo:"append",prependTo:"prepend",insertBefore:"before",insertAfter:"after",replaceAll:"replaceWith"},function(a,b){n.fn[a]=function(a){for(var c,d=0,e=[],g=n(a),h=g.length-1;h>=d;d++)c=d===h?this:this.clone(!0),n(g[d])[b](c),f.apply(e,c.get());return this.pushStack(e)}});var Db,Eb={};function Fb(b,c){var d=n(c.createElement(b)).appendTo(c.body),e=a.getDefaultComputedStyle?a.getDefaultComputedStyle(d[0]).display:n.css(d[0],"display");return d.detach(),e}function Gb(a){var b=z,c=Eb[a];return c||(c=Fb(a,b),"none"!==c&&c||(Db=(Db||n("<iframe frameborder='0' width='0' height='0'/>")).appendTo(b.documentElement),b=(Db[0].contentWindow||Db[0].contentDocument).document,b.write(),b.close(),c=Fb(a,b),Db.detach()),Eb[a]=c),c}!function(){var a,b,c=z.createElement("div"),d="-webkit-box-sizing:content-box;-moz-box-sizing:content-box;box-sizing:content-box;display:block;padding:0;margin:0;border:0";c.innerHTML="  <link/><table></table><a href='/a'>a</a><input type='checkbox'/>",a=c.getElementsByTagName("a")[0],a.style.cssText="float:left;opacity:.5",l.opacity=/^0.5/.test(a.style.opacity),l.cssFloat=!!a.style.cssFloat,c.style.backgroundClip="content-box",c.cloneNode(!0).style.backgroundClip="",l.clearCloneStyle="content-box"===c.style.backgroundClip,a=c=null,l.shrinkWrapBlocks=function(){var a,c,e,f;if(null==b){if(a=z.getElementsByTagName("body")[0],!a)return;f="border:0;width:0;height:0;position:absolute;top:0;left:-9999px",c=z.createElement("div"),e=z.createElement("div"),a.appendChild(c).appendChild(e),b=!1,typeof e.style.zoom!==L&&(e.style.cssText=d+";width:1px;padding:1px;zoom:1",e.innerHTML="<div></div>",e.firstChild.style.width="5px",b=3!==e.offsetWidth),a.removeChild(c),a=c=e=null}return b}}();var Hb=/^margin/,Ib=new RegExp("^("+T+")(?!px)[a-z%]+$","i"),Jb,Kb,Lb=/^(top|right|bottom|left)$/;a.getComputedStyle?(Jb=function(a){return a.ownerDocument.defaultView.getComputedStyle(a,null)},Kb=function(a,b,c){var d,e,f,g,h=a.style;return c=c||Jb(a),g=c?c.getPropertyValue(b)||c[b]:void 0,c&&(""!==g||n.contains(a.ownerDocument,a)||(g=n.style(a,b)),Ib.test(g)&&Hb.test(b)&&(d=h.width,e=h.minWidth,f=h.maxWidth,h.minWidth=h.maxWidth=h.width=g,g=c.width,h.width=d,h.minWidth=e,h.maxWidth=f)),void 0===g?g:g+""}):z.documentElement.currentStyle&&(Jb=function(a){return a.currentStyle},Kb=function(a,b,c){var d,e,f,g,h=a.style;return c=c||Jb(a),g=c?c[b]:void 0,null==g&&h&&h[b]&&(g=h[b]),Ib.test(g)&&!Lb.test(b)&&(d=h.left,e=a.runtimeStyle,f=e&&e.left,f&&(e.left=a.currentStyle.left),h.left="fontSize"===b?"1em":g,g=h.pixelLeft+"px",h.left=d,f&&(e.left=f)),void 0===g?g:g+""||"auto"});function Mb(a,b){return{get:function(){var c=a();if(null!=c)return c?void delete this.get:(this.get=b).apply(this,arguments)}}}!function(){var b,c,d,e,f,g,h=z.createElement("div"),i="border:0;width:0;height:0;position:absolute;top:0;left:-9999px",j="-webkit-box-sizing:content-box;-moz-box-sizing:content-box;box-sizing:content-box;display:block;padding:0;margin:0;border:0";h.innerHTML="  <link/><table></table><a href='/a'>a</a><input type='checkbox'/>",b=h.getElementsByTagName("a")[0],b.style.cssText="float:left;opacity:.5",l.opacity=/^0.5/.test(b.style.opacity),l.cssFloat=!!b.style.cssFloat,h.style.backgroundClip="content-box",h.cloneNode(!0).style.backgroundClip="",l.clearCloneStyle="content-box"===h.style.backgroundClip,b=h=null,n.extend(l,{reliableHiddenOffsets:function(){if(null!=c)return c;var a,b,d,e=z.createElement("div"),f=z.getElementsByTagName("body")[0];if(f)return e.setAttribute("className","t"),e.innerHTML="  <link/><table></table><a href='/a'>a</a><input type='checkbox'/>",a=z.createElement("div"),a.style.cssText=i,f.appendChild(a).appendChild(e),e.innerHTML="<table><tr><td></td><td>t</td></tr></table>",b=e.getElementsByTagName("td"),b[0].style.cssText="padding:0;margin:0;border:0;display:none",d=0===b[0].offsetHeight,b[0].style.display="",b[1].style.display="none",c=d&&0===b[0].offsetHeight,f.removeChild(a),e=f=null,c},boxSizing:function(){return null==d&&k(),d},boxSizingReliable:function(){return null==e&&k(),e},pixelPosition:function(){return null==f&&k(),f},reliableMarginRight:function(){var b,c,d,e;if(null==g&&a.getComputedStyle){if(b=z.getElementsByTagName("body")[0],!b)return;c=z.createElement("div"),d=z.createElement("div"),c.style.cssText=i,b.appendChild(c).appendChild(d),e=d.appendChild(z.createElement("div")),e.style.cssText=d.style.cssText=j,e.style.marginRight=e.style.width="0",d.style.width="1px",g=!parseFloat((a.getComputedStyle(e,null)||{}).marginRight),b.removeChild(c)}return g}});function k(){var b,c,h=z.getElementsByTagName("body")[0];h&&(b=z.createElement("div"),c=z.createElement("div"),b.style.cssText=i,h.appendChild(b).appendChild(c),c.style.cssText="-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;position:absolute;display:block;padding:1px;border:1px;width:4px;margin-top:1%;top:1%",n.swap(h,null!=h.style.zoom?{zoom:1}:{},function(){d=4===c.offsetWidth}),e=!0,f=!1,g=!0,a.getComputedStyle&&(f="1%"!==(a.getComputedStyle(c,null)||{}).top,e="4px"===(a.getComputedStyle(c,null)||{width:"4px"}).width),h.removeChild(b),c=h=null)}}(),n.swap=function(a,b,c,d){var e,f,g={};for(f in b)g[f]=a.style[f],a.style[f]=b[f];e=c.apply(a,d||[]);for(f in b)a.style[f]=g[f];return e};var Nb=/alpha\([^)]*\)/i,Ob=/opacity\s*=\s*([^)]*)/,Pb=/^(none|table(?!-c[ea]).+)/,Qb=new RegExp("^("+T+")(.*)$","i"),Rb=new RegExp("^([+-])=("+T+")","i"),Sb={position:"absolute",visibility:"hidden",display:"block"},Tb={letterSpacing:0,fontWeight:400},Ub=["Webkit","O","Moz","ms"];function Vb(a,b){if(b in a)return b;var c=b.charAt(0).toUpperCase()+b.slice(1),d=b,e=Ub.length;while(e--)if(b=Ub[e]+c,b in a)return b;return d}function Wb(a,b){for(var c,d,e,f=[],g=0,h=a.length;h>g;g++)d=a[g],d.style&&(f[g]=n._data(d,"olddisplay"),c=d.style.display,b?(f[g]||"none"!==c||(d.style.display=""),""===d.style.display&&V(d)&&(f[g]=n._data(d,"olddisplay",Gb(d.nodeName)))):f[g]||(e=V(d),(c&&"none"!==c||!e)&&n._data(d,"olddisplay",e?c:n.css(d,"display"))));for(g=0;h>g;g++)d=a[g],d.style&&(b&&"none"!==d.style.display&&""!==d.style.display||(d.style.display=b?f[g]||"":"none"));return a}function Xb(a,b,c){var d=Qb.exec(b);return d?Math.max(0,d[1]-(c||0))+(d[2]||"px"):b}function Yb(a,b,c,d,e){for(var f=c===(d?"border":"content")?4:"width"===b?1:0,g=0;4>f;f+=2)"margin"===c&&(g+=n.css(a,c+U[f],!0,e)),d?("content"===c&&(g-=n.css(a,"padding"+U[f],!0,e)),"margin"!==c&&(g-=n.css(a,"border"+U[f]+"Width",!0,e))):(g+=n.css(a,"padding"+U[f],!0,e),"padding"!==c&&(g+=n.css(a,"border"+U[f]+"Width",!0,e)));return g}function Zb(a,b,c){var d=!0,e="width"===b?a.offsetWidth:a.offsetHeight,f=Jb(a),g=l.boxSizing()&&"border-box"===n.css(a,"boxSizing",!1,f);if(0>=e||null==e){if(e=Kb(a,b,f),(0>e||null==e)&&(e=a.style[b]),Ib.test(e))return e;d=g&&(l.boxSizingReliable()||e===a.style[b]),e=parseFloat(e)||0}return e+Yb(a,b,c||(g?"border":"content"),d,f)+"px"}n.extend({cssHooks:{opacity:{get:function(a,b){if(b){var c=Kb(a,"opacity");return""===c?"1":c}}}},cssNumber:{columnCount:!0,fillOpacity:!0,fontWeight:!0,lineHeight:!0,opacity:!0,order:!0,orphans:!0,widows:!0,zIndex:!0,zoom:!0},cssProps:{"float":l.cssFloat?"cssFloat":"styleFloat"},style:function(a,b,c,d){if(a&&3!==a.nodeType&&8!==a.nodeType&&a.style){var e,f,g,h=n.camelCase(b),i=a.style;if(b=n.cssProps[h]||(n.cssProps[h]=Vb(i,h)),g=n.cssHooks[b]||n.cssHooks[h],void 0===c)return g&&"get"in g&&void 0!==(e=g.get(a,!1,d))?e:i[b];if(f=typeof c,"string"===f&&(e=Rb.exec(c))&&(c=(e[1]+1)*e[2]+parseFloat(n.css(a,b)),f="number"),null!=c&&c===c&&("number"!==f||n.cssNumber[h]||(c+="px"),l.clearCloneStyle||""!==c||0!==b.indexOf("background")||(i[b]="inherit"),!(g&&"set"in g&&void 0===(c=g.set(a,c,d)))))try{i[b]="",i[b]=c}catch(j){}}},css:function(a,b,c,d){var e,f,g,h=n.camelCase(b);return b=n.cssProps[h]||(n.cssProps[h]=Vb(a.style,h)),g=n.cssHooks[b]||n.cssHooks[h],g&&"get"in g&&(f=g.get(a,!0,c)),void 0===f&&(f=Kb(a,b,d)),"normal"===f&&b in Tb&&(f=Tb[b]),""===c||c?(e=parseFloat(f),c===!0||n.isNumeric(e)?e||0:f):f}}),n.each(["height","width"],function(a,b){n.cssHooks[b]={get:function(a,c,d){return c?0===a.offsetWidth&&Pb.test(n.css(a,"display"))?n.swap(a,Sb,function(){return Zb(a,b,d)}):Zb(a,b,d):void 0},set:function(a,c,d){var e=d&&Jb(a);return Xb(a,c,d?Yb(a,b,d,l.boxSizing()&&"border-box"===n.css(a,"boxSizing",!1,e),e):0)}}}),l.opacity||(n.cssHooks.opacity={get:function(a,b){return Ob.test((b&&a.currentStyle?a.currentStyle.filter:a.style.filter)||"")?.01*parseFloat(RegExp.$1)+"":b?"1":""},set:function(a,b){var c=a.style,d=a.currentStyle,e=n.isNumeric(b)?"alpha(opacity="+100*b+")":"",f=d&&d.filter||c.filter||"";c.zoom=1,(b>=1||""===b)&&""===n.trim(f.replace(Nb,""))&&c.removeAttribute&&(c.removeAttribute("filter"),""===b||d&&!d.filter)||(c.filter=Nb.test(f)?f.replace(Nb,e):f+" "+e)}}),n.cssHooks.marginRight=Mb(l.reliableMarginRight,function(a,b){return b?n.swap(a,{display:"inline-block"},Kb,[a,"marginRight"]):void 0}),n.each({margin:"",padding:"",border:"Width"},function(a,b){n.cssHooks[a+b]={expand:function(c){for(var d=0,e={},f="string"==typeof c?c.split(" "):[c];4>d;d++)e[a+U[d]+b]=f[d]||f[d-2]||f[0];return e}},Hb.test(a)||(n.cssHooks[a+b].set=Xb)}),n.fn.extend({css:function(a,b){return W(this,function(a,b,c){var d,e,f={},g=0;if(n.isArray(b)){for(d=Jb(a),e=b.length;e>g;g++)f[b[g]]=n.css(a,b[g],!1,d);return f}return void 0!==c?n.style(a,b,c):n.css(a,b)
@@ -1752,6 +1753,2311 @@ ToneDen.define('vendor/simple-slider',['jquery'], function($) {
   }
 }).call(this);
 
+/* 
+ *  DSP.js - a comprehensive digital signal processing  library for javascript
+ * 
+ *  Created by Corban Brook <corbanbrook@gmail.com> on 2010-01-01.
+ *  Copyright 2010 Corban Brook. All rights reserved.
+ *
+ */
+
+////////////////////////////////////////////////////////////////////////////////
+//                                  CONSTANTS                                 //
+////////////////////////////////////////////////////////////////////////////////
+
+/**
+ * DSP is an object which contains general purpose utility functions and constants
+ */
+var DSP = {
+  // Channels
+  LEFT:           0,
+  RIGHT:          1,
+  MIX:            2,
+
+  // Waveforms
+  SINE:           1,
+  TRIANGLE:       2,
+  SAW:            3,
+  SQUARE:         4,
+
+  // Filters
+  LOWPASS:        0,
+  HIGHPASS:       1,
+  BANDPASS:       2,
+  NOTCH:          3,
+
+  // Window functions
+  BARTLETT:       1,
+  BARTLETTHANN:   2,
+  BLACKMAN:       3,
+  COSINE:         4,
+  GAUSS:          5,
+  HAMMING:        6,
+  HANN:           7,
+  LANCZOS:        8,
+  RECTANGULAR:    9,
+  TRIANGULAR:     10,
+
+  // Loop modes
+  OFF:            0,
+  FW:             1,
+  BW:             2,
+  FWBW:           3,
+
+  // Math
+  TWO_PI:         2*Math.PI
+};
+
+// Setup arrays for platforms which do not support byte arrays
+function setupTypedArray(name, fallback) {
+  // check if TypedArray exists
+  // typeof on Minefield and Chrome return function, typeof on Webkit returns object.
+  if (typeof this[name] !== "function" && typeof this[name] !== "object") {
+    // nope.. check if WebGLArray exists
+    if (typeof this[fallback] === "function" && typeof this[fallback] !== "object") {
+      this[name] = this[fallback];
+    } else {
+      // nope.. set as Native JS array
+      this[name] = function(obj) {
+        if (obj instanceof Array) {
+          return obj;
+        } else if (typeof obj === "number") {
+          return new Array(obj);
+        }
+      };
+    }
+  }
+}
+
+setupTypedArray("Float32Array", "WebGLFloatArray");
+setupTypedArray("Int32Array",   "WebGLIntArray");
+setupTypedArray("Uint16Array",  "WebGLUnsignedShortArray");
+setupTypedArray("Uint8Array",   "WebGLUnsignedByteArray");
+
+
+////////////////////////////////////////////////////////////////////////////////
+//                            DSP UTILITY FUNCTIONS                           //
+////////////////////////////////////////////////////////////////////////////////
+
+/**
+ * Inverts the phase of a signal
+ *
+ * @param {Array} buffer A sample buffer
+ *
+ * @returns The inverted sample buffer
+ */
+DSP.invert = function(buffer) {
+  for (var i = 0, len = buffer.length; i < len; i++) {
+    buffer[i] *= -1;
+  }
+
+  return buffer;
+};
+
+/**
+ * Converts split-stereo (dual mono) sample buffers into a stereo interleaved sample buffer
+ *
+ * @param {Array} left  A sample buffer
+ * @param {Array} right A sample buffer
+ *
+ * @returns The stereo interleaved buffer
+ */
+DSP.interleave = function(left, right) {
+  if (left.length !== right.length) {
+    throw "Can not interleave. Channel lengths differ.";
+  }
+ 
+  var stereoInterleaved = new Float32Array(left.length * 2);
+ 
+  for (var i = 0, len = left.length; i < len; i++) {
+    stereoInterleaved[2*i]   = left[i];
+    stereoInterleaved[2*i+1] = right[i];
+  }
+ 
+  return stereoInterleaved;
+};
+
+/**
+ * Converts a stereo-interleaved sample buffer into split-stereo (dual mono) sample buffers
+ *
+ * @param {Array} buffer A stereo-interleaved sample buffer
+ *
+ * @returns an Array containing left and right channels
+ */
+DSP.deinterleave = (function() {
+  var left, right, mix, deinterleaveChannel = []; 
+
+  deinterleaveChannel[DSP.MIX] = function(buffer) {
+    for (var i = 0, len = buffer.length/2; i < len; i++) {
+      mix[i] = (buffer[2*i] + buffer[2*i+1]) / 2;
+    }
+    return mix;
+  };
+
+  deinterleaveChannel[DSP.LEFT] = function(buffer) {
+    for (var i = 0, len = buffer.length/2; i < len; i++) {
+      left[i]  = buffer[2*i];
+    }
+    return left;
+  };
+
+  deinterleaveChannel[DSP.RIGHT] = function(buffer) {
+    for (var i = 0, len = buffer.length/2; i < len; i++) {
+      right[i]  = buffer[2*i+1];
+    }
+    return right;
+  };
+
+  return function(channel, buffer) { 
+    left  = left  || new Float32Array(buffer.length/2);
+    right = right || new Float32Array(buffer.length/2);
+    mix   = mix   || new Float32Array(buffer.length/2);
+
+    if (buffer.length/2 !== left.length) {
+      left  = new Float32Array(buffer.length/2);
+      right = new Float32Array(buffer.length/2);
+      mix   = new Float32Array(buffer.length/2);
+    }
+
+    return deinterleaveChannel[channel](buffer);
+  };
+}());
+
+/**
+ * Separates a channel from a stereo-interleaved sample buffer
+ *
+ * @param {Array}  buffer A stereo-interleaved sample buffer
+ * @param {Number} channel A channel constant (LEFT, RIGHT, MIX)
+ *
+ * @returns an Array containing a signal mono sample buffer
+ */
+DSP.getChannel = DSP.deinterleave;
+
+/**
+ * Helper method (for Reverb) to mix two (interleaved) samplebuffers. It's possible
+ * to negate the second buffer while mixing and to perform a volume correction
+ * on the final signal.
+ *
+ * @param {Array} sampleBuffer1 Array containing Float values or a Float32Array
+ * @param {Array} sampleBuffer2 Array containing Float values or a Float32Array
+ * @param {Boolean} negate When true inverts/flips the audio signal
+ * @param {Number} volumeCorrection When you add multiple sample buffers, use this to tame your signal ;)
+ *
+ * @returns A new Float32Array interleaved buffer.
+ */
+DSP.mixSampleBuffers = function(sampleBuffer1, sampleBuffer2, negate, volumeCorrection){
+  var outputSamples = new Float32Array(sampleBuffer1);
+
+  for(var i = 0; i<sampleBuffer1.length; i++){
+    outputSamples[i] += (negate ? -sampleBuffer2[i] : sampleBuffer2[i]) / volumeCorrection;
+  }
+ 
+  return outputSamples;
+}; 
+
+// Biquad filter types
+DSP.LPF = 0;                // H(s) = 1 / (s^2 + s/Q + 1)
+DSP.HPF = 1;                // H(s) = s^2 / (s^2 + s/Q + 1)
+DSP.BPF_CONSTANT_SKIRT = 2; // H(s) = s / (s^2 + s/Q + 1)  (constant skirt gain, peak gain = Q)
+DSP.BPF_CONSTANT_PEAK = 3;  // H(s) = (s/Q) / (s^2 + s/Q + 1)      (constant 0 dB peak gain)
+DSP.NOTCH = 4;              // H(s) = (s^2 + 1) / (s^2 + s/Q + 1)
+DSP.APF = 5;                // H(s) = (s^2 - s/Q + 1) / (s^2 + s/Q + 1)
+DSP.PEAKING_EQ = 6;         // H(s) = (s^2 + s*(A/Q) + 1) / (s^2 + s/(A*Q) + 1)
+DSP.LOW_SHELF = 7;          // H(s) = A * (s^2 + (sqrt(A)/Q)*s + A)/(A*s^2 + (sqrt(A)/Q)*s + 1)
+DSP.HIGH_SHELF = 8;         // H(s) = A * (A*s^2 + (sqrt(A)/Q)*s + 1)/(s^2 + (sqrt(A)/Q)*s + A)
+
+// Biquad filter parameter types
+DSP.Q = 1;
+DSP.BW = 2; // SHARED with BACKWARDS LOOP MODE
+DSP.S = 3;
+
+// Find RMS of signal
+DSP.RMS = function(buffer) {
+  var total = 0;
+  
+  for (var i = 0, n = buffer.length; i < n; i++) {
+    total += buffer[i] * buffer[i];
+  }
+  
+  return Math.sqrt(total / n);
+};
+
+// Find Peak of signal
+DSP.Peak = function(buffer) {
+  var peak = 0;
+  
+  for (var i = 0, n = buffer.length; i < n; i++) {
+    peak = (Math.abs(buffer[i]) > peak) ? Math.abs(buffer[i]) : peak; 
+  }
+  
+  return peak;
+};
+
+// Fourier Transform Module used by DFT, FFT, RFFT
+function FourierTransform(bufferSize, sampleRate) {
+  this.bufferSize = bufferSize;
+  this.sampleRate = sampleRate;
+  this.bandwidth  = 2 / bufferSize * sampleRate / 2;
+
+  this.spectrum   = new Float32Array(bufferSize/2);
+  this.real       = new Float32Array(bufferSize);
+  this.imag       = new Float32Array(bufferSize);
+
+  this.peakBand   = 0;
+  this.peak       = 0;
+
+  /**
+   * Calculates the *middle* frequency of an FFT band.
+   *
+   * @param {Number} index The index of the FFT band.
+   *
+   * @returns The middle frequency in Hz.
+   */
+  this.getBandFrequency = function(index) {
+    return this.bandwidth * index + this.bandwidth / 2;
+  };
+
+  this.calculateSpectrum = function() {
+    var spectrum  = this.spectrum,
+        real      = this.real,
+        imag      = this.imag,
+        bSi       = 2 / this.bufferSize,
+        sqrt      = Math.sqrt,
+        rval, 
+        ival,
+        mag;
+
+    for (var i = 0, N = bufferSize/2; i < N; i++) {
+      rval = real[i];
+      ival = imag[i];
+      mag = bSi * sqrt(rval * rval + ival * ival);
+
+      if (mag > this.peak) {
+        this.peakBand = i;
+        this.peak = mag;
+      }
+
+      spectrum[i] = mag;
+    }
+  };
+}
+
+/**
+ * DFT is a class for calculating the Discrete Fourier Transform of a signal.
+ *
+ * @param {Number} bufferSize The size of the sample buffer to be computed
+ * @param {Number} sampleRate The sampleRate of the buffer (eg. 44100)
+ *
+ * @constructor
+ */
+function DFT(bufferSize, sampleRate) {
+  FourierTransform.call(this, bufferSize, sampleRate);
+
+  var N = bufferSize/2 * bufferSize;
+  var TWO_PI = 2 * Math.PI;
+
+  this.sinTable = new Float32Array(N);
+  this.cosTable = new Float32Array(N);
+
+  for (var i = 0; i < N; i++) {
+    this.sinTable[i] = Math.sin(i * TWO_PI / bufferSize);
+    this.cosTable[i] = Math.cos(i * TWO_PI / bufferSize);
+  }
+}
+
+/**
+ * Performs a forward transform on the sample buffer.
+ * Converts a time domain signal to frequency domain spectra.
+ *
+ * @param {Array} buffer The sample buffer
+ *
+ * @returns The frequency spectrum array
+ */
+DFT.prototype.forward = function(buffer) {
+  var real = this.real, 
+      imag = this.imag,
+      rval,
+      ival;
+
+  for (var k = 0; k < this.bufferSize/2; k++) {
+    rval = 0.0;
+    ival = 0.0;
+
+    for (var n = 0; n < buffer.length; n++) {
+      rval += this.cosTable[k*n] * buffer[n];
+      ival += this.sinTable[k*n] * buffer[n];
+    }
+
+    real[k] = rval;
+    imag[k] = ival;
+  }
+
+  return this.calculateSpectrum();
+};
+
+
+/**
+ * FFT is a class for calculating the Discrete Fourier Transform of a signal
+ * with the Fast Fourier Transform algorithm.
+ *
+ * @param {Number} bufferSize The size of the sample buffer to be computed. Must be power of 2
+ * @param {Number} sampleRate The sampleRate of the buffer (eg. 44100)
+ *
+ * @constructor
+ */
+function FFT(bufferSize, sampleRate) {
+  FourierTransform.call(this, bufferSize, sampleRate);
+   
+  this.reverseTable = new Uint32Array(bufferSize);
+
+  var limit = 1;
+  var bit = bufferSize >> 1;
+
+  var i;
+
+  while (limit < bufferSize) {
+    for (i = 0; i < limit; i++) {
+      this.reverseTable[i + limit] = this.reverseTable[i] + bit;
+    }
+
+    limit = limit << 1;
+    bit = bit >> 1;
+  }
+
+  this.sinTable = new Float32Array(bufferSize);
+  this.cosTable = new Float32Array(bufferSize);
+
+  for (i = 0; i < bufferSize; i++) {
+    this.sinTable[i] = Math.sin(-Math.PI/i);
+    this.cosTable[i] = Math.cos(-Math.PI/i);
+  }
+}
+
+/**
+ * Performs a forward transform on the sample buffer.
+ * Converts a time domain signal to frequency domain spectra.
+ *
+ * @param {Array} buffer The sample buffer. Buffer Length must be power of 2
+ *
+ * @returns The frequency spectrum array
+ */
+FFT.prototype.forward = function(buffer) {
+  // Locally scope variables for speed up
+  var bufferSize      = this.bufferSize,
+      cosTable        = this.cosTable,
+      sinTable        = this.sinTable,
+      reverseTable    = this.reverseTable,
+      real            = this.real,
+      imag            = this.imag,
+      spectrum        = this.spectrum;
+
+  var k = Math.floor(Math.log(bufferSize) / Math.LN2);
+
+  if (Math.pow(2, k) !== bufferSize) { throw "Invalid buffer size, must be a power of 2."; }
+  if (bufferSize !== buffer.length)  { throw "Supplied buffer is not the same size as defined FFT. FFT Size: " + bufferSize + " Buffer Size: " + buffer.length; }
+
+  var halfSize = 1,
+      phaseShiftStepReal,
+      phaseShiftStepImag,
+      currentPhaseShiftReal,
+      currentPhaseShiftImag,
+      off,
+      tr,
+      ti,
+      tmpReal,
+      i;
+
+  for (i = 0; i < bufferSize; i++) {
+    real[i] = buffer[reverseTable[i]];
+    imag[i] = 0;
+  }
+
+  while (halfSize < bufferSize) {
+    //phaseShiftStepReal = Math.cos(-Math.PI/halfSize);
+    //phaseShiftStepImag = Math.sin(-Math.PI/halfSize);
+    phaseShiftStepReal = cosTable[halfSize];
+    phaseShiftStepImag = sinTable[halfSize];
+    
+    currentPhaseShiftReal = 1;
+    currentPhaseShiftImag = 0;
+
+    for (var fftStep = 0; fftStep < halfSize; fftStep++) {
+      i = fftStep;
+
+      while (i < bufferSize) {
+        off = i + halfSize;
+        tr = (currentPhaseShiftReal * real[off]) - (currentPhaseShiftImag * imag[off]);
+        ti = (currentPhaseShiftReal * imag[off]) + (currentPhaseShiftImag * real[off]);
+
+        real[off] = real[i] - tr;
+        imag[off] = imag[i] - ti;
+        real[i] += tr;
+        imag[i] += ti;
+
+        i += halfSize << 1;
+      }
+
+      tmpReal = currentPhaseShiftReal;
+      currentPhaseShiftReal = (tmpReal * phaseShiftStepReal) - (currentPhaseShiftImag * phaseShiftStepImag);
+      currentPhaseShiftImag = (tmpReal * phaseShiftStepImag) + (currentPhaseShiftImag * phaseShiftStepReal);
+    }
+
+    halfSize = halfSize << 1;
+  }
+
+  return this.calculateSpectrum();
+};
+
+FFT.prototype.inverse = function(real, imag) {
+  // Locally scope variables for speed up
+  var bufferSize      = this.bufferSize,
+      cosTable        = this.cosTable,
+      sinTable        = this.sinTable,
+      reverseTable    = this.reverseTable,
+      spectrum        = this.spectrum;
+     
+      real = real || this.real;
+      imag = imag || this.imag;
+
+  var halfSize = 1,
+      phaseShiftStepReal,
+      phaseShiftStepImag,
+      currentPhaseShiftReal,
+      currentPhaseShiftImag,
+      off,
+      tr,
+      ti,
+      tmpReal,
+      i;
+
+  for (i = 0; i < bufferSize; i++) {
+    imag[i] *= -1;
+  }
+
+  var revReal = new Float32Array(bufferSize);
+  var revImag = new Float32Array(bufferSize);
+ 
+  for (i = 0; i < real.length; i++) {
+    revReal[i] = real[reverseTable[i]];
+    revImag[i] = imag[reverseTable[i]];
+  }
+ 
+  real = revReal;
+  imag = revImag;
+
+  while (halfSize < bufferSize) {
+    phaseShiftStepReal = cosTable[halfSize];
+    phaseShiftStepImag = sinTable[halfSize];
+    currentPhaseShiftReal = 1;
+    currentPhaseShiftImag = 0;
+
+    for (var fftStep = 0; fftStep < halfSize; fftStep++) {
+      i = fftStep;
+
+      while (i < bufferSize) {
+        off = i + halfSize;
+        tr = (currentPhaseShiftReal * real[off]) - (currentPhaseShiftImag * imag[off]);
+        ti = (currentPhaseShiftReal * imag[off]) + (currentPhaseShiftImag * real[off]);
+
+        real[off] = real[i] - tr;
+        imag[off] = imag[i] - ti;
+        real[i] += tr;
+        imag[i] += ti;
+
+        i += halfSize << 1;
+      }
+
+      tmpReal = currentPhaseShiftReal;
+      currentPhaseShiftReal = (tmpReal * phaseShiftStepReal) - (currentPhaseShiftImag * phaseShiftStepImag);
+      currentPhaseShiftImag = (tmpReal * phaseShiftStepImag) + (currentPhaseShiftImag * phaseShiftStepReal);
+    }
+
+    halfSize = halfSize << 1;
+  }
+
+  var buffer = new Float32Array(bufferSize); // this should be reused instead
+  for (i = 0; i < bufferSize; i++) {
+    buffer[i] = real[i] / bufferSize;
+  }
+
+  return buffer;
+};
+
+/**
+ * RFFT is a class for calculating the Discrete Fourier Transform of a signal
+ * with the Fast Fourier Transform algorithm.
+ *
+ * This method currently only contains a forward transform but is highly optimized.
+ *
+ * @param {Number} bufferSize The size of the sample buffer to be computed. Must be power of 2
+ * @param {Number} sampleRate The sampleRate of the buffer (eg. 44100)
+ *
+ * @constructor
+ */
+
+// lookup tables don't really gain us any speed, but they do increase
+// cache footprint, so don't use them in here
+
+// also we don't use sepearate arrays for real/imaginary parts
+
+// this one a little more than twice as fast as the one in FFT
+// however I only did the forward transform
+
+// the rest of this was translated from C, see http://www.jjj.de/fxt/
+// this is the real split radix FFT
+
+function RFFT(bufferSize, sampleRate) {
+  FourierTransform.call(this, bufferSize, sampleRate);
+
+  this.trans = new Float32Array(bufferSize);
+
+  this.reverseTable = new Uint32Array(bufferSize);
+
+  // don't use a lookup table to do the permute, use this instead
+  this.reverseBinPermute = function (dest, source) {
+    var bufferSize  = this.bufferSize, 
+        halfSize    = bufferSize >>> 1, 
+        nm1         = bufferSize - 1, 
+        i = 1, r = 0, h;
+
+    dest[0] = source[0];
+
+    do {
+      r += halfSize;
+      dest[i] = source[r];
+      dest[r] = source[i];
+      
+      i++;
+
+      h = halfSize << 1;
+      while (h = h >> 1, !((r ^= h) & h));
+
+      if (r >= i) { 
+        dest[i]     = source[r]; 
+        dest[r]     = source[i];
+
+        dest[nm1-i] = source[nm1-r]; 
+        dest[nm1-r] = source[nm1-i];
+      }
+      i++;
+    } while (i < halfSize);
+    dest[nm1] = source[nm1];
+  };
+
+  this.generateReverseTable = function () {
+    var bufferSize  = this.bufferSize, 
+        halfSize    = bufferSize >>> 1, 
+        nm1         = bufferSize - 1, 
+        i = 1, r = 0, h;
+
+    this.reverseTable[0] = 0;
+
+    do {
+      r += halfSize;
+      
+      this.reverseTable[i] = r;
+      this.reverseTable[r] = i;
+
+      i++;
+
+      h = halfSize << 1;
+      while (h = h >> 1, !((r ^= h) & h));
+
+      if (r >= i) { 
+        this.reverseTable[i] = r;
+        this.reverseTable[r] = i;
+
+        this.reverseTable[nm1-i] = nm1-r;
+        this.reverseTable[nm1-r] = nm1-i;
+      }
+      i++;
+    } while (i < halfSize);
+
+    this.reverseTable[nm1] = nm1;
+  };
+
+  this.generateReverseTable();
+}
+
+
+// Ordering of output:
+//
+// trans[0]     = re[0] (==zero frequency, purely real)
+// trans[1]     = re[1]
+//             ...
+// trans[n/2-1] = re[n/2-1]
+// trans[n/2]   = re[n/2]    (==nyquist frequency, purely real)
+//
+// trans[n/2+1] = im[n/2-1]
+// trans[n/2+2] = im[n/2-2]
+//             ...
+// trans[n-1]   = im[1] 
+
+RFFT.prototype.forward = function(buffer) {
+  var n         = this.bufferSize, 
+      spectrum  = this.spectrum,
+      x         = this.trans, 
+      TWO_PI    = 2*Math.PI,
+      sqrt      = Math.sqrt,
+      i         = n >>> 1,
+      bSi       = 2 / n,
+      n2, n4, n8, nn, 
+      t1, t2, t3, t4, 
+      i1, i2, i3, i4, i5, i6, i7, i8, 
+      st1, cc1, ss1, cc3, ss3,
+      e, 
+      a,
+      rval, ival, mag; 
+
+  this.reverseBinPermute(x, buffer);
+
+  /*
+  var reverseTable = this.reverseTable;
+
+  for (var k = 0, len = reverseTable.length; k < len; k++) {
+    x[k] = buffer[reverseTable[k]];
+  }
+  */
+
+  for (var ix = 0, id = 4; ix < n; id *= 4) {
+    for (var i0 = ix; i0 < n; i0 += id) {
+      //sumdiff(x[i0], x[i0+1]); // {a, b}  <--| {a+b, a-b}
+      st1 = x[i0] - x[i0+1];
+      x[i0] += x[i0+1];
+      x[i0+1] = st1;
+    } 
+    ix = 2*(id-1);
+  }
+
+  n2 = 2;
+  nn = n >>> 1;
+
+  while((nn = nn >>> 1)) {
+    ix = 0;
+    n2 = n2 << 1;
+    id = n2 << 1;
+    n4 = n2 >>> 2;
+    n8 = n2 >>> 3;
+    do {
+      if(n4 !== 1) {
+        for(i0 = ix; i0 < n; i0 += id) {
+          i1 = i0;
+          i2 = i1 + n4;
+          i3 = i2 + n4;
+          i4 = i3 + n4;
+     
+          //diffsum3_r(x[i3], x[i4], t1); // {a, b, s} <--| {a, b-a, a+b}
+          t1 = x[i3] + x[i4];
+          x[i4] -= x[i3];
+          //sumdiff3(x[i1], t1, x[i3]);   // {a, b, d} <--| {a+b, b, a-b}
+          x[i3] = x[i1] - t1; 
+          x[i1] += t1;
+     
+          i1 += n8;
+          i2 += n8;
+          i3 += n8;
+          i4 += n8;
+         
+          //sumdiff(x[i3], x[i4], t1, t2); // {s, d}  <--| {a+b, a-b}
+          t1 = x[i3] + x[i4];
+          t2 = x[i3] - x[i4];
+         
+          t1 = -t1 * Math.SQRT1_2;
+          t2 *= Math.SQRT1_2;
+     
+          // sumdiff(t1, x[i2], x[i4], x[i3]); // {s, d}  <--| {a+b, a-b}
+          st1 = x[i2];
+          x[i4] = t1 + st1; 
+          x[i3] = t1 - st1;
+          
+          //sumdiff3(x[i1], t2, x[i2]); // {a, b, d} <--| {a+b, b, a-b}
+          x[i2] = x[i1] - t2;
+          x[i1] += t2;
+        }
+      } else {
+        for(i0 = ix; i0 < n; i0 += id) {
+          i1 = i0;
+          i2 = i1 + n4;
+          i3 = i2 + n4;
+          i4 = i3 + n4;
+     
+          //diffsum3_r(x[i3], x[i4], t1); // {a, b, s} <--| {a, b-a, a+b}
+          t1 = x[i3] + x[i4]; 
+          x[i4] -= x[i3];
+          
+          //sumdiff3(x[i1], t1, x[i3]);   // {a, b, d} <--| {a+b, b, a-b}
+          x[i3] = x[i1] - t1; 
+          x[i1] += t1;
+        }
+      }
+   
+      ix = (id << 1) - n2;
+      id = id << 2;
+    } while (ix < n);
+ 
+    e = TWO_PI / n2;
+
+    for (var j = 1; j < n8; j++) {
+      a = j * e;
+      ss1 = Math.sin(a);
+      cc1 = Math.cos(a);
+
+      //ss3 = sin(3*a); cc3 = cos(3*a);
+      cc3 = 4*cc1*(cc1*cc1-0.75);
+      ss3 = 4*ss1*(0.75-ss1*ss1);
+   
+      ix = 0; id = n2 << 1;
+      do {
+        for (i0 = ix; i0 < n; i0 += id) {
+          i1 = i0 + j;
+          i2 = i1 + n4;
+          i3 = i2 + n4;
+          i4 = i3 + n4;
+       
+          i5 = i0 + n4 - j;
+          i6 = i5 + n4;
+          i7 = i6 + n4;
+          i8 = i7 + n4;
+       
+          //cmult(c, s, x, y, &u, &v)
+          //cmult(cc1, ss1, x[i7], x[i3], t2, t1); // {u,v} <--| {x*c-y*s, x*s+y*c}
+          t2 = x[i7]*cc1 - x[i3]*ss1; 
+          t1 = x[i7]*ss1 + x[i3]*cc1;
+          
+          //cmult(cc3, ss3, x[i8], x[i4], t4, t3);
+          t4 = x[i8]*cc3 - x[i4]*ss3; 
+          t3 = x[i8]*ss3 + x[i4]*cc3;
+       
+          //sumdiff(t2, t4);   // {a, b} <--| {a+b, a-b}
+          st1 = t2 - t4;
+          t2 += t4;
+          t4 = st1;
+          
+          //sumdiff(t2, x[i6], x[i8], x[i3]); // {s, d}  <--| {a+b, a-b}
+          //st1 = x[i6]; x[i8] = t2 + st1; x[i3] = t2 - st1;
+          x[i8] = t2 + x[i6]; 
+          x[i3] = t2 - x[i6];
+         
+          //sumdiff_r(t1, t3); // {a, b} <--| {a+b, b-a}
+          st1 = t3 - t1;
+          t1 += t3;
+          t3 = st1;
+          
+          //sumdiff(t3, x[i2], x[i4], x[i7]); // {s, d}  <--| {a+b, a-b}
+          //st1 = x[i2]; x[i4] = t3 + st1; x[i7] = t3 - st1;
+          x[i4] = t3 + x[i2]; 
+          x[i7] = t3 - x[i2];
+         
+          //sumdiff3(x[i1], t1, x[i6]);   // {a, b, d} <--| {a+b, b, a-b}
+          x[i6] = x[i1] - t1; 
+          x[i1] += t1;
+          
+          //diffsum3_r(t4, x[i5], x[i2]); // {a, b, s} <--| {a, b-a, a+b}
+          x[i2] = t4 + x[i5]; 
+          x[i5] -= t4;
+        }
+     
+        ix = (id << 1) - n2;
+        id = id << 2;
+   
+      } while (ix < n);
+    }
+  }
+
+  while (--i) {
+    rval = x[i];
+    ival = x[n-i-1];
+    mag = bSi * sqrt(rval * rval + ival * ival);
+
+    if (mag > this.peak) {
+      this.peakBand = i;
+      this.peak = mag;
+    }
+
+    spectrum[i] = mag;
+  }
+
+  spectrum[0] = bSi * x[0];
+
+  return spectrum;
+};
+
+function Sampler(file, bufferSize, sampleRate, playStart, playEnd, loopStart, loopEnd, loopMode) {
+  this.file = file;
+  this.bufferSize = bufferSize;
+  this.sampleRate = sampleRate;
+  this.playStart  = playStart || 0; // 0%
+  this.playEnd    = playEnd   || 1; // 100%
+  this.loopStart  = loopStart || 0;
+  this.loopEnd    = loopEnd   || 1;
+  this.loopMode   = loopMode  || DSP.OFF;
+  this.loaded     = false;
+  this.samples    = [];
+  this.signal     = new Float32Array(bufferSize);
+  this.frameCount = 0;
+  this.envelope   = null;
+  this.amplitude  = 1;
+  this.rootFrequency = 110; // A2 110
+  this.frequency  = 550;
+  this.step       = this.frequency / this.rootFrequency;
+  this.duration   = 0;
+  this.samplesProcessed = 0;
+  this.playhead   = 0;
+ 
+  var audio = /* new Audio();*/ document.createElement("AUDIO");
+  var self = this;
+ 
+  this.loadSamples = function(event) {
+    var buffer = DSP.getChannel(DSP.MIX, event.frameBuffer);
+    for ( var i = 0; i < buffer.length; i++) {
+      self.samples.push(buffer[i]);
+    }
+  };
+ 
+  this.loadComplete = function() {
+    // convert flexible js array into a fast typed array
+    self.samples = new Float32Array(self.samples);
+    self.loaded = true;
+  };
+ 
+  this.loadMetaData = function() {
+    self.duration = audio.duration;
+  };
+ 
+  audio.addEventListener("MozAudioAvailable", this.loadSamples, false);
+  audio.addEventListener("loadedmetadata", this.loadMetaData, false);
+  audio.addEventListener("ended", this.loadComplete, false);
+  audio.muted = true;
+  audio.src = file;
+  audio.play();
+}
+
+Sampler.prototype.applyEnvelope = function() {
+  this.envelope.process(this.signal);
+  return this.signal;
+};
+
+Sampler.prototype.generate = function() {
+  var frameOffset = this.frameCount * this.bufferSize;
+ 
+  var loopWidth = this.playEnd * this.samples.length - this.playStart * this.samples.length;
+  var playStartSamples = this.playStart * this.samples.length; // ie 0.5 -> 50% of the length
+  var playEndSamples = this.playEnd * this.samples.length; // ie 0.5 -> 50% of the length
+  var offset;
+
+  for ( var i = 0; i < this.bufferSize; i++ ) {
+    switch (this.loopMode) {
+      case DSP.OFF:
+        this.playhead = Math.round(this.samplesProcessed * this.step + playStartSamples);
+        if (this.playhead < (this.playEnd * this.samples.length) ) {
+          this.signal[i] = this.samples[this.playhead] * this.amplitude;
+        } else {
+          this.signal[i] = 0;
+        }
+        break;
+     
+      case DSP.FW:
+        this.playhead = Math.round((this.samplesProcessed * this.step) % loopWidth + playStartSamples);
+        if (this.playhead < (this.playEnd * this.samples.length) ) {
+          this.signal[i] = this.samples[this.playhead] * this.amplitude;
+        }
+        break;
+       
+      case DSP.BW:
+        this.playhead = playEndSamples - Math.round((this.samplesProcessed * this.step) % loopWidth);
+        if (this.playhead < (this.playEnd * this.samples.length) ) {
+          this.signal[i] = this.samples[this.playhead] * this.amplitude;
+        }
+        break;
+       
+      case DSP.FWBW:
+        if ( Math.floor(this.samplesProcessed * this.step / loopWidth) % 2 === 0 ) {
+          this.playhead = Math.round((this.samplesProcessed * this.step) % loopWidth + playStartSamples);
+        } else {
+          this.playhead = playEndSamples - Math.round((this.samplesProcessed * this.step) % loopWidth);
+        }  
+        if (this.playhead < (this.playEnd * this.samples.length) ) {
+          this.signal[i] = this.samples[this.playhead] * this.amplitude;
+        }
+        break;
+    }
+    this.samplesProcessed++;
+  }
+
+  this.frameCount++;
+
+  return this.signal;
+};
+
+Sampler.prototype.setFreq = function(frequency) {
+    var totalProcessed = this.samplesProcessed * this.step;
+    this.frequency = frequency;
+    this.step = this.frequency / this.rootFrequency;
+    this.samplesProcessed = Math.round(totalProcessed/this.step);
+};
+
+Sampler.prototype.reset = function() {
+  this.samplesProcessed = 0;
+  this.playhead = 0;
+};
+
+/**
+ * Oscillator class for generating and modifying signals
+ *
+ * @param {Number} type       A waveform constant (eg. DSP.SINE)
+ * @param {Number} frequency  Initial frequency of the signal
+ * @param {Number} amplitude  Initial amplitude of the signal
+ * @param {Number} bufferSize Size of the sample buffer to generate
+ * @param {Number} sampleRate The sample rate of the signal
+ *
+ * @contructor
+ */
+function Oscillator(type, frequency, amplitude, bufferSize, sampleRate) {
+  this.frequency  = frequency;
+  this.amplitude  = amplitude;
+  this.bufferSize = bufferSize;
+  this.sampleRate = sampleRate;
+  //this.pulseWidth = pulseWidth;
+  this.frameCount = 0;
+ 
+  this.waveTableLength = 2048;
+
+  this.cyclesPerSample = frequency / sampleRate;
+
+  this.signal = new Float32Array(bufferSize);
+  this.envelope = null;
+
+  switch(parseInt(type, 10)) {
+    case DSP.TRIANGLE:
+      this.func = Oscillator.Triangle;
+      break;
+
+    case DSP.SAW:
+      this.func = Oscillator.Saw;
+      break;
+
+    case DSP.SQUARE:
+      this.func = Oscillator.Square;
+      break;
+
+    default:
+    case DSP.SINE:
+      this.func = Oscillator.Sine;
+      break;
+  }
+
+  this.generateWaveTable = function() {
+    Oscillator.waveTable[this.func] = new Float32Array(2048);
+    var waveTableTime = this.waveTableLength / this.sampleRate;
+    var waveTableHz = 1 / waveTableTime;
+
+    for (var i = 0; i < this.waveTableLength; i++) {
+      Oscillator.waveTable[this.func][i] = this.func(i * waveTableHz/this.sampleRate);
+    }
+  };
+
+  if ( typeof Oscillator.waveTable === 'undefined' ) {
+    Oscillator.waveTable = {};
+  }
+
+  if ( typeof Oscillator.waveTable[this.func] === 'undefined' ) {
+    this.generateWaveTable();
+  }
+ 
+  this.waveTable = Oscillator.waveTable[this.func];
+}
+
+/**
+ * Set the amplitude of the signal
+ *
+ * @param {Number} amplitude The amplitude of the signal (between 0 and 1)
+ */
+Oscillator.prototype.setAmp = function(amplitude) {
+  if (amplitude >= 0 && amplitude <= 1) {
+    this.amplitude = amplitude;
+  } else {
+    throw "Amplitude out of range (0..1).";
+  }
+};
+  
+/**
+ * Set the frequency of the signal
+ *
+ * @param {Number} frequency The frequency of the signal
+ */  
+Oscillator.prototype.setFreq = function(frequency) {
+  this.frequency = frequency;
+  this.cyclesPerSample = frequency / this.sampleRate;
+};
+     
+// Add an oscillator
+Oscillator.prototype.add = function(oscillator) {
+  for ( var i = 0; i < this.bufferSize; i++ ) {
+    //this.signal[i] += oscillator.valueAt(i);
+    this.signal[i] += oscillator.signal[i];
+  }
+ 
+  return this.signal;
+};
+     
+// Add a signal to the current generated osc signal
+Oscillator.prototype.addSignal = function(signal) {
+  for ( var i = 0; i < signal.length; i++ ) {
+    if ( i >= this.bufferSize ) {
+      break;
+    }
+    this.signal[i] += signal[i];
+   
+    /*
+    // Constrain amplitude
+    if ( this.signal[i] > 1 ) {
+      this.signal[i] = 1;
+    } else if ( this.signal[i] < -1 ) {
+      this.signal[i] = -1;
+    }
+    */
+  }
+  return this.signal;
+};
+     
+// Add an envelope to the oscillator
+Oscillator.prototype.addEnvelope = function(envelope) {
+  this.envelope = envelope;
+};
+
+Oscillator.prototype.applyEnvelope = function() {
+  this.envelope.process(this.signal);
+};
+     
+Oscillator.prototype.valueAt = function(offset) {
+  return this.waveTable[offset % this.waveTableLength];
+};
+     
+Oscillator.prototype.generate = function() {
+  var frameOffset = this.frameCount * this.bufferSize;
+  var step = this.waveTableLength * this.frequency / this.sampleRate;
+  var offset;
+
+  for ( var i = 0; i < this.bufferSize; i++ ) {
+    //var step = (frameOffset + i) * this.cyclesPerSample % 1;
+    //this.signal[i] = this.func(step) * this.amplitude;
+    //this.signal[i] = this.valueAt(Math.round((frameOffset + i) * step)) * this.amplitude;
+    offset = Math.round((frameOffset + i) * step);
+    this.signal[i] = this.waveTable[offset % this.waveTableLength] * this.amplitude;
+  }
+
+  this.frameCount++;
+
+  return this.signal;
+};
+
+Oscillator.Sine = function(step) {
+  return Math.sin(DSP.TWO_PI * step);
+};
+
+Oscillator.Square = function(step) {
+  return step < 0.5 ? 1 : -1;
+};
+
+Oscillator.Saw = function(step) {
+  return 2 * (step - Math.round(step));
+};
+
+Oscillator.Triangle = function(step) {
+  return 1 - 4 * Math.abs(Math.round(step) - step);
+};
+
+Oscillator.Pulse = function(step) {
+  // stub
+};
+ 
+function ADSR(attackLength, decayLength, sustainLevel, sustainLength, releaseLength, sampleRate) {
+  this.sampleRate = sampleRate;
+  // Length in seconds
+  this.attackLength  = attackLength;
+  this.decayLength   = decayLength;
+  this.sustainLevel  = sustainLevel;
+  this.sustainLength = sustainLength;
+  this.releaseLength = releaseLength;
+  this.sampleRate    = sampleRate;
+ 
+  // Length in samples
+  this.attackSamples  = attackLength  * sampleRate;
+  this.decaySamples   = decayLength   * sampleRate;
+  this.sustainSamples = sustainLength * sampleRate;
+  this.releaseSamples = releaseLength * sampleRate;
+ 
+  // Updates the envelope sample positions
+  this.update = function() {
+    this.attack         =                this.attackSamples;
+    this.decay          = this.attack  + this.decaySamples;
+    this.sustain        = this.decay   + this.sustainSamples;
+    this.release        = this.sustain + this.releaseSamples;
+  };
+ 
+  this.update();
+ 
+  this.samplesProcessed = 0;
+}
+
+ADSR.prototype.noteOn = function() {
+  this.samplesProcessed = 0;
+  this.sustainSamples = this.sustainLength * this.sampleRate;
+  this.update();
+};
+
+// Send a note off when using a sustain of infinity to let the envelope enter the release phase
+ADSR.prototype.noteOff = function() {
+  this.sustainSamples = this.samplesProcessed - this.decaySamples;
+  this.update();
+};
+
+ADSR.prototype.processSample = function(sample) {
+  var amplitude = 0;
+
+  if ( this.samplesProcessed <= this.attack ) {
+    amplitude = 0 + (1 - 0) * ((this.samplesProcessed - 0) / (this.attack - 0));
+  } else if ( this.samplesProcessed > this.attack && this.samplesProcessed <= this.decay ) {
+    amplitude = 1 + (this.sustainLevel - 1) * ((this.samplesProcessed - this.attack) / (this.decay - this.attack));
+  } else if ( this.samplesProcessed > this.decay && this.samplesProcessed <= this.sustain ) {
+    amplitude = this.sustainLevel;
+  } else if ( this.samplesProcessed > this.sustain && this.samplesProcessed <= this.release ) {
+    amplitude = this.sustainLevel + (0 - this.sustainLevel) * ((this.samplesProcessed - this.sustain) / (this.release - this.sustain));
+  }
+ 
+  return sample * amplitude;
+};
+
+ADSR.prototype.value = function() {
+  var amplitude = 0;
+
+  if ( this.samplesProcessed <= this.attack ) {
+    amplitude = 0 + (1 - 0) * ((this.samplesProcessed - 0) / (this.attack - 0));
+  } else if ( this.samplesProcessed > this.attack && this.samplesProcessed <= this.decay ) {
+    amplitude = 1 + (this.sustainLevel - 1) * ((this.samplesProcessed - this.attack) / (this.decay - this.attack));
+  } else if ( this.samplesProcessed > this.decay && this.samplesProcessed <= this.sustain ) {
+    amplitude = this.sustainLevel;
+  } else if ( this.samplesProcessed > this.sustain && this.samplesProcessed <= this.release ) {
+    amplitude = this.sustainLevel + (0 - this.sustainLevel) * ((this.samplesProcessed - this.sustain) / (this.release - this.sustain));
+  }
+ 
+  return amplitude;
+};
+     
+ADSR.prototype.process = function(buffer) {
+  for ( var i = 0; i < buffer.length; i++ ) {
+    buffer[i] *= this.value();
+
+    this.samplesProcessed++;
+  }
+ 
+  return buffer;
+};
+     
+     
+ADSR.prototype.isActive = function() {
+  if ( this.samplesProcessed > this.release || this.samplesProcessed === -1 ) {
+    return false;
+  } else {
+    return true;
+  }
+};
+
+ADSR.prototype.disable = function() {
+  this.samplesProcessed = -1;
+};
+ 
+function IIRFilter(type, cutoff, resonance, sampleRate) {
+  this.sampleRate = sampleRate;
+
+  switch(type) {
+    case DSP.LOWPASS:
+    case DSP.LP12:
+      this.func = new IIRFilter.LP12(cutoff, resonance, sampleRate);
+      break;
+  }
+}
+
+IIRFilter.prototype.__defineGetter__('cutoff',
+  function() {
+    return this.func.cutoff;
+  }
+);
+
+IIRFilter.prototype.__defineGetter__('resonance',
+  function() {
+    return this.func.resonance;
+  }
+);
+
+IIRFilter.prototype.set = function(cutoff, resonance) {
+  this.func.calcCoeff(cutoff, resonance);
+};
+
+IIRFilter.prototype.process = function(buffer) {
+  this.func.process(buffer);
+};
+
+// Add an envelope to the filter
+IIRFilter.prototype.addEnvelope = function(envelope) {
+  if ( envelope instanceof ADSR ) {
+    this.func.addEnvelope(envelope);
+  } else {
+    throw "Not an envelope.";
+  }
+};
+
+IIRFilter.LP12 = function(cutoff, resonance, sampleRate) {
+  this.sampleRate = sampleRate;
+  this.vibraPos   = 0;
+  this.vibraSpeed = 0;
+  this.envelope = false;
+ 
+  this.calcCoeff = function(cutoff, resonance) {
+    this.w = 2.0 * Math.PI * cutoff / this.sampleRate;
+    this.q = 1.0 - this.w / (2.0 * (resonance + 0.5 / (1.0 + this.w)) + this.w - 2.0);
+    this.r = this.q * this.q;
+    this.c = this.r + 1.0 - 2.0 * Math.cos(this.w) * this.q;
+   
+    this.cutoff = cutoff;
+    this.resonance = resonance;
+  };
+
+  this.calcCoeff(cutoff, resonance);
+
+  this.process = function(buffer) {
+    for ( var i = 0; i < buffer.length; i++ ) {
+      this.vibraSpeed += (buffer[i] - this.vibraPos) * this.c;
+      this.vibraPos   += this.vibraSpeed;
+      this.vibraSpeed *= this.r;
+   
+      /*
+      var temp = this.vibraPos;
+     
+      if ( temp > 1.0 ) {
+        temp = 1.0;
+      } else if ( temp < -1.0 ) {
+        temp = -1.0;
+      } else if ( temp != temp ) {
+        temp = 1;
+      }
+     
+      buffer[i] = temp;
+      */
+
+      if (this.envelope) {
+        buffer[i] = (buffer[i] * (1 - this.envelope.value())) + (this.vibraPos * this.envelope.value());
+        this.envelope.samplesProcessed++;
+      } else {
+        buffer[i] = this.vibraPos;
+      }
+    }
+  };
+}; 
+
+IIRFilter.LP12.prototype.addEnvelope = function(envelope) {
+  this.envelope = envelope;
+};
+
+function IIRFilter2(type, cutoff, resonance, sampleRate) {
+  this.type = type;
+  this.cutoff = cutoff;
+  this.resonance = resonance;
+  this.sampleRate = sampleRate;
+
+  this.f = Float32Array(4);
+  this.f[0] = 0.0; // lp
+  this.f[1] = 0.0; // hp
+  this.f[2] = 0.0; // bp
+  this.f[3] = 0.0; // br 
+ 
+  this.calcCoeff = function(cutoff, resonance) {
+    this.freq = 2 * Math.sin(Math.PI * Math.min(0.25, cutoff/(this.sampleRate*2)));  
+    this.damp = Math.min(2 * (1 - Math.pow(resonance, 0.25)), Math.min(2, 2/this.freq - this.freq * 0.5));
+  };
+
+  this.calcCoeff(cutoff, resonance);
+}
+
+IIRFilter2.prototype.process = function(buffer) {
+  var input, output;
+  var f = this.f;
+
+  for ( var i = 0; i < buffer.length; i++ ) {
+    input = buffer[i];
+
+    // first pass
+    f[3] = input - this.damp * f[2];
+    f[0] = f[0] + this.freq * f[2];
+    f[1] = f[3] - f[0];
+    f[2] = this.freq * f[1] + f[2];
+    output = 0.5 * f[this.type];
+
+    // second pass
+    f[3] = input - this.damp * f[2];
+    f[0] = f[0] + this.freq * f[2];
+    f[1] = f[3] - f[0];
+    f[2] = this.freq * f[1] + f[2];
+    output += 0.5 * f[this.type];
+
+    if (this.envelope) {
+      buffer[i] = (buffer[i] * (1 - this.envelope.value())) + (output * this.envelope.value());
+      this.envelope.samplesProcessed++;
+    } else {
+      buffer[i] = output;
+    }
+  }
+};
+
+IIRFilter2.prototype.addEnvelope = function(envelope) {
+  if ( envelope instanceof ADSR ) {
+    this.envelope = envelope;
+  } else {
+    throw "This is not an envelope.";
+  }
+};
+
+IIRFilter2.prototype.set = function(cutoff, resonance) {
+  this.calcCoeff(cutoff, resonance);
+};
+
+
+
+function WindowFunction(type, alpha) {
+  this.alpha = alpha;
+ 
+  switch(type) {
+    case DSP.BARTLETT:
+      this.func = WindowFunction.Bartlett;
+      break;
+     
+    case DSP.BARTLETTHANN:
+      this.func = WindowFunction.BartlettHann;
+      break;
+     
+    case DSP.BLACKMAN:
+      this.func = WindowFunction.Blackman;
+      this.alpha = this.alpha || 0.16;
+      break;
+   
+    case DSP.COSINE:
+      this.func = WindowFunction.Cosine;
+      break;
+     
+    case DSP.GAUSS:
+      this.func = WindowFunction.Gauss;
+      this.alpha = this.alpha || 0.25;
+      break;
+     
+    case DSP.HAMMING:
+      this.func = WindowFunction.Hamming;
+      break;
+     
+    case DSP.HANN:
+      this.func = WindowFunction.Hann;
+      break;
+   
+    case DSP.LANCZOS:
+      this.func = WindowFunction.Lanczoz;
+      break;
+     
+    case DSP.RECTANGULAR:
+      this.func = WindowFunction.Rectangular;
+      break;
+     
+    case DSP.TRIANGULAR:
+      this.func = WindowFunction.Triangular;
+      break;
+  }
+}
+
+WindowFunction.prototype.process = function(buffer) {
+  var length = buffer.length;
+  for ( var i = 0; i < length; i++ ) {
+    buffer[i] *= this.func(length, i, this.alpha);
+  }
+  return buffer;
+};
+
+WindowFunction.Bartlett = function(length, index) {
+  return 2 / (length - 1) * ((length - 1) / 2 - Math.abs(index - (length - 1) / 2));
+};
+
+WindowFunction.BartlettHann = function(length, index) {
+  return 0.62 - 0.48 * Math.abs(index / (length - 1) - 0.5) - 0.38 * Math.cos(DSP.TWO_PI * index / (length - 1));
+};
+
+WindowFunction.Blackman = function(length, index, alpha) {
+  var a0 = (1 - alpha) / 2;
+  var a1 = 0.5;
+  var a2 = alpha / 2;
+
+  return a0 - a1 * Math.cos(DSP.TWO_PI * index / (length - 1)) + a2 * Math.cos(4 * Math.PI * index / (length - 1));
+};
+
+WindowFunction.Cosine = function(length, index) {
+  return Math.cos(Math.PI * index / (length - 1) - Math.PI / 2);
+};
+
+WindowFunction.Gauss = function(length, index, alpha) {
+  return Math.pow(Math.E, -0.5 * Math.pow((index - (length - 1) / 2) / (alpha * (length - 1) / 2), 2));
+};
+
+WindowFunction.Hamming = function(length, index) {
+  return 0.54 - 0.46 * Math.cos(DSP.TWO_PI * index / (length - 1));
+};
+
+WindowFunction.Hann = function(length, index) {
+  return 0.5 * (1 - Math.cos(DSP.TWO_PI * index / (length - 1)));
+};
+
+WindowFunction.Lanczos = function(length, index) {
+  var x = 2 * index / (length - 1) - 1;
+  return Math.sin(Math.PI * x) / (Math.PI * x);
+};
+
+WindowFunction.Rectangular = function(length, index) {
+  return 1;
+};
+
+WindowFunction.Triangular = function(length, index) {
+  return 2 / length * (length / 2 - Math.abs(index - (length - 1) / 2));
+};
+
+function sinh (arg) {
+  // Returns the hyperbolic sine of the number, defined as (exp(number) - exp(-number))/2 
+  //
+  // version: 1004.2314
+  // discuss at: http://phpjs.org/functions/sinh    // +   original by: Onno Marsman
+  // *     example 1: sinh(-0.9834330348825909);
+  // *     returns 1: -1.1497971402636502
+  return (Math.exp(arg) - Math.exp(-arg))/2;
+}
+
+/* 
+ *  Biquad filter
+ * 
+ *  Created by Ricard Marxer <email@ricardmarxer.com> on 2010-05-23.
+ *  Copyright 2010 Ricard Marxer. All rights reserved.
+ *
+ */
+// Implementation based on:
+// http://www.musicdsp.org/files/Audio-EQ-Cookbook.txt
+function Biquad(type, sampleRate) {
+  this.Fs = sampleRate;
+  this.type = type;  // type of the filter
+  this.parameterType = DSP.Q; // type of the parameter
+
+  this.x_1_l = 0;
+  this.x_2_l = 0;
+  this.y_1_l = 0;
+  this.y_2_l = 0;
+
+  this.x_1_r = 0;
+  this.x_2_r = 0;
+  this.y_1_r = 0;
+  this.y_2_r = 0;
+
+  this.b0 = 1;
+  this.a0 = 1;
+
+  this.b1 = 0;
+  this.a1 = 0;
+
+  this.b2 = 0;
+  this.a2 = 0;
+
+  this.b0a0 = this.b0 / this.a0;
+  this.b1a0 = this.b1 / this.a0;
+  this.b2a0 = this.b2 / this.a0;
+  this.a1a0 = this.a1 / this.a0;
+  this.a2a0 = this.a2 / this.a0;
+
+  this.f0 = 3000;   // "wherever it's happenin', man."  Center Frequency or
+                    // Corner Frequency, or shelf midpoint frequency, depending
+                    // on which filter type.  The "significant frequency".
+
+  this.dBgain = 12; // used only for peaking and shelving filters
+
+  this.Q = 1;       // the EE kind of definition, except for peakingEQ in which A*Q is
+                    // the classic EE Q.  That adjustment in definition was made so that
+                    // a boost of N dB followed by a cut of N dB for identical Q and
+                    // f0/Fs results in a precisely flat unity gain filter or "wire".
+
+  this.BW = -3;     // the bandwidth in octaves (between -3 dB frequencies for BPF
+                    // and notch or between midpoint (dBgain/2) gain frequencies for
+                    // peaking EQ
+
+  this.S = 1;       // a "shelf slope" parameter (for shelving EQ only).  When S = 1,
+                    // the shelf slope is as steep as it can be and remain monotonically
+                    // increasing or decreasing gain with frequency.  The shelf slope, in
+                    // dB/octave, remains proportional to S for all other values for a
+                    // fixed f0/Fs and dBgain.
+
+  this.coefficients = function() {
+    var b = [this.b0, this.b1, this.b2];
+    var a = [this.a0, this.a1, this.a2];
+    return {b: b, a:a};
+  };
+
+  this.setFilterType = function(type) {
+    this.type = type;
+    this.recalculateCoefficients();
+  };
+
+  this.setSampleRate = function(rate) {
+    this.Fs = rate;
+    this.recalculateCoefficients();
+  };
+
+  this.setQ = function(q) {
+    this.parameterType = DSP.Q;
+    this.Q = Math.max(Math.min(q, 115.0), 0.001);
+    this.recalculateCoefficients();
+  };
+
+  this.setBW = function(bw) {
+    this.parameterType = DSP.BW;
+    this.BW = bw;
+    this.recalculateCoefficients();
+  };
+
+  this.setS = function(s) {
+    this.parameterType = DSP.S;
+    this.S = Math.max(Math.min(s, 5.0), 0.0001);
+    this.recalculateCoefficients();
+  };
+
+  this.setF0 = function(freq) {
+    this.f0 = freq;
+    this.recalculateCoefficients();
+  }; 
+ 
+  this.setDbGain = function(g) {
+    this.dBgain = g;
+    this.recalculateCoefficients();
+  };
+
+  this.recalculateCoefficients = function() {
+    var A;
+    if (type === DSP.PEAKING_EQ || type === DSP.LOW_SHELF || type === DSP.HIGH_SHELF ) {
+      A = Math.pow(10, (this.dBgain/40));  // for peaking and shelving EQ filters only
+    } else {
+      A  = Math.sqrt( Math.pow(10, (this.dBgain/20)) );   
+    }
+
+    var w0 = DSP.TWO_PI * this.f0 / this.Fs;
+
+    var cosw0 = Math.cos(w0);
+    var sinw0 = Math.sin(w0);
+
+    var alpha = 0;
+   
+    switch (this.parameterType) {
+      case DSP.Q:
+        alpha = sinw0/(2*this.Q);
+        break;
+           
+      case DSP.BW:
+        alpha = sinw0 * sinh( Math.LN2/2 * this.BW * w0/sinw0 );
+        break;
+
+      case DSP.S:
+        alpha = sinw0/2 * Math.sqrt( (A + 1/A)*(1/this.S - 1) + 2 );
+        break;
+    }
+
+    /**
+        FYI: The relationship between bandwidth and Q is
+             1/Q = 2*sinh(ln(2)/2*BW*w0/sin(w0))     (digital filter w BLT)
+        or   1/Q = 2*sinh(ln(2)/2*BW)             (analog filter prototype)
+
+        The relationship between shelf slope and Q is
+             1/Q = sqrt((A + 1/A)*(1/S - 1) + 2)
+    */
+
+    var coeff;
+
+    switch (this.type) {
+      case DSP.LPF:       // H(s) = 1 / (s^2 + s/Q + 1)
+        this.b0 =  (1 - cosw0)/2;
+        this.b1 =   1 - cosw0;
+        this.b2 =  (1 - cosw0)/2;
+        this.a0 =   1 + alpha;
+        this.a1 =  -2 * cosw0;
+        this.a2 =   1 - alpha;
+        break;
+
+      case DSP.HPF:       // H(s) = s^2 / (s^2 + s/Q + 1)
+        this.b0 =  (1 + cosw0)/2;
+        this.b1 = -(1 + cosw0);
+        this.b2 =  (1 + cosw0)/2;
+        this.a0 =   1 + alpha;
+        this.a1 =  -2 * cosw0;
+        this.a2 =   1 - alpha;
+        break;
+
+      case DSP.BPF_CONSTANT_SKIRT:       // H(s) = s / (s^2 + s/Q + 1)  (constant skirt gain, peak gain = Q)
+        this.b0 =   sinw0/2;
+        this.b1 =   0;
+        this.b2 =  -sinw0/2;
+        this.a0 =   1 + alpha;
+        this.a1 =  -2*cosw0;
+        this.a2 =   1 - alpha;
+        break;
+
+      case DSP.BPF_CONSTANT_PEAK:       // H(s) = (s/Q) / (s^2 + s/Q + 1)      (constant 0 dB peak gain)
+        this.b0 =   alpha;
+        this.b1 =   0;
+        this.b2 =  -alpha;
+        this.a0 =   1 + alpha;
+        this.a1 =  -2*cosw0;
+        this.a2 =   1 - alpha;
+        break;
+
+      case DSP.NOTCH:     // H(s) = (s^2 + 1) / (s^2 + s/Q + 1)
+        this.b0 =   1;
+        this.b1 =  -2*cosw0;
+        this.b2 =   1;
+        this.a0 =   1 + alpha;
+        this.a1 =  -2*cosw0;
+        this.a2 =   1 - alpha;
+        break;
+
+      case DSP.APF:       // H(s) = (s^2 - s/Q + 1) / (s^2 + s/Q + 1)
+        this.b0 =   1 - alpha;
+        this.b1 =  -2*cosw0;
+        this.b2 =   1 + alpha;
+        this.a0 =   1 + alpha;
+        this.a1 =  -2*cosw0;
+        this.a2 =   1 - alpha;
+        break;
+
+      case DSP.PEAKING_EQ:  // H(s) = (s^2 + s*(A/Q) + 1) / (s^2 + s/(A*Q) + 1)
+        this.b0 =   1 + alpha*A;
+        this.b1 =  -2*cosw0;
+        this.b2 =   1 - alpha*A;
+        this.a0 =   1 + alpha/A;
+        this.a1 =  -2*cosw0;
+        this.a2 =   1 - alpha/A;
+        break;
+
+      case DSP.LOW_SHELF:   // H(s) = A * (s^2 + (sqrt(A)/Q)*s + A)/(A*s^2 + (sqrt(A)/Q)*s + 1)
+        coeff = sinw0 * Math.sqrt( (A^2 + 1)*(1/this.S - 1) + 2*A );
+        this.b0 =    A*((A+1) - (A-1)*cosw0 + coeff);
+        this.b1 =  2*A*((A-1) - (A+1)*cosw0);
+        this.b2 =    A*((A+1) - (A-1)*cosw0 - coeff);
+        this.a0 =       (A+1) + (A-1)*cosw0 + coeff;
+        this.a1 =   -2*((A-1) + (A+1)*cosw0);
+        this.a2 =       (A+1) + (A-1)*cosw0 - coeff;
+        break;
+
+      case DSP.HIGH_SHELF:   // H(s) = A * (A*s^2 + (sqrt(A)/Q)*s + 1)/(s^2 + (sqrt(A)/Q)*s + A)
+        coeff = sinw0 * Math.sqrt( (A^2 + 1)*(1/this.S - 1) + 2*A );
+        this.b0 =    A*((A+1) + (A-1)*cosw0 + coeff);
+        this.b1 = -2*A*((A-1) + (A+1)*cosw0);
+        this.b2 =    A*((A+1) + (A-1)*cosw0 - coeff);
+        this.a0 =       (A+1) - (A-1)*cosw0 + coeff;
+        this.a1 =    2*((A-1) - (A+1)*cosw0);
+        this.a2 =       (A+1) - (A-1)*cosw0 - coeff;
+        break;
+    }
+   
+    this.b0a0 = this.b0/this.a0;
+    this.b1a0 = this.b1/this.a0;
+    this.b2a0 = this.b2/this.a0;
+    this.a1a0 = this.a1/this.a0;
+    this.a2a0 = this.a2/this.a0;
+  };
+
+  this.process = function(buffer) {
+      //y[n] = (b0/a0)*x[n] + (b1/a0)*x[n-1] + (b2/a0)*x[n-2]
+      //       - (a1/a0)*y[n-1] - (a2/a0)*y[n-2]
+
+      var len = buffer.length;
+      var output = new Float32Array(len);
+
+      for ( var i=0; i<buffer.length; i++ ) {
+        output[i] = this.b0a0*buffer[i] + this.b1a0*this.x_1_l + this.b2a0*this.x_2_l - this.a1a0*this.y_1_l - this.a2a0*this.y_2_l;
+        this.y_2_l = this.y_1_l;
+        this.y_1_l = output[i];
+        this.x_2_l = this.x_1_l;
+        this.x_1_l = buffer[i];
+      }
+
+      return output;
+  };
+
+  this.processStereo = function(buffer) {
+      //y[n] = (b0/a0)*x[n] + (b1/a0)*x[n-1] + (b2/a0)*x[n-2]
+      //       - (a1/a0)*y[n-1] - (a2/a0)*y[n-2]
+
+      var len = buffer.length;
+      var output = new Float32Array(len);
+     
+      for (var i = 0; i < len/2; i++) {
+        output[2*i] = this.b0a0*buffer[2*i] + this.b1a0*this.x_1_l + this.b2a0*this.x_2_l - this.a1a0*this.y_1_l - this.a2a0*this.y_2_l;
+        this.y_2_l = this.y_1_l;
+        this.y_1_l = output[2*i];
+        this.x_2_l = this.x_1_l;
+        this.x_1_l = buffer[2*i];
+
+        output[2*i+1] = this.b0a0*buffer[2*i+1] + this.b1a0*this.x_1_r + this.b2a0*this.x_2_r - this.a1a0*this.y_1_r - this.a2a0*this.y_2_r;
+        this.y_2_r = this.y_1_r;
+        this.y_1_r = output[2*i+1];
+        this.x_2_r = this.x_1_r;
+        this.x_1_r = buffer[2*i+1];
+      }
+
+      return output;
+  };
+}
+
+/* 
+ *  Magnitude to decibels
+ * 
+ *  Created by Ricard Marxer <email@ricardmarxer.com> on 2010-05-23.
+ *  Copyright 2010 Ricard Marxer. All rights reserved.
+ *
+ *  @buffer array of magnitudes to convert to decibels
+ *
+ *  @returns the array in decibels
+ *
+ */
+DSP.mag2db = function(buffer) {
+  var minDb = -120;
+  var minMag = Math.pow(10.0, minDb / 20.0);
+
+  var log = Math.log;
+  var max = Math.max;
+ 
+  var result = Float32Array(buffer.length);
+  for (var i=0; i<buffer.length; i++) {
+    result[i] = 20.0*log(max(buffer[i], minMag));
+  }
+
+  return result;
+};
+
+/* 
+ *  Frequency response
+ * 
+ *  Created by Ricard Marxer <email@ricardmarxer.com> on 2010-05-23.
+ *  Copyright 2010 Ricard Marxer. All rights reserved.
+ *
+ *  Calculates the frequency response at the given points.
+ *
+ *  @b b coefficients of the filter
+ *  @a a coefficients of the filter
+ *  @w w points (normally between -PI and PI) where to calculate the frequency response
+ *
+ *  @returns the frequency response in magnitude
+ *
+ */
+DSP.freqz = function(b, a, w) {
+  var i, j;
+
+  if (!w) {
+    w = Float32Array(200);
+    for (i=0;i<w.length; i++) {
+      w[i] = DSP.TWO_PI/w.length * i - Math.PI;
+    }
+  }
+
+  var result = Float32Array(w.length);
+ 
+  var sqrt = Math.sqrt;
+  var cos = Math.cos;
+  var sin = Math.sin;
+ 
+  for (i=0; i<w.length; i++) {
+    var numerator = {real:0.0, imag:0.0};
+    for (j=0; j<b.length; j++) {
+      numerator.real += b[j] * cos(-j*w[i]);
+      numerator.imag += b[j] * sin(-j*w[i]);
+    }
+
+    var denominator = {real:0.0, imag:0.0};
+    for (j=0; j<a.length; j++) {
+      denominator.real += a[j] * cos(-j*w[i]);
+      denominator.imag += a[j] * sin(-j*w[i]);
+    }
+ 
+    result[i] =  sqrt(numerator.real*numerator.real + numerator.imag*numerator.imag) / sqrt(denominator.real*denominator.real + denominator.imag*denominator.imag);
+  }
+
+  return result;
+};
+
+/* 
+ *  Graphical Equalizer
+ *
+ *  Implementation of a graphic equalizer with a configurable bands-per-octave
+ *  and minimum and maximum frequencies
+ * 
+ *  Created by Ricard Marxer <email@ricardmarxer.com> on 2010-05-23.
+ *  Copyright 2010 Ricard Marxer. All rights reserved.
+ *
+ */
+function GraphicalEq(sampleRate) {
+  this.FS = sampleRate;
+  this.minFreq = 40.0;
+  this.maxFreq = 16000.0;
+
+  this.bandsPerOctave = 1.0;
+
+  this.filters = [];
+  this.freqzs = [];
+
+  this.calculateFreqzs = true;
+
+  this.recalculateFilters = function() {
+    var bandCount = Math.round(Math.log(this.maxFreq/this.minFreq) * this.bandsPerOctave/ Math.LN2);
+
+    this.filters = [];
+    for (var i=0; i<bandCount; i++) {
+      var freq = this.minFreq*(Math.pow(2, i/this.bandsPerOctave));
+      var newFilter = new Biquad(DSP.PEAKING_EQ, this.FS);
+      newFilter.setDbGain(0);
+      newFilter.setBW(1/this.bandsPerOctave);
+      newFilter.setF0(freq);
+      this.filters[i] = newFilter;
+      this.recalculateFreqz(i);
+    }
+  };
+
+  this.setMinimumFrequency = function(freq) {
+    this.minFreq = freq;
+    this.recalculateFilters();
+  };
+
+  this.setMaximumFrequency = function(freq) {
+    this.maxFreq = freq;
+    this.recalculateFilters();
+  };
+
+  this.setBandsPerOctave = function(bands) {
+    this.bandsPerOctave = bands;
+    this.recalculateFilters();
+  };
+
+  this.setBandGain = function(bandIndex, gain) {
+    if (bandIndex < 0 || bandIndex > (this.filters.length-1)) {
+      throw "The band index of the graphical equalizer is out of bounds.";
+    }
+
+    if (!gain) {
+      throw "A gain must be passed.";
+    }
+   
+    this.filters[bandIndex].setDbGain(gain);
+    this.recalculateFreqz(bandIndex);
+  };
+ 
+  this.recalculateFreqz = function(bandIndex) {
+    if (!this.calculateFreqzs) {
+      return;
+    }
+
+    if (bandIndex < 0 || bandIndex > (this.filters.length-1)) {
+      throw "The band index of the graphical equalizer is out of bounds. " + bandIndex + " is out of [" + 0 + ", " + this.filters.length-1 + "]";
+    }
+       
+    if (!this.w) {
+      this.w = Float32Array(400);
+      for (var i=0; i<this.w.length; i++) {
+         this.w[i] = Math.PI/this.w.length * i;
+      }
+    }
+   
+    var b = [this.filters[bandIndex].b0, this.filters[bandIndex].b1, this.filters[bandIndex].b2];
+    var a = [this.filters[bandIndex].a0, this.filters[bandIndex].a1, this.filters[bandIndex].a2];
+
+    this.freqzs[bandIndex] = DSP.mag2db(DSP.freqz(b, a, this.w));
+  };
+
+  this.process = function(buffer) {
+    var output = buffer;
+
+    for (var i = 0; i < this.filters.length; i++) {
+      output = this.filters[i].process(output);
+    }
+
+    return output;
+  };
+
+  this.processStereo = function(buffer) {
+    var output = buffer;
+
+    for (var i = 0; i < this.filters.length; i++) {
+      output = this.filters[i].processStereo(output);
+    }
+
+    return output;
+  };
+}
+
+/**
+ * MultiDelay effect by Almer Thie (http://code.almeros.com).
+ * Copyright 2010 Almer Thie. All rights reserved.
+ * Example: http://code.almeros.com/code-examples/delay-firefox-audio-api/
+ *
+ * This is a delay that feeds it's own delayed signal back into its circular
+ * buffer. Also known as a CombFilter.
+ *
+ * Compatible with interleaved stereo (or more channel) buffers and
+ * non-interleaved mono buffers.
+ *
+ * @param {Number} maxDelayInSamplesSize Maximum possible delay in samples (size of circular buffer)
+ * @param {Number} delayInSamples Initial delay in samples
+ * @param {Number} masterVolume Initial master volume. Float value: 0.0 (silence), 1.0 (normal), >1.0 (amplify)
+ * @param {Number} delayVolume Initial feedback delay volume. Float value: 0.0 (silence), 1.0 (normal), >1.0 (amplify)
+ *
+ * @constructor
+ */
+function MultiDelay(maxDelayInSamplesSize, delayInSamples, masterVolume, delayVolume) {
+  this.delayBufferSamples   = new Float32Array(maxDelayInSamplesSize); // The maximum size of delay
+  this.delayInputPointer     = delayInSamples;
+  this.delayOutputPointer   = 0;
+ 
+  this.delayInSamples   = delayInSamples;
+  this.masterVolume     = masterVolume;
+  this.delayVolume     = delayVolume;
+}
+
+/**
+ * Change the delay time in samples.
+ *
+ * @param {Number} delayInSamples Delay in samples
+ */
+MultiDelay.prototype.setDelayInSamples = function (delayInSamples) {
+  this.delayInSamples = delayInSamples;
+ 
+  this.delayInputPointer = this.delayOutputPointer + delayInSamples;
+
+  if (this.delayInputPointer >= this.delayBufferSamples.length-1) {
+    this.delayInputPointer = this.delayInputPointer - this.delayBufferSamples.length; 
+  }
+};
+
+/**
+ * Change the master volume.
+ *
+ * @param {Number} masterVolume Float value: 0.0 (silence), 1.0 (normal), >1.0 (amplify)
+ */
+MultiDelay.prototype.setMasterVolume = function(masterVolume) {
+  this.masterVolume = masterVolume;
+};
+
+/**
+ * Change the delay feedback volume.
+ *
+ * @param {Number} delayVolume Float value: 0.0 (silence), 1.0 (normal), >1.0 (amplify)
+ */
+MultiDelay.prototype.setDelayVolume = function(delayVolume) {
+  this.delayVolume = delayVolume;
+};
+
+/**
+ * Process a given interleaved or mono non-interleaved float value Array and adds the delayed audio.
+ *
+ * @param {Array} samples Array containing Float values or a Float32Array
+ *
+ * @returns A new Float32Array interleaved or mono non-interleaved as was fed to this function.
+ */
+MultiDelay.prototype.process = function(samples) {
+  // NB. Make a copy to put in the output samples to return.
+  var outputSamples = new Float32Array(samples.length);
+
+  for (var i=0; i<samples.length; i++) {
+    // delayBufferSamples could contain initial NULL's, return silence in that case
+    var delaySample = (this.delayBufferSamples[this.delayOutputPointer] === null ? 0.0 : this.delayBufferSamples[this.delayOutputPointer]);
+   
+    // Mix normal audio data with delayed audio
+    var sample = (delaySample * this.delayVolume) + samples[i];
+   
+    // Add audio data with the delay in the delay buffer
+    this.delayBufferSamples[this.delayInputPointer] = sample;
+   
+    // Return the audio with delay mix
+    outputSamples[i] = sample * this.masterVolume;
+   
+    // Manage circulair delay buffer pointers
+    this.delayInputPointer++;
+    if (this.delayInputPointer >= this.delayBufferSamples.length-1) {
+      this.delayInputPointer = 0;
+    }
+     
+    this.delayOutputPointer++;
+    if (this.delayOutputPointer >= this.delayBufferSamples.length-1) {
+      this.delayOutputPointer = 0; 
+    } 
+  }
+ 
+  return outputSamples;
+};
+
+/**
+ * SingleDelay effect by Almer Thie (http://code.almeros.com).
+ * Copyright 2010 Almer Thie. All rights reserved.
+ * Example: See usage in Reverb class
+ *
+ * This is a delay that does NOT feeds it's own delayed signal back into its 
+ * circular buffer, neither does it return the original signal. Also known as
+ * an AllPassFilter(?).
+ *
+ * Compatible with interleaved stereo (or more channel) buffers and
+ * non-interleaved mono buffers.
+ *
+ * @param {Number} maxDelayInSamplesSize Maximum possible delay in samples (size of circular buffer)
+ * @param {Number} delayInSamples Initial delay in samples
+ * @param {Number} delayVolume Initial feedback delay volume. Float value: 0.0 (silence), 1.0 (normal), >1.0 (amplify)
+ *
+ * @constructor
+ */
+
+function SingleDelay(maxDelayInSamplesSize, delayInSamples, delayVolume) {
+  this.delayBufferSamples = new Float32Array(maxDelayInSamplesSize); // The maximum size of delay
+  this.delayInputPointer  = delayInSamples;
+  this.delayOutputPointer = 0;
+ 
+  this.delayInSamples     = delayInSamples;
+  this.delayVolume        = delayVolume;
+}
+
+/**
+ * Change the delay time in samples.
+ *
+ * @param {Number} delayInSamples Delay in samples
+ */
+SingleDelay.prototype.setDelayInSamples = function(delayInSamples) {
+  this.delayInSamples = delayInSamples;
+  this.delayInputPointer = this.delayOutputPointer + delayInSamples;
+
+  if (this.delayInputPointer >= this.delayBufferSamples.length-1) {
+    this.delayInputPointer = this.delayInputPointer - this.delayBufferSamples.length; 
+  }
+};
+
+/**
+ * Change the return signal volume.
+ *
+ * @param {Number} delayVolume Float value: 0.0 (silence), 1.0 (normal), >1.0 (amplify)
+ */
+SingleDelay.prototype.setDelayVolume = function(delayVolume) {
+  this.delayVolume = delayVolume;
+};
+
+/**
+ * Process a given interleaved or mono non-interleaved float value Array and
+ * returns the delayed audio.
+ *
+ * @param {Array} samples Array containing Float values or a Float32Array
+ *
+ * @returns A new Float32Array interleaved or mono non-interleaved as was fed to this function.
+ */
+SingleDelay.prototype.process = function(samples) {
+  // NB. Make a copy to put in the output samples to return.
+  var outputSamples = new Float32Array(samples.length);
+
+  for (var i=0; i<samples.length; i++) {
+
+    // Add audio data with the delay in the delay buffer
+    this.delayBufferSamples[this.delayInputPointer] = samples[i];
+   
+    // delayBufferSamples could contain initial NULL's, return silence in that case
+    var delaySample = this.delayBufferSamples[this.delayOutputPointer];
+
+    // Return the audio with delay mix
+    outputSamples[i] = delaySample * this.delayVolume;
+
+    // Manage circulair delay buffer pointers
+    this.delayInputPointer++;
+
+    if (this.delayInputPointer >= this.delayBufferSamples.length-1) {
+      this.delayInputPointer = 0;
+    }
+     
+    this.delayOutputPointer++;
+
+    if (this.delayOutputPointer >= this.delayBufferSamples.length-1) {
+      this.delayOutputPointer = 0; 
+    } 
+  }
+ 
+  return outputSamples;
+};
+
+/**
+ * Reverb effect by Almer Thie (http://code.almeros.com).
+ * Copyright 2010 Almer Thie. All rights reserved.
+ * Example: http://code.almeros.com/code-examples/reverb-firefox-audio-api/
+ *
+ * This reverb consists of 6 SingleDelays, 6 MultiDelays and an IIRFilter2
+ * for each of the two stereo channels.
+ *
+ * Compatible with interleaved stereo buffers only!
+ *
+ * @param {Number} maxDelayInSamplesSize Maximum possible delay in samples (size of circular buffers)
+ * @param {Number} delayInSamples Initial delay in samples for internal (Single/Multi)delays
+ * @param {Number} masterVolume Initial master volume. Float value: 0.0 (silence), 1.0 (normal), >1.0 (amplify)
+ * @param {Number} mixVolume Initial reverb signal mix volume. Float value: 0.0 (silence), 1.0 (normal), >1.0 (amplify)
+ * @param {Number} delayVolume Initial feedback delay volume for internal (Single/Multi)delays. Float value: 0.0 (silence), 1.0 (normal), >1.0 (amplify)
+ * @param {Number} dampFrequency Initial low pass filter frequency. 0 to 44100 (depending on your maximum sampling frequency)
+ *
+ * @constructor
+ */
+function Reverb(maxDelayInSamplesSize, delayInSamples, masterVolume, mixVolume, delayVolume, dampFrequency) {
+  this.delayInSamples   = delayInSamples;
+  this.masterVolume     = masterVolume;
+  this.mixVolume       = mixVolume;
+  this.delayVolume     = delayVolume;
+  this.dampFrequency     = dampFrequency;
+ 
+  this.NR_OF_MULTIDELAYS = 6;
+  this.NR_OF_SINGLEDELAYS = 6;
+ 
+  this.LOWPASSL = new IIRFilter2(DSP.LOWPASS, dampFrequency, 0, 44100);
+  this.LOWPASSR = new IIRFilter2(DSP.LOWPASS, dampFrequency, 0, 44100);
+ 
+  this.singleDelays = [];
+  
+  var i, delayMultiply;
+
+  for (i = 0; i < this.NR_OF_SINGLEDELAYS; i++) {
+    delayMultiply = 1.0 + (i/7.0); // 1.0, 1.1, 1.2...
+    this.singleDelays[i] = new SingleDelay(maxDelayInSamplesSize, Math.round(this.delayInSamples * delayMultiply), this.delayVolume);
+  }
+ 
+  this.multiDelays = [];
+
+  for (i = 0; i < this.NR_OF_MULTIDELAYS; i++) {
+    delayMultiply = 1.0 + (i/10.0); // 1.0, 1.1, 1.2... 
+    this.multiDelays[i] = new MultiDelay(maxDelayInSamplesSize, Math.round(this.delayInSamples * delayMultiply), this.masterVolume, this.delayVolume);
+  }
+}
+
+/**
+ * Change the delay time in samples as a base for all delays.
+ *
+ * @param {Number} delayInSamples Delay in samples
+ */
+Reverb.prototype.setDelayInSamples = function (delayInSamples){
+  this.delayInSamples = delayInSamples;
+
+  var i, delayMultiply;
+ 
+  for (i = 0; i < this.NR_OF_SINGLEDELAYS; i++) {
+    delayMultiply = 1.0 + (i/7.0); // 1.0, 1.1, 1.2...
+    this.singleDelays[i].setDelayInSamples( Math.round(this.delayInSamples * delayMultiply) );
+  }
+   
+  for (i = 0; i < this.NR_OF_MULTIDELAYS; i++) {
+    delayMultiply = 1.0 + (i/10.0); // 1.0, 1.1, 1.2...
+    this.multiDelays[i].setDelayInSamples( Math.round(this.delayInSamples * delayMultiply) );
+  }
+};
+
+/**
+ * Change the master volume.
+ *
+ * @param {Number} masterVolume Float value: 0.0 (silence), 1.0 (normal), >1.0 (amplify)
+ */
+Reverb.prototype.setMasterVolume = function (masterVolume){
+  this.masterVolume = masterVolume;
+};
+
+/**
+ * Change the reverb signal mix level.
+ *
+ * @param {Number} mixVolume Float value: 0.0 (silence), 1.0 (normal), >1.0 (amplify)
+ */
+Reverb.prototype.setMixVolume = function (mixVolume){
+  this.mixVolume = mixVolume;
+};
+
+/**
+ * Change all delays feedback volume.
+ *
+ * @param {Number} delayVolume Float value: 0.0 (silence), 1.0 (normal), >1.0 (amplify)
+ */
+Reverb.prototype.setDelayVolume = function (delayVolume){
+  this.delayVolume = delayVolume;
+ 
+  var i;
+
+  for (i = 0; i<this.NR_OF_SINGLEDELAYS; i++) {
+    this.singleDelays[i].setDelayVolume(this.delayVolume);
+  } 
+ 
+  for (i = 0; i<this.NR_OF_MULTIDELAYS; i++) {
+    this.multiDelays[i].setDelayVolume(this.delayVolume);
+  } 
+};
+
+/**
+ * Change the Low Pass filter frequency.
+ *
+ * @param {Number} dampFrequency low pass filter frequency. 0 to 44100 (depending on your maximum sampling frequency)
+ */
+Reverb.prototype.setDampFrequency = function (dampFrequency){
+  this.dampFrequency = dampFrequency;
+ 
+  this.LOWPASSL.set(dampFrequency, 0);
+  this.LOWPASSR.set(dampFrequency, 0); 
+};
+
+/**
+ * Process a given interleaved float value Array and copies and adds the reverb signal.
+ *
+ * @param {Array} samples Array containing Float values or a Float32Array
+ *
+ * @returns A new Float32Array interleaved buffer.
+ */
+Reverb.prototype.process = function (interleavedSamples){ 
+  // NB. Make a copy to put in the output samples to return.
+  var outputSamples = new Float32Array(interleavedSamples.length);
+ 
+  // Perform low pass on the input samples to mimick damp
+  var leftRightMix = DSP.deinterleave(interleavedSamples);
+  this.LOWPASSL.process( leftRightMix[DSP.LEFT] );
+  this.LOWPASSR.process( leftRightMix[DSP.RIGHT] ); 
+  var filteredSamples = DSP.interleave(leftRightMix[DSP.LEFT], leftRightMix[DSP.RIGHT]);
+
+  var i;
+
+  // Process MultiDelays in parallel
+  for (i = 0; i<this.NR_OF_MULTIDELAYS; i++) {
+    // Invert the signal of every even multiDelay
+    outputSamples = DSP.mixSampleBuffers(outputSamples, this.multiDelays[i].process(filteredSamples), 2%i === 0, this.NR_OF_MULTIDELAYS);
+  }
+ 
+  // Process SingleDelays in series
+  var singleDelaySamples = new Float32Array(outputSamples.length);
+  for (i = 0; i<this.NR_OF_SINGLEDELAYS; i++) {
+    // Invert the signal of every even singleDelay
+    singleDelaySamples = DSP.mixSampleBuffers(singleDelaySamples, this.singleDelays[i].process(outputSamples), 2%i === 0, 1);
+  }
+
+  // Apply the volume of the reverb signal
+  for (i = 0; i<singleDelaySamples.length; i++) {
+    singleDelaySamples[i] *= this.mixVolume;
+  }
+ 
+  // Mix the original signal with the reverb signal
+  outputSamples = DSP.mixSampleBuffers(singleDelaySamples, interleavedSamples, 0, 1);
+
+  // Apply the master volume to the complete signal
+  for (i = 0; i<outputSamples.length; i++) {
+    outputSamples[i] *= this.masterVolume;
+  }
+   
+  return outputSamples;
+};
+
+
+ToneDen.define("vendor/dsp", function(){});
+
 /** @license
  *
  * SoundManager 2: JavaScript Sound for the Web
@@ -1784,9 +4090,9 @@ ToneDen.define('vendor/simple-slider',['jquery'], function($) {
  * Also, as you may note: Whoa, reliable cross-platform/device audio support is hard! ;)
  */
 
-ToneDen.define('vendor/soundmanager2',[], function() {
+ToneDen.define('vendor/soundmanager2',['vendor/dsp'], function(dsp) {
 
-"use strict";
+
 
 var _undefined = undefined;
 var soundManager = null;
@@ -3210,6 +5516,22 @@ function SoundManager(smURL, smID) {
 
     var s = this, resetProperties, add_html5_events, remove_html5_events, stop_html5_timer, start_html5_timer, attachOnPosition, onplay_called = false, onPositionItems = [], onPositionFired = 0, detachOnPosition, applyFromTo, lastURL = null, lastHTML5State, urlOmitted;
 
+
+    //HTML5 audio sampling properties
+    this._useAdvancedHTML5 = false;
+    this._useMoz = false;
+    this._fftLeft;
+    this._fftRight;
+    this._fftRightO; //For when we set right = left but want to preserve the original
+    this._waveformLeft;
+    this._waveformRight;
+    this._audioContext;
+    this._processingNode;
+    this._sourceNode;
+    this._fbLength;
+    this._sample_size;
+    this._sample_rate;
+
     lastHTML5State = {
       // tracks duration + position (time)
       duration: null,
@@ -3478,6 +5800,10 @@ function SoundManager(smURL, smID) {
       } else {
 
         stop_html5_timer();
+
+        if(s._useAdvancedHTML5 && !s._useMoz){
+            this._destroy_WebAudio_Waveform_Parser();
+        }
 
         if (s._a) {
           s._a.pause();
@@ -4532,6 +6858,87 @@ function SoundManager(smURL, smID) {
 
     };
 
+    var audioProcessEvent = function ( e ) {
+      if(s.paused) return;
+      //When we're processing some data through the HTML WebAudio API
+      var buffers = [];
+      var channels, resolution;
+      channels = s._channels = e.inputBuffer.numberOfChannels;
+
+      s._waveformLeft = e.inputBuffer.getChannelData(0);
+      if(s.instanceOptions.useEQData){
+        s._fftLeft.forward(s._waveformLeft);
+      }
+
+      if(channels > 1){
+        s._waveformRight = e.inputBuffer.getChannelData(1);
+        if(s.instanceOptions.useEQData){
+          s._fftRight = s._fftRightO;
+          s._fftRight.forward(s._waveformRight);
+        }
+      } else {
+        s._waveformRight = s._waveformLeft;
+        s._fftRight = s._fftLeft;
+      }
+
+      s._onTimer(true);
+    };
+  
+    this._create_WebAudio_Waveform_Parser = function(){
+      //Initialisation for Google Chrome/Web Audio compatible browsers
+
+      s._sample_rate = 44100;
+      s._sample_size = 2048;
+      if(s.instanceOptions.useWaveformData || s.instanceOptions.useEQData || s.instanceOptions.usePeakData){ 
+        var context = s._audioContext;
+
+        var source = s._sourceNode = context.createMediaElementSource( s._a );
+
+        var proc = s._processingNode = context.createJavaScriptNode( s._sample_size / 2, 1, 1 );
+
+        source.connect( proc );
+
+        proc.connect( context.destination );
+
+        source.connect( context.destination );
+
+        proc.onaudioprocess = audioProcessEvent; 
+
+        s._fftLeft = new FFT( s._sample_size / 2, s._sample_rate );
+        s._fftRight = s._fftRightO = new FFT( s._sample_size / 2, s._sample_rate );
+      }
+
+    };
+    
+    this._destroy_WebAudio_Waveform_Parser = function(){
+      if(s._sourceNode)
+        s._sourceNode.disconnect(0); 
+      
+      if(s._processingNode)
+        s._processingNode.disconnect(0); 
+    };
+
+    this._create_Mozilla_Waveform_Parser = function(){
+      //Initialisation for Mozilla Firefox
+
+      s._fbLength = s._a.mozFrameBufferLength;
+      s._channels = s._a.mozChannels;  
+      s._sample_rate = s._a.mozSampleRate;     
+ 
+      if(s.instanceOptions.useWaveformData || s.instanceOptions.useEQData || s.instanceOptions.usePeakData){ 
+        s._waveformLeft = new Float32Array( s._fbLength / s._channels );
+        s._waveformRight = new Float32Array( s._fbLength / s._channels );
+      }
+
+      if(s.instanceOptions.useEQData || s.instanceOptions.usePeakData){ 
+        s._fftLeft = new FFT( s._fbLength / s._channels, s._sample_rate );
+        s._fftRight = s._fftLeft;
+        if(s._channels > 1){
+          s._fftRight = new FFT( s._fbLength / s._channels, s._sample_rate );
+        }
+      }
+    };
+
     resetProperties();
 
     /**
@@ -4548,6 +6955,10 @@ function SoundManager(smURL, smID) {
        */
 
       var duration, isNew = false, time, x = {};
+      var peakData = x;
+      var waveformLeft = x;
+      var waveformRight = x; 
+      var eqData = x;
 
       if (s._hasTimer || bForce) {
 
@@ -4579,7 +6990,19 @@ function SoundManager(smURL, smID) {
 
           if (isNew || bForce) {
 
-            s._whileplaying(time,x,x,x,x);
+            // s._whileplaying(time,x,x,x,x);
+            if(s._useAdvancedHTML5){
+                if(s.instanceOptions.useWaveformData){
+                    waveformLeft = s._waveformLeft;
+                    waveformRight = s._waveformRight;
+                }
+                if(s.instanceOptions.useEQData){
+                    eqData = {leftEQ: s._fftLeft.spectrum,
+                              rightEQ: s._fftRight.spectrum};
+                }
+            }
+            
+            s._whileplaying(time, peakData, waveformLeft, waveformRight, eqData);
 
           }
 
@@ -4726,6 +7149,21 @@ function SoundManager(smURL, smID) {
       }
 
       s.isHTML5 = true;
+
+      if(FFT && Float32Array){
+          //Use html5 for spectrum/waveform (dsp.js must be available)
+        if(window.AudioProcessingEvent && (window.AudioContext || window.webkitAudioContext)){
+            //Webkit and WebAudio API
+            s._useAdvancedHTML5 = true;
+            s._audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            sm2._wD(s.id + ': Using HTML5 Audio for eqData and waveform');
+        } else if(a.mozSetup) {
+            //Mozilla Firefox
+            sm2._wD(s.id + ': Using Mozilla Audio for eqData and waveform');
+            s._useAdvancedHTML5 = true;
+            s._useMoz = true;
+        }
+      }
 
       // store a ref on the track
       s._a = a;
@@ -4982,7 +7420,8 @@ function SoundManager(smURL, smID) {
     this._whileplaying = function(nPosition, oPeakData, oWaveformDataLeft, oWaveformDataRight, oEQData) {
 
       var instanceOptions = s._iO,
-          eqLeft;
+          // eqLeft;
+          eqLeft, eqRight;
 
       if (isNaN(nPosition) || nPosition === null) {
         // flash safety net
@@ -4994,9 +7433,7 @@ function SoundManager(smURL, smID) {
 
       s._processOnPosition();
 
-      console.log(!s.isHTML5, fV > 8);
-
-      if (!s.isHTML5 && fV > 8) {
+      if (!s.isHTML5 && fV > 8 || s._useAdvancedHTML5) {
 
         if (instanceOptions.usePeakData && oPeakData !== _undefined && oPeakData) {
           s.peakData = {
@@ -5006,22 +7443,49 @@ function SoundManager(smURL, smID) {
         }
 
         if (instanceOptions.useWaveformData && oWaveformDataLeft !== _undefined && oWaveformDataLeft) {
-          s.waveformData = {
-            left: oWaveformDataLeft.split(','),
-            right: oWaveformDataRight.split(',')
-          };
+          // s.waveformData = {
+          //   left: oWaveformDataLeft.split(','),
+          //   right: oWaveformDataRight.split(',')
+          // };
+          if(typeof(oWaveformDataLeft) == 'string'){
+            s.waveformData = {
+              left: oWaveformDataLeft.split(','),
+              right: oWaveformDataRight.split(',')
+            };
+          } else {
+            s.waveformData = {
+              left: oWaveformDataLeft,
+              right: oWaveformDataRight
+            };
+          }
         }
 
         if (instanceOptions.useEQData) {
-            console.log("hey " + oEQData.leftEQ);
           if (oEQData !== _undefined && oEQData && oEQData.leftEQ) {
-            eqLeft = oEQData.leftEQ;
-            s.eqData = eqLeft;
-            s.eqData.left = eqLeft;
-            if (oEQData.rightEQ !== _undefined && oEQData.rightEQ) {
-              s.eqData.right = oEQData.rightEQ.split(',');
+            // eqLeft = oEQData.leftEQ;
+            // s.eqData = eqLeft;
+            // s.eqData.left = eqLeft;
+            // if (oEQData.rightEQ !== _undefined && oEQData.rightEQ) {
+            //   s.eqData.right = oEQData.rightEQ.split(',');
+            if(typeof(oEQData.leftEQ) == 'string'){
+              eqLeft = oEQData.leftEQ.split(',');
+            } else {
+              eqLeft = oEQData.leftEQ;
+              eqRight = eqLeft;
             }
           }
+
+          if (oEQData.rightEQ !== _undefined && oEQData.rightEQ) {
+            if(typeof(oEQData.rightEQ) == 'string'){
+              eqRight = oEQData.rightEQ.split(',');
+            } else {
+              eqRight = oEQData.rightEQ;
+            }
+          }
+
+          s.eqData = {};
+          s.eqData.left = eqLeft;
+          s.eqData.right= eqRight;
         }
 
       }
@@ -5495,7 +7959,7 @@ function SoundManager(smURL, smID) {
 
     // enough has loaded to play
 
-    canplay: html5_event(function() {
+    canplay: html5_event(function(e) {
 
       var s = this._s,
           position1K;
@@ -5525,6 +7989,14 @@ function SoundManager(smURL, smID) {
       // hack for HTML5 from/to case
       if (s._iO._oncanplay) {
         s._iO._oncanplay();
+      }
+
+      if(s._useAdvancedHTML5){
+        if(s._useMoz){
+            s._create_Mozilla_Waveform_Parser();
+        } else {
+            s._create_WebAudio_Waveform_Parser();
+        }
       }
 
     }),
@@ -5710,6 +8182,8 @@ function SoundManager(smURL, smID) {
 
     timeupdate: html5_event(function() {
 
+      var s = this._s;
+      if(s._useAdvancedHTML5) return;
       this._s._onTimer();
 
     }),
@@ -5724,6 +8198,27 @@ function SoundManager(smURL, smID) {
       // playback faster than download rate, etc.
       s._onbufferchange(1);
 
+    }),
+
+    // only for firefox
+    MozAudioAvailable: html5_event(function(e) {
+      var s = this._s;
+      if(!s._useAdvancedHTML5 || !s._useMoz) return;
+      if(s._channels < 2){
+        s._waveformLeft = e.frameBuffer;
+        s._waveformRight = e.frameBuffer;
+      } else {
+        var per_channel = s._fbLength / s._channels;
+        for ( var i = 0; i < per_channel; i++ ) {
+          s._waveformLeft[i] = e.frameBuffer[i * s._channels];
+          s._waveformRight[i] = e.frameBuffer[i * s._channels + 1];
+        } 
+      }
+      s._fftLeft.forward( s._waveformLeft );
+      if(s._channels > 1){
+        s._fftRight.forward( s._waveformRight );
+      }
+      s._onTimer(true);
     })
 
   };
@@ -7822,7 +10317,7 @@ ToneDen.define('vendor/sc-player',['vendor/soundmanager2', 'jquery'], function(s
             volume: 100,
             useEQData: true,
             flashVersion: 9,
-            useWaveformData: false
+            useWaveformData: true
         };
 
         var sc_resolve_url = 'http://api.soundcloud.com/resolve?url=http://soundcloud.com';
@@ -8261,16 +10756,6 @@ ToneDen.define('vendor/sc-player',['vendor/soundmanager2', 'jquery'], function(s
             url += 'consumer_key=' + self.config.consumerKey;
             url = url + "&ts=" + Math.round((new Date()).getTime() / 1000);
 
-            //Need to resolve SoundCloud URL
-            // $.get(
-            //     'http://api.soundcloud.com/resolve.json?url=' + url,
-            //     function (result) {
-            //         console.log(result);
-            //     }
-            // )
-
-            console.log(url);
-
             // Setup the SM2 sound object.
             self.sound = soundManager.createSound({
                 flashVersion: 9,
@@ -8283,6 +10768,7 @@ ToneDen.define('vendor/sc-player',['vendor/soundmanager2', 'jquery'], function(s
                 volume: self.config.volume,
                 waitForWindowLoad: true,
                 wmode: 'transparent',
+                useWaveformData: true,
                 whileloading: function() {
                     // Only use whole number percents.
                     var percent = Math.round(this.bytesLoaded / this.bytesTotal * 100);
@@ -8291,7 +10777,7 @@ ToneDen.define('vendor/sc-player',['vendor/soundmanager2', 'jquery'], function(s
                 whileplaying: function() {
                     // Round to nearest 10th of a percent for performance
                     var percent = Math.round(this.position / track.duration * 100 * 10) / 10;
-                    self.trigger('scplayer.track.whileplaying', percent, eqData);
+                    self.trigger('scplayer.track.whileplaying', percent);
                 },
                 onplay: function() {
                     self.log('track.onplay');
@@ -8314,6 +10800,8 @@ ToneDen.define('vendor/sc-player',['vendor/soundmanager2', 'jquery'], function(s
                     self.trigger('scplayer.track.ready', self.currentTrackIndex, self.currentTrack);
                 }
             });
+
+            console.log(self.sound);
 
             self.trigger('scplayer.track.bindable', track, self.sound);
         };
@@ -8651,7 +11139,7 @@ THE SOFTWARE.
 var Handlebars = (function() {
 // handlebars/safe-string.js
 var __module4__ = (function() {
-  "use strict";
+  
   var __exports__;
   // Build out our basic SafeString type
   function SafeString(string) {
@@ -8668,7 +11156,7 @@ var __module4__ = (function() {
 
 // handlebars/utils.js
 var __module3__ = (function(__dependency1__) {
-  "use strict";
+  
   var __exports__ = {};
   /*jshint -W004 */
   var SafeString = __dependency1__;
@@ -8750,7 +11238,7 @@ var __module3__ = (function(__dependency1__) {
 
 // handlebars/exception.js
 var __module5__ = (function() {
-  "use strict";
+  
   var __exports__;
 
   var errorProps = ['description', 'fileName', 'lineNumber', 'message', 'name', 'number', 'stack'];
@@ -8784,7 +11272,7 @@ var __module5__ = (function() {
 
 // handlebars/base.js
 var __module2__ = (function(__dependency1__, __dependency2__) {
-  "use strict";
+  
   var __exports__ = {};
   var Utils = __dependency1__;
   var Exception = __dependency2__;
@@ -8970,7 +11458,7 @@ var __module2__ = (function(__dependency1__, __dependency2__) {
 
 // handlebars/runtime.js
 var __module6__ = (function(__dependency1__, __dependency2__, __dependency3__) {
-  "use strict";
+  
   var __exports__ = {};
   var Utils = __dependency1__;
   var Exception = __dependency2__;
@@ -9113,7 +11601,7 @@ var __module6__ = (function(__dependency1__, __dependency2__, __dependency3__) {
 
 // handlebars.runtime.js
 var __module1__ = (function(__dependency1__, __dependency2__, __dependency3__, __dependency4__, __dependency5__) {
-  "use strict";
+  
   var __exports__;
   /*globals Handlebars: true */
   var base = __dependency1__;
@@ -9151,7 +11639,7 @@ var __module1__ = (function(__dependency1__, __dependency2__, __dependency3__, _
 
 // handlebars/compiler/ast.js
 var __module7__ = (function(__dependency1__) {
-  "use strict";
+  
   var __exports__;
   var Exception = __dependency1__;
 
@@ -9384,7 +11872,7 @@ var __module7__ = (function(__dependency1__) {
 
 // handlebars/compiler/parser.js
 var __module9__ = (function() {
-  "use strict";
+  
   var __exports__;
   /* jshint ignore:start */
   /* Jison generated parser */
@@ -9880,7 +12368,7 @@ var __module9__ = (function() {
 
 // handlebars/compiler/base.js
 var __module8__ = (function(__dependency1__, __dependency2__) {
-  "use strict";
+  
   var __exports__ = {};
   var parser = __dependency1__;
   var AST = __dependency2__;
@@ -9901,7 +12389,7 @@ var __module8__ = (function(__dependency1__, __dependency2__) {
 
 // handlebars/compiler/compiler.js
 var __module10__ = (function(__dependency1__) {
-  "use strict";
+  
   var __exports__ = {};
   var Exception = __dependency1__;
 
@@ -10376,7 +12864,7 @@ var __module10__ = (function(__dependency1__) {
 
 // handlebars/compiler/javascript-compiler.js
 var __module11__ = (function(__dependency1__, __dependency2__) {
-  "use strict";
+  
   var __exports__;
   var COMPILER_REVISION = __dependency1__.COMPILER_REVISION;
   var REVISION_CHANGES = __dependency1__.REVISION_CHANGES;
@@ -11324,7 +13812,7 @@ var __module11__ = (function(__dependency1__, __dependency2__) {
 
 // handlebars.js
 var __module0__ = (function(__dependency1__, __dependency2__, __dependency3__, __dependency4__, __dependency5__) {
-  "use strict";
+  
   var __exports__;
   /*globals Handlebars: true */
   var Handlebars = __dependency1__;
@@ -11404,7 +13892,7 @@ THE SOFTWARE.
 var Handlebars = (function() {
 // handlebars/safe-string.js
 var __module4__ = (function() {
-  "use strict";
+  
   var __exports__;
   // Build out our basic SafeString type
   function SafeString(string) {
@@ -11421,7 +13909,7 @@ var __module4__ = (function() {
 
 // handlebars/utils.js
 var __module3__ = (function(__dependency1__) {
-  "use strict";
+  
   var __exports__ = {};
   /*jshint -W004 */
   var SafeString = __dependency1__;
@@ -11503,7 +13991,7 @@ var __module3__ = (function(__dependency1__) {
 
 // handlebars/exception.js
 var __module5__ = (function() {
-  "use strict";
+  
   var __exports__;
 
   var errorProps = ['description', 'fileName', 'lineNumber', 'message', 'name', 'number', 'stack'];
@@ -11537,7 +14025,7 @@ var __module5__ = (function() {
 
 // handlebars/base.js
 var __module2__ = (function(__dependency1__, __dependency2__) {
-  "use strict";
+  
   var __exports__ = {};
   var Utils = __dependency1__;
   var Exception = __dependency2__;
@@ -11723,7 +14211,7 @@ var __module2__ = (function(__dependency1__, __dependency2__) {
 
 // handlebars/runtime.js
 var __module6__ = (function(__dependency1__, __dependency2__, __dependency3__) {
-  "use strict";
+  
   var __exports__ = {};
   var Utils = __dependency1__;
   var Exception = __dependency2__;
@@ -11866,7 +14354,7 @@ var __module6__ = (function(__dependency1__, __dependency2__, __dependency3__) {
 
 // handlebars.runtime.js
 var __module1__ = (function(__dependency1__, __dependency2__, __dependency3__, __dependency4__, __dependency5__) {
-  "use strict";
+  
   var __exports__;
   /*globals Handlebars: true */
   var base = __dependency1__;
@@ -11904,7 +14392,7 @@ var __module1__ = (function(__dependency1__, __dependency2__, __dependency3__, _
 
 // handlebars/compiler/ast.js
 var __module7__ = (function(__dependency1__) {
-  "use strict";
+  
   var __exports__;
   var Exception = __dependency1__;
 
@@ -12137,7 +14625,7 @@ var __module7__ = (function(__dependency1__) {
 
 // handlebars/compiler/parser.js
 var __module9__ = (function() {
-  "use strict";
+  
   var __exports__;
   /* jshint ignore:start */
   /* Jison generated parser */
@@ -12633,7 +15121,7 @@ var __module9__ = (function() {
 
 // handlebars/compiler/base.js
 var __module8__ = (function(__dependency1__, __dependency2__) {
-  "use strict";
+  
   var __exports__ = {};
   var parser = __dependency1__;
   var AST = __dependency2__;
@@ -12654,7 +15142,7 @@ var __module8__ = (function(__dependency1__, __dependency2__) {
 
 // handlebars/compiler/compiler.js
 var __module10__ = (function(__dependency1__) {
-  "use strict";
+  
   var __exports__ = {};
   var Exception = __dependency1__;
 
@@ -13129,7 +15617,7 @@ var __module10__ = (function(__dependency1__) {
 
 // handlebars/compiler/javascript-compiler.js
 var __module11__ = (function(__dependency1__, __dependency2__) {
-  "use strict";
+  
   var __exports__;
   var COMPILER_REVISION = __dependency1__.COMPILER_REVISION;
   var REVISION_CHANGES = __dependency1__.REVISION_CHANGES;
@@ -14077,7 +16565,7 @@ var __module11__ = (function(__dependency1__, __dependency2__) {
 
 // handlebars.js
 var __module0__ = (function(__dependency1__, __dependency2__, __dependency3__, __dependency4__, __dependency5__) {
-  "use strict";
+  
   var __exports__;
   /*globals Handlebars: true */
   var Handlebars = __dependency1__;
@@ -14124,7 +16612,6 @@ var __module0__ = (function(__dependency1__, __dependency2__, __dependency3__, _
 return Handlebars; });
 // End AMD Wrapper
 ;
-//>>excludeStart('excludeAfterBuild', pragmas.excludeAfterBuild)
 
 //     Underscore.js 1.3.3
 //     (c) 2009-2012 Jeremy Ashkenas, DocumentCloud Inc.
@@ -15168,9 +17655,7 @@ ToneDen.define('hbs/underscore',[],function() {
     return _;
 
 });
-//>>excludeEnd('excludeAfterBuild')
 ;
-//>>excludeStart('excludeAfterBuild', pragmas.excludeAfterBuild)
 ToneDen.define('hbs/i18nprecompile',['hbs/handlebars', "hbs/underscore"], function ( Handlebars, _ ) {
 
   function replaceLocaleStrings ( ast, mapping, options ) {
@@ -15214,9 +17699,7 @@ ToneDen.define('hbs/i18nprecompile',['hbs/handlebars', "hbs/underscore"], functi
     return new Handlebars.JavaScriptCompiler().compile(environment, options);
   };
 });
-//>>excludeEnd('excludeAfterBuild')
 ;
-//>>excludeStart('excludeAfterBuild', pragmas.excludeAfterBuild)
 /*
     http://www.JSON.org/json2.js
     2011-10-19
@@ -15253,7 +17736,7 @@ ToneDen.define('hbs/i18nprecompile',['hbs/handlebars', "hbs/underscore"], functi
 var JSON = window.JSON || {};
 
 (function () {
-    'use strict';
+    
 
     function f(n) {
         // Format integers to have at least two digits.
@@ -15580,7 +18063,6 @@ ToneDen.define('hbs/json2',[],function(){
 // otherwise just leave it alone
     
 }).call(this, this);
-//>>excludeEnd('excludeAfterBuild')
 ;
 /**
  * @license Handlebars hbs 0.4.0 - Alex Sexton, but Handlebars has it's own licensing junk
@@ -15594,16 +18076,11 @@ ToneDen.define('hbs/json2',[],function(){
 /*global require: false, XMLHttpRequest: false, ActiveXObject: false,
 define: false, process: false, window: false */
 ToneDen.define('hbs',[
-//>>excludeStart('excludeHbs', pragmas.excludeHbs)
   'hbs/handlebars', 'hbs/underscore', 'hbs/i18nprecompile', 'hbs/json2'
-//>>excludeEnd('excludeHbs')
 ], function (
-//>>excludeStart('excludeHbs', pragmas.excludeHbs)
   Handlebars, _, precompile, JSON
-//>>excludeEnd('excludeHbs')
 ) {
-  //>>excludeStart('excludeHbs', pragmas.excludeHbs)
-  var fs;
+    var fs;
   var getXhr;
   var progIds = ['Msxml2.XMLHTTP', 'Microsoft.XMLHTTP', 'Msxml2.XMLHTTP.4.0'];
   var fetchText = function () {
@@ -15757,8 +18234,7 @@ ToneDen.define('hbs',[
   };
   var styleList = [];
   var styleMap = {};
-  //>>excludeEnd('excludeHbs')
-
+  
   return {
 
     get: function () {
@@ -15775,8 +18251,7 @@ ToneDen.define('hbs',[
     version: '0.5.0',
 
     load: function (name, parentRequire, load, config) {
-      //>>excludeStart('excludeHbs', pragmas.excludeHbs)
-
+      
       var compiledName = name + customNameExtension;
       config.hbs = config.hbs || {};
       var disableI18n = !(config.hbs.i18n == true); // by default we disable i18n unless config.hbs.i18n is true
@@ -16201,8 +18676,7 @@ ToneDen.define('hbs',[
           }
         }
       }
-      //>>excludeEnd('excludeHbs')
-    }
+          }
   };
 });
 /* END_hbs_PLUGIN */
@@ -16608,7 +19082,8 @@ ToneDen.require.config({
         hbs: 'vendor/hbs',
         jquery: 'vendor/jquery',
         soundmanager2: 'vendor/soundmanager2',
-        underscore: 'vendor/underscore'
+        underscore: 'vendor/underscore',
+        dsp: 'vendor/dsp'
     },
     shim: {
         soundmanager2: {

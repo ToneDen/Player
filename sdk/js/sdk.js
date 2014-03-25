@@ -4,7 +4,8 @@ require.config({
         hbs: 'vendor/hbs',
         jquery: 'vendor/jquery',
         soundmanager2: 'vendor/soundmanager2',
-        underscore: 'vendor/underscore'
+        underscore: 'vendor/underscore',
+        dsp: 'vendor/dsp'
     },
     shim: {
         soundmanager2: {
