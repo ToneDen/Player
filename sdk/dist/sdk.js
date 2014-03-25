@@ -16496,24 +16496,31 @@ ToneDen.define('player',['jquery', 'vendor/simple-slider', 'underscore', 'vendor
         });
 
         container.bind('slider:changed', 'scrubber-slider', function(e, slider) {
+            log('Slider Ratio: ' + slider.ratio);
+
             playerInstance.seek(slider.ratio);
         });
 
         // Hook into SC player events.
         playerInstance.on('scplayer.play', function(e) {
+            log('Playing.');
+
             changePlayButton(false);
         });
 
         playerInstance.on('scplayer.pause', function(e) {
             var paused = playerInstance.sound().paused;
+            log('Pause state changed: ' + paused);
             changePlayButton(paused);
         });
 
         playerInstance.on('scplayer.stop', function(e) {
+            log('Stopped.');
             container.find('.play').attr('src', staticUrl + 'img/play.png');
         });
 
         playerInstance.on('scplayer.track.whileloading', function(e, percent) {
+            log('Loaded: ' + percent + '%');
             container.find('.buffer').css('width', percent + '%');
         });
 
@@ -16528,6 +16535,8 @@ ToneDen.define('player',['jquery', 'vendor/simple-slider', 'underscore', 'vendor
         });
 
         playerInstance.on('scplayer.playlist.preloaded', function(e) {
+            log('All tracks loaded.');
+
             playerInstance.tracks(function(tracks) {
                 log(tracks);
                 rerender(container, {
@@ -16538,6 +16547,8 @@ ToneDen.define('player',['jquery', 'vendor/simple-slider', 'underscore', 'vendor
         });
 
         playerInstance.on('scplayer.changing_track', function(e, trackIndex) {
+            log('New track index: ' + trackIndex);
+
             container.find('.played').css('width', '0%');
             container.find('.buffer').css('width', '0%');
 
@@ -16550,7 +16561,7 @@ ToneDen.define('player',['jquery', 'vendor/simple-slider', 'underscore', 'vendor
         });
 
         //Interactions
-        console.log(playerInstance);
+        log(playerInstance);
         return playerInstance;
     };
 });
