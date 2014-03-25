@@ -14,6 +14,9 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-player', 'ven
             }
         }
 
+        console.log("hi");
+        console.log(parameters);
+
         container.html(template(parameters));
 
         container.find('.scrubber-slider').simpleSlider({highlight: true});
