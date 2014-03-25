@@ -74,8 +74,8 @@ cursor: pointer;
 	border-left: 1px solid #D6D6D6;
 }
 	#waveform .buffer, #waveform .played, #waveform > img { position:absolute; width: 0%; height:100%; }
-	#waveform .buffer { background-color: #7C85CC;}
-	#waveform .played { background-color: #9D95DF;}
+	#waveform .buffer { background-color: #222;}
+	#waveform .played { background-color: #333;}
 	#waveform > img {  width: 100%; }
 
 #playlist { display: none;}
@@ -89,7 +89,10 @@ cursor: pointer;
 }
 
 .song-name {
-  line-height: 50px;
+  margin: 10px 0px;
+  text-align: center;
+  font-size:14px;
+  font-weight: normal;
   -webkit-animation: fadeInLeft 1s; /* Safari and Chrome */
      -moz-animation: fadeInLeft 1s; /* Firefox */
       -ms-animation: fadeInLeft 1s; /* Internet Explorer */
@@ -98,8 +101,8 @@ cursor: pointer;
 }
 
 .artist-name {
-  text-align: right;
-  line-height: 50px;
+  margin: 10px 0px;
+  text-align: center;
   -webkit-animation: fadeInLeft 1s; /* Safari and Chrome */
      -moz-animation: fadeInLeft 1s; /* Firefox */
       -ms-animation: fadeInLeft 1s; /* Internet Explorer */
@@ -360,7 +363,7 @@ cursor: pointer;
 
 .slider > .highlight-track {
   border-color: #AFAFAF;
-  background: #7C85CC;
+  background: #222;
 }
 
 /*General*/

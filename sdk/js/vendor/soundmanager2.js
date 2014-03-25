@@ -124,7 +124,7 @@ function SoundManager(smURL, smID) {
     'isMovieStar': null,      // "MovieStar" MPEG4 audio mode. Null (default) = auto detect MP4, AAC etc. based on URL. true = force on, ignore URL
     'usePeakData': false,     // enable left/right channel peak (level) data
     'useWaveformData': false, // enable sound spectrum (raw waveform data) - NOTE: May increase CPU load.
-    'useEQData': false,       // enable sound EQ (frequency spectrum data) - NOTE: May increase CPU load.
+    'useEQData': true,       // enable sound EQ (frequency spectrum data) - NOTE: May increase CPU load.
     'onbufferchange': null,   // callback for "isBuffering" property change
     'ondataerror': null       // callback for waveform/eq data access error (flash playing audio in other tabs/domains)
 
@@ -217,7 +217,7 @@ function SoundManager(smURL, smID) {
     'buffering': false,
     'peakData': false,
     'waveformData': false,
-    'eqData': false,
+    'eqData': true,
     'movieStar': false
 
   };
@@ -3240,6 +3240,8 @@ function SoundManager(smURL, smID) {
 
       s._processOnPosition();
 
+      console.log(!s.isHTML5, fV > 8);
+
       if (!s.isHTML5 && fV > 8) {
 
         if (instanceOptions.usePeakData && oPeakData !== _undefined && oPeakData) {
@@ -3257,8 +3259,9 @@ function SoundManager(smURL, smID) {
         }
 
         if (instanceOptions.useEQData) {
+            console.log("hey " + oEQData.leftEQ);
           if (oEQData !== _undefined && oEQData && oEQData.leftEQ) {
-            eqLeft = oEQData.leftEQ.split(',');
+            eqLeft = oEQData.leftEQ;
             s.eqData = eqLeft;
             s.eqData.left = eqLeft;
             if (oEQData.rightEQ !== _undefined && oEQData.rightEQ) {

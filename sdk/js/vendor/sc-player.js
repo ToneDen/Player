@@ -9,10 +9,14 @@ define(['vendor/soundmanager2', 'jquery'], function(soundManager, jQuery) {
     if(typeof soundManager !== 'undefined'){
         soundManager.setup({
             debugMode: false,
-            url: 'swf',
+            url: '../swf',
+            useFlashBlock: false,
             useHighPerformance: true,
-            useHTML5Audio: true,
-            wmode: 'transparent'
+            // useHTML5Audio: true,
+            useFastPolling: true,
+            wmode: 'transparent',
+            flashVersion: 9,
+            useEQData: true
         });
     }
 
@@ -67,11 +71,14 @@ define(['vendor/soundmanager2', 'jquery'], function(soundManager, jQuery) {
             startOn: 0,
             togglePause: true, //Should pause act as a toggle?
             tracksPerArtist: 5, // When given an artist URL, how many tracks to load?
-            volume: 100
+            volume: 100,
+            useEQData: true,
+            flashVersion: 9,
+            useWaveformData: false
         };
 
-        var sc_resolve_url = 'https://api.soundcloud.com/resolve?url=http://soundcloud.com';
-        var scApiUrl = 'https://api.soundcloud.com/';
+        var sc_resolve_url = 'http://api.soundcloud.com/resolve?url=http://soundcloud.com';
+        var scApiUrl = 'http://api.soundcloud.com/';
         var urlregex = new RegExp(/[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&//=]*)?/gi);
 
         //keep ref to local scope
@@ -505,6 +512,16 @@ define(['vendor/soundmanager2', 'jquery'], function(soundManager, jQuery) {
 
             url += 'consumer_key=' + self.config.consumerKey;
 
+            //Need to resolve SoundCloud URL
+            // $.get(
+            //     'http://api.soundcloud.com/resolve.json?url=' + url,
+            //     function (result) {
+            //         console.log(result);
+            //     }
+            // )
+
+            console.log(url);
+
             // Setup the SM2 sound object.
             self.sound = soundManager.createSound({
                 autoLoad: true,
@@ -513,6 +530,8 @@ define(['vendor/soundmanager2', 'jquery'], function(soundManager, jQuery) {
                 loops: 1,
                 url: url,
                 volume: self.config.volume,
+                useEQData: true,
+                useWaveformData: self.config.useWaveformData,
                 whileloading: function() {
                     // Only use whole number percents.
                     var percent = Math.round(this.bytesLoaded / this.bytesTotal * 100);
@@ -520,8 +539,10 @@ define(['vendor/soundmanager2', 'jquery'], function(soundManager, jQuery) {
                 },
                 whileplaying: function() {
                     // Round to nearest 10th of a percent for performance
+                    var eqData = this.eqData;
+                    console.log(this.eqData);
                     var percent = Math.round(this.position / track.duration * 100 * 10) / 10;
-                    self.trigger('scplayer.track.whileplaying', percent);
+                    self.trigger('scplayer.track.whileplaying', percent, eqData);
                 },
                 onplay: function() {
                     self.log('track.onplay');

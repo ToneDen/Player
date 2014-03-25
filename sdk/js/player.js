@@ -139,16 +139,16 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-player', 'ven
         });
 
         playerInstance.on('scplayer.stop', function(e) {
-            log('Stopped.');
+            // log('Stopped.');
             container.find('.play').attr('src', staticUrl + 'img/play.png');
         });
 
         playerInstance.on('scplayer.track.whileloading', function(e, percent) {
-            log('Loaded: ' + percent + '%');
+            // log('Loaded: ' + percent + '%');
             container.find('.buffer').css('width', percent + '%');
         });
 
-        playerInstance.on('scplayer.track.whileplaying', function(e, percent) {
+        playerInstance.on('scplayer.track.whileplaying', function(e, percent, eqData) {
             var ratio = percent / 100;
             var timeIn = msToTimestamp(playerInstance.position());
             var timeLeft = msToTimestamp(playerInstance.track().duration - playerInstance.position());
