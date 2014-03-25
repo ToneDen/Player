@@ -124,7 +124,7 @@ function SoundManager(smURL, smID) {
     'isMovieStar': null,      // "MovieStar" MPEG4 audio mode. Null (default) = auto detect MP4, AAC etc. based on URL. true = force on, ignore URL
     'usePeakData': false,     // enable left/right channel peak (level) data
     'useWaveformData': false, // enable sound spectrum (raw waveform data) - NOTE: May increase CPU load.
-    'useEQData': false,       // enable sound EQ (frequency spectrum data) - NOTE: May increase CPU load.
+    'useEQData': true,       // enable sound EQ (frequency spectrum data) - NOTE: May increase CPU load.
     'onbufferchange': null,   // callback for "isBuffering" property change
     'ondataerror': null       // callback for waveform/eq data access error (flash playing audio in other tabs/domains)
 
@@ -217,7 +217,7 @@ function SoundManager(smURL, smID) {
     'buffering': false,
     'peakData': false,
     'waveformData': false,
-    'eqData': false,
+    'eqData': true,
     'movieStar': false
 
   };
@@ -3854,6 +3854,7 @@ function SoundManager(smURL, smID) {
       // sm2._wD(this._s.id + ': play()');
       // once play starts, no buffering
       this._s._onbufferchange(0);
+
     }),
 
     playing: html5_event(function() {

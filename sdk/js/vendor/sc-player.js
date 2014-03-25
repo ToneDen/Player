@@ -9,14 +9,13 @@ define(['vendor/soundmanager2', 'jquery'], function(soundManager, jQuery) {
     if(typeof soundManager !== 'undefined'){
         soundManager.setup({
             debugMode: false,
-            url: '../swf',
+            url: 'swf',
             useFlashBlock: false,
-            useHighPerformance: true,
-            // useHTML5Audio: true,
-            useFastPolling: true,
+            useHighPerformance: false,
+            waitForWindowLoad: true,
+            useHTML5Audio: true,
             wmode: 'transparent',
             flashVersion: 9,
-            useEQData: true
         });
     }
 
@@ -511,6 +510,7 @@ define(['vendor/soundmanager2', 'jquery'], function(soundManager, jQuery) {
             }
 
             url += 'consumer_key=' + self.config.consumerKey;
+            url = url + "&ts=" + Math.round((new Date()).getTime() / 1000);
 
             //Need to resolve SoundCloud URL
             // $.get(
@@ -524,14 +524,16 @@ define(['vendor/soundmanager2', 'jquery'], function(soundManager, jQuery) {
 
             // Setup the SM2 sound object.
             self.sound = soundManager.createSound({
+                flashVersion: 9,
                 autoLoad: true,
+                useHighPerformance: false,
                 id: 'track_' + track.id,
                 multiShot: false,
                 loops: 1,
                 url: url,
                 volume: self.config.volume,
-                useEQData: true,
-                useWaveformData: self.config.useWaveformData,
+                waitForWindowLoad: true,
+                wmode: 'transparent',
                 whileloading: function() {
                     // Only use whole number percents.
                     var percent = Math.round(this.bytesLoaded / this.bytesTotal * 100);
@@ -539,8 +541,6 @@ define(['vendor/soundmanager2', 'jquery'], function(soundManager, jQuery) {
                 },
                 whileplaying: function() {
                     // Round to nearest 10th of a percent for performance
-                    var eqData = this.eqData;
-                    console.log(this.eqData);
                     var percent = Math.round(this.position / track.duration * 100 * 10) / 10;
                     self.trigger('scplayer.track.whileplaying', percent, eqData);
                 },
