@@ -552,7 +552,7 @@ define(['vendor/soundmanager2', 'jquery', 'vendor/d3'], function(soundManager, j
                         eqBarValues[(i/eqBarInterval)>>0] += this.eqData.left[i];
                     }
                     var percent = Math.round(this.position / track.duration * 100 * 10) / 10;
-                    self.trigger('scplayer.track.whileplaying', percent);
+                    self.trigger('scplayer.track.whileplaying', percent, eqBarValues);
                 },
                 onplay: function() {
                     self.log('track.onplay');

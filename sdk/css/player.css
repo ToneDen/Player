@@ -43,6 +43,7 @@ cursor: pointer;
 .cover {
 	height: 100%;
 	display: table;
+  z-index: 1;
 }
 
 .cover a {
@@ -64,18 +65,12 @@ cursor: pointer;
           animation: fadeIn 1s;
 }
 
-#waveform {
-	/*width: 100%;*/9
-	height: 40px;
-	margin:10px;
-	position: relative;
-	margin: 0;
-	border-left: 1px solid #D6D6D6;
+.waveform{
+  position: absolute;
+  left: 0;
+  right: 0;
+  z-index: 100;
 }
-	#waveform .buffer, #waveform .played, #waveform > img { position:absolute; width: 0%; height:100%; }
-	#waveform .buffer { background-color: #222;}
-	#waveform .played { background-color: #333;}
-	#waveform > img {  width: 100%; }
 
 #playlist { display: none;}
 	#playlist .active { font-weight: bold; }
