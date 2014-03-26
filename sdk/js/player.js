@@ -1,5 +1,7 @@
-define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-player', 'vendor/handlebars', 'hbs!templates/player', 'templates/helpers/msToTimestamp'], function($, SimpleSlider, _, scPlayer, Handlebars, template, msToTimestamp) {
+define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-player', 'vendor/handlebars', 'hbs!templates/player', 'templates/helpers/msToTimestamp', 'vendor/d3'], function($, SimpleSlider, _, scPlayer, Handlebars, template, msToTimestamp, d3) {
     var staticUrl = '//widget.dev/sdk/';
+    var svg;
+    var svg_line;
 
     function rerender(container, parameters) {
         parameters = JSON.parse(JSON.stringify(parameters));
@@ -19,7 +21,56 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-player', 'ven
 
         container.html(template(parameters));
 
-        container.find('.scrubber-slider').simpleSlider({highlight: true});
+        container.find('.scrubber-slider').simpleSlider({highlight: true});        
+    }
+
+    function drawEQ(data) {
+        if(!data) {
+            var data = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+        } else {
+            var data = data;
+        }
+
+        var n = 32
+         
+        var margin = {top: 0, right: 0, bottom: 0, left: 0},
+            width = $(".waveform").width(),
+            height = 300;
+         
+        var x = d3.scale.linear()
+            .domain([0, n - 1])
+            .range([0, width]);
+         
+        var y = d3.scale.linear()
+            .domain([0, 1])
+            .range([height, 0]);
+
+        svg = d3.select(".waveform").append("svg")
+                    .attr("width", width + margin.left + margin.right)
+                    .attr("height", height + margin.top + margin.bottom)
+                    .append("g")
+                    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+         
+        svg_line = d3.svg.line()
+            .interpolate("basis")
+            .x(function(d, i) { return x(i); })
+            .y(function(d, i) { return y(d); });
+        
+        svg.selectAll("path")
+            .data([data])
+            .enter()
+            .append("svg:path")
+            .attr("d", svg_line);
+
+        return svg;
+    }
+
+    function redrawEQ(svg, data) {
+
+        svg.selectAll("path")
+            .data([data])
+            .attr("class", "line")
+            .attr("d", svg_line);
     }
 
     return function(urls, dom, options) {
@@ -92,6 +143,7 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-player', 'ven
             return;
         }
 
+
         var playerInstance = new scPlayer(urls, playerParameters);
         var titleArea = container.find('.title');
 
@@ -149,6 +201,10 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-player', 'ven
         });
 
         playerInstance.on('scplayer.track.whileplaying', function(e, percent, eqData) {
+            if(container.find('.waveform svg').length==0) {
+               svg = drawEQ();
+            }
+
             var ratio = percent / 100;
             var timeIn = msToTimestamp(playerInstance.position());
             var timeLeft = msToTimestamp(playerInstance.track().duration - playerInstance.position());
@@ -156,6 +212,7 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-player', 'ven
             container.find('.scrubber-slider').simpleSlider('setRatio', ratio, true);
             container.find('.start-time').html(timeIn);
             container.find('.stop-time').html(timeLeft);
+            redrawEQ(svg, eqData);
         });
 
         playerInstance.on('scplayer.playlist.preloaded', function(e) {
@@ -168,6 +225,8 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-player', 'ven
                     tracks: tracks
                 });
             });
+
+
         });
 
         playerInstance.on('scplayer.changing_track', function(e, trackIndex) {

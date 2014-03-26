@@ -37,7 +37,6 @@ cursor: pointer;
 
 .header {
 	height: 100%;
-	padding: 20px;
   text-align: center;
 }
 
@@ -365,6 +364,25 @@ cursor: pointer;
   border-color: #AFAFAF;
   background: #222;
 }
+
+/*Equalizer*/
+svg {
+  font: 10px sans-serif;
+}
+ 
+.line {
+  fill: none;
+  stroke: #000;
+  stroke-width: 1.5px;
+}
+ 
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
 
 /*General*/
 

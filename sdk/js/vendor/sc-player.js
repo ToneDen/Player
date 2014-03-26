@@ -1,7 +1,7 @@
 /**
  * Refactored from: https://github.com/kilokeith/soundcloud-soundmanager-player
  */
-define(['vendor/soundmanager2', 'jquery'], function(soundManager, jQuery) {
+define(['vendor/soundmanager2', 'jquery', 'vendor/d3'], function(soundManager, jQuery, d3) {
     //object slice
     __slice = [].slice;
 
@@ -80,6 +80,10 @@ define(['vendor/soundmanager2', 'jquery'], function(soundManager, jQuery) {
         var scApiUrl = 'http://api.soundcloud.com/';
         var urlregex = new RegExp(/[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&//=]*)?/gi);
 
+        var numEqBars = 32;
+        var eqBarValues;
+        var eqBarValuesLast;
+        var eqBarInterval = 256 / numEqBars;
         //keep ref to local scope
         var self = this;
         var $this = jQuery(this);
@@ -524,7 +528,7 @@ define(['vendor/soundmanager2', 'jquery'], function(soundManager, jQuery) {
                 volume: self.config.volume,
                 waitForWindowLoad: true,
                 wmode: 'transparent',
-                useWaveformData: true,
+                useEQData: true,
                 whileloading: function() {
                     // Only use whole number percents.
                     var percent = Math.round(this.bytesLoaded / this.bytesTotal * 100);
@@ -532,6 +536,21 @@ define(['vendor/soundmanager2', 'jquery'], function(soundManager, jQuery) {
                 },
                 whileplaying: function() {
                     // Round to nearest 10th of a percent for performance
+                    eqBarValues = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+    
+                    var b1 = 0, b2 = 0, b3 = 0, b4 = 0;
+                    for (var i=0;i<256;i++){
+                        if (i < 64)
+                            b1 += this.eqData.left[i];
+                        else if (i < 128)
+                            b2 += this.eqData.left[i];
+                        else if (i < 192)
+                            b3 += this.eqData.left[i];
+                        else
+                            b4 += this.eqData.left[i];
+                
+                        eqBarValues[(i/eqBarInterval)>>0] += this.eqData.left[i];
+                    }
                     var percent = Math.round(this.position / track.duration * 100 * 10) / 10;
                     self.trigger('scplayer.track.whileplaying', percent);
                 },

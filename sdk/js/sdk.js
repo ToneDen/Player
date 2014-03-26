@@ -5,7 +5,8 @@ require.config({
         jquery: 'vendor/jquery',
         soundmanager2: 'vendor/soundmanager2',
         underscore: 'vendor/underscore',
-        dsp: 'vendor/dsp'
+        dsp: 'vendor/dsp',
+        d3: 'vendor/d3',
     },
     shim: {
         soundmanager2: {
