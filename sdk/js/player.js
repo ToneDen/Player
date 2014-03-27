@@ -117,6 +117,7 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-player', 'ven
         });
 
         container.bind('slider:changed', 'scrubber-slider', function(e, slider) {
+            playerInstance.play();
             playerInstance.seek(slider.ratio);
         });
 
