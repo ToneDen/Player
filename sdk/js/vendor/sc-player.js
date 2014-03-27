@@ -1,7 +1,7 @@
 /**
  * Refactored from: https://github.com/kilokeith/soundcloud-soundmanager-player
  */
-define(['vendor/soundmanager2', 'jquery'], function(soundManager, jQuery) {
+define(['vendor/soundmanager2', 'jquery', 'vendor/d3'], function(soundManager, jQuery, d3) {
     //object slice
     __slice = [].slice;
 
@@ -10,9 +10,12 @@ define(['vendor/soundmanager2', 'jquery'], function(soundManager, jQuery) {
         soundManager.setup({
             debugMode: false,
             url: 'swf',
-            useHighPerformance: true,
+            useFlashBlock: false,
+            useHighPerformance: false,
+            waitForWindowLoad: true,
             useHTML5Audio: true,
-            wmode: 'transparent'
+            wmode: 'transparent',
+            flashVersion: 9,
         });
     }
 
@@ -67,13 +70,20 @@ define(['vendor/soundmanager2', 'jquery'], function(soundManager, jQuery) {
             startOn: 0,
             togglePause: true, //Should pause act as a toggle?
             tracksPerArtist: 5, // When given an artist URL, how many tracks to load?
-            volume: 100
+            volume: 100,
+            useEQData: true,
+            flashVersion: 9,
+            useWaveformData: true
         };
 
-        var sc_resolve_url = 'https://api.soundcloud.com/resolve?url=http://soundcloud.com';
-        var scApiUrl = 'https://api.soundcloud.com/';
+        var sc_resolve_url = 'http://api.soundcloud.com/resolve?url=http://soundcloud.com';
+        var scApiUrl = 'http://api.soundcloud.com/';
         var urlregex = new RegExp(/[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&//=]*)?/gi);
 
+        var numEqBars = 32;
+        var eqBarValues;
+        var eqBarValuesLast;
+        var eqBarInterval = 256 / numEqBars;
         //keep ref to local scope
         var self = this;
         var $this = jQuery(this);
@@ -504,15 +514,21 @@ define(['vendor/soundmanager2', 'jquery'], function(soundManager, jQuery) {
             }
 
             url += 'consumer_key=' + self.config.consumerKey;
+            url = url + "&ts=" + Math.round((new Date()).getTime() / 1000);
 
             // Setup the SM2 sound object.
             self.sound = soundManager.createSound({
+                flashVersion: 9,
                 autoLoad: true,
+                useHighPerformance: false,
                 id: 'track_' + track.id,
                 multiShot: false,
                 loops: 1,
                 url: url,
                 volume: self.config.volume,
+                waitForWindowLoad: true,
+                wmode: 'transparent',
+                useEQData: true,
                 whileloading: function() {
                     // Only use whole number percents.
                     var percent = Math.round(this.bytesLoaded / this.bytesTotal * 100);
@@ -520,8 +536,23 @@ define(['vendor/soundmanager2', 'jquery'], function(soundManager, jQuery) {
                 },
                 whileplaying: function() {
                     // Round to nearest 10th of a percent for performance
+                    eqBarValues = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+    
+                    var b1 = 0, b2 = 0, b3 = 0, b4 = 0;
+                    for (var i=0;i<256;i++){
+                        if (i < 64)
+                            b1 += this.eqData.left[i];
+                        else if (i < 128)
+                            b2 += this.eqData.left[i];
+                        else if (i < 192)
+                            b3 += this.eqData.left[i];
+                        else
+                            b4 += this.eqData.left[i];
+                
+                        eqBarValues[(i/eqBarInterval)>>0] += this.eqData.left[i];
+                    }
                     var percent = Math.round(this.position / track.duration * 100 * 10) / 10;
-                    self.trigger('scplayer.track.whileplaying', percent);
+                    self.trigger('scplayer.track.whileplaying', percent, eqBarValues);
                 },
                 onplay: function() {
                     self.log('track.onplay');
@@ -544,6 +575,8 @@ define(['vendor/soundmanager2', 'jquery'], function(soundManager, jQuery) {
                     self.trigger('scplayer.track.ready', self.currentTrackIndex, self.currentTrack);
                 }
             });
+
+            console.log(self.sound);
 
             self.trigger('scplayer.track.bindable', track, self.sound);
         };

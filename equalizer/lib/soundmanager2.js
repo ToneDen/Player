@@ -30,7 +30,7 @@
  * Also, as you may note: Whoa, reliable cross-platform/device audio support is hard! ;)
  */
 
-define(['vendor/dsp'], function(dsp) {
+define([], function() {
 
 "use strict";
 
@@ -124,7 +124,7 @@ function SoundManager(smURL, smID) {
     'isMovieStar': null,      // "MovieStar" MPEG4 audio mode. Null (default) = auto detect MP4, AAC etc. based on URL. true = force on, ignore URL
     'usePeakData': false,     // enable left/right channel peak (level) data
     'useWaveformData': false, // enable sound spectrum (raw waveform data) - NOTE: May increase CPU load.
-    'useEQData': false,       // enable sound EQ (frequency spectrum data) - NOTE: May increase CPU load.
+    'useEQData': true,       // enable sound EQ (frequency spectrum data) - NOTE: May increase CPU load.
     'onbufferchange': null,   // callback for "isBuffering" property change
     'ondataerror': null       // callback for waveform/eq data access error (flash playing audio in other tabs/domains)
 
@@ -217,7 +217,7 @@ function SoundManager(smURL, smID) {
     'buffering': false,
     'peakData': false,
     'waveformData': false,
-    'eqData': false,
+    'eqData': true,
     'movieStar': false
 
   };
@@ -1456,22 +1456,6 @@ function SoundManager(smURL, smID) {
 
     var s = this, resetProperties, add_html5_events, remove_html5_events, stop_html5_timer, start_html5_timer, attachOnPosition, onplay_called = false, onPositionItems = [], onPositionFired = 0, detachOnPosition, applyFromTo, lastURL = null, lastHTML5State, urlOmitted;
 
-
-    //HTML5 audio sampling properties
-    this._useAdvancedHTML5 = false;
-    this._useMoz = false;
-    this._fftLeft;
-    this._fftRight;
-    this._fftRightO; //For when we set right = left but want to preserve the original
-    this._waveformLeft;
-    this._waveformRight;
-    this._audioContext;
-    this._processingNode;
-    this._sourceNode;
-    this._fbLength;
-    this._sample_size;
-    this._sample_rate;
-
     lastHTML5State = {
       // tracks duration + position (time)
       duration: null,
@@ -1740,10 +1724,6 @@ function SoundManager(smURL, smID) {
       } else {
 
         stop_html5_timer();
-
-        if(s._useAdvancedHTML5 && !s._useMoz){
-            this._destroy_WebAudio_Waveform_Parser();
-        }
 
         if (s._a) {
           s._a.pause();
@@ -2798,87 +2778,6 @@ function SoundManager(smURL, smID) {
 
     };
 
-    var audioProcessEvent = function ( e ) {
-      if(s.paused) return;
-      //When we're processing some data through the HTML WebAudio API
-      var buffers = [];
-      var channels, resolution;
-      channels = s._channels = e.inputBuffer.numberOfChannels;
-
-      s._waveformLeft = e.inputBuffer.getChannelData(0);
-      if(s.instanceOptions.useEQData){
-        s._fftLeft.forward(s._waveformLeft);
-      }
-
-      if(channels > 1){
-        s._waveformRight = e.inputBuffer.getChannelData(1);
-        if(s.instanceOptions.useEQData){
-          s._fftRight = s._fftRightO;
-          s._fftRight.forward(s._waveformRight);
-        }
-      } else {
-        s._waveformRight = s._waveformLeft;
-        s._fftRight = s._fftLeft;
-      }
-
-      s._onTimer(true);
-    };
-  
-    this._create_WebAudio_Waveform_Parser = function(){
-      //Initialisation for Google Chrome/Web Audio compatible browsers
-
-      s._sample_rate = 44100;
-      s._sample_size = 2048;
-      if(s.instanceOptions.useWaveformData || s.instanceOptions.useEQData || s.instanceOptions.usePeakData){ 
-        var context = s._audioContext;
-
-        var source = s._sourceNode = context.createMediaElementSource( s._a );
-
-        var proc = s._processingNode = context.createJavaScriptNode( s._sample_size / 2, 1, 1 );
-
-        source.connect( proc );
-
-        proc.connect( context.destination );
-
-        source.connect( context.destination );
-
-        proc.onaudioprocess = audioProcessEvent; 
-
-        s._fftLeft = new FFT( s._sample_size / 2, s._sample_rate );
-        s._fftRight = s._fftRightO = new FFT( s._sample_size / 2, s._sample_rate );
-      }
-
-    };
-    
-    this._destroy_WebAudio_Waveform_Parser = function(){
-      if(s._sourceNode)
-        s._sourceNode.disconnect(0); 
-      
-      if(s._processingNode)
-        s._processingNode.disconnect(0); 
-    };
-
-    this._create_Mozilla_Waveform_Parser = function(){
-      //Initialisation for Mozilla Firefox
-
-      s._fbLength = s._a.mozFrameBufferLength;
-      s._channels = s._a.mozChannels;  
-      s._sample_rate = s._a.mozSampleRate;     
- 
-      if(s.instanceOptions.useWaveformData || s.instanceOptions.useEQData || s.instanceOptions.usePeakData){ 
-        s._waveformLeft = new Float32Array( s._fbLength / s._channels );
-        s._waveformRight = new Float32Array( s._fbLength / s._channels );
-      }
-
-      if(s.instanceOptions.useEQData || s.instanceOptions.usePeakData){ 
-        s._fftLeft = new FFT( s._fbLength / s._channels, s._sample_rate );
-        s._fftRight = s._fftLeft;
-        if(s._channels > 1){
-          s._fftRight = new FFT( s._fbLength / s._channels, s._sample_rate );
-        }
-      }
-    };
-
     resetProperties();
 
     /**
@@ -2895,10 +2794,6 @@ function SoundManager(smURL, smID) {
        */
 
       var duration, isNew = false, time, x = {};
-      var peakData = x;
-      var waveformLeft = x;
-      var waveformRight = x; 
-      var eqData = x;
 
       if (s._hasTimer || bForce) {
 
@@ -2930,19 +2825,7 @@ function SoundManager(smURL, smID) {
 
           if (isNew || bForce) {
 
-            // s._whileplaying(time,x,x,x,x);
-            if(s._useAdvancedHTML5){
-                if(s.instanceOptions.useWaveformData){
-                    waveformLeft = s._waveformLeft;
-                    waveformRight = s._waveformRight;
-                }
-                if(s.instanceOptions.useEQData){
-                    eqData = {leftEQ: s._fftLeft.spectrum,
-                              rightEQ: s._fftRight.spectrum};
-                }
-            }
-            
-            s._whileplaying(time, peakData, waveformLeft, waveformRight, eqData);
+            s._whileplaying(time,x,x,x,x);
 
           }
 
@@ -3089,21 +2972,6 @@ function SoundManager(smURL, smID) {
       }
 
       s.isHTML5 = true;
-
-      if(FFT && Float32Array){
-          //Use html5 for spectrum/waveform (dsp.js must be available)
-        if(window.AudioProcessingEvent && (window.AudioContext || window.webkitAudioContext)){
-            //Webkit and WebAudio API
-            s._useAdvancedHTML5 = true;
-            s._audioContext = new (window.AudioContext || window.webkitAudioContext)();
-            sm2._wD(s.id + ': Using HTML5 Audio for eqData and waveform');
-        } else if(a.mozSetup) {
-            //Mozilla Firefox
-            sm2._wD(s.id + ': Using Mozilla Audio for eqData and waveform');
-            s._useAdvancedHTML5 = true;
-            s._useMoz = true;
-        }
-      }
 
       // store a ref on the track
       s._a = a;
@@ -3360,8 +3228,7 @@ function SoundManager(smURL, smID) {
     this._whileplaying = function(nPosition, oPeakData, oWaveformDataLeft, oWaveformDataRight, oEQData) {
 
       var instanceOptions = s._iO,
-          // eqLeft;
-          eqLeft, eqRight;
+          eqLeft;
 
       if (isNaN(nPosition) || nPosition === null) {
         // flash safety net
@@ -3373,7 +3240,9 @@ function SoundManager(smURL, smID) {
 
       s._processOnPosition();
 
-      if (!s.isHTML5 && fV > 8 || s._useAdvancedHTML5) {
+      console.log(!s.isHTML5, fV > 8);
+
+      if (!s.isHTML5 && fV > 8) {
 
         if (instanceOptions.usePeakData && oPeakData !== _undefined && oPeakData) {
           s.peakData = {
@@ -3383,49 +3252,22 @@ function SoundManager(smURL, smID) {
         }
 
         if (instanceOptions.useWaveformData && oWaveformDataLeft !== _undefined && oWaveformDataLeft) {
-          // s.waveformData = {
-          //   left: oWaveformDataLeft.split(','),
-          //   right: oWaveformDataRight.split(',')
-          // };
-          if(typeof(oWaveformDataLeft) == 'string'){
-            s.waveformData = {
-              left: oWaveformDataLeft.split(','),
-              right: oWaveformDataRight.split(',')
-            };
-          } else {
-            s.waveformData = {
-              left: oWaveformDataLeft,
-              right: oWaveformDataRight
-            };
-          }
+          s.waveformData = {
+            left: oWaveformDataLeft.split(','),
+            right: oWaveformDataRight.split(',')
+          };
         }
 
         if (instanceOptions.useEQData) {
+            console.log("hey " + oEQData.leftEQ);
           if (oEQData !== _undefined && oEQData && oEQData.leftEQ) {
-            // eqLeft = oEQData.leftEQ;
-            // s.eqData = eqLeft;
-            // s.eqData.left = eqLeft;
-            // if (oEQData.rightEQ !== _undefined && oEQData.rightEQ) {
-            //   s.eqData.right = oEQData.rightEQ.split(',');
-            if(typeof(oEQData.leftEQ) == 'string'){
-              eqLeft = oEQData.leftEQ.split(',');
-            } else {
-              eqLeft = oEQData.leftEQ;
-              eqRight = eqLeft;
+            eqLeft = oEQData.leftEQ;
+            s.eqData = eqLeft;
+            s.eqData.left = eqLeft;
+            if (oEQData.rightEQ !== _undefined && oEQData.rightEQ) {
+              s.eqData.right = oEQData.rightEQ.split(',');
             }
           }
-
-          if (oEQData.rightEQ !== _undefined && oEQData.rightEQ) {
-            if(typeof(oEQData.rightEQ) == 'string'){
-              eqRight = oEQData.rightEQ.split(',');
-            } else {
-              eqRight = oEQData.rightEQ;
-            }
-          }
-
-          s.eqData = {};
-          s.eqData.left = eqLeft;
-          s.eqData.right= eqRight;
         }
 
       }
@@ -3899,7 +3741,7 @@ function SoundManager(smURL, smID) {
 
     // enough has loaded to play
 
-    canplay: html5_event(function(e) {
+    canplay: html5_event(function() {
 
       var s = this._s,
           position1K;
@@ -3929,14 +3771,6 @@ function SoundManager(smURL, smID) {
       // hack for HTML5 from/to case
       if (s._iO._oncanplay) {
         s._iO._oncanplay();
-      }
-
-      if(s._useAdvancedHTML5){
-        if(s._useMoz){
-            s._create_Mozilla_Waveform_Parser();
-        } else {
-            s._create_WebAudio_Waveform_Parser();
-        }
       }
 
     }),
@@ -4020,6 +3854,7 @@ function SoundManager(smURL, smID) {
       // sm2._wD(this._s.id + ': play()');
       // once play starts, no buffering
       this._s._onbufferchange(0);
+
     }),
 
     playing: html5_event(function() {
@@ -4122,8 +3957,6 @@ function SoundManager(smURL, smID) {
 
     timeupdate: html5_event(function() {
 
-      var s = this._s;
-      if(s._useAdvancedHTML5) return;
       this._s._onTimer();
 
     }),
@@ -4138,27 +3971,6 @@ function SoundManager(smURL, smID) {
       // playback faster than download rate, etc.
       s._onbufferchange(1);
 
-    }),
-
-    // only for firefox
-    MozAudioAvailable: html5_event(function(e) {
-      var s = this._s;
-      if(!s._useAdvancedHTML5 || !s._useMoz) return;
-      if(s._channels < 2){
-        s._waveformLeft = e.frameBuffer;
-        s._waveformRight = e.frameBuffer;
-      } else {
-        var per_channel = s._fbLength / s._channels;
-        for ( var i = 0; i < per_channel; i++ ) {
-          s._waveformLeft[i] = e.frameBuffer[i * s._channels];
-          s._waveformRight[i] = e.frameBuffer[i * s._channels + 1];
-        } 
-      }
-      s._fftLeft.forward( s._waveformLeft );
-      if(s._channels > 1){
-        s._fftRight.forward( s._waveformRight );
-      }
-      s._onTimer(true);
     })
 
   };
