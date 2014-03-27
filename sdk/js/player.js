@@ -16,10 +16,14 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-player', 'ven
             }
         }
 
-        console.log("hi");
-        console.log(parameters);
-
         container.html(template(parameters));
+
+        //container responsiveness
+        if(container.width()<600) {
+            container.find(".follow").addClass("follow-small").css("width", "50%");
+            container.find(".current-song-info").css("width", "100%").prependTo(container.find(".social"));
+            container.find(".buy").addClass("buy-small").css("width", "50%");
+        }
 
         container.find('.scrubber-slider').simpleSlider({highlight: true});        
     }
@@ -28,7 +32,7 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-player', 'ven
         if(!data) {
             var data = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
         } else {
-            var data = [0.1361162606626749, 0.07157782607828267, 0.025764694961253554, 0.03246627771295607, 0.08847521455027163, 0.026442752219736576, 0.030323196086101234, 0.0218847866053693, 0.030693408683873713, 0.034768179641105235, 0.03734104009345174, 0.03952709608711302, 0.02001303166616708, 0.02404092694632709, 0.030453502520686015, 0.030208346783183515, 0.01673863606993109, 0.017160871473606676, 0.02146214054664597, 0.013027621200308204, 0.017390099848853424, 0.009947492013452575, 0.008884934359230101, 0.012018044828437269, 0.005719061256968416, 0.004763303462823387, 0.002962481608847156, 0.0034158889029640704, 0.003077854446019046, 0.0008949323819251731, 0.001218922381667653, 0.0025467737068538554];
+            var data = data;
         }
 
         var n = 32
@@ -54,7 +58,7 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-player', 'ven
         }
          
         svg_line = d3.svg.line()
-            // .interpolate("basis")
+            .interpolate("basis")
             .x(function(d, i) { return x(i); })
             .y(function(d, i) { return y(d); });
         

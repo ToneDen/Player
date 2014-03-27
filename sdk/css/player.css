@@ -12,7 +12,7 @@ body {
 }
 
 #player {
-	width: 100%;
+  width: 300px !important;
 	height: 100%;
 	/*border-top: 10px solid transparent;*/
 }
@@ -330,20 +330,16 @@ cursor: pointer;
 
 .slider > .dragger {
   background: #e4e5e7;
-  background: linear-gradient(to bottom, #e4e5e7 0%,#d0d3d8 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e4e5e7', endColorstr='#d0d3d8',GradientType=0 );
   -webkit-border-radius: 10px;
   -moz-border-radius: 10px;
   border-radius: 10px;
   border: 1px solid #AFAFAF;
-  width: 16px;
-  height: 16px;
+  width: 8px;
+  height: 8px;
 }
 
 .slider > .dragger:hover {
    background: #f8f8f8;
-  background: linear-gradient(to bottom, #f8f8f8 0%,#e4e5e7 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f8f8f8', endColorstr='#e4e5e7',GradientType=0 );
 }
 
 
@@ -433,6 +429,23 @@ svg {
 
 .right {
   float: right !important; }
+
+/*Container Responsiveness*/
+.follow-small, 
+.buy-small {
+  width: 100%;
+}
+
+.follow-small .follow-link { 
+  border-right: 0px !important;
+  border-top: 1px solid #AFAFAF !important;
+}
+
+.buy-small .buy-link {
+  border-left: 0px !important;
+  border-top: 1px solid #AFAFAF !important;
+}
+
 
 /*Animations*/
 @-webkit-keyframes fadeIn {
