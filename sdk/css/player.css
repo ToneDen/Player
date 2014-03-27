@@ -65,11 +65,8 @@ cursor: pointer;
           animation: fadeIn 1s;
 }
 
-.waveform{
-  position: absolute;
-  left: 0;
-  right: 0;
-  z-index: 100;
+.waveform rect {
+    fill: red;
 }
 
 #playlist { display: none;}

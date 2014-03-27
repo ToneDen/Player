@@ -535,7 +535,6 @@ define(['vendor/soundmanager2', 'jquery', 'vendor/d3'], function(soundManager, j
                     self.trigger('scplayer.track.whileloading', percent);
                 },
                 whileplaying: function() {
-                    // Round to nearest 10th of a percent for performance
                     eqBarValues = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
     
                     var b1 = 0, b2 = 0, b3 = 0, b4 = 0;
@@ -551,6 +550,8 @@ define(['vendor/soundmanager2', 'jquery', 'vendor/d3'], function(soundManager, j
                 
                         eqBarValues[(i/eqBarInterval)>>0] += this.eqData.left[i];
                     }
+
+                    // Round to nearest 10th of a percent for performance
                     var percent = Math.round(this.position / track.duration * 100 * 10) / 10;
                     self.trigger('scplayer.track.whileplaying', percent, eqBarValues);
                 },
