@@ -67,6 +67,7 @@ cursor: pointer;
 
 .waveform rect {
     fill: red;
+    stroke: white;
 }
 
 #playlist { display: none;}

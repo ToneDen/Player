@@ -88,6 +88,7 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-player', 'ven
 
             var width = container.find('.cover').width();
             var height = container.find('.cover').height();
+            var barWidth = width / n;
              
             var x = d3.scale.linear()
                 .domain([0, n - 1])
@@ -95,22 +96,28 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-player', 'ven
              
             var y = d3.scale.linear()
                 .domain([0, 1])
-                .range([height, 0]);
+                .range([0, height]);
 
             if(!chart.node()) {
                 chart = d3Container.select('.waveform').append('svg')
                     .attr('width', width + margin.left + margin.right)
                     .attr('height', height + margin.top + margin.bottom)
-                    .append('g')
-                    .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
+                    .append('g');
+                    //.attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
 
                 chart.selectAll('rect')
                     .data(data)
                     .enter().append('rect')
-                    .attr('x', function(d, i) { return x(i) - .5; })
-                    .attr('y', function(d) { return width - y(d) - .5; })
-                    .attr('width', width)
-                    .attr('height', function(d) { return y(d); });
+                    .attr('x', function(d, i) {
+                        return x(i);
+                    })
+                    .attr('y', function(d) {
+                        return height - y(d);
+                    })
+                    .attr('width', barWidth)
+                    .attr('height', function(d) {
+                        return y(d);
+                    });
             }
 
             /*svg_line = d3.svg.line()
@@ -135,9 +142,13 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-player', 'ven
                 chart.selectAll('rect')
                     .data(data)
                     .transition()
-                    .duration(1000)
-                    .attr('y', function(d) { return width - y(d) - .5; })
-                    .attr('height', function(d) { return y(d); });
+                    .duration(100)
+                    .attr('y', function(d) {
+                        return height - y(d);
+                    })
+                    .attr('height', function(d) {
+                        return y(d);
+                    });
             }
 
             redrawEQ(chart, data);
