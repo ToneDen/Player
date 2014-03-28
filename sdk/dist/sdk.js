@@ -28029,7 +28029,7 @@ var t = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
 helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   var buffer = "", stack1, helper, options, functionType="function", escapeExpression=this.escapeExpression, self=this, helperMissing=helpers.helperMissing;
 
-function program1(depth0,data) {
+function program1(depth0,data,depth1) {
   
   var buffer = "", stack1, helper;
   buffer += "\n            <div class=\"header row\">\n                <div class=\"cover large-12 small-12 columns\">\n                    <a href=\"";
@@ -28049,11 +28049,9 @@ function program1(depth0,data) {
   if (helper = helpers.permalink_url) { stack1 = helper.call(depth0, {hash:{},data:data}); }
   else { helper = (depth0 && depth0.permalink_url); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
   buffer += escapeExpression(stack1)
-    + "\"  target=\"_blank\">\n                        <img src=\"";
-  if (helper = helpers.staticUrl) { stack1 = helper.call(depth0, {hash:{},data:data}); }
-  else { helper = (depth0 && depth0.staticUrl); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
-  buffer += escapeExpression(stack1)
-    + "/img/sc-dark.png\">\n                    </a>\n                </div>\n                <div class=\"current-song-info large-6 columns small-12\">\n                    <div class=\"track-info-plays large-3 small-3 columns\">\n                        <i class=\"fa fa-play-circle fw current-song-social-icon\"></i>\n                        ";
+    + "\"  target=\"_blank\">\n                        <img src=\""
+    + escapeExpression(((stack1 = (depth1 && depth1.staticUrl)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
+    + "img/sc-dark.png\">\n                    </a>\n                </div>\n                <div class=\"current-song-info large-6 columns small-12\">\n                    <div class=\"track-info-plays large-3 small-3 columns\">\n                        <i class=\"fa fa-play-circle fw current-song-social-icon\"></i>\n                        ";
   if (helper = helpers.playback_count) { stack1 = helper.call(depth0, {hash:{},data:data}); }
   else { helper = (depth0 && depth0.playback_count); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
   buffer += escapeExpression(stack1)
@@ -28188,7 +28186,7 @@ function program18(depth0,data) {
   }
 
   buffer += "<div class=\"row player\">\n    <div class=\"large-12 small-12 columns large-centered\">\n        ";
-  stack1 = helpers['with'].call(depth0, (depth0 && depth0.nowPlaying), {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data});
+  stack1 = helpers['with'].call(depth0, (depth0 && depth0.nowPlaying), {hash:{},inverse:self.noop,fn:self.programWithDepth(1, program1, data, depth0),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
   buffer += "\n        <div class=\"row controls\">\n            <div class=\"buttons large-12 small-12 columns\">\n                <i class=\"fa fa-angle-double-left fw player-prev prev\"></i>\n                <i class=\"fa fa-play-circle-o fw player-play play\"></i>\n                <i class=\"fa fa-angle-double-right fw player-next next\"></i>\n            </div>\n        </div>\n        <div class=\"row scrubber\">\n            <div class=\"large-12 small-12 columns scrubber-box\">\n                <div class=\"large-1 small-1 columns start-time\">0:00</div>\n                <div class=\"large-10 small-10 columns scrub-bar-box\">\n                    <input type=\"text\" class=\"scrubber-slider\">\n                </div>\n                <div class=\"large-1 small-1 columns stop-time\">\n                    "
     + escapeExpression((helper = helpers.msToTimestamp || (depth0 && depth0.msToTimestamp),options={hash:{},data:data},helper ? helper.call(depth0, ((stack1 = (depth0 && depth0.nowPlaying)),stack1 == null || stack1 === false ? stack1 : stack1.duration), options) : helperMissing.call(depth0, "msToTimestamp", ((stack1 = (depth0 && depth0.nowPlaying)),stack1 == null || stack1 === false ? stack1 : stack1.duration), options)))
