@@ -80,7 +80,7 @@ define(['vendor/soundmanager2', 'jquery', 'vendor/d3'], function(soundManager, j
         var scApiUrl = 'http://api.soundcloud.com/';
         var urlregex = new RegExp(/[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&//=]*)?/gi);
 
-        var numEqBars = 32;
+        var numEqBars = 64;
         var eqBarValues;
         var eqBarValuesLast;
         var eqBarInterval = 256 / numEqBars;
@@ -535,8 +535,7 @@ define(['vendor/soundmanager2', 'jquery', 'vendor/d3'], function(soundManager, j
                     self.trigger('scplayer.track.whileloading', percent);
                 },
                 whileplaying: function() {
-                    // Round to nearest 10th of a percent for performance
-                    eqBarValues = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+                    eqBarValues = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];;
     
                     var b1 = 0, b2 = 0, b3 = 0, b4 = 0;
                     for (var i=0;i<256;i++){
@@ -551,6 +550,8 @@ define(['vendor/soundmanager2', 'jquery', 'vendor/d3'], function(soundManager, j
                 
                         eqBarValues[(i/eqBarInterval)>>0] += this.eqData.left[i];
                     }
+
+                    // Round to nearest 10th of a percent for performance
                     var percent = Math.round(this.position / track.duration * 100 * 10) / 10;
                     self.trigger('scplayer.track.whileplaying', percent, eqBarValues);
                 },

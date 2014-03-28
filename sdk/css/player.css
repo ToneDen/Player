@@ -12,7 +12,7 @@ body {
 }
 
 #player {
-  width: 300px !important;
+  width: 800px !important;
 	height: 100%;
 	/*border-top: 10px solid transparent;*/
 }
@@ -65,11 +65,14 @@ cursor: pointer;
           animation: fadeIn 1s;
 }
 
-.waveform{
+.waveform {
   position: absolute;
-  left: 0;
-  right: 0;
-  z-index: 100;
+  left:0;
+  right:0;
+}
+
+.waveform rect {
+    fill: #222;
 }
 
 #playlist { display: none;}
