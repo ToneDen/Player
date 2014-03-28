@@ -28049,7 +28049,11 @@ function program1(depth0,data) {
   if (helper = helpers.permalink_url) { stack1 = helper.call(depth0, {hash:{},data:data}); }
   else { helper = (depth0 && depth0.permalink_url); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
   buffer += escapeExpression(stack1)
-    + "\"  target=\"_blank\">\n                        FOLLOW\n                    </a>\n                </div>\n                <div class=\"current-song-info large-6 columns small-12\">\n                    <div class=\"track-info-plays large-3 small-3 columns\">\n                        <i class=\"fa fa-play-circle fw current-song-social-icon\"></i>\n                        ";
+    + "\"  target=\"_blank\">\n                        <img src=\"";
+  if (helper = helpers.staticUrl) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.staticUrl); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "/img/sc-dark.png\">\n                    </a>\n                </div>\n                <div class=\"current-song-info large-6 columns small-12\">\n                    <div class=\"track-info-plays large-3 small-3 columns\">\n                        <i class=\"fa fa-play-circle fw current-song-social-icon\"></i>\n                        ";
   if (helper = helpers.playback_count) { stack1 = helper.call(depth0, {hash:{},data:data}); }
   else { helper = (depth0 && depth0.playback_count); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
   buffer += escapeExpression(stack1)
