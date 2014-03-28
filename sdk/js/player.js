@@ -73,7 +73,6 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-player', 'ven
                 var data = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
             }
 
-            var svg_line;
             var d3Container = d3.select(container[0]);
             var chart = d3Container.select('.waveform svg');
 
@@ -98,14 +97,28 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-player', 'ven
                 .domain([0, 0.2])
                 .range([0, height]);
 
+            var line = d3.svg.line()
+                .x(function(d, i) {
+                    return x(i);
+                })
+                .y(function(d, i) {
+                    return y(d);
+                })
+                .interpolate('basis');
+
             if(!chart.node()) {
-                chart = d3Container.select('.waveform').append('svg')
+                chart = d3Container.select('.waveform').append('svg:svg')
                     .attr('width', width + margin.left + margin.right)
                     .attr('height', height + margin.top + margin.bottom)
                     .append('g');
-                    //.attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
 
-                chart.selectAll('rect')
+                chart.selectAll('path')
+                    .data([data])
+                    .enter()
+                    .append('svg:path')
+                    .attr('d', line);
+
+                /*chart.selectAll('rect')
                     .data(data)
                     .enter().append('rect')
                     .attr('x', function(d, i) {
@@ -117,29 +130,17 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-player', 'ven
                     .attr('width', barWidth)
                     .attr('height', function(d) {
                         return y(d);
-                    });
+                    });*/
             }
 
-            /*svg_line = d3.svg.line()
-                // .interpolate('basis')
-                .x(function(d, i) { return x(i); })
-                .y(function(d, i) { return y(d); });
-            
-            chart.selectAll('path')
-                .data([data])
-                .enter()
-                .append('svg:path')
-                .attr('d', svg_line);*/
-
-
             function redrawEQ(svg, data) {
-                /*svg.selectAll('path')
+                svg.selectAll('path')
                     .data([data])
-                    .attr('d', svg_line)
+                    .attr('d', line)
                     .transition()
                         .ease('linear')
-                        .duration(1000)*/
-                chart.selectAll('rect')
+                        .duration(1000);
+                /*chart.selectAll('rect')
                     .data(data)
                     .transition()
                     .duration(100)
@@ -148,7 +149,7 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-player', 'ven
                     })
                     .attr('height', function(d) {
                         return y(d);
-                    });
+                    });*/
             }
 
             redrawEQ(chart, data);

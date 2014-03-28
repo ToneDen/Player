@@ -71,8 +71,9 @@ cursor: pointer;
   right:0;
 }
 
-.waveform rect {
-    fill: #222;
+.waveform path {
+    fill: none;
+    stroke: #222;
 }
 
 #playlist { display: none;}
