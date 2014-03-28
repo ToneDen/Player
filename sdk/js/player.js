@@ -102,7 +102,7 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-player', 'ven
                     return x(i);
                 })
                 .y(function(d, i) {
-                    return y(d);
+                    return height - y(d);
                 })
                 .interpolate('basis');
 
@@ -139,7 +139,7 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-player', 'ven
                     .attr('d', line)
                     .transition()
                         .ease('linear')
-                        .duration(1000);
+                        .duration(100);
                 /*chart.selectAll('rect')
                     .data(data)
                     .transition()
