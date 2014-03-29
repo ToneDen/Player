@@ -12,7 +12,7 @@ body {
 }
 
 #player {
-  width: 800px !important;
+  width: 400px !important;
 	height: 100%;
 	/*border-top: 10px solid transparent;*/
 }
@@ -57,7 +57,9 @@ cursor: pointer;
 }
 
 .cover a img {
-  max-height: 250px;
+  max-height: 200px;
+  border-radius: 100%;
+  margin: 20px 0px;
   -webkit-animation: fadeIn 1s; /* Safari and Chrome */
      -moz-animation: fadeIn 1s; /* Firefox */
       -ms-animation: fadeIn 1s; /* Internet Explorer */
@@ -71,15 +73,16 @@ cursor: pointer;
   right:0;
 }
 
-.waveform rect {
-    fill: #222;
+.waveform path {
+    fill: none;
+    stroke: #222;
 }
 
 #playlist { display: none;}
 	#playlist .active { font-weight: bold; }
 
 .info {
-	border-top: 1px solid #AFAFAF;
+	/*border-top: 1px solid #AFAFAF;*/
 	border-bottom: 1px solid #AFAFAF;
 	font-weight: bold;
   padding: 0px 45px;
