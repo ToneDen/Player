@@ -114,6 +114,12 @@ cursor: pointer;
   border-right: 1px solid #AFAFAF !important;
 }
 
+.follow-link img {
+  height: 16px;
+  margin-right: 10px;
+  vertical-align: middle;
+}
+
 .buy-link {
   border-left: 1px solid #AFAFAF !important;
 }
