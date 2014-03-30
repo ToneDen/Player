@@ -80,11 +80,11 @@
         </div>
         <div class="row scrubber">
             <div class="large-12 small-12 columns scrubber-box">
-                <div class="large-1 small-1 columns start-time">0:00</div>
-                <div class="large-10 small-10 columns scrub-bar-box">
+                <div class="large-2 small-2 columns start-time">0:00</div>
+                <div class="large-8 small-8 columns scrub-bar-box">
                     <input type="text" class="scrubber-slider">
                 </div>
-                <div class="large-1 small-1 columns stop-time">
+                <div class="large-2 small-2 columns stop-time">
                     {{msToTimestamp nowPlaying.duration}}
                 </div>
             </div>
@@ -98,16 +98,16 @@
                         <tr class="track-info" data-index={{@index}}>
                     {{/if}}
                         {{#if playing}}
-                            <td><i class="fa fa-play-circle fw current-play-icon" data-index={{@index}}></i></td>
+                            <td width="20"><i class="fa fa-play-circle fw current-play-icon" data-index={{@index}}></i></td>
                         {{else}}
                             <td><div class="track-info" data-index={{@index}}></td>
                         {{/if}}
                             <td>
-                                <div class="track-info-name large-12 small-12columns">
+                                <div class="track-info-name large-12 small-12 columns">
                                     {{title}}
                                 </div>
                             </td>
-                            <td style="width:50%">
+                            <td class="track-info-stats" style="width:50%">
                                 <div class="track-info-social large-12 small-12 columns">
                                     <div class="track-info-plays  small-3 large-3 columns">
                                         <i class="fa fa-play-circle fw playlist-social-icon"></i>

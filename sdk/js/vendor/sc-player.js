@@ -551,9 +551,11 @@ define(['vendor/soundmanager2', 'jquery', 'vendor/d3'], function(soundManager, j
                         eqBarValues[(i/eqBarInterval)>>0] += this.eqData.left[i];
                     }
 
+                    var reverseEqBarValues = eqBarValues.slice().reverse();
+                    var fullEQ = reverseEqBarValues.concat(eqBarValues);
                     // Round to nearest 10th of a percent for performance
                     var percent = Math.round(this.position / track.duration * 100 * 10) / 10;
-                    self.trigger('scplayer.track.whileplaying', percent, eqBarValues);
+                    self.trigger('scplayer.track.whileplaying', percent, fullEQ);
                 },
                 onplay: function() {
                     self.log('track.onplay');

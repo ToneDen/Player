@@ -63,6 +63,21 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-player', 'ven
 
             container.html(template(parameters));
 
+            //container responsiveness
+            if(container.width()<600) {
+                container.find(".follow").addClass("follow-small").css("width", "100%");
+                container.find(".current-song-info").css("width", "100%").prependTo(container.find(".social"));
+                container.find(".buy").addClass("buy-small").css("width", "100%");
+                container.find(".track-info-stats").hide();
+            }
+
+            // if(container.height()<600) {
+            //     container.find(".follow").addClass("follow-small").css("width", "100%");
+            //     container.find(".current-song-info").css("width", "100%").prependTo(container.find(".social"));
+            //     container.find(".buy").addClass("buy-small").css("width", "100%");
+            //     container.find(".track-info-stats").hide();
+            // }
+
             container.find('.scrubber-slider').simpleSlider({
                 highlight: true
             });
@@ -70,13 +85,13 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-player', 'ven
 
         function drawEQ(data) {
             if(!data) {
-                var data = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+                var data = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
             }
 
             var d3Container = d3.select(container[0]);
             var chart = d3Container.select('.waveform svg');
 
-            var n = 64;
+            var n = 128;
              
             var margin = {
                 top: 0,
@@ -94,7 +109,7 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-player', 'ven
                 .range([0, width]);
              
             var y = d3.scale.linear()
-                .domain([0, 1])
+                .domain([0, 1.5])
                 .range([0, height]);
 
             var line = d3.svg.line()

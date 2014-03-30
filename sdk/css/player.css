@@ -12,7 +12,7 @@ body {
 }
 
 #player {
-  width: 400px !important;
+  width: 800px !important;
 	height: 100%;
 	/*border-top: 10px solid transparent;*/
 }
@@ -25,7 +25,8 @@ body {
 	background: rgba(255,255,255,0.8);
   transition: all 0.5s;
   -webkit-transition: all 0.5s;
-    -moz-transition: all 0.5s;  
+    -moz-transition: all 0.5s;
+  min-width: 250px;  
 }
 
 .player .controls div {
@@ -141,7 +142,7 @@ cursor: pointer;
 .current-song-info {
   font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
   font-weight: 300;
-	font-size: 14px;
+	font-size: 12px;
   text-align: center;
 	padding-top: 1rem;
 	padding-bottom: 1.0625rem;
@@ -227,7 +228,7 @@ cursor: pointer;
   line-height: 50px;
   text-align: center;
   border-bottom: 1px solid #AFAFAF;
-  padding: 0px 20px;
+  padding: 0px 10px;
   -webkit-animation: fadeIn 1s; /* Safari and Chrome */
      -moz-animation: fadeIn 1s; /* Firefox */
       -ms-animation: fadeIn 1s; /* Internet Explorer */
@@ -863,3 +864,11 @@ table {}
     float: left; }
 
 }
+
+@media only screen and (max-width: 40em){
+  .track-info-stats {
+    display: none;
+  } 
+
+
+  }
