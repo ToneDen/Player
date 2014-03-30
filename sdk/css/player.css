@@ -83,8 +83,8 @@ cursor: pointer;
 	#playlist .active { font-weight: bold; }
 
 .info {
-	/*border-top: 1px solid #AFAFAF;*/
-	border-bottom: 1px solid #AFAFAF;
+	/*border-top: 1px solid #C2C6CE;*/
+	border-bottom: 1px solid #C2C6CE;
 	font-weight: bold;
   padding: 0px 45px;
 }
@@ -115,7 +115,7 @@ cursor: pointer;
 }
 
 .follow-link {
-  border-right: 1px solid #AFAFAF !important;
+  border-right: 1px solid #C2C6CE !important;
 }
 
 .follow-link img {
@@ -125,7 +125,7 @@ cursor: pointer;
 }
 
 .buy-link {
-  border-left: 1px solid #AFAFAF !important;
+  border-left: 1px solid #C2C6CE !important;
 }
 
 .follow-link, .buy-link {
@@ -155,8 +155,8 @@ cursor: pointer;
 .controls {
 	padding: 20px;
 	color: #222;
-	border-top: 1px solid #AFAFAF;
-	border-bottom: 1px solid #AFAFAF;
+	border-top: 1px solid #C2C6CE;
+	border-bottom: 1px solid #C2C6CE;
 }
 
 .player-prev {
@@ -227,7 +227,7 @@ cursor: pointer;
 .scrubber {
   line-height: 50px;
   text-align: center;
-  border-bottom: 1px solid #AFAFAF;
+  border-bottom: 1px solid #C2C6CE;
   padding: 0px 10px;
   -webkit-animation: fadeIn 1s; /* Safari and Chrome */
      -moz-animation: fadeIn 1s; /* Firefox */
@@ -251,7 +251,7 @@ cursor: pointer;
   line-height: 50px;
   height: 5px;
   border-radius: 20px;
-  border: 1px solid #AFAFAF;
+  border: 1px solid #C2C6CE;
   width: 100%;
   margin-bottom: 3px;
 }
@@ -330,7 +330,7 @@ cursor: pointer;
   border-right:0px;
   border-left:0px;
   border-top:0px;
-  border-bottom: 1px solid #AFAFAF;
+  border-bottom: 1px solid #C2C6CE;
 }
 
 /*Slider*/
@@ -346,7 +346,7 @@ cursor: pointer;
   -webkit-border-radius: 10px;
   -moz-border-radius: 10px;
   border-radius: 10px;
-  border: 1px solid #AFAFAF;
+  border: 1px solid #C2C6CE;
   width: 8px;
   height: 8px;
 }
@@ -360,12 +360,12 @@ cursor: pointer;
   -webkit-border-radius: 8px;
   -moz-border-radius: 8px;
   border-radius: 8px;
-  border: 1px solid #AFAFAF;
+  border: 1px solid #C2C6CE;
   height: 4px;
 }
 
 .slider > .highlight-track {
-  border-color: #AFAFAF;
+  border-color: #C2C6CE;
   background: #222;
 }
 
@@ -451,12 +451,12 @@ svg {
 
 .follow-small .follow-link { 
   border-right: 0px !important;
-  border-top: 1px solid #AFAFAF !important;
+  border-top: 1px solid #C2C6CE !important;
 }
 
 .buy-small .buy-link {
   border-left: 0px !important;
-  border-top: 1px solid #AFAFAF !important;
+  border-top: 1px solid #C2C6CE !important;
 }
 
 

@@ -291,6 +291,16 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-player', 'ven
             });
         });
 
+        function spacebarStop(e) {
+            if (e.keyCode == 32) {
+                if(playerInstance) {
+                    playerInstance.pause();
+                }
+                e.preventDefault();
+            }
+        }
+        document.addEventListener('keydown', spacebarStop, false);
+
         //Interactions
         log(playerInstance);
         return playerInstance;

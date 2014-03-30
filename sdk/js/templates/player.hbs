@@ -26,13 +26,17 @@
                 {{#ifCond purchase_url download_url}}
                     <div class="follow large-3 small-12 columns">
                         <a class="button expand follow-link" href="{{permalink_url}}"  target="_blank">
-                            <img src="{{../staticUrl}}img/sc-dark.png"> FOLLOW
+                            <i class="fa fa-cloud fw playlist-social-icon"></i>
+                            {{!-- <img src="{{../staticUrl}}img/sc-dark.png">  --}}
+                            FOLLOW
                         </a>
                     </div>
                 {{else}}
                     <div class="follow large-6 small-12 columns">
                         <a class="button expand follow-link" href="{{permalink_url}}"  target="_blank">
-                            <img src="{{../staticUrl}}img/sc-dark.png"> FOLLOW
+                            <i class="fa fa-cloud fw playlist-social-icon"></i>
+                            {{!-- <img src="{{../staticUrl}}img/sc-dark.png">  --}}
+                            FOLLOW
                         </a>
                     </div>
                 {{/ifCond}}
