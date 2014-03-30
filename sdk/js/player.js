@@ -6,7 +6,8 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-player', 'ven
         var parameters = {
             debug: false,
             skin: 'light',
-            tracksPerArtist: 5
+            tracksPerArtist: 5,
+            eq: 'waves',
         };
 
         // Setup the parameters object with the given arguments and
@@ -127,45 +128,50 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-player', 'ven
                     .attr('height', height + margin.top + margin.bottom)
                     .append('g');
 
-                chart.selectAll('path')
-                    .data([data])
-                    .enter()
-                    .append('svg:path')
-                    .attr('d', line)
-                    .attr('stroke-width', 3);
-
-                /*chart.selectAll('rect')
-                    .data(data)
-                    .enter().append('rect')
-                    .attr('x', function(d, i) {
-                        return x(i);
-                    })
-                    .attr('y', function(d) {
-                        return height - y(d);
-                    })
-                    .attr('width', barWidth)
-                    .attr('height', function(d) {
-                        return y(d);
-                    });*/
+                if(parameters.eq == "waves"){
+                    chart.selectAll('path')
+                        .data([data])
+                        .enter()
+                        .append('svg:path')
+                        .attr('d', line)
+                        .attr('stroke-width', 3);
+                } else if(parameters.eq == "bars") {
+                    chart.selectAll('rect')
+                        .data(data)
+                        .enter().append('rect')
+                        .attr('x', function(d, i) {
+                            return x(i);
+                        })
+                        .attr('y', function(d) {
+                            return height - y(d);
+                        })
+                        .attr('width', barWidth)
+                        .attr('height', function(d) {
+                            return y(d);
+                        });
+                }                
             }
 
             function redrawEQ(svg, data) {
-                svg.selectAll('path')
-                    .data([data])
-                    .attr('d', line)
-                    .transition()
-                        .ease('linear')
-                        .duration(100);
-                /*chart.selectAll('rect')
-                    .data(data)
-                    .transition()
-                    .duration(100)
-                    .attr('y', function(d) {
-                        return height - y(d);
-                    })
-                    .attr('height', function(d) {
-                        return y(d);
-                    });*/
+                if(parameters.eq == "waves"){
+                    svg.selectAll('path')
+                        .data([data])
+                        .attr('d', line)
+                        .transition()
+                            .ease('linear')
+                            .duration(100);
+                } else if(parameters.eq == "bars") {
+                    chart.selectAll('rect')
+                        .data(data)
+                        .transition()
+                        .duration(100)
+                        .attr('y', function(d) {
+                            return height - y(d);
+                        })
+                        .attr('height', function(d) {
+                            return y(d);
+                        });
+                }
             }
 
             redrawEQ(chart, data);
