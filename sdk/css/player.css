@@ -68,7 +68,7 @@ cursor: pointer;
 }
 
 .cover a img {
-  max-height: 200px;
+  max-height: 150px;
   border-radius: 100%;
   margin: 20px 0px;
   -webkit-animation: fadeIn 1s; /* Safari and Chrome */
@@ -428,18 +428,16 @@ cursor: pointer;
   -webkit-border-radius: 10px;
   -moz-border-radius: 10px;
   border-radius: 10px;
-  width: 8px;
-  height: 8px;
+  width: 10px;
+  height: 10px;
 }
 
 .player.light .slider > .dragger {
   background: #e4e5e7;
-  border: 1px solid #C2C6CE;
 }
 
 .player.dark .slider > .dragger {
   background: #ACACAC;
-  border: 1px solid #000;
 }
 
 .player.light .slider > .dragger:hover {
