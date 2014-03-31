@@ -529,12 +529,14 @@ define(['vendor/soundmanager2', 'jquery', 'vendor/d3'], function(soundManager, j
                 waitForWindowLoad: true,
                 wmode: 'transparent',
                 useEQData: true,
+                useWaveformData: true,
                 whileloading: function() {
                     // Only use whole number percents.
                     var percent = Math.round(this.bytesLoaded / this.bytesTotal * 100);
                     self.trigger('scplayer.track.whileloading', percent);
                 },
                 whileplaying: function() {
+                    console.log(this.waveformLeft);
                     eqBarValues = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
     
                     var b1 = 0, b2 = 0, b3 = 0, b4 = 0;

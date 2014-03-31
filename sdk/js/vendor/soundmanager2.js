@@ -3092,10 +3092,18 @@ function SoundManager(smURL, smID) {
 
       if(FFT && Float32Array){
           //Use html5 for spectrum/waveform (dsp.js must be available)
-        if(window.AudioProcessingEvent && (window.AudioContext || window.webkitAudioContext)){
+        var contextClass =(window.AudioContext || 
+          window.webkitAudioContext || 
+          window.mozAudioContext || 
+          window.oAudioContext || 
+          window.msAudioContext);
+
+        if(window.AudioProcessingEvent && contextClass){
             //Webkit and WebAudio API
+          
             s._useAdvancedHTML5 = true;
-            s._audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            s._audioContext = new contextClass();
+
             sm2._wD(s.id + ': Using HTML5 Audio for eqData and waveform');
         } else if(a.mozSetup) {
             //Mozilla Firefox

@@ -3078,6 +3078,9 @@ function SoundManager(smURL, smID) {
         if(window.AudioProcessingEvent && (window.AudioContext || window.webkitAudioContext)){
             //Webkit and WebAudio API
             s._useAdvancedHTML5 = true;
+            s._audioContext = null;
+            window.AudioContext = null;
+            window.webkitAudioContext = null;
             s._audioContext = new (window.AudioContext || window.webkitAudioContext)();
             sm2._wD(s.id + ': Using HTML5 Audio for eqData and waveform');
         } else if(a.mozSetup) {

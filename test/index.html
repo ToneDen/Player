@@ -6,7 +6,7 @@
         <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
     </head>
     <body>
-        <div id="player">
+        <div id="player" class="large-6 small-12 small-centered large-centered">
         </div>
         <script>
             (function() {
@@ -26,14 +26,23 @@
                     debug: true,
                     dom: '#player',
                     urls: [
-                        'https://soundcloud.com/saintpepsi'
-                    ]
+                        'https://soundcloud.com/giraffage'
+                    ],
+                    skin: 'light',
+                    eq: 'waves'
                 });
             });
         </script>
         <br>
         <br>
         <div id="player2">
+        </div>
+        <div class="row">
+            <div class="large-4 small-12 large-centered small-centered columns skin-change-container">
+                <a href="#" class="skin-change-btn" id="light-btn"></a>
+                <a href="#" class="skin-change-btn active" id="dark-btn"></a>
+            </div>
+        </div>
         <script>
             /*(function() {
                 var script = document.createElement('script');

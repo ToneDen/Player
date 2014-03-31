@@ -8,6 +8,7 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-player', 'ven
             skin: 'light',
             tracksPerArtist: 5,
             eq: 'waves',
+            visualizer: true
         };
 
         // Setup the parameters object with the given arguments and
@@ -17,9 +18,15 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-player', 'ven
         } else {
             parameters.urls = urls;
             parameters.dom = dom;
+            parameters.skin = skin;
+            parameters.eq = eq;
+            parameters.visualizer = visualizer;
 
             delete options.urls;
             delete options.dom;
+            delete options.skin;
+            delete options.eq;
+            delete options.visualizer;
 
             _.extend(parameters, options);
         }
@@ -51,6 +58,7 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-player', 'ven
         function rerender(parameters) {
             parameters = JSON.parse(JSON.stringify(parameters));
             parameters.staticUrl = staticUrl;
+            console.log(parameters);
 
             if(parameters.nowPlaying) {
                 for(var i = 0; i < parameters.tracks.length; i++) {
@@ -258,7 +266,9 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-player', 'ven
         });
 
         playerInstance.on('scplayer.track.whileplaying', function(e, percent, eqData) {
-            drawEQ(eqData);
+            if(parameters.visualizer == true) {
+                drawEQ(eqData);
+            }
 
             var ratio = percent / 100;
             var timeIn = msToTimestamp(playerInstance.position());
@@ -297,6 +307,7 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-player', 'ven
             });
         });
 
+        //Interactions
         function spacebarStop(e) {
             if (e.keyCode == 32) {
                 if(playerInstance) {
@@ -307,8 +318,26 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-player', 'ven
         }
         document.addEventListener('keydown', spacebarStop, false);
 
-        //Interactions
-        log(playerInstance);
+        function keyTrackNext(e) {
+            if (e.keyCode == 39) {
+                if(playerInstance) {
+                    playerInstance.next();
+                }
+                e.preventDefault();
+            }
+        }
+        document.addEventListener('keydown', keyTrackNext, false);
+
+        function keyTrackPrev(e) {
+            if (e.keyCode == 37) {
+                if(playerInstance) {
+                    playerInstance.prev();
+                }
+                e.preventDefault();
+            }
+        }
+        document.addEventListener('keydown', keyTrackPrev, false);
+
         return playerInstance;
     };
 });

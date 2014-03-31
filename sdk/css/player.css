@@ -11,12 +11,6 @@ body {
 	cursor: default; 
 }
 
-#player {
-  width: 800px !important;
-	height: 100%;
-	/*border-top: 10px solid transparent;*/
-}
-
 #player .controls {
 /*width: 150px;*/
 }
@@ -433,7 +427,7 @@ cursor: pointer;
 }
 
 .player.light .slider > .dragger {
-  background: #e4e5e7;
+  background: #BFC1CC;
 }
 
 .player.dark .slider > .dragger {
@@ -441,7 +435,7 @@ cursor: pointer;
 }
 
 .player.light .slider > .dragger:hover {
-   background: #f8f8f8;
+   background: #000;
 }
 
 .player.dark .slider > .dragger:hover {
@@ -466,12 +460,12 @@ cursor: pointer;
 }
 
 .player.light .slider > .highlight-track {
-  border-color: #C2C6CE;
+  border: 1px solid #000;
   background: #000;
 }
 
 .player.dark .slider > .highlight-track  {
-  border-color: #000;
+  border: 1px solid #000;
   background: white;
 }
 

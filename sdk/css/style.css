@@ -8,7 +8,35 @@ body {
 }
 
 #player {
-	width: 500px;
-	height: 1000px;
-	margin: 100px auto;
+	margin: 100px auto 0px;
+}
+
+.skin-change-container {
+	text-align: center;
+	margin-bottom: 20px;
+}
+
+.skin-change-btn {
+	padding: 0px 9px;
+	border-radius: 100%;
+	margin: 0px 20px;
+	opacity: 0.8;
+}
+
+.skin-change-btn:hover {
+	opacity: 1;
+}
+
+.skin-change-btn.active {
+	opacity: 1;
+	border: 2px solid #3498db;
+	box-sizing: border-box;
+}
+
+#light-btn {
+	background: rgba(255,255,255,0.8);
+}
+
+#dark-btn {
+	background: rgba(0,0,0,0.85);
 }
