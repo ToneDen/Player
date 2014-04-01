@@ -2832,6 +2832,8 @@ function SoundManager(smURL, smID) {
       if(s.instanceOptions.useWaveformData || s.instanceOptions.useEQData || s.instanceOptions.usePeakData){ 
         var context = s._audioContext;
 
+        console.log(context);
+        debugger;
         var source = s._sourceNode = context.createMediaElementSource( s._a );
 
         var proc = s._processingNode = context.createJavaScriptNode( s._sample_size / 2, 1, 1 );
@@ -3102,7 +3104,11 @@ function SoundManager(smURL, smID) {
             //Webkit and WebAudio API
           
             s._useAdvancedHTML5 = true;
-            s._audioContext = new contextClass();
+            console.log(s._audioContext);
+            if(!s._audioContext) {
+              console.log("creating new context");
+              s._audioContext = new contextClass();
+            }
 
             sm2._wD(s.id + ': Using HTML5 Audio for eqData and waveform');
         } else if(a.mozSetup) {

@@ -58,7 +58,6 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-player', 'ven
         function rerender(parameters) {
             parameters = JSON.parse(JSON.stringify(parameters));
             parameters.staticUrl = staticUrl;
-            console.log(parameters);
 
             if(parameters.nowPlaying) {
                 for(var i = 0; i < parameters.tracks.length; i++) {
