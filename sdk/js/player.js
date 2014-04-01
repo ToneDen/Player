@@ -201,7 +201,12 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-player', 'ven
 
         if(container) {
             rerender({
-                tracks: []
+                tracks: [],
+                skin: parameters.skin,
+                eq: parameters.eq,
+                tracksPerArtist: parameters.tracksPerArtist,
+                eq: parameters.eq,
+                visualizer: parameters.visualizer
             });
         } else {
             log('ToneDen Player: the container specified does not exist.', 'error');
@@ -286,7 +291,12 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-player', 'ven
                 log(tracks);
                 rerender({
                     nowPlaying: playerInstance.track(),
-                    tracks: tracks
+                    tracks: tracks,
+                    skin: parameters.skin,
+                    eq: parameters.eq,
+                    tracksPerArtist: parameters.tracksPerArtist,
+                    eq: parameters.eq,
+                    visualizer: parameters.visualizer
                 });
             });
 
@@ -302,7 +312,12 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-player', 'ven
             playerInstance.tracks(function(tracks) {
                 rerender({
                     nowPlaying: playerInstance.track(),
-                    tracks: tracks
+                    tracks: tracks,
+                    skin: parameters.skin,
+                    eq: parameters.eq,
+                    tracksPerArtist: parameters.tracksPerArtist,
+                    eq: parameters.eq,
+                    visualizer: parameters.visualizer
                 });
             });
         });

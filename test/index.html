@@ -29,7 +29,7 @@
                         'https://soundcloud.com/giraffage'
                     ],
                     skin: 'light',
-                    eq: 'bars'
+                    eq: 'waves'
                 });
             });
         </script>
@@ -39,12 +39,33 @@
         </div>
         <div class="row">
             <div class="large-4 small-12 large-centered small-centered columns skin-change-container">
-                <a href="#" class="skin-change-btn" id="light-btn"></a>
-                <a href="#" class="skin-change-btn" id="dark-btn"></a>
-                <a href="#" class="skin-change-btn active" id="aurora-btn"></a>
+                <a href="#" class="skin-change-btn active" id="light-btn" data-theme="light"></a>
+                <a href="#" class="skin-change-btn" id="dark-btn" data-theme="dark"></a>
+                <a href="#" class="skin-change-btn" id="aurora-btn" data-theme="aurora"></a>
             </div>
         </div>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
         <script>
+            $(document).ready(function() {
+                $(".skin-change-btn").on("click", function() {
+                    var id = $(this).attr("id");
+                    $(".player").remove();
+                    
+                    ToneDen.player({
+                        debug: true,
+                        dom: '#player',
+                        urls: [
+                            'https://soundcloud.com/giraffage'
+                        ],
+                        skin: $(this).attr("data-theme"),
+                        eq: 'bars'
+                    });
+
+                    $(".skin-change-btn").removeClass("active");
+                    $(this).addClass("active");
+
+                    });
+            });
             /*(function() {
                 var script = document.createElement('script');
 

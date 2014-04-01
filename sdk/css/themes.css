@@ -84,8 +84,8 @@
   color: white;
 }
 
-.player.aurora .follow-link:hover,.player.dark .buy-link:hover {
-  background: rgba(0,0,0,0.8);
+.player.aurora .follow-link:hover,.player.aurora .buy-link:hover {
+  background: #122230;
   color: white;
 }
 
@@ -141,6 +141,18 @@
 
 .player.dark .aurora {
   border-left: 1px solid #1B4B4B;
+}
+
+.player.light .playlist-table tbody tr.playing {
+	color: #000;
+}
+
+.player.dark .playlist-table tbody tr.playing {
+	color: white;
+}
+
+.player.aurora .playlist-table tbody tr.playing {
+	color: #02DDA8;
 }
 
 .player.light tbody tr:hover {
@@ -241,7 +253,7 @@
   stroke: white;
 }
 
-.player.aurora .axis path, .player.dark .axis line,{
+.player.aurora .axis path, .player.aurora .axis line,{
   stroke: white;
 }
 
