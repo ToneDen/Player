@@ -1,0 +1,282 @@
+
+.player.light {
+  background: rgba(255,255,255,0.8);
+  border: 1px solid #C2C6CE;
+  color: black;
+}
+
+.player.dark {
+  background: rgba(0,0,0,0.85);
+  border: 1px solid #000;
+  color: white;
+}
+
+.player.aurora {
+  	color: white;
+	background: #192F41;
+  	border: 1px solid #1B4B4B;
+}
+
+.player.light .waveform path {
+    fill: none;
+    stroke: #000;
+}
+
+.player.dark .waveform path {
+    fill: none;
+    stroke: white;
+}
+
+.player.aurora .waveform path {
+    fill: none;
+    stroke: #02DDA8;
+}
+
+.player.light .info {
+  border-bottom: 1px solid #C2C6CE;
+}
+
+.player.dark .info {
+  border-bottom: 1px solid #000;
+}
+
+.player.aurora .info {
+  border-bottom: 1px solid #1B4B4B;
+}
+
+.player.light .follow-link {
+  border-right: 1px solid #C2C6CE !important;
+  color: #222;
+}
+
+.player.dark .follow-link {
+  border-right: 1px solid #000 !important;
+  color: white;
+}
+
+.player.aurora .follow-link {
+  border-right: 1px solid #1B4B4B !important;
+  color: white;
+}
+
+.player.light .buy-link {
+  border-left: 1px solid #C2C6CE !important;
+  color: #222;
+}
+
+.player.dark .buy-link {
+  border-left: 1px solid #000 !important;
+  color: white;
+}
+
+.player.aurora .buy-link {
+  border-left: 1px solid #1B4B4B !important;
+  color: white;
+}
+
+.player.light .follow-link:hover,.player.light .buy-link:hover {
+  background: rgba(255,255,255,0.8);
+  color: #000;
+}
+
+.player.dark .follow-link:hover,.player.dark .buy-link:hover {
+  background: rgba(0,0,0,0.8);
+  color: white;
+}
+
+.player.aurora .follow-link:hover,.player.dark .buy-link:hover {
+  background: rgba(0,0,0,0.8);
+  color: white;
+}
+
+.player.light .controls {
+  color: #000;
+  border-top: 1px solid #C2C6CE;
+  border-bottom: 1px solid #C2C6CE;
+}
+
+.player.dark .controls {
+  color: white;
+  border-top: 1px solid #000;
+  border-bottom: 1px solid #000;
+}
+
+.player.aurora .controls {
+  color: #02DDA8;
+  border-top: 1px solid #1B4B4B;
+  border-bottom: 1px solid #1B4B4B;
+}
+
+.player.light .scrubber {
+  border-bottom: 1px solid #C2C6CE;
+}
+
+.player.dark .scrubber {
+  border-bottom: 1px solid #000;
+}
+
+.player.aurora .scrubber {
+  border-bottom: 1px solid #1B4B4B;
+}
+
+.player.light .scrub-bar {
+  border: 1px solid #C2C6CE;
+}
+
+.player.dark .scrub-bar {
+  border: 1px solid #000;
+}
+
+.player.aurora .scrub-bar {
+  border: 1px solid #1B4B4B;
+}
+
+.player.light .title {
+  border-left: 1px solid #D6D6D6;
+}
+
+.player.dark .title {
+  border-left: 1px solid #000;
+}
+
+.player.dark .aurora {
+  border-left: 1px solid #1B4B4B;
+}
+
+.player.light tbody tr:hover {
+  border-bottom: 1px solid rgba(175, 175, 175, 0.5);
+}
+
+.player.dark tbody tr:hover {
+  border-bottom: 1px solid rgba(175, 175, 175, 0.5);
+}
+
+.player.aurora tbody tr:hover {
+  border-bottom: 1px solid rgba(175, 175, 175, 0.5);
+}
+
+.player.light .playlist-table tbody tr td {
+  border-bottom: 1px solid #C2C6CE;
+}
+
+.player.dark .playlist-table tbody tr td {
+  border-bottom: 1px solid #000;
+}
+
+.player.aurora .playlist-table tbody tr td {
+  border-bottom: 1px solid #1B4B4B;
+}
+
+.player.light .slider > .dragger {
+  background: #BFC1CC;
+}
+
+.player.dark .slider > .dragger {
+  background: #ACACAC;
+}
+
+.player.aurora .slider > .dragger {
+  background: #ACACAC;
+}
+
+.player.light .slider > .dragger:hover {
+   background: #000;
+}
+
+.player.dark .slider > .dragger:hover {
+   background: white;
+}
+
+.player.aurora .slider > .dragger:hover {
+   background: white;
+}
+
+.player.light .slider > .track {
+  background: #f8f8f8;
+  border: 1px solid #C2C6CE;
+}
+
+.player.dark .slider > .track {
+   background: #494949;
+  border: 1px solid #000;
+}
+
+.player.aurora .slider > .track {
+   background: #254364;
+  border: 1px solid #254364;
+}
+
+.player.light .slider > .highlight-track {
+  border: 1px solid #000;
+  background: #000;
+}
+
+.player.dark .slider > .highlight-track  {
+  border: 1px solid #000;
+  background: white;
+}
+
+.player.aurora .slider > .highlight-track  {
+  border: 1px solid #02DDA8;
+  background: #02DDA8;
+}
+
+.player.light .line {
+  stroke: #000;
+}
+
+.player.dark .line {
+  stroke: white;
+}
+
+.player.aurora .line {
+  stroke: white;
+}
+
+.player.light .axis path, .player.light .axis line,{
+  stroke: #000;
+}
+
+.player.dark .axis path, .player.dark .axis line,{
+  stroke: white;
+}
+
+.player.aurora .axis path, .player.dark .axis line,{
+  stroke: white;
+}
+
+.player.light svg rect {
+  fill: #000;
+}
+
+.player.dark svg rect {
+  fill: white;
+}
+
+.player.aurora svg rect {
+  fill: #02DDA8;
+}
+
+.player.light .follow-small .follow-link {
+  border-top: 1px solid #C2C6CE !important;
+}
+
+.player.dark .follow-small .follow-link {
+  border-top: 1px solid #000 !important;
+}
+
+.player.aurora .follow-small .follow-link {
+  border-top: 1px solid #1B4B4B !important;
+}
+
+.player.light .buy-small .buy-link {
+  border-top: 1px solid #C2C6CE !important;
+}
+
+.player.dark .buy-small .buy-link {
+  border-top: 1px solid #000 !important;
+}
+
+.player.aurora .buy-small .buy-link {
+  border-top: 1px solid #1B4B4B !important;
+}
