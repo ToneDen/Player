@@ -12,9 +12,15 @@
 }
 
 .player.aurora {
-  	color: white;
-	background: #192F41;
-  	/*border: 1px solid #1B4B4B;*/
+    color: white;
+  background: #192F41;
+    /*border: 1px solid #1B4B4B;*/
+}
+
+.player.mojave {
+    color: white;
+    background: #4F4E70;
+    /*border: 1px solid #1B4B4B;*/
 }
 
 .player.light .waveform path {
@@ -32,6 +38,11 @@
     stroke: #02DDA8;
 }
 
+.player.mojave .waveform path {
+    fill: none;
+    stroke: #F58F86;
+}
+
 .player.light .info {
   border-bottom: 1px solid #C2C6CE;
 }
@@ -42,6 +53,10 @@
 
 .player.aurora .info {
   border-bottom: 1px solid #1B4B4B;
+}
+
+.player.mojave .info {
+  border-bottom: 1px solid #6D6C9A;
 }
 
 .player.light .follow-link {
@@ -56,6 +71,11 @@
 
 .player.aurora .follow-link {
   border-right: 1px solid #1B4B4B !important;
+  color: white;
+}
+
+.player.mojave .follow-link {
+  border-right: 1px solid #6D6C9A !important;
   color: white;
 }
 
@@ -74,6 +94,11 @@
   color: white;
 }
 
+.player.mojave .buy-link {
+  border-left: 1px solid #6D6C9A !important;
+  color: white;
+}
+
 .player.light .follow-link:hover,.player.light .buy-link:hover {
   background: rgba(255,255,255,0.8);
   color: #000;
@@ -86,6 +111,11 @@
 
 .player.aurora .follow-link:hover,.player.aurora .buy-link:hover {
   background: #122230;
+  color: white;
+}
+
+.player.mojave .follow-link:hover,.player.aurora .buy-link:hover {
+  background: #4F4E70;
   color: white;
 }
 
@@ -107,6 +137,12 @@
   border-bottom: 1px solid #1B4B4B;
 }
 
+.player.mojave .controls {
+  color: #F58F86;
+  border-top: 1px solid #6D6C9A;
+  border-bottom: 1px solid #6D6C9A;
+}
+
 .player.light .scrubber {
   border-bottom: 1px solid #C2C6CE;
 }
@@ -117,6 +153,10 @@
 
 .player.aurora .scrubber {
   border-bottom: 1px solid #1B4B4B;
+}
+
+.player.mojave .scrubber {
+  border-bottom: 1px solid #6D6C9A;
 }
 
 .player.light .scrub-bar {
@@ -131,6 +171,10 @@
   border: 1px solid #1B4B4B;
 }
 
+.player.mojave .scrub-bar {
+  border: 1px solid #6D6C9A;
+}
+
 .player.light .title {
   border-left: 1px solid #D6D6D6;
 }
@@ -139,20 +183,28 @@
   border-left: 1px solid #000;
 }
 
-.player.dark .aurora {
+.player.aurora .title {
   border-left: 1px solid #1B4B4B;
 }
 
+.player.mojave .title {
+  border-left: 1px solid #6D6C9A;
+}
+
 .player.light .playlist-table tbody tr.playing {
-	color: #000;
+  color: #000;
 }
 
 .player.dark .playlist-table tbody tr.playing {
-	color: white;
+  color: white;
 }
 
 .player.aurora .playlist-table tbody tr.playing {
-	color: #02DDA8;
+  color: #02DDA8;
+}
+
+.player.mojave .playlist-table tbody tr.playing {
+  color: white;
 }
 
 .player.light tbody tr:hover {
@@ -164,6 +216,10 @@
 }
 
 .player.aurora tbody tr:hover {
+  border-bottom: 1px solid rgba(175, 175, 175, 0.5);
+}
+
+.player.mojave tbody tr:hover {
   border-bottom: 1px solid rgba(175, 175, 175, 0.5);
 }
 
@@ -179,6 +235,10 @@
   border-bottom: 1px solid #1B4B4B;
 }
 
+.player.mojave .playlist-table tbody tr td {
+  border-bottom: 1px solid #6D6C9A;
+}
+
 .player.light .slider > .dragger {
   background: #BFC1CC;
 }
@@ -191,6 +251,10 @@
   background: #ACACAC;
 }
 
+.player.mojave .slider > .dragger {
+  background: #6D6C9A;
+}
+
 .player.light .slider > .dragger:hover {
    background: #000;
 }
@@ -200,6 +264,10 @@
 }
 
 .player.aurora .slider > .dragger:hover {
+   background: white;
+}
+
+.player.mojave .slider > .dragger:hover {
    background: white;
 }
 
@@ -218,6 +286,11 @@
   border: 1px solid #254364;
 }
 
+.player.mojave .slider > .track {
+   background: #254364;
+  border: 1px solid #6D6C9A;
+}
+
 .player.light .slider > .highlight-track {
   border: 1px solid #000;
   background: #000;
@@ -233,6 +306,11 @@
   background: #02DDA8;
 }
 
+.player.mojave .slider > .highlight-track  {
+  border: 1px solid #F58F86;
+  background: #F58F86;
+}
+
 .player.light .line {
   stroke: #000;
 }
@@ -242,6 +320,10 @@
 }
 
 .player.aurora .line {
+  stroke: white;
+}
+
+.player.mojave .line {
   stroke: white;
 }
 
@@ -257,6 +339,10 @@
   stroke: white;
 }
 
+.player.mojave .axis path, .player.mojave .axis line,{
+  stroke: white;
+}
+
 .player.light svg rect {
   fill: #000;
 }
@@ -267,6 +353,10 @@
 
 .player.aurora svg rect {
   fill: #02DDA8;
+}
+
+.player.mojave svg rect {
+  fill: #F58F86;
 }
 
 .player.light .follow-small .follow-link {
@@ -281,6 +371,10 @@
   border-top: 1px solid #1B4B4B !important;
 }
 
+.player.mojave .follow-small .follow-link {
+  border-top: 1px solid #6D6C9A !important;
+}
+
 .player.light .buy-small .buy-link {
   border-top: 1px solid #C2C6CE !important;
 }
@@ -291,4 +385,8 @@
 
 .player.aurora .buy-small .buy-link {
   border-top: 1px solid #1B4B4B !important;
+}
+
+.player.mojave .buy-small .buy-link {
+  border-top: 1px solid #6D6C9A !important;
 }
