@@ -204,6 +204,7 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-player', 'ven
                 skin: parameters.skin,
                 eq: parameters.eq,
                 tracksPerArtist: parameters.tracksPerArtist,
+                eq: parameters.eq,
                 visualizer: parameters.visualizer
             });
         } else {
