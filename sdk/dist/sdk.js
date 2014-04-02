@@ -6888,12 +6888,10 @@ function SoundManager(smURL, smID) {
 
       s._sample_rate = 44100;
       s._sample_size = 2048;
+
       if(s.instanceOptions.useWaveformData || s.instanceOptions.useEQData || s.instanceOptions.usePeakData){ 
         var context = s._audioContext;
-
-        console.log(context);
         var source = s._sourceNode = context.createMediaElementSource( s._a );
-
         var proc = s._processingNode = context.createJavaScriptNode( s._sample_size / 2, 1, 1 );
 
         source.connect( proc );
@@ -6906,11 +6904,22 @@ function SoundManager(smURL, smID) {
 
         s._fftLeft = new FFT( s._sample_size / 2, s._sample_rate );
         s._fftRight = s._fftRightO = new FFT( s._sample_size / 2, s._sample_rate );
+
+        // var source = s._sourceNode = context.createMediaElementSource( s._a );
+        // var analyser = (s._analyser || context.createAnalyser() );
+        // analyser.smoothingTimeConstant = 0.8;
+        // analyser.fftSize = 512;
+        // source.connect( context.destination );
+        // s.fftLeft = new Uint8Array(analyser.frequencyBinCount);
+        // analyser.getByteFrequencyData(s._fftLeft);
+        // console.log(s.fftLeft);
       }
 
     };
     
     this._destroy_WebAudio_Waveform_Parser = function(){
+      console.log("destroying web audio waveform");
+
       if(s._sourceNode)
         s._sourceNode.disconnect(0); 
       
@@ -6997,8 +7006,7 @@ function SoundManager(smURL, smID) {
                     waveformRight = s._waveformRight;
                 }
                 if(s.instanceOptions.useEQData){
-                    eqData = {leftEQ: s._fftLeft.spectrum,
-                              rightEQ: s._fftRight.spectrum};
+                    eqData = {leftEQ: s._fftLeft.spectrum};
                 }
             }
             
