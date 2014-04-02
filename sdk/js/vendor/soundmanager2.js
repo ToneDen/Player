@@ -1727,7 +1727,6 @@ function SoundManager(smURL, smID) {
      */
 
     this.destruct = function(_bFromSM) {
-
       sm2._wD(s.id + ': Destruct');
 
       if (!s.isHTML5) {
@@ -2833,7 +2832,6 @@ function SoundManager(smURL, smID) {
         var context = s._audioContext;
 
         console.log(context);
-        debugger;
         var source = s._sourceNode = context.createMediaElementSource( s._a );
 
         var proc = s._processingNode = context.createJavaScriptNode( s._sample_size / 2, 1, 1 );

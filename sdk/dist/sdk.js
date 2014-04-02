@@ -5787,7 +5787,6 @@ function SoundManager(smURL, smID) {
      */
 
     this.destruct = function(_bFromSM) {
-
       sm2._wD(s.id + ': Destruct');
 
       if (!s.isHTML5) {
@@ -6893,7 +6892,6 @@ function SoundManager(smURL, smID) {
         var context = s._audioContext;
 
         console.log(context);
-        debugger;
         var source = s._sourceNode = context.createMediaElementSource( s._a );
 
         var proc = s._processingNode = context.createJavaScriptNode( s._sample_size / 2, 1, 1 );
@@ -19636,8 +19634,6 @@ ToneDen.define('vendor/sc-player',['vendor/soundmanager2', 'jquery', 'vendor/d3'
         var eqBarValues;
         var eqBarValuesLast;
         var eqBarInterval = 256 / numEqBars;
-
-        var audioContext;
         //keep ref to local scope
         var self = this;
         var $this = jQuery(this);
@@ -20084,7 +20080,6 @@ ToneDen.define('vendor/sc-player',['vendor/soundmanager2', 'jquery', 'vendor/d3'
                 wmode: 'transparent',
                 useEQData: true,
                 useWaveformData: false,
-                audioContext: audioContext,
                 whileloading: function() {
                     // Only use whole number percents.
                     var percent = Math.round(this.bytesLoaded / this.bytesTotal * 100);
@@ -20134,8 +20129,8 @@ ToneDen.define('vendor/sc-player',['vendor/soundmanager2', 'jquery', 'vendor/d3'
                     self.trigger('scplayer.track.ready', self.currentTrackIndex, self.currentTrack);
                 }
             });
-            
-            audioContext = self.sound._audioContext;
+        
+            console.log(self.sound);
 
             self.trigger('scplayer.track.bindable', track, self.sound);
         };

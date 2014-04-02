@@ -84,8 +84,6 @@ define(['vendor/soundmanager2', 'jquery', 'vendor/d3'], function(soundManager, j
         var eqBarValues;
         var eqBarValuesLast;
         var eqBarInterval = 256 / numEqBars;
-
-        var audioContext;
         //keep ref to local scope
         var self = this;
         var $this = jQuery(this);
@@ -532,7 +530,6 @@ define(['vendor/soundmanager2', 'jquery', 'vendor/d3'], function(soundManager, j
                 wmode: 'transparent',
                 useEQData: true,
                 useWaveformData: false,
-                audioContext: audioContext,
                 whileloading: function() {
                     // Only use whole number percents.
                     var percent = Math.round(this.bytesLoaded / this.bytesTotal * 100);
@@ -582,8 +579,8 @@ define(['vendor/soundmanager2', 'jquery', 'vendor/d3'], function(soundManager, j
                     self.trigger('scplayer.track.ready', self.currentTrackIndex, self.currentTrack);
                 }
             });
-            
-            audioContext = self.sound._audioContext;
+        
+            console.log(self.sound);
 
             self.trigger('scplayer.track.bindable', track, self.sound);
         };
