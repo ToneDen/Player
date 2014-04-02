@@ -3104,8 +3104,13 @@ function SoundManager(smURL, smID) {
             s._useAdvancedHTML5 = true;
             console.log(s._audioContext);
             if(!s._audioContext) {
-              console.log("creating new context");
-              s._audioContext = new contextClass();
+              if(window.ToneDen && window.ToneDen.audioContext) {
+                s._audioContext = window.ToneDen.audioContext;
+              } else {
+                console.log("creating new context");
+                s._audioContext = new contextClass();
+                window.ToneDen.audioContext = s._audioContext;
+              }
             }
 
             sm2._wD(s.id + ': Using HTML5 Audio for eqData and waveform');
