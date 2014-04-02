@@ -1,20 +1,20 @@
 
 .player.light {
   background: rgba(255,255,255,0.8);
-  border: 1px solid #C2C6CE;
+  /*border: 1px solid #C2C6CE;*/
   color: black;
 }
 
 .player.dark {
   background: rgba(0,0,0,0.85);
-  border: 1px solid #000;
+  /*border: 1px solid #000;*/
   color: white;
 }
 
 .player.aurora {
   	color: white;
 	background: #192F41;
-  	border: 1px solid #1B4B4B;
+  	/*border: 1px solid #1B4B4B;*/
 }
 
 .player.light .waveform path {

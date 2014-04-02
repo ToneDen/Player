@@ -73,7 +73,7 @@ define(['vendor/soundmanager2', 'jquery', 'vendor/d3'], function(soundManager, j
             volume: 100,
             useEQData: true,
             flashVersion: 9,
-            useWaveformData: true
+            useWaveformData: false
         };
 
         var sc_resolve_url = 'http://api.soundcloud.com/resolve?url=http://soundcloud.com';
@@ -529,14 +529,13 @@ define(['vendor/soundmanager2', 'jquery', 'vendor/d3'], function(soundManager, j
                 waitForWindowLoad: true,
                 wmode: 'transparent',
                 useEQData: true,
-                useWaveformData: true,
+                useWaveformData: false,
                 whileloading: function() {
                     // Only use whole number percents.
                     var percent = Math.round(this.bytesLoaded / this.bytesTotal * 100);
                     self.trigger('scplayer.track.whileloading', percent);
                 },
                 whileplaying: function() {
-                    console.log(this.waveformLeft);
                     eqBarValues = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
     
                     var b1 = 0, b2 = 0, b3 = 0, b4 = 0;
@@ -580,7 +579,7 @@ define(['vendor/soundmanager2', 'jquery', 'vendor/d3'], function(soundManager, j
                     self.trigger('scplayer.track.ready', self.currentTrackIndex, self.currentTrack);
                 }
             });
-
+        
             console.log(self.sound);
 
             self.trigger('scplayer.track.bindable', track, self.sound);
