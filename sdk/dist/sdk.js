@@ -28308,6 +28308,8 @@ ToneDen.define('player',['jquery', 'vendor/simple-slider', 'underscore', 'vendor
         var dom = parameters.dom;
         var urls = parameters.urls;
         var container = $(dom);
+        var currentRatio = null;
+        var currentTimeIn = null;
 
         // Helper functions.
         function log(message, isError) {
@@ -28425,7 +28427,7 @@ ToneDen.define('player',['jquery', 'vendor/simple-slider', 'underscore', 'vendor
             }
 
             function redrawEQ(svg, data) {
-                if(parameters.eq == "waves"){
+                if(parameters.eq === "waves"){
                     svg.selectAll('path')
                         .data([data])
                         .attr('d', line)
@@ -28542,9 +28544,22 @@ ToneDen.define('player',['jquery', 'vendor/simple-slider', 'underscore', 'vendor
             var timeIn = msToTimestamp(playerInstance.position());
             var timeLeft = msToTimestamp(playerInstance.track().duration - playerInstance.position());
 
-            container.find('.scrubber-slider').simpleSlider('setRatio', ratio, true);
-            container.find('.start-time').html(timeIn);
-            container.find('.stop-time').html(timeLeft);
+            // Round ratio to the nearest 3 decimal points.
+            ratio = ratio.toFixed(3);
+
+            // Only update the slider if the ratio has changed.
+            if(ratio !== currentRatio) {
+                container.find('.scrubber-slider').simpleSlider('setRatio', ratio, true);
+            }
+
+            // Only update the play times if they have changed.
+            if(timeIn !== currentTimeIn) {
+                container.find('.start-time').html(timeIn);
+                container.find('.stop-time').html(timeLeft);
+            }
+
+            currentRatio = ratio;
+            currentTimeIn = timeIn;
         });
 
         playerInstance.on('scplayer.playlist.preloaded', function(e) {
