@@ -28337,8 +28337,6 @@ ToneDen.define('player',['jquery', 'vendor/simple-slider', 'underscore', 'vendor
                     }
                 }
 
-                log(parameters);
-
                 container.html(template(parameters));
 
                 //container responsiveness
@@ -28380,7 +28378,7 @@ ToneDen.define('player',['jquery', 'vendor/simple-slider', 'underscore', 'vendor
 
                 var width = container.find('.cover').width();
                 var height = container.find('.cover').height();
-                var barWidth = (width-n) / n;
+                var barWidth = (width - n) / n;
                  
                 var x = d3.scale.linear()
                     .domain([0, n - 1])
@@ -28430,7 +28428,7 @@ ToneDen.define('player',['jquery', 'vendor/simple-slider', 'underscore', 'vendor
                 }
 
                 function redrawEQ(svg, data) {
-                    if(parameters.eq === "waves"){
+                    if(parameters.eq === "waves") {
                         svg.selectAll('path')
                             .data([data])
                             .attr('d', line)
