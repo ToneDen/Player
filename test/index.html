@@ -6,7 +6,9 @@
         <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
     </head>
     <body>
-        <div id="player" class="large-6 small-12 small-centered large-centered">
+        <div id="player-container">
+            <div id="player" class="large-6 small-12 small-centered large-centered">
+            </div>
         </div>
         <script>
             (function() {
@@ -22,7 +24,7 @@
 
             ToneDenReady = window.ToneDenReady || [];
             ToneDenReady.push(function() {
-                ToneDen.player({
+                ToneDen.player.create({
                     debug: true,
                     dom: '#player',
                     urls: [
@@ -35,8 +37,6 @@
         </script>
         <br>
         <br>
-        <div id="player2">
-        </div>
         <div class="row">
             <div class="large-4 small-12 large-centered small-centered columns skin-change-container">
                 <a href="#" class="skin-change-btn active" id="light-btn" data-theme="light"></a>
@@ -50,9 +50,10 @@
             $(document).ready(function() {
                 $(".skin-change-btn").on("click", function() {
                     var id = $(this).attr("id");
-                    $(".player").remove();
+
+                    ToneDen.player.getInstanceByDom('#player').destroy();
                     
-                    ToneDen.player({
+                    ToneDen.player.create({
                         debug: true,
                         dom: '#player',
                         urls: [
@@ -64,30 +65,8 @@
 
                     $(".skin-change-btn").removeClass("active");
                     $(this).addClass("active");
-
-                    });
-            });
-            /*(function() {
-                var script = document.createElement('script');
-
-                script.type = 'text/javascript';
-                script.async = true;
-                script.src = "//widget.dev/loader/dist/sdk.loader.js"
-
-                var entry = document.getElementsByTagName('script')[0];
-                entry.parentNode.insertBefore(script, entry);
-            }());
-
-            ToneDenReady = window.ToneDenReady || [];
-            ToneDenReady.push(function() {
-                ToneDen.player({
-                    dom: '#player2',
-                    urls: [
-                        '/liquidcomplex/sea-of-voices-porter-robinson',
-                        'https://soundcloud.com/stbeethoven/run'
-                    ]
                 });
-            });*/
+            });
         </script>
         </div>
     </body>
