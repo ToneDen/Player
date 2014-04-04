@@ -9,7 +9,34 @@
         <div id="player-container">
             <div id="player" class="large-6 small-12 small-centered large-centered">
             </div>
+            <div id="player2" class="large-6 small-12 small-centered large-centered">
+            </div>
         </div>
+        <script>
+            (function() {
+                var script = document.createElement('script');
+
+                script.type = 'text/javascript';
+                script.async = true;
+                script.src = "//widget.dev/loader/dist/sdk.loader.js"
+
+                var entry = document.getElementsByTagName('script')[0];
+                entry.parentNode.insertBefore(script, entry);
+            }());
+
+            ToneDenReady = window.ToneDenReady || [];
+            ToneDenReady.push(function() {
+                ToneDen.player.create({
+                    debug: true,
+                    dom: '#player2',
+                    urls: [
+                        'https://soundcloud.com/giraffage'
+                    ],
+                    skin: 'light',
+                    eq: 'waves'
+                });
+            });
+        </script>
         <script>
             (function() {
                 var script = document.createElement('script');

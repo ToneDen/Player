@@ -73,8 +73,6 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-player', 'ven
                     }
                 }
 
-                log(parameters);
-
                 container.html(template(parameters));
 
                 //container responsiveness
@@ -116,7 +114,7 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-player', 'ven
 
                 var width = container.find('.cover').width();
                 var height = container.find('.cover').height();
-                var barWidth = (width-n) / n;
+                var barWidth = (width - n) / n;
                  
                 var x = d3.scale.linear()
                     .domain([0, n - 1])
@@ -166,7 +164,7 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-player', 'ven
                 }
 
                 function redrawEQ(svg, data) {
-                    if(parameters.eq === "waves"){
+                    if(parameters.eq === "waves") {
                         svg.selectAll('path')
                             .data([data])
                             .attr('d', line)
