@@ -28488,6 +28488,8 @@ ToneDen.define('player',['jquery', 'vendor/simple-slider', 'underscore', 'vendor
                 e.preventDefault();
                 var target = $(e.target);
 
+                console.log(container[0]);
+
                 if(target.hasClass('play')) {
                     playerInstance.pause();
                 } else if(target.hasClass('next')) {
