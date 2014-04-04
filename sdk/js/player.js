@@ -245,7 +245,7 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-player', 'ven
                 }
             });
 
-            container.on('slider:changed', 'scrubber-slider', function(e, slider) {
+            container.on('slider:changed', '.scrubber-slider', function(e, slider) {
                 playerInstance.play();
                 log('Slider Ratio: ' + slider.ratio);
 

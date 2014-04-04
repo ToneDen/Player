@@ -28509,7 +28509,7 @@ ToneDen.define('player',['jquery', 'vendor/simple-slider', 'underscore', 'vendor
                 }
             });
 
-            container.on('slider:changed', 'scrubber-slider', function(e, slider) {
+            container.on('slider:changed', '.scrubber-slider', function(e, slider) {
                 playerInstance.play();
                 log('Slider Ratio: ' + slider.ratio);
 
