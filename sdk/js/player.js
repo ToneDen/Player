@@ -1,4 +1,4 @@
-define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-player', 'vendor/handlebars', 'hbs!templates/player', 'templates/helpers/msToTimestamp', 'vendor/d3'], function($, SimpleSlider, _, scPlayer, Handlebars, template, msToTimestamp, d3) {
+define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-player', 'vendor/handlebars', 'hbs!templates/player', 'hbs!templates/player-solo', 'templates/helpers/msToTimestamp', 'vendor/d3'], function($, SimpleSlider, _, scPlayer, Handlebars, template, template_solo, msToTimestamp, d3) {
     return {
         create: function(urls, dom, options) {
             ToneDen.players = ToneDen.players || [];
@@ -12,7 +12,8 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-player', 'ven
                 skin: 'light',
                 tracksPerArtist: 5,
                 eq: 'waves',
-                visualizer: true
+                visualizer: true,
+                single: false,
             };
 
             // Setup the parameters object with the given arguments and
@@ -25,12 +26,14 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-player', 'ven
                 parameters.skin = skin;
                 parameters.eq = eq;
                 parameters.visualizer = visualizer;
+                parameters.single = single;
 
                 delete options.urls;
                 delete options.dom;
                 delete options.skin;
                 delete options.eq;
                 delete options.visualizer;
+                delete options.single;
 
                 _.extend(parameters, options);
             }
@@ -72,8 +75,11 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-player', 'ven
                         }
                     }
                 }
-
-                container.html(template(parameters));
+                if(parameters.single==true) {
+                    container.html(template_solo(parameters));
+                } else {
+                    container.html(template(parameters));
+                }
 
                 //container responsiveness
                 if(container.width()<600) {
@@ -209,7 +215,8 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-player', 'ven
                     skin: parameters.skin,
                     eq: parameters.eq,
                     tracksPerArtist: parameters.tracksPerArtist,
-                    visualizer: parameters.visualizer
+                    visualizer: parameters.visualizer,
+                    single: parameters.single
                 });
             } else {
                 log('ToneDen Player: the container specified does not exist.', 'error');
@@ -347,7 +354,8 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-player', 'ven
                         eq: parameters.eq,
                         tracksPerArtist: parameters.tracksPerArtist,
                         eq: parameters.eq,
-                        visualizer: parameters.visualizer
+                        visualizer: parameters.visualizer,
+                        single: parameters.single
                     });
                 });
             });
@@ -366,7 +374,8 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-player', 'ven
                         eq: parameters.eq,
                         tracksPerArtist: parameters.tracksPerArtist,
                         eq: parameters.eq,
-                        visualizer: parameters.visualizer
+                        visualizer: parameters.visualizer,
+                        single: parameters.single
                     });
                 });
             });

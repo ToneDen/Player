@@ -1,0 +1,101 @@
+<div class="row player {{skin}} solo">
+    <div class="large-12 small-12 columns large-centered small-centered">
+        {{#with nowPlaying}}
+            <div class="header large-4 small-12 columns">
+                <div class="cover large-12 small-12 columns">
+                    <div class="solo-cover">
+                        {{#if artwork_url}}
+                            <img src="{{artwork_url}}" />
+                        {{else}}
+                            <img src="{{user.avatar_url}}" />
+                        {{/if}}
+                    </div>
+                    <div class="controls">
+                        <div class="buttons large-12 small-12 columns">
+                            {{!-- <i class="fa fa-angle-double-left fw player-prev prev"></i> --}}
+                            <i class="fa fa-play-circle-o fw player-play play"></i>
+                            {{!-- <i class="fa fa-angle-double-right fw player-next next"></i> --}}
+                        </div>
+                    </div>
+                </div>
+                <div class="waveform large-12 small-12 columns">
+                </div>
+                <div class="solo-buttons large-12 small-12 columns">
+                    {{#ifCond purchase_url download_url}}
+                        <div class="follow large-6 small-12 columns">
+                            <a class="button expand follow-link" href="{{permalink_url}}"  target="_blank">
+                                <i class="fa fa-cloud fw playlist-social-icon"></i>
+                                {{!-- <img src="{{../staticUrl}}img/sc-dark.png">  --}}
+                                FOLLOW
+                            </a>
+                        </div>
+                    {{else}}
+                        <div class="follow large-12 small-12 columns">
+                            <a class="button expand follow-link" href="{{permalink_url}}"  target="_blank">
+                                <i class="fa fa-cloud fw playlist-social-icon"></i>
+                                {{!-- <img src="{{../staticUrl}}img/sc-dark.png">  --}}
+                                FOLLOW
+                            </a>
+                        </div>
+                    {{/ifCond}}
+                    {{#if purchase_url}}
+                        <div class="buy large-6 small-12 columns">
+                            <a class="button expand  buy-link" href="{{purchase_url}}" target="_blank">
+                                BUY
+                            </a>
+                        </div>
+                    {{else}}
+                        {{#if download_url}}    
+                            <div class="buy large-6 small-12 columns">
+                                <a class="button expand buy-link" href="{{download_url}}" target="_blank">
+                                    DOWNLOAD
+                                </a>
+                            </div>
+                        {{/if}}
+                    {{/if}}
+                </div>
+            </div>
+            <div class="solo-container large-8 small-12 columns">
+                <div class="row info ">
+                    <div class="song-name large-12 small-12 columns">
+                        {{title}}
+                    </div>
+                    <div class="artist-name large-12 small-12 columns">
+                        {{user.username}}
+                    </div>
+                </div>
+                <div class="row scrubber">
+                    <div class="large-12 small-12 columns scrubber-box">
+                        <div class="large-2 small-2 columns start-time">0:00</div>
+                        <div class="large-8 small-8 columns scrub-bar-box">
+                            <input type="text" class="scrubber-slider">
+                        </div>
+                        <div class="large-2 small-2 columns stop-time">
+                            {{msToTimestamp nowPlaying.duration}}
+                        </div>
+                    </div>
+                </div>
+                <div class="row social">
+                    <div class="current-song-info large-12 columns small-12">
+                        <div class="track-info-plays large-3 small-3 columns">
+                            <i class="fa fa-play-circle fw current-song-social-icon"></i>
+                            {{playback_count}}
+                        </div>
+                        <div class="track-info-favorites large-3 small-3 columns">
+                            <i class="fa fa-heart fw current-song-social-icon"></i>
+                            {{favoritings_count}}
+                        </div>
+                        <div class="track-info-comments large-3 small-3 columns">
+                            <i class="fa fa-comments fw current-song-social-icon"></i>
+                            {{comments.length}}
+                        </div>
+                        <div class="track-info-downloads large-3 small-3 columns">
+                            <i class="fa fa-download fw current-song-social-icon"></i>
+                            {{download_count}}
+                        </div>
+                    </div>
+                </div>
+            {{/with}}
+        </div>
+    </div>
+</div>

@@ -7,9 +7,9 @@
     </head>
     <body>
         <div id="player-container">
-            <div id="player" class="large-6 small-12 small-centered large-centered">
+            <div id="player" class="large-6 small-12 small-centered large-centered columns">
             </div>
-            <div id="player2" class="large-6 small-12 small-centered large-centered">
+            <div id="player2" class="large-6 small-12 small-centered large-centered columns">
             </div>
         </div>
         <script>
@@ -28,39 +28,41 @@
             ToneDenReady.push(function() {
                 ToneDen.player.create({
                     debug: true,
-                    dom: '#player2',
+                    dom: '#player',
                     urls: [
                         'https://soundcloud.com/giraffage'
                     ],
                     skin: 'light',
-                    eq: 'waves'
+                    eq: 'waves',
+                    single: true,
+                    tracksPerArtist: 1
                 });
             });
         </script>
         <script>
-            (function() {
-                var script = document.createElement('script');
+            // (function() {
+            //     var script = document.createElement('script');
 
-                script.type = 'text/javascript';
-                script.async = true;
-                script.src = "//widget.dev/loader/dist/sdk.loader.js"
+            //     script.type = 'text/javascript';
+            //     script.async = true;
+            //     script.src = "//widget.dev/loader/dist/sdk.loader.js"
 
-                var entry = document.getElementsByTagName('script')[0];
-                entry.parentNode.insertBefore(script, entry);
-            }());
+            //     var entry = document.getElementsByTagName('script')[0];
+            //     entry.parentNode.insertBefore(script, entry);
+            // }());
 
-            ToneDenReady = window.ToneDenReady || [];
-            ToneDenReady.push(function() {
-                ToneDen.player.create({
-                    debug: true,
-                    dom: '#player',
-                    urls: [
-                        'https://soundcloud.com/brotherboard'
-                    ],
-                    skin: 'light',
-                    eq: 'waves'
-                });
-            });
+            // ToneDenReady = window.ToneDenReady || [];
+            // ToneDenReady.push(function() {
+            //     ToneDen.player.create({
+            //         debug: true,
+            //         dom: '#player',
+            //         urls: [
+            //             'https://soundcloud.com/brotherboard'
+            //         ],
+            //         skin: 'light',
+            //         eq: 'waves'
+            //     });
+            // });
         </script>
         <br>
         <br>

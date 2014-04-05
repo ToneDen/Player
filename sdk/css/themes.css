@@ -1,26 +1,38 @@
 
 .player.light {
   background: rgba(255,255,255,0.8);
-  /*border: 1px solid #C2C6CE;*/
   color: black;
 }
 
 .player.dark {
   background: rgba(0,0,0,0.85);
-  /*border: 1px solid #000;*/
   color: white;
 }
 
 .player.aurora {
     color: white;
-  background: #192F41;
-    /*border: 1px solid #1B4B4B;*/
+    background: #192F41;
 }
 
 .player.mojave {
     color: white;
     background: #4F4E70;
-    /*border: 1px solid #1B4B4B;*/
+}
+
+.player.light div {
+  border-color: #C2C6CE !important;
+}
+
+.player.dark div {
+  border-color: #000 !important;
+}
+
+.player.aurora div {
+    border-color: #1B4B4B !important;
+}
+
+.player.mojave div {
+    border-color: #1B4B4B !important;
 }
 
 .player.light .waveform path {
@@ -44,58 +56,58 @@
 }
 
 .player.light .info {
-  border-bottom: 1px solid #C2C6CE;
+  border-color: #C2C6CE;
 }
 
 .player.dark .info {
-  border-bottom: 1px solid #000;
+  border-color: #000;
 }
 
 .player.aurora .info {
-  border-bottom: 1px solid #1B4B4B;
+  border-color: #1B4B4B;
 }
 
 .player.mojave .info {
-  border-bottom: 1px solid #6D6C9A;
+  border-color: #6D6C9A;
 }
 
 .player.light .follow-link {
-  border-right: 1px solid #C2C6CE !important;
+  border-color: #C2C6CE !important;
   color: #222;
 }
 
 .player.dark .follow-link {
-  border-right: 1px solid #000 !important;
+  border-color: #000 !important;
   color: white;
 }
 
 .player.aurora .follow-link {
-  border-right: 1px solid #1B4B4B !important;
+  border-color: #1B4B4B !important;
   color: white;
 }
 
 .player.mojave .follow-link {
-  border-right: 1px solid #6D6C9A !important;
+  border-color: #6D6C9A !important;
   color: white;
 }
 
 .player.light .buy-link {
-  border-left: 1px solid #C2C6CE !important;
+  border-color: #C2C6CE !important;
   color: #222;
 }
 
 .player.dark .buy-link {
-  border-left: 1px solid #000 !important;
+  border-color: #000 !important;
   color: white;
 }
 
 .player.aurora .buy-link {
-  border-left: 1px solid #1B4B4B !important;
+  border-color: #1B4B4B !important;
   color: white;
 }
 
 .player.mojave .buy-link {
-  border-left: 1px solid #6D6C9A !important;
+  border-color: #6D6C9A !important;
   color: white;
 }
 
@@ -121,74 +133,70 @@
 
 .player.light .controls {
   color: #000;
-  border-top: 1px solid #C2C6CE;
-  border-bottom: 1px solid #C2C6CE;
+  border-color: #C2C6CE;
 }
 
 .player.dark .controls {
   color: white;
-  border-top: 1px solid #000;
-  border-bottom: 1px solid #000;
+  border-color: #000;
 }
 
 .player.aurora .controls {
   color: #02DDA8;
-  border-top: 1px solid #1B4B4B;
-  border-bottom: 1px solid #1B4B4B;
+  border-color: #1B4B4B;
 }
 
 .player.mojave .controls {
   color: #F58F86;
-  border-top: 1px solid #6D6C9A;
-  border-bottom: 1px solid #6D6C9A;
+  border-color: #6D6C9A;
 }
 
 .player.light .scrubber {
-  border-bottom: 1px solid #C2C6CE;
+  border-color: #C2C6CE;
 }
 
 .player.dark .scrubber {
-  border-bottom: 1px solid #000;
+  border-color: #000;
 }
 
 .player.aurora .scrubber {
-  border-bottom: 1px solid #1B4B4B;
+  border-color: #1B4B4B;
 }
 
 .player.mojave .scrubber {
-  border-bottom: 1px solid #6D6C9A;
+  border-color: #6D6C9A;
 }
 
 .player.light .scrub-bar {
-  border: 1px solid #C2C6CE;
+  border-color: #C2C6CE;
 }
 
 .player.dark .scrub-bar {
-  border: 1px solid #000;
+  border-color: #000;
 }
 
 .player.aurora .scrub-bar {
-  border: 1px solid #1B4B4B;
+  border-color: #1B4B4B;
 }
 
 .player.mojave .scrub-bar {
-  border: 1px solid #6D6C9A;
+  border-color: #6D6C9A;
 }
 
 .player.light .title {
-  border-left: 1px solid #D6D6D6;
+  border-color: #D6D6D6;
 }
 
 .player.dark .title {
-  border-left: 1px solid #000;
+  border-color: #000;
 }
 
 .player.aurora .title {
-  border-left: 1px solid #1B4B4B;
+  border-color: #1B4B4B;
 }
 
 .player.mojave .title {
-  border-left: 1px solid #6D6C9A;
+  border-color: #6D6C9A;
 }
 
 .player.light .playlist-table tbody tr.playing {
@@ -208,35 +216,35 @@
 }
 
 .player.light tbody tr:hover {
-  border-bottom: 1px solid rgba(175, 175, 175, 0.5);
+  border-color: rgba(175, 175, 175, 0.5);
 }
 
 .player.dark tbody tr:hover {
-  border-bottom: 1px solid rgba(175, 175, 175, 0.5);
+  border-color: rgba(175, 175, 175, 0.5);
 }
 
 .player.aurora tbody tr:hover {
-  border-bottom: 1px solid rgba(175, 175, 175, 0.5);
+  border-color: rgba(175, 175, 175, 0.5);
 }
 
 .player.mojave tbody tr:hover {
-  border-bottom: 1px solid rgba(175, 175, 175, 0.5);
+  border-color: rgba(175, 175, 175, 0.5);
 }
 
 .player.light .playlist-table tbody tr td {
-  border-bottom: 1px solid #C2C6CE;
+  border-color: #C2C6CE;
 }
 
 .player.dark .playlist-table tbody tr td {
-  border-bottom: 1px solid #000;
+  border-color: #000;
 }
 
 .player.aurora .playlist-table tbody tr td {
-  border-bottom: 1px solid #1B4B4B;
+  border-color: #1B4B4B;
 }
 
 .player.mojave .playlist-table tbody tr td {
-  border-bottom: 1px solid #6D6C9A;
+  border-color: #6D6C9A;
 }
 
 .player.light .slider > .dragger {
@@ -273,41 +281,41 @@
 
 .player.light .slider > .track {
   background: #f8f8f8;
-  border: 1px solid #C2C6CE;
+  border-color: #C2C6CE;
 }
 
 .player.dark .slider > .track {
    background: #494949;
-  border: 1px solid #000;
+  border-color: #000;
 }
 
 .player.aurora .slider > .track {
    background: #254364;
-  border: 1px solid #254364;
+  border-color: #254364;
 }
 
 .player.mojave .slider > .track {
    background: #254364;
-  border: 1px solid #6D6C9A;
+  border-color: #6D6C9A;
 }
 
 .player.light .slider > .highlight-track {
-  border: 1px solid #000;
+  border-color: #000;
   background: #000;
 }
 
 .player.dark .slider > .highlight-track  {
-  border: 1px solid #000;
+  border-color: #000;
   background: white;
 }
 
 .player.aurora .slider > .highlight-track  {
-  border: 1px solid #02DDA8;
+  border-color: #02DDA8;
   background: #02DDA8;
 }
 
 .player.mojave .slider > .highlight-track  {
-  border: 1px solid #F58F86;
+  border-color: #F58F86;
   background: #F58F86;
 }
 
@@ -360,33 +368,33 @@
 }
 
 .player.light .follow-small .follow-link {
-  border-top: 1px solid #C2C6CE !important;
+  border-color: #C2C6CE !important;
 }
 
 .player.dark .follow-small .follow-link {
-  border-top: 1px solid #000 !important;
+  border-color: #000 !important;
 }
 
 .player.aurora .follow-small .follow-link {
-  border-top: 1px solid #1B4B4B !important;
+  border-color: #1B4B4B !important;
 }
 
 .player.mojave .follow-small .follow-link {
-  border-top: 1px solid #6D6C9A !important;
+  border-color: #6D6C9A !important;
 }
 
 .player.light .buy-small .buy-link {
-  border-top: 1px solid #C2C6CE !important;
+  border-color: #C2C6CE !important;
 }
 
 .player.dark .buy-small .buy-link {
-  border-top: 1px solid #000 !important;
+  border-color: #000 !important;
 }
 
 .player.aurora .buy-small .buy-link {
-  border-top: 1px solid #1B4B4B !important;
+  border-color: #1B4B4B !important;
 }
 
 .player.mojave .buy-small .buy-link {
-  border-top: 1px solid #6D6C9A !important;
+  border-color: #6D6C9A !important;
 }

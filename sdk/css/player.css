@@ -31,6 +31,7 @@ cursor: pointer;
 .header {
 	height: 100%;
   text-align: center;
+  position: relative;
 }
 
 .cover {
@@ -70,7 +71,7 @@ cursor: pointer;
 	#playlist .active { font-weight: bold; }
 
 .info {
-	/*border-top: 1px solid #C2C6CE;*/
+  border-bottom: 1px solid;
 	font-weight: bold;
   padding: 5px 45px;
 }
@@ -95,6 +96,14 @@ cursor: pointer;
       -ms-animation: fadeInLeft 1s; /* Internet Explorer */
        -o-animation: fadeInLeft 1s; /* Opera */
           animation: fadeInLeft 1s;
+}
+
+.follow-link {
+  border-right: 1px solid;
+}
+
+.buy-link {
+  border-left: 1px solid;
 }
 
 .follow-link img {
@@ -124,6 +133,8 @@ cursor: pointer;
 
 .controls {
 	padding: 20px;
+  border-top: 1px solid;
+  border-bottom: 1px solid;
 }
 
 .player-prev {
@@ -195,6 +206,7 @@ cursor: pointer;
   line-height: 50px;
   text-align: center;
   padding: 0px 10px;
+  border-bottom: 1px solid;
   -webkit-animation: fadeIn 1s; /* Safari and Chrome */
      -moz-animation: fadeIn 1s; /* Firefox */
       -ms-animation: fadeIn 1s; /* Internet Explorer */
@@ -219,6 +231,7 @@ cursor: pointer;
   border-radius: 20px;
   width: 100%;
   margin-bottom: 3px;
+  border: 1px solid;
 }
 
 .start-time, .stop-time {
@@ -231,7 +244,7 @@ cursor: pointer;
 }
 
 .title {
-	border-left: 1px solid #D6D6D6;
+	border-left: 1px solid;
 	margin-left: 40px;
 	height: 40px;
 }
@@ -267,6 +280,7 @@ cursor: pointer;
 .playlist-table tbody tr:hover {
 	cursor: pointer;
 	opacity: 1;
+  border-bottom: 1px solid;
 }
 
 .current-play-icon {
@@ -286,6 +300,7 @@ cursor: pointer;
   border-right:0px;
   border-left:0px;
   border-top:0px;
+  border-bottom: 1px solid;
 }
 
 /*Slider*/
@@ -309,6 +324,7 @@ cursor: pointer;
   -moz-border-radius: 8px;
   border-radius: 8px;
   height: 4px;
+  border: 1px solid;
 }
 
 /*Equalizer*/
@@ -377,6 +393,71 @@ svg {
 .right {
   float: right !important; }
 
+/*Single Player*/
+.player.solo .cover {
+  position: relative;
+  border-right: 1px solid;
+  border-bottom: 1px solid;
+}
+
+.player.solo .controls {
+  border-top: 0px;
+  border-bottom: 0px;
+  position: absolute;
+  left: 0;
+  width: 100%;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  margin: auto;
+  padding: 0px;
+}
+
+.player.solo .solo-cover{
+  display: table-cell;
+  vertical-align: middle;
+  -webkit-animation: fadeIn 1s; /* Safari and Chrome */
+     -moz-animation: fadeIn 1s; /* Firefox */
+      -ms-animation: fadeIn 1s; /* Internet Explorer */
+       -o-animation: fadeIn 1s; /* Opera */
+          animation: fadeIn 1s;
+}
+
+.player.solo .solo-cover img {
+  max-height: 100px;
+  border-radius: 100%;
+  margin: 10px 0px;
+  -webkit-animation: fadeIn 1s; /* Safari and Chrome */
+     -moz-animation: fadeIn 1s; /* Firefox */
+      -ms-animation: fadeIn 1s; /* Internet Explorer */
+       -o-animation: fadeIn 1s; /* Opera */
+          animation: fadeIn 1s;
+}
+
+.player.solo .buttons {
+  margin: 35px 0px;
+}
+
+.player.solo .fa-play-circle-o {
+  font-size: 55px;
+  color: white;
+  text-shadow: 1px 1px 1px black;
+}
+
+.player.solo .buy-link, .player.solo .follow-link {
+  font-size: 10px;
+}
+
+.player.solo .song-name, .player.solo .artist-name, .player.solo .current-song-info {
+  font-size: 12px;
+}
+
+.player.solo .song-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 /*Container Responsiveness*/
 .follow-small, 
 .buy-small {
@@ -385,11 +466,12 @@ svg {
 
 .follow-small .follow-link { 
   border-right: 0px !important;
+  border-top: 1px solid;
 }
 
 .buy-small .buy-link {
   border-left: 0px !important;
-  border-top: 1px solid #C2C6CE !important;
+  border-top: 1px solid;
 }
 /*Animations*/
 @-webkit-keyframes fadeIn {
