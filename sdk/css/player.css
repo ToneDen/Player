@@ -20,6 +20,11 @@ body {
   -webkit-transition: all 0.5s;
     -moz-transition: all 0.5s;
   min-width: 250px;  
+    -webkit-animation: fadeIn 0.5s; /* Safari and Chrome */
+     -moz-animation: fadeIn 0.5s; /* Firefox */
+      -ms-animation: fadeIn 0.5s; /* Internet Explorer */
+       -o-animation: fadeIn 0.5s; /* Opera */
+          animation: fadeIn 0.5s;
 }
 
 .player .controls div {

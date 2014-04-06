@@ -24,7 +24,7 @@
 }
 
 .player.dark div {
-  border-color: #000 !important;
+  border-color: #333 !important;
 }
 
 .player.aurora div {
@@ -32,7 +32,7 @@
 }
 
 .player.mojave div {
-    border-color: #1B4B4B !important;
+    border-color: #6D6C9A !important;
 }
 
 .player.light .waveform path {
@@ -60,7 +60,7 @@
 }
 
 .player.dark .info {
-  border-color: #000;
+  border-color: #333;
 }
 
 .player.aurora .info {
@@ -77,7 +77,7 @@
 }
 
 .player.dark .follow-link {
-  border-color: #000 !important;
+  border-color: #333 !important;
   color: white;
 }
 
@@ -97,7 +97,7 @@
 }
 
 .player.dark .buy-link {
-  border-color: #000 !important;
+  border-color: #333 !important;
   color: white;
 }
 
@@ -126,8 +126,8 @@
   color: white;
 }
 
-.player.mojave .follow-link:hover,.player.aurora .buy-link:hover {
-  background: #4F4E70;
+.player.mojave .follow-link:hover,.player.mojave .buy-link:hover {
+  background: #44435F;
   color: white;
 }
 
@@ -138,7 +138,7 @@
 
 .player.dark .controls {
   color: white;
-  border-color: #000;
+  border-color: #333;
 }
 
 .player.aurora .controls {
@@ -156,7 +156,7 @@
 }
 
 .player.dark .scrubber {
-  border-color: #000;
+  border-color: #333;
 }
 
 .player.aurora .scrubber {
@@ -172,7 +172,7 @@
 }
 
 .player.dark .scrub-bar {
-  border-color: #000;
+  border-color: #333;
 }
 
 .player.aurora .scrub-bar {
@@ -188,7 +188,7 @@
 }
 
 .player.dark .title {
-  border-color: #000;
+  border-color: #333;
 }
 
 .player.aurora .title {
@@ -236,7 +236,7 @@
 }
 
 .player.dark .playlist-table tbody tr td {
-  border-color: #000;
+  border-color: #333;
 }
 
 .player.aurora .playlist-table tbody tr td {
@@ -286,7 +286,7 @@
 
 .player.dark .slider > .track {
    background: #494949;
-  border-color: #000;
+  border-color: #333;
 }
 
 .player.aurora .slider > .track {
@@ -300,12 +300,12 @@
 }
 
 .player.light .slider > .highlight-track {
-  border-color: #000;
+  border-color: #333;
   background: #000;
 }
 
 .player.dark .slider > .highlight-track  {
-  border-color: #000;
+  border-color: #333;
   background: white;
 }
 
@@ -372,7 +372,7 @@
 }
 
 .player.dark .follow-small .follow-link {
-  border-color: #000 !important;
+  border-color: #333 !important;
 }
 
 .player.aurora .follow-small .follow-link {
@@ -388,7 +388,7 @@
 }
 
 .player.dark .buy-small .buy-link {
-  border-color: #000 !important;
+  border-color: #333 !important;
 }
 
 .player.aurora .buy-small .buy-link {
