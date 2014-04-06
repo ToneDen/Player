@@ -78,16 +78,22 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-player', 'ven
 
                 if(parameters.single==true) {
                     container.html(template_solo(parameters));
+
+                     if(container.width()<500) {
+                        container.find(".header").addClass("header-small").css("width", "100%");
+                        container.find(".solo-container").addClass("solo-container-small").css("width", "100%").prependTo(container.find(".solo-buttons"));
+                        container.find(".scrubber").hide();
+                     }
                 } else {
                     container.html(template(parameters));
-                }
 
-                //container responsiveness
-                if(container.width()<600) {
-                    container.find(".follow").addClass("follow-small").css("width", "100%");
-                    container.find(".current-song-info").css("width", "100%").prependTo(container.find(".social"));
-                    container.find(".buy").addClass("buy-small").css("width", "100%");
-                    container.find(".track-info-stats").hide();
+                    //container responsiveness
+                    if(container.width()<600) {
+                        container.find(".follow").addClass("follow-small").css("width", "100%");
+                        container.find(".current-song-info").css("width", "100%").prependTo(container.find(".social"));
+                        container.find(".buy").addClass("buy-small").css("width", "100%");
+                        container.find(".track-info-stats").hide();
+                    }
                 }
 
                 // if(container.height()<600) {
@@ -211,14 +217,14 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-player', 'ven
 
             // Perform the initial rendering.
             if(container) {
-                rerender({
-                    tracks: [],
-                    skin: parameters.skin,
-                    eq: parameters.eq,
-                    tracksPerArtist: parameters.tracksPerArtist,
-                    visualizer: parameters.visualizer,
-                    single: parameters.single
-                });
+                // rerender({
+                //     tracks: [],
+                //     skin: parameters.skin,
+                //     eq: parameters.eq,
+                //     tracksPerArtist: parameters.tracksPerArtist,
+                //     visualizer: parameters.visualizer,
+                //     single: parameters.single
+                // });
             } else {
                 log('ToneDen Player: the container specified does not exist.', 'error');
                 return;

@@ -9,6 +9,7 @@ body {
 
 #player {
 	margin: 60px auto 0px;
+	width: 300px;
 }
 
 .skin-change-container {

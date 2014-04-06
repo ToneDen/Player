@@ -399,6 +399,10 @@ svg {
   float: right !important; }
 
 /*Single Player*/
+.player.solo {
+  min-width: 185px;
+}
+
 .player.solo .cover {
   position: relative;
 }
@@ -501,6 +505,10 @@ svg {
 .buy-small .buy-link {
   border-left: 0px !important;
   border-top: 1px solid;
+}
+
+.player.solo .solo-container-small {
+  border-bottom: 1px solid;
 }
 /*Animations*/
 @-webkit-keyframes fadeIn {
