@@ -8,8 +8,27 @@ body {
 }
 
 #player {
-	margin: 60px auto 0px;
-	width: 300px;
+	margin: 20px auto 0px;
+}
+
+#header {
+  	font-family: 'Source Sans Pro', sans-serif;
+	color: white;
+	text-align: center;
+}
+
+#header h1 {
+	font-size: 24px;
+	font-weight: 300;
+	text-shadow: 0 0 5px #E0E0E0;
+}
+
+#header h2 {
+	font-size: 16px;
+	font-weight: 300;
+	font-style: italic;
+	text-shadow: 0 0 5px #E0E0E0;
+	margin-top: 10px;
 }
 
 .skin-change-container {
@@ -49,3 +68,4 @@ body {
 #mojave-btn {
 	background: #F58F86;
 }
+

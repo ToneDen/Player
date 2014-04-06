@@ -79,12 +79,13 @@ cursor: pointer;
   border-bottom: 1px solid;
 	font-weight: bold;
   padding: 5px 45px;
+  font-size: 14px;
 }
 
 .song-name {
   margin: 10px 0px 0px;
   text-align: center;
-  font-size:14px;
+  font-size:12px;
   font-weight: normal;
   -webkit-animation: fadeInLeft 1s; /* Safari and Chrome */
      -moz-animation: fadeInLeft 1s; /* Firefox */
@@ -120,7 +121,7 @@ cursor: pointer;
 .follow-link, .buy-link {
 	letter-spacing: 2px;
 	font-weight: 400;
-	font-size: 14px;
+	font-size: 12px;
 }
 
 .current-song-info {
@@ -133,7 +134,7 @@ cursor: pointer;
 }
 
 .current-song-social-icon {
-	font-size: 14px;
+	font-size: 12px;
 }
 
 .controls {
@@ -619,6 +620,17 @@ svg {
     -webkit-transform: translateY(5px);
     -ms-transform: translateY(5px);
     transform: translateY(5px);
+  }
+}
+
+/*Mozilla Fixes*/
+@-moz-document url-prefix() { 
+  .slider {
+    display: block;
+  }
+
+  .scrub-bar-box {
+    padding: 20px 0px;
   }
 }
 

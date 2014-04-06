@@ -2,10 +2,14 @@
 <html>
     <head>
         <title>Publisher Test Page</title>
-        <link href='http://fonts.googleapis.com/css?family=Raleway:400,600,200' rel='stylesheet' type='text/css'>
+        <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600' rel='stylesheet' type='text/css'>
         <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
     </head>
     <body>
+        <div id="header" class="large-12 small-12 columns large-centered small-centered">
+            <h1>tonedenplayer.js</h1>
+            <h2>A customizable & responsive player for SoundCloud</h2>
+        </div>
         <div id="player-container">
             <div id="player" class="large-6 small-12 small-centered large-centered columns">
             </div>
@@ -30,12 +34,10 @@
                     debug: true,
                     dom: '#player',
                     urls: [
-                        'https://soundcloud.com/giraffage'
+                        'https://soundcloud.com/giraffage/sets/giraffage-needs'
                     ],
                     skin: 'light',
                     eq: 'waves',
-                    single: true,
-                    tracksPerArtist: 1
                 });
             });
         </script>
