@@ -75,6 +75,7 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-player', 'ven
                         }
                     }
                 }
+
                 if(parameters.single==true) {
                     container.html(template_solo(parameters));
                 } else {
@@ -347,6 +348,11 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-player', 'ven
 
                 playerInstance.tracks(function(tracks) {
                     log(tracks);
+
+                    if(tracks.length==1) {
+                       parameters.single = true;
+                    } 
+
                     rerender({
                         nowPlaying: playerInstance.track(),
                         tracks: tracks,

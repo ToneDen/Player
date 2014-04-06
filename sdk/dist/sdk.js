@@ -28471,6 +28471,7 @@ ToneDen.define('player',['jquery', 'vendor/simple-slider', 'underscore', 'vendor
                         }
                     }
                 }
+
                 if(parameters.single==true) {
                     container.html(template_solo(parameters));
                 } else {
@@ -28743,6 +28744,11 @@ ToneDen.define('player',['jquery', 'vendor/simple-slider', 'underscore', 'vendor
 
                 playerInstance.tracks(function(tracks) {
                     log(tracks);
+
+                    if(tracks.length==1) {
+                       parameters.single = true;
+                    } 
+
                     rerender({
                         nowPlaying: playerInstance.track(),
                         tracks: tracks,
