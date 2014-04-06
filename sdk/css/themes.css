@@ -20,7 +20,7 @@
 }
 
 .player.light div {
-  border-color: #C2C6CE !important;
+  border-color: #E4E4E4!important;
 }
 
 .player.dark div {
@@ -56,7 +56,7 @@
 }
 
 .player.light .info {
-  border-color: #C2C6CE;
+  border-color: #E4E4E4;
 }
 
 .player.dark .info {
@@ -72,7 +72,7 @@
 }
 
 .player.light .follow-link {
-  border-color: #C2C6CE !important;
+  border-color: #E4E4E4!important;
   color: #222;
 }
 
@@ -92,7 +92,7 @@
 }
 
 .player.light .buy-link {
-  border-color: #C2C6CE !important;
+  border-color: #E4E4E4!important;
   color: #222;
 }
 
@@ -133,7 +133,7 @@
 
 .player.light .controls {
   color: #000;
-  border-color: #C2C6CE;
+  border-color: #E4E4E4;
 }
 
 .player.dark .controls {
@@ -152,7 +152,7 @@
 }
 
 .player.light .scrubber {
-  border-color: #C2C6CE;
+  border-color: #E4E4E4;
 }
 
 .player.dark .scrubber {
@@ -168,7 +168,7 @@
 }
 
 .player.light .scrub-bar {
-  border-color: #C2C6CE;
+  border-color: #E4E4E4;
 }
 
 .player.dark .scrub-bar {
@@ -232,7 +232,7 @@
 }
 
 .player.light .playlist-table tbody tr td {
-  border-color: #C2C6CE;
+  border-color: #E4E4E4;
 }
 
 .player.dark .playlist-table tbody tr td {
@@ -281,7 +281,7 @@
 
 .player.light .slider > .track {
   background: #f8f8f8;
-  border-color: #C2C6CE;
+  border-color: #E4E4E4;
 }
 
 .player.dark .slider > .track {
@@ -368,7 +368,7 @@
 }
 
 .player.light .follow-small .follow-link {
-  border-color: #C2C6CE !important;
+  border-color: #E4E4E4!important;
 }
 
 .player.dark .follow-small .follow-link {
@@ -384,7 +384,7 @@
 }
 
 .player.light .buy-small .buy-link {
-  border-color: #C2C6CE !important;
+  border-color: #E4E4E4!important;
 }
 
 .player.dark .buy-small .buy-link {

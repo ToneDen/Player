@@ -396,8 +396,6 @@ svg {
 /*Single Player*/
 .player.solo .cover {
   position: relative;
-  border-right: 1px solid;
-  border-bottom: 1px solid;
 }
 
 .player.solo .controls {
@@ -424,7 +422,7 @@ svg {
 }
 
 .player.solo .solo-cover img {
-  max-height: 100px;
+  max-height: 95px;
   border-radius: 100%;
   margin: 10px 0px;
   -webkit-animation: fadeIn 1s; /* Safari and Chrome */
@@ -434,6 +432,14 @@ svg {
           animation: fadeIn 1s;
 }
 
+.player.solo .scrubber {
+  border-left: 1px solid;
+}
+
+.player.solo .solo-buttons {
+  border-top: 1px solid;
+}
+
 .player.solo .buttons {
   margin: 35px 0px;
 }
@@ -441,7 +447,12 @@ svg {
 .player.solo .fa-play-circle-o {
   font-size: 55px;
   color: white;
-  text-shadow: 1px 1px 1px black;
+  text-shadow: 0px 0px 5px #4E4E4E;
+}
+
+.player.solo .fa-pause {
+  color: white;
+  text-shadow: 0px 0px 5px #4E4E4E;
 }
 
 .player.solo .buy-link, .player.solo .follow-link {
@@ -452,10 +463,23 @@ svg {
   font-size: 12px;
 }
 
+.player.solo .info {
+  border-left: 1px solid;
+  padding: 6px 35px;
+}
+
 .player.solo .song-name {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+.player.solo .current-song-info {
+  font-size: 10px;
+}
+
+.player.solo .current-song-social-icon {
+  font-size: 10px;
 }
 
 /*Container Responsiveness*/
