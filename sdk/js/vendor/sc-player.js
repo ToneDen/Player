@@ -497,6 +497,7 @@ define(['vendor/soundmanager2', 'jquery', 'vendor/d3'], function(soundManager, j
         };
 
         self.setSound = function(track) {
+            var isMoz = navigator.userAgent.toLowerCase().indexOf('firefox') > -1;
             self.log('setSound');
             self.trigger('scplayer.track.info_loaded', track);
 
@@ -551,6 +552,7 @@ define(['vendor/soundmanager2', 'jquery', 'vendor/d3'], function(soundManager, j
                         eqBarValues[(i/eqBarInterval)>>0] += this.eqData.left[i];
                     }
 
+                    console.log(eqBarValues);
                     var reverseEqBarValues = eqBarValues.slice().reverse();
                     var fullEQ = reverseEqBarValues.concat(eqBarValues);
                     // Round to nearest 10th of a percent for performance

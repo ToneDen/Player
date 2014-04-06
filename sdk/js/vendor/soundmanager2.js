@@ -3110,7 +3110,10 @@ function SoundManager(smURL, smID) {
             //Webkit and WebAudio API
           
             s._useAdvancedHTML5 = true;
-            console.log(s._audioContext);
+            if(navigator.userAgent.toLowerCase().indexOf('firefox') > -1) {
+              s._useMoz = true;
+            }
+
             if(!s._audioContext) {
               if(window.ToneDen && window.ToneDen.audioContext) {
                 s._audioContext = window.ToneDen.audioContext;
@@ -3122,7 +3125,7 @@ function SoundManager(smURL, smID) {
             }
 
             sm2._wD(s.id + ': Using HTML5 Audio for eqData and waveform');
-        } else if(a.mozSetup) {
+        } else if(navigator.userAgent.toLowerCase().indexOf('firefox') > -1) {
             //Mozilla Firefox
             sm2._wD(s.id + ': Using Mozilla Audio for eqData and waveform');
             s._useAdvancedHTML5 = true;
