@@ -8021,7 +8021,8 @@ function SoundManager(smURL, smID) {
 
       if(s._useAdvancedHTML5){
         if(s._useMoz){
-            s._create_Mozilla_Waveform_Parser();
+            // s._create_Mozilla_Waveform_Parser();
+            //TODO: Fix Mozilla Parser
         } else {
             s._create_WebAudio_Waveform_Parser();
         }
@@ -19638,9 +19639,12 @@ ToneDen.define('vendor/sc-player',['vendor/soundmanager2', 'jquery', 'vendor/d3'
             tracksPerArtist: 5, // When given an artist URL, how many tracks to load?
             volume: 100,
             useEQData: true,
+            useHTML5Audio: true,
             flashVersion: 9,
             useWaveformData: false
         };
+
+        var flashFallback = false;
 
         var sc_resolve_url = 'http://api.soundcloud.com/resolve?url=http://soundcloud.com';
         var scApiUrl = 'http://api.soundcloud.com/';
@@ -20064,6 +20068,9 @@ ToneDen.define('vendor/sc-player',['vendor/soundmanager2', 'jquery', 'vendor/d3'
 
         self.setSound = function(track) {
             var isMoz = navigator.userAgent.toLowerCase().indexOf('firefox') > -1;
+
+            if(isMoz==true) var flashFallback = true;
+
             self.log('setSound');
             self.trigger('scplayer.track.info_loaded', track);
 
@@ -20096,6 +20103,7 @@ ToneDen.define('vendor/sc-player',['vendor/soundmanager2', 'jquery', 'vendor/d3'
                 wmode: 'transparent',
                 useEQData: true,
                 useWaveformData: false,
+                preferFlash: flashFallback,
                 whileloading: function() {
                     // Only use whole number percents.
                     var percent = Math.round(this.bytesLoaded / this.bytesTotal * 100);
@@ -20118,7 +20126,6 @@ ToneDen.define('vendor/sc-player',['vendor/soundmanager2', 'jquery', 'vendor/d3'
                         eqBarValues[(i/eqBarInterval)>>0] += this.eqData.left[i];
                     }
 
-                    console.log(eqBarValues);
                     var reverseEqBarValues = eqBarValues.slice().reverse();
                     var fullEQ = reverseEqBarValues.concat(eqBarValues);
                     // Round to nearest 10th of a percent for performance
@@ -28479,7 +28486,7 @@ ToneDen.define('player',['jquery', 'vendor/simple-slider', 'underscore', 'vendor
 
                 if(parameters.single==true) {
                     container.html(template_solo(parameters));
-
+                    //container responsiveness  
                      if(container.width()<500) {
                         container.find(".header").addClass("header-small").css("width", "100%");
                         container.find(".solo-container").addClass("solo-container-small").css("width", "100%").prependTo(container.find(".solo-buttons"));

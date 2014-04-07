@@ -72,9 +72,12 @@ define(['vendor/soundmanager2', 'jquery', 'vendor/d3'], function(soundManager, j
             tracksPerArtist: 5, // When given an artist URL, how many tracks to load?
             volume: 100,
             useEQData: true,
+            useHTML5Audio: true,
             flashVersion: 9,
             useWaveformData: false
         };
+
+        var flashFallback = false;
 
         var sc_resolve_url = 'http://api.soundcloud.com/resolve?url=http://soundcloud.com';
         var scApiUrl = 'http://api.soundcloud.com/';
@@ -498,6 +501,9 @@ define(['vendor/soundmanager2', 'jquery', 'vendor/d3'], function(soundManager, j
 
         self.setSound = function(track) {
             var isMoz = navigator.userAgent.toLowerCase().indexOf('firefox') > -1;
+
+            if(isMoz==true) var flashFallback = true;
+
             self.log('setSound');
             self.trigger('scplayer.track.info_loaded', track);
 
@@ -530,6 +536,7 @@ define(['vendor/soundmanager2', 'jquery', 'vendor/d3'], function(soundManager, j
                 wmode: 'transparent',
                 useEQData: true,
                 useWaveformData: false,
+                preferFlash: flashFallback,
                 whileloading: function() {
                     // Only use whole number percents.
                     var percent = Math.round(this.bytesLoaded / this.bytesTotal * 100);
@@ -552,7 +559,6 @@ define(['vendor/soundmanager2', 'jquery', 'vendor/d3'], function(soundManager, j
                         eqBarValues[(i/eqBarInterval)>>0] += this.eqData.left[i];
                     }
 
-                    console.log(eqBarValues);
                     var reverseEqBarValues = eqBarValues.slice().reverse();
                     var fullEQ = reverseEqBarValues.concat(eqBarValues);
                     // Round to nearest 10th of a percent for performance

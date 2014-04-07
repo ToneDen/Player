@@ -3961,7 +3961,8 @@ function SoundManager(smURL, smID) {
 
       if(s._useAdvancedHTML5){
         if(s._useMoz){
-            s._create_Mozilla_Waveform_Parser();
+            // s._create_Mozilla_Waveform_Parser();
+            //TODO: Fix Mozilla Parser
         } else {
             s._create_WebAudio_Waveform_Parser();
         }
