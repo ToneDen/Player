@@ -272,6 +272,8 @@ cursor: pointer;
 
 .playlist {
 	font-size: 12px;
+  max-height: 150px;
+  overflow: scroll
 }
 
 .playlist-table {

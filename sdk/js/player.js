@@ -10,7 +10,7 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-player', 'ven
             var parameters = {
                 debug: false,
                 skin: 'light',
-                tracksPerArtist: 5,
+                tracksPerArtist: 4,
                 eq: 'waves',
                 visualizer: true,
                 single: false,
