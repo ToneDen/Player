@@ -256,7 +256,7 @@ function SoundManager(smURL, smID) {
   this.flash = {};
 
   // determined at init time
-  this.html5Only = false;
+  this.html5Only = true;
 
   // used for special cases (eg. iPad/iPhone/palm OS?)
   this.ignoreFlash = false;
@@ -352,7 +352,7 @@ function SoundManager(smURL, smID) {
 
       // special case 2: If lazy-loading SM2 (DOMContentLoaded has already happened) and user calls setup() with url: parameter, try to init ASAP.
 
-      if (!didDCLoaded && options.url !== _undefined && doc.readyState === 'complete') {
+      if (!didDCLoaded && options.url !== _undefined && (doc.readyState === 'interactive' || doc.readyState === 'complete')) {
         setTimeout(domContentLoaded, 1);
       }
 
@@ -2832,7 +2832,14 @@ function SoundManager(smURL, smID) {
       if(s.instanceOptions.useWaveformData || s.instanceOptions.useEQData || s.instanceOptions.usePeakData){ 
         var context = s._audioContext;
         var source = s._sourceNode = context.createMediaElementSource( s._a );
-        var proc = s._processingNode = context.createJavaScriptNode( s._sample_size / 2, 1, 1 );
+        var proc;
+
+        // Cross-compatibility for Chrome and Firefox.
+        if(context.createJavaScriptNode) {
+            proc = s._processingNode = context.createJavaScriptNode( s._sample_size / 2, 1, 1 );
+        } else {
+            proc = s._processingNode = context.createScriptProcessor( s._sample_size / 2, 1, 1 );
+        }
 
         source.connect( proc );
 
@@ -2858,8 +2865,6 @@ function SoundManager(smURL, smID) {
     };
     
     this._destroy_WebAudio_Waveform_Parser = function(){
-      console.log("destroying web audio waveform");
-
       if(s._sourceNode)
         s._sourceNode.disconnect(0); 
       
@@ -2870,9 +2875,12 @@ function SoundManager(smURL, smID) {
     this._create_Mozilla_Waveform_Parser = function(){
       //Initialisation for Mozilla Firefox
 
-      s._fbLength = s._a.mozFrameBufferLength;
-      s._channels = s._a.mozChannels;  
-      s._sample_rate = s._a.mozSampleRate;     
+      s._sample_rate = 44100;
+      s._fbLength = 2048;
+      s._channels = 2;
+      //s._fbLength = s._a.mozFrameBufferLength;
+      //s._channels = s._a.mozChannels;  
+      //s._sample_rate = s._a.mozSampleRate;     
  
       if(s.instanceOptions.useWaveformData || s.instanceOptions.useEQData || s.instanceOptions.usePeakData){ 
         s._waveformLeft = new Float32Array( s._fbLength / s._channels );
@@ -2896,7 +2904,6 @@ function SoundManager(smURL, smID) {
      */
 
     this._onTimer = function(bForce) {
-
       /**
        * HTML5-only _whileplaying() etc.
        * called from both HTML5 native events, and polling/interval-based timers
@@ -2928,6 +2935,7 @@ function SoundManager(smURL, smID) {
           // TODO: investigate why this goes wack if not set/re-set each time.
           s.durationEstimate = s.duration;
 
+          //time = (s._audioContext.currentTime * msecScale || 0);
           time = (s._a.currentTime * msecScale || 0);
 
           if (time !== lastHTML5State.time) {
@@ -3118,7 +3126,6 @@ function SoundManager(smURL, smID) {
               if(window.ToneDen && window.ToneDen.audioContext) {
                 s._audioContext = window.ToneDen.audioContext;
               } else {
-                console.log("creating new context");
                 s._audioContext = new contextClass();
                 window.ToneDen.audioContext = s._audioContext;
               }
@@ -3960,12 +3967,11 @@ function SoundManager(smURL, smID) {
       }
 
       if(s._useAdvancedHTML5){
-        if(s._useMoz){
-            // s._create_Mozilla_Waveform_Parser();
-            //TODO: Fix Mozilla Parser
-        } else {
+        //if(s._useMoz){
+            //s._create_Mozilla_Waveform_Parser();
+        //} else {
             s._create_WebAudio_Waveform_Parser();
-        }
+        //}
       }
 
     }),
@@ -5165,7 +5171,6 @@ function SoundManager(smURL, smID) {
   };
 
   timerExecute = function() {
-
     /**
      * manual polling for HTML5 progress events, ie., whileplaying() (can achieve greater precision than conservative default HTML5 interval)
      */
@@ -6031,6 +6036,7 @@ function SoundManager(smURL, smID) {
   };
 
   domContentLoaded = function() {
+    console.log('dom content loaded');
 
     if (didDCLoaded) {
       return false;

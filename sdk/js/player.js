@@ -215,18 +215,9 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-player', 'ven
                 }
             }
 
-            // Perform the initial rendering.
-            if(container) {
-                // rerender({
-                //     tracks: [],
-                //     skin: parameters.skin,
-                //     eq: parameters.eq,
-                //     tracksPerArtist: parameters.tracksPerArtist,
-                //     visualizer: parameters.visualizer,
-                //     single: parameters.single
-                // });
-            } else {
-                log('ToneDen Player: the container specified does not exist.', 'error');
+            // Make sure the specified container is valid.
+            if(!container) {
+                log('ToneDen Player: the dom element specified does not exist.', 'error');
                 return;
             }
 
@@ -237,8 +228,6 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-player', 'ven
             container.on('click', '.controls', function(e) {
                 e.preventDefault();
                 var target = $(e.target);
-
-                console.log(container[0]);
 
                 if(target.hasClass('play')) {
                     playerInstance.pause();
@@ -299,15 +288,11 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-player', 'ven
 
             // Hook into SC player events.
             playerInstance.on('scplayer.play', function(e) {
-                log('Playing.');
-
                 changePlayButton(false);
             });
 
             playerInstance.on('scplayer.pause', function(e) {
                 var paused = playerInstance.sound().paused;
-
-                log('Pause state changed: ' + paused);
 
                 changePlayButton(paused);
             });
@@ -323,10 +308,6 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-player', 'ven
             });
 
             playerInstance.on('scplayer.track.whileplaying', function(e, percent, eqData) {
-                if(parameters.visualizer == true) {
-                    drawEQ(eqData);
-                }
-
                 var ratio = percent / 100;
                 var timeIn = msToTimestamp(playerInstance.position());
                 var timeLeft = msToTimestamp(playerInstance.track().duration - playerInstance.position());
@@ -347,6 +328,10 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-player', 'ven
 
                 currentRatio = ratio;
                 currentTimeIn = timeIn;
+
+                if(parameters.visualizer == true) {
+                    drawEQ(eqData);
+                }
             });
 
             playerInstance.on('scplayer.playlist.preloaded', function(e) {

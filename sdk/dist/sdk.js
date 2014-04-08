@@ -4316,7 +4316,7 @@ function SoundManager(smURL, smID) {
   this.flash = {};
 
   // determined at init time
-  this.html5Only = false;
+  this.html5Only = true;
 
   // used for special cases (eg. iPad/iPhone/palm OS?)
   this.ignoreFlash = false;
@@ -4412,7 +4412,7 @@ function SoundManager(smURL, smID) {
 
       // special case 2: If lazy-loading SM2 (DOMContentLoaded has already happened) and user calls setup() with url: parameter, try to init ASAP.
 
-      if (!didDCLoaded && options.url !== _undefined && doc.readyState === 'complete') {
+      if (!didDCLoaded && options.url !== _undefined && (doc.readyState === 'interactive' || doc.readyState === 'complete')) {
         setTimeout(domContentLoaded, 1);
       }
 
@@ -6892,7 +6892,14 @@ function SoundManager(smURL, smID) {
       if(s.instanceOptions.useWaveformData || s.instanceOptions.useEQData || s.instanceOptions.usePeakData){ 
         var context = s._audioContext;
         var source = s._sourceNode = context.createMediaElementSource( s._a );
-        var proc = s._processingNode = context.createJavaScriptNode( s._sample_size / 2, 1, 1 );
+        var proc;
+
+        // Cross-compatibility for Chrome and Firefox.
+        if(context.createJavaScriptNode) {
+            proc = s._processingNode = context.createJavaScriptNode( s._sample_size / 2, 1, 1 );
+        } else {
+            proc = s._processingNode = context.createScriptProcessor( s._sample_size / 2, 1, 1 );
+        }
 
         source.connect( proc );
 
@@ -6918,8 +6925,6 @@ function SoundManager(smURL, smID) {
     };
     
     this._destroy_WebAudio_Waveform_Parser = function(){
-      console.log("destroying web audio waveform");
-
       if(s._sourceNode)
         s._sourceNode.disconnect(0); 
       
@@ -6930,9 +6935,12 @@ function SoundManager(smURL, smID) {
     this._create_Mozilla_Waveform_Parser = function(){
       //Initialisation for Mozilla Firefox
 
-      s._fbLength = s._a.mozFrameBufferLength;
-      s._channels = s._a.mozChannels;  
-      s._sample_rate = s._a.mozSampleRate;     
+      s._sample_rate = 44100;
+      s._fbLength = 2048;
+      s._channels = 2;
+      //s._fbLength = s._a.mozFrameBufferLength;
+      //s._channels = s._a.mozChannels;  
+      //s._sample_rate = s._a.mozSampleRate;     
  
       if(s.instanceOptions.useWaveformData || s.instanceOptions.useEQData || s.instanceOptions.usePeakData){ 
         s._waveformLeft = new Float32Array( s._fbLength / s._channels );
@@ -6956,7 +6964,6 @@ function SoundManager(smURL, smID) {
      */
 
     this._onTimer = function(bForce) {
-
       /**
        * HTML5-only _whileplaying() etc.
        * called from both HTML5 native events, and polling/interval-based timers
@@ -6988,6 +6995,7 @@ function SoundManager(smURL, smID) {
           // TODO: investigate why this goes wack if not set/re-set each time.
           s.durationEstimate = s.duration;
 
+          //time = (s._audioContext.currentTime * msecScale || 0);
           time = (s._a.currentTime * msecScale || 0);
 
           if (time !== lastHTML5State.time) {
@@ -7178,7 +7186,6 @@ function SoundManager(smURL, smID) {
               if(window.ToneDen && window.ToneDen.audioContext) {
                 s._audioContext = window.ToneDen.audioContext;
               } else {
-                console.log("creating new context");
                 s._audioContext = new contextClass();
                 window.ToneDen.audioContext = s._audioContext;
               }
@@ -8020,12 +8027,11 @@ function SoundManager(smURL, smID) {
       }
 
       if(s._useAdvancedHTML5){
-        if(s._useMoz){
-            // s._create_Mozilla_Waveform_Parser();
-            //TODO: Fix Mozilla Parser
-        } else {
+        //if(s._useMoz){
+            //s._create_Mozilla_Waveform_Parser();
+        //} else {
             s._create_WebAudio_Waveform_Parser();
-        }
+        //}
       }
 
     }),
@@ -9225,7 +9231,6 @@ function SoundManager(smURL, smID) {
   };
 
   timerExecute = function() {
-
     /**
      * manual polling for HTML5 progress events, ie., whileplaying() (can achieve greater precision than conservative default HTML5 interval)
      */
@@ -10091,6 +10096,7 @@ function SoundManager(smURL, smID) {
   };
 
   domContentLoaded = function() {
+    console.log('dom content loaded');
 
     if (didDCLoaded) {
       return false;
@@ -19575,14 +19581,15 @@ ToneDen.define('vendor/sc-player',['vendor/soundmanager2', 'jquery', 'vendor/d3'
     // Setup soundmanager2.
     if(typeof soundManager !== 'undefined'){
         soundManager.setup({
-            debugMode: false,
+            debugMode: true,
+            flashVersion: 9,
             url: 'swf',
             useFlashBlock: false,
             useHighPerformance: false,
             waitForWindowLoad: true,
+            useConsole: true,
             useHTML5Audio: true,
-            wmode: 'transparent',
-            flashVersion: 9,
+            wmode: 'transparent'
         });
     }
 
@@ -28623,18 +28630,9 @@ ToneDen.define('player',['jquery', 'vendor/simple-slider', 'underscore', 'vendor
                 }
             }
 
-            // Perform the initial rendering.
-            if(container) {
-                // rerender({
-                //     tracks: [],
-                //     skin: parameters.skin,
-                //     eq: parameters.eq,
-                //     tracksPerArtist: parameters.tracksPerArtist,
-                //     visualizer: parameters.visualizer,
-                //     single: parameters.single
-                // });
-            } else {
-                log('ToneDen Player: the container specified does not exist.', 'error');
+            // Make sure the specified container is valid.
+            if(!container) {
+                log('ToneDen Player: the dom element specified does not exist.', 'error');
                 return;
             }
 
@@ -28645,8 +28643,6 @@ ToneDen.define('player',['jquery', 'vendor/simple-slider', 'underscore', 'vendor
             container.on('click', '.controls', function(e) {
                 e.preventDefault();
                 var target = $(e.target);
-
-                console.log(container[0]);
 
                 if(target.hasClass('play')) {
                     playerInstance.pause();
@@ -28707,15 +28703,11 @@ ToneDen.define('player',['jquery', 'vendor/simple-slider', 'underscore', 'vendor
 
             // Hook into SC player events.
             playerInstance.on('scplayer.play', function(e) {
-                log('Playing.');
-
                 changePlayButton(false);
             });
 
             playerInstance.on('scplayer.pause', function(e) {
                 var paused = playerInstance.sound().paused;
-
-                log('Pause state changed: ' + paused);
 
                 changePlayButton(paused);
             });
@@ -28731,10 +28723,6 @@ ToneDen.define('player',['jquery', 'vendor/simple-slider', 'underscore', 'vendor
             });
 
             playerInstance.on('scplayer.track.whileplaying', function(e, percent, eqData) {
-                if(parameters.visualizer == true) {
-                    drawEQ(eqData);
-                }
-
                 var ratio = percent / 100;
                 var timeIn = msToTimestamp(playerInstance.position());
                 var timeLeft = msToTimestamp(playerInstance.track().duration - playerInstance.position());
@@ -28755,6 +28743,10 @@ ToneDen.define('player',['jquery', 'vendor/simple-slider', 'underscore', 'vendor
 
                 currentRatio = ratio;
                 currentTimeIn = timeIn;
+
+                if(parameters.visualizer == true) {
+                    drawEQ(eqData);
+                }
             });
 
             playerInstance.on('scplayer.playlist.preloaded', function(e) {

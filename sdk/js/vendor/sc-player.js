@@ -8,14 +8,15 @@ define(['vendor/soundmanager2', 'jquery', 'vendor/d3'], function(soundManager, j
     // Setup soundmanager2.
     if(typeof soundManager !== 'undefined'){
         soundManager.setup({
-            debugMode: false,
+            debugMode: true,
+            flashVersion: 9,
             url: 'swf',
             useFlashBlock: false,
             useHighPerformance: false,
             waitForWindowLoad: true,
+            useConsole: true,
             useHTML5Audio: true,
-            wmode: 'transparent',
-            flashVersion: 9,
+            wmode: 'transparent'
         });
     }
 
