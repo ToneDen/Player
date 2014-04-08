@@ -10,6 +10,7 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-player', 'ven
             var parameters = {
                 debug: false, // Output debug messages?
                 eq: 'waves', // Equalizer type. 'waves' or 'bars'
+                keyboardEvents: false, // Should we listen to keyboard events?
                 single: false,
                 skin: 'light',
                 tracksPerArtist: 4, // How many tracks to load when given an artist SoundCloud URL.
@@ -258,35 +259,29 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-player', 'ven
             });
 
             // Document-wide listeners.
-            function spacebarStop(e) {
-                if (e.keyCode == 32) {
-                    if(playerInstance) {
-                        playerInstance.pause();
-                    }
-                    e.preventDefault();
-                }
-            }
-            document.addEventListener('keydown', spacebarStop, false);
+            if(parameters.keyboardEvents) {
+                document.addEventListener('keydown', function(e) {
+                    if (e.keyCode == 32) {
+                        if(playerInstance) {
+                            playerInstance.pause();
+                        }
 
-            function keyTrackNext(e) {
-                if (e.keyCode == 39) {
-                    if(playerInstance) {
-                        playerInstance.next();
-                    }
-                    e.preventDefault();
-                }
-            }
-            document.addEventListener('keydown', keyTrackNext, false);
+                        e.preventDefault();
+                    } else if (e.keyCode == 39) {
+                        if(playerInstance) {
+                            playerInstance.next();
+                        }
 
-            function keyTrackPrev(e) {
-                if (e.keyCode == 37) {
-                    if(playerInstance) {
-                        playerInstance.prev();
+                        e.preventDefault();
+                    } else if (e.keyCode == 37) {
+                        if(playerInstance) {
+                            playerInstance.prev();
+                        }
+
+                        e.preventDefault();
                     }
-                    e.preventDefault();
-                }
+                }, false);
             }
-            document.addEventListener('keydown', keyTrackPrev, false);
 
             // Hook into SC player events.
             playerInstance.on('scplayer.play', function(e) {
