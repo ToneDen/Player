@@ -4164,7 +4164,6 @@ function SoundManager(smURL, smID) {
 
     timeupdate: html5_event(function() {
 
-      sm2._wD(this._s.id + ': timeupdate');
       var s = this._s;
       if(s._useAdvancedHTML5) return;
       this._s._onTimer();
@@ -6044,8 +6043,6 @@ function SoundManager(smURL, smID) {
   };
 
   domContentLoaded = function() {
-    console.log('dom content loaded');
-
     if (didDCLoaded) {
       return false;
     }

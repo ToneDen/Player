@@ -8,7 +8,7 @@ define(['vendor/soundmanager2', 'jquery', 'vendor/d3'], function(soundManager, j
     // Setup soundmanager2.
     if(typeof soundManager !== 'undefined'){
         soundManager.setup({
-            debugMode: true,
+            debugMode: false,
             flashVersion: 9,
             url: 'swf',
             useFlashBlock: false,
@@ -98,6 +98,10 @@ define(['vendor/soundmanager2', 'jquery', 'vendor/d3'], function(soundManager, j
         this.currentTrackIndex = this.config.startOn;
         this.currentTrack = null;
         this.sound = null;
+
+        soundManager.setup({
+            debugMode: config.debug
+        });
 
         //flag for if we're already inited
         this.inited = false;
