@@ -308,6 +308,13 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-player', 'ven
             });
 
             playerInstance.on('scplayer.track.whileplaying', function(e, percent, eqData) {
+                if(parameters.visualizer) {
+                    //Only enable waveform in Chrome. TODO Fix waveform when WebAudio bugs are resolved in Firefox & Safari
+                    if(navigator.userAgent.toLowerCase().indexOf('chrome') > -1) {
+                        drawEQ(eqData);
+                    }
+                }
+
                 var ratio = percent / 100;
                 var timeIn = msToTimestamp(playerInstance.position());
                 var timeLeft = msToTimestamp(playerInstance.track().duration - playerInstance.position());
