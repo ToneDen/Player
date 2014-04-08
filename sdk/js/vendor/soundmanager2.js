@@ -2799,7 +2799,7 @@ function SoundManager(smURL, smID) {
 
     var audioProcessEvent = function ( e ) {
       if(s.paused) return;
-      //When we're processing some data through the HTML WebAudio API
+      // When we're processing some data through the HTML WebAudio API
       var buffers = [];
       var channels, resolution;
       channels = s._channels = e.inputBuffer.numberOfChannels;
@@ -2824,8 +2824,12 @@ function SoundManager(smURL, smID) {
     };
   
     this._create_WebAudio_Waveform_Parser = function(){
-      //Initialisation for Google Chrome/Web Audio compatible browsers
-      //TODO: Make this work for Safari/Mozilla
+      // Initialisation for Google Chrome/Web Audio compatible browsers
+      // TODO: Make this work for Safari/Mozilla
+
+      // Firefox will only play silence if you attempt to call createMediaElementSource
+      // on an audio file coming from a different origin. Pain in the ass.
+      // See: http://stackoverflow.com/questions/19708561/firefox-25-and-audiocontext-createjavascriptnote-not-a-function
 
       s._sample_rate = 44100;
       s._sample_size = 2048;
@@ -3968,11 +3972,13 @@ function SoundManager(smURL, smID) {
       }
 
       if(s._useAdvancedHTML5){
-        //if(s._useMoz){
-            //s._create_Mozilla_Waveform_Parser();
-        //} else {
+        // Firefox fails due to cross-origin checks when attempting to get the
+        // waveform.
+        if(s._useMoz){
+            s._useAdvancedHTML5 = false;
+        } else {
             s._create_WebAudio_Waveform_Parser();
-        //}
+        }
       }
 
     }),
@@ -4158,6 +4164,7 @@ function SoundManager(smURL, smID) {
 
     timeupdate: html5_event(function() {
 
+      sm2._wD(this._s.id + ': timeupdate');
       var s = this._s;
       if(s._useAdvancedHTML5) return;
       this._s._onTimer();

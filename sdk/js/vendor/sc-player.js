@@ -588,8 +588,6 @@ define(['vendor/soundmanager2', 'jquery', 'vendor/d3'], function(soundManager, j
                 }
             });
         
-            console.log(self.sound);
-
             self.trigger('scplayer.track.bindable', track, self.sound);
         };
 
