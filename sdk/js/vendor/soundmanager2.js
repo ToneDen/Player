@@ -2825,6 +2825,7 @@ function SoundManager(smURL, smID) {
   
     this._create_WebAudio_Waveform_Parser = function(){
       //Initialisation for Google Chrome/Web Audio compatible browsers
+      //TODO: Make this work for Safari/Mozilla
 
       s._sample_rate = 44100;
       s._sample_size = 2048;
