@@ -387,7 +387,9 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-player', 'ven
 
             // Public methods that will be accessible on the player object.
             function destroy() {
+                container.off();
                 container.html('');
+
                 playerInstance.destroy();
 
                 ToneDen.players.splice(ToneDen.players.indexOf(player), 1);

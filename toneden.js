@@ -28810,7 +28810,9 @@ ToneDen.define('player',['jquery', 'vendor/simple-slider', 'underscore', 'vendor
 
             // Public methods that will be accessible on the player object.
             function destroy() {
+                container.off();
                 container.html('');
+
                 playerInstance.destroy();
 
                 ToneDen.players.splice(ToneDen.players.indexOf(player), 1);
