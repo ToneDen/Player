@@ -1,9 +1,9 @@
-<div class="row player {{skin}} solo">
-    <div class="large-12 small-12 columns large-centered small-centered">
+<div class="td tdrow player {{skin}} solo">
+    <div class="tdlarge-12 tdsmall-12 tdcolumns tdlarge-centered tdsmall-centered">
         <a href="https://www.toneden.io" target="_blank" class="td-icon-link"><i class="td-icon"></i></a>
         {{#with nowPlaying}}
-            <div class="header large-4 small-12 columns">
-                <div class="cover large-12 small-12 columns">
+            <div class="header tdlarge-4 tdsmall-12 tdcolumns">
+                <div class="cover tdlarge-12 tdsmall-12 tdcolumns">
                     <div class="solo-cover">
                         {{#if artwork_url}}
                             <img src="{{artwork_url}}" />
@@ -12,27 +12,27 @@
                         {{/if}}
                     </div>
                     <div class="controls">
-                        <div class="buttons large-12 small-12 columns">
+                        <div class="buttons tdlarge-12 tdsmall-12 tdcolumns">
                             {{!-- <i class="fa fa-angle-double-left fw player-prev prev"></i> --}}
                             <i class="fa fa-play-circle-o fw player-play play"></i>
                             {{!-- <i class="fa fa-angle-double-right fw player-next next"></i> --}}
                         </div>
                     </div>
                 </div>
-                <div class="waveform large-12 small-12 columns">
+                <div class="waveform tdlarge-12 tdsmall-12 tdcolumns">
                 </div>
-                <div class="solo-buttons large-12 small-12 columns">
+                <div class="solo-buttons tdlarge-12 tdsmall-12 tdcolumns">
                     {{#ifCond purchase_url download_url}}
-                        <div class="follow large-6 small-12 columns">
-                            <a class="button expand follow-link" href="{{permalink_url}}"  target="_blank">
+                        <div class="follow tdlarge-6 tdsmall-12 tdcolumns">
+                            <a class="tdbutton expand follow-link" href="{{permalink_url}}"  target="_blank">
                                 <i class="fa soundcloud-icon fw playlist-social-icon"></i>
                                 {{!-- <img src="{{../staticUrl}}img/sc-dark.png">  --}}
                                 FOLLOW
                             </a>
                         </div>
                     {{else}}
-                        <div class="follow large-12 small-12 columns">
-                            <a class="button expand follow-link" href="{{permalink_url}}"  target="_blank">
+                        <div class="follow tdlarge-12 tdsmall-12 tdcolumns">
+                            <a class="tdbutton expand follow-link" href="{{permalink_url}}"  target="_blank">
                                 <i class="fa soundcloud-icon fw playlist-social-icon"></i>
                                 {{!-- <img src="{{../staticUrl}}img/sc-dark.png">  --}}
                                 FOLLOW
@@ -40,15 +40,15 @@
                         </div>
                     {{/ifCond}}
                     {{#if purchase_url}}
-                        <div class="buy large-6 small-12 columns">
-                            <a class="button expand  buy-link" href="{{purchase_url}}" target="_blank">
+                        <div class="buy tdlarge-6 tdsmall-12 tdcolumns">
+                            <a class="tdbutton expand  buy-link" href="{{purchase_url}}" target="_blank">
                                 BUY
                             </a>
                         </div>
                     {{else}}
                         {{#if download_url}}    
-                            <div class="buy large-6 small-12 columns">
-                                <a class="button expand buy-link" href="{{download_url}}" target="_blank">
+                            <div class="buy tdlarge-6 tdsmall-12 tdcolumns">
+                                <a class="tdbutton expand buy-link" href="{{download_url}}" target="_blank">
                                     DOWNLOAD
                                 </a>
                             </div>
@@ -56,41 +56,41 @@
                     {{/if}}
                 </div>
             </div>
-            <div class="solo-container large-8 small-12 columns">
-                <div class="row info ">
-                    <div class="song-name large-12 small-12 columns">
+            <div class="solo-container tdlarge-8 tdsmall-12 tdcolumns">
+                <div class="tdrow info ">
+                    <div class="song-name tdlarge-12 tdsmall-12 tdcolumns">
                         {{title}}
                     </div>
-                    <div class="artist-name large-12 small-12 columns">
+                    <div class="artist-name tdlarge-12 tdsmall-12 tdcolumns">
                         {{user.username}}
                     </div>
                 </div>
-                <div class="row scrubber">
-                    <div class="large-12 small-12 columns scrubber-box">
-                        <div class="large-2 small-2 columns start-time">0:00</div>
-                        <div class="large-8 small-8 columns scrub-bar-box">
+                <div class="tdrow scrubber">
+                    <div class="tdlarge-12 tdsmall-12 tdcolumns scrubber-box">
+                        <div class="tdlarge-2 tdsmall-2 tdcolumns start-time">0:00</div>
+                        <div class="tdlarge-8 tdsmall-8 tdcolumns scrub-bar-box">
                             <input type="text" class="scrubber-slider">
                         </div>
-                        <div class="large-2 small-2 columns stop-time">
+                        <div class="tdlarge-2 tdsmall-2 tdcolumns stop-time">
                             {{msToTimestamp nowPlaying.duration}}
                         </div>
                     </div>
                 </div>
-                <div class="row social">
-                    <div class="current-song-info large-12 columns small-12">
-                        <div class="track-info-plays large-3 small-3 columns">
+                <div class="tdrow social">
+                    <div class="current-song-info tdlarge-12 tdcolumns tdsmall-12">
+                        <div class="track-info-plays tdlarge-3 tdsmall-3 tdcolumns">
                             <i class="fa fa-play-circle fw current-song-social-icon"></i>
                             {{playback_count}}
                         </div>
-                        <div class="track-info-favorites large-3 small-3 columns">
+                        <div class="track-info-favorites tdlarge-3 tdsmall-3 tdcolumns">
                             <i class="fa fa-heart fw current-song-social-icon"></i>
                             {{favoritings_count}}
                         </div>
-                        <div class="track-info-comments large-3 small-3 columns">
+                        <div class="track-info-comments tdlarge-3 tdsmall-3 tdcolumns">
                             <i class="fa fa-comments fw current-song-social-icon"></i>
                             {{comments.length}}
                         </div>
-                        <div class="track-info-downloads large-3 small-3 columns">
+                        <div class="track-info-downloads tdlarge-3 tdsmall-3 tdcolumns">
                             <i class="fa fa-download fw current-song-social-icon"></i>
                             {{download_count}}
                         </div>

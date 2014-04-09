@@ -2,10 +2,14 @@
 <html>
     <head>
         <title>Publisher Test Page</title>
+        <link href="css/foundation.min.css" rel="stylesheet">
+        <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600' rel='stylesheet' type='text/css'>
+        <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+        <link rel="stylesheet" href="http://yandex.st/highlightjs/8.0/styles/solarized-dark.min.css">
     </head>
     <body>
         <div id="header" class="large-12 small-12 columns large-centered small-centered">
-            <h2>tonedenplayer.js</h2>
+            <h2>toneden.js</h2>
             <h1>A fresh new customizable SoundCloud player.</h1>
         </div>
         <div id="player-container">
@@ -33,7 +37,7 @@
                     dom: '#player',
                     keyboardEvents: false,
                     urls: [
-                        'https://soundcloud.com/mutantbreakz/blacklist-vs-alt-a-fire'
+                        'https://soundcloud.com/teendaze'
                     ],
                     skin: 'light',
                     staticUrl: '//widget.dev/sdk/',
@@ -77,6 +81,82 @@
                 <a href="#" class="skin-change-btn" id="mojave-btn" data-theme="mojave"></a>
             </div>
         </div>
+        <div id="player-banner">
+            <div class="row">
+                <div class="tagline"><p>Fully customizable, responsive, and extensible.</p></div>
+                <div class="doc-sec large-10 small-12 columns large-centered">
+                    <h3>Basic usage:</h3>
+                    <p><i class="fa fa-angle-right fw"></i> Add this script to your page (before the closing body tag)</p>
+                    <pre><code>&lt;script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"&gt;&lt;/script&gt;</code></pre>
+                    <p><i class="fa fa-angle-right fw"></i> Add the following snippet of code.</p>
+                    <pre><code class="javascript">&lt;script&gt;
+    (function() {
+        var script = document.createElement('script');
+
+        script.type = 'text/javascript';
+        script.async = true;
+        script.src = 'sdk.loader.js'
+
+        var entry = document.getElementsByTagName('script')[0];
+        entry.parentNode.insertBefore(script, entry);
+    }());
+
+    ToneDenReady = window.ToneDenReady || [];
+    ToneDenReady.push(function() {
+        // This is where all the action happens:
+        ToneDen.player.create({
+            dom: '#player',
+            urls: [
+                'https://soundcloud.com/giraffage'
+            ]
+        });
+    });
+&lt;/script&gt;</code></pre>
+
+                </div>
+
+                <div class="doc-sec large-10 small-12 columns large-centered">
+                    <h3>Player Configuration:</h3>
+                    <p>There are several configuration options that you can explore. However <code>dom</code> and <code>urls</code> must be specified.</p>
+                    <ul>
+                        <li><code>dom</code>: The container in which you want your player to render in.</li>
+                        <li><code>urls</code>: Urls to SoundCloud artist, tracks, or set. Parameter can take an array of multiple urls.</li>
+                    </ul>
+                    <p>Check out the <a href="https://github.com/ToneDen/tonedenplayer">documentation</a> for a full list of the config parameters and defaults.</p>
+                </div>
+                <div class="doc-sec large-10 small-12 columns large-centered">
+                    <h3>Multiple Players:</h3>
+                    <p>You can create as many players as you like by pushing multiple <code>ToneDen.player</code> objects to <code>ToneDenReady</code>.</p>
+                    <p>Example:</p>
+                    <pre><code class="javascript">
+ToneDenReady.push(function() {
+        ToneDen.player.create({
+            dom: '#player1',
+            urls: [
+                'https://soundcloud.com/giraffage'
+            ]
+        });
+        ToneDen.player.create({
+            dom: '#player2',
+            urls: [
+                'https://soundcloud.com/teendaze'
+            ]
+        });
+        ToneDen.player.create({
+            dom: '#player3',
+            urls: [
+                'https://soundcloud.com/beat-culture'
+            ]
+        });
+    });
+</code></pre>
+                </div>
+            </div>
+        </div>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+        <!-- <script src="js/foundation.min.js"></script> -->
+        <script src="http://yandex.st/highlightjs/8.0/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
         <!--<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
         <script>
             $(document).ready(function() {
