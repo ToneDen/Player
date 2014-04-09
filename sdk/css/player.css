@@ -42,11 +42,15 @@ cursor: pointer;
   width: 16px;
   margin: 10px;
   display: block;
-  -webkit-animation: fadeIn 0.5s; /* Safari and Chrome */
-     -moz-animation: fadeIn 0.5s; /* Firefox */
-      -ms-animation: fadeIn 0.5s; /* Internet Explorer */
-       -o-animation: fadeIn 0.5s; /* Opera */
-          animation: fadeIn 0.5s;
+  z-index: 100;
+  opacity: 0.2;
+  -webkit-transition: opacity 300ms ease-out;
+  -moz-transition: opacity 300ms ease-out;
+  transition: opacity 300ms ease-out;
+}
+
+.td-icon-link:hover {
+  opacity: 1;
 }
 
 .td-icon {
@@ -56,7 +60,6 @@ cursor: pointer;
   right: 0;
   top:0;
   background-size: 16px;
-  z-index: 100;
 }
 
 .header {
