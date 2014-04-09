@@ -1,4 +1,13 @@
 require.config({
+    // Set up jquery as here: http://requirejs.org/docs/jquery.html#noconflictmap
+    map: {
+        '*': {
+            'jquery': 'vendor/jquery-private'
+        },
+        'vendor/jquery-private': {
+            'jquery': 'jquery'
+        }
+    },
     namespace: 'ToneDen',
     paths: {
         hbs: 'vendor/hbs',
@@ -20,8 +29,8 @@ define(['player'], function(player) {
 
     // Inject CSS into the dom.
     var style = document.createElement('style');
+    var css = ToneDenSDKCSS.replace(/\}/g, "}\n");
     style.type = 'text/css';
-    css = css.replace(/\}/g, "}\n");
 
     if (style.styleSheet) {
         style.styleSheet.cssText = css;
