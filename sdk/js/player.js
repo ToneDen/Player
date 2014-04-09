@@ -8,13 +8,12 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-player', 'ven
             // Default parameters go here.
             var parameters = {
                 debug: false, // Output debug messages?
-                eq: 'waves', // Equalizer type. 'waves' or 'bars'
                 keyboardEvents: false, // Should we listen to keyboard events?
                 single: false,
                 skin: 'light',
                 staticUrl: '//widget.dev/sdk/',
                 tracksPerArtist: 4, // How many tracks to load when given an artist SoundCloud URL.
-                visualizer: true // Show the visualizer?
+                visualizerType: 'waves', // Equalizer type. 'waves' or 'bars'
             };
 
             // Setup the parameters object with the given arguments and
@@ -37,7 +36,11 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-player', 'ven
 
             // Visualizer is currently only supported in Chrome.
             if(navigator.userAgent.toLowerCase().indexOf('chrome') === -1) {
-                parameters.visualizer = false;
+                parameters.visualizerType = false;
+            }
+
+            if(parameters.visualizerType === 'none') {
+                parameters.visualizerType = false;
             }
 
             // Parameters for the SoundCloud player.
@@ -158,14 +161,14 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-player', 'ven
                         .attr('height', height + margin.top + margin.bottom)
                         .append('g');
 
-                    if(parameters.eq == "waves"){
+                    if(parameters.visualizerType == 'waves'){
                         chart.selectAll('path')
                             .data([data])
                             .enter()
                             .append('svg:path')
                             .attr('d', line)
                             .attr('stroke-width', 3);
-                    } else if(parameters.eq == "bars") {
+                    } else if(parameters.visualizerType == 'bars') {
                         chart.selectAll('rect')
                             .data(data)
                             .enter().append('rect')
@@ -183,14 +186,14 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-player', 'ven
                 }
 
                 function redrawEQ(svg, data) {
-                    if(parameters.eq === "waves") {
+                    if(parameters.visualizerType === 'waves') {
                         svg.selectAll('path')
                             .data([data])
                             .attr('d', line)
                             .transition()
                                 .ease('linear')
                                 .duration(100);
-                    } else if(parameters.eq == "bars") {
+                    } else if(parameters.visualizerType == 'bars') {
                         chart.selectAll('rect')
                             .data(data)
                             .transition()
@@ -308,11 +311,8 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-player', 'ven
             });
 
             playerInstance.on('scplayer.track.whileplaying', function(e, percent, eqData) {
-                if(parameters.visualizer) {
-                    //Only enable waveform in Chrome. TODO Fix waveform when WebAudio bugs are resolved in Firefox & Safari
-                    if(navigator.userAgent.toLowerCase().indexOf('chrome') > -1) {
-                        drawEQ(eqData);
-                    }
+                if(parameters.visualizerType) {
+                    drawEQ(eqData);
                 }
 
                 var ratio = percent / 100;
@@ -335,10 +335,6 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-player', 'ven
 
                 currentRatio = ratio;
                 currentTimeIn = timeIn;
-
-                if(parameters.visualizer == true) {
-                    drawEQ(eqData);
-                }
             });
 
             playerInstance.on('scplayer.playlist.preloaded', function(e) {
@@ -355,10 +351,8 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-player', 'ven
                         nowPlaying: playerInstance.track(),
                         tracks: tracks,
                         skin: parameters.skin,
-                        eq: parameters.eq,
                         tracksPerArtist: parameters.tracksPerArtist,
-                        eq: parameters.eq,
-                        visualizer: parameters.visualizer,
+                        visualizerType: parameters.visualizerType,
                         single: parameters.single
                     });
                 });
@@ -375,10 +369,8 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-player', 'ven
                         nowPlaying: playerInstance.track(),
                         tracks: tracks,
                         skin: parameters.skin,
-                        eq: parameters.eq,
                         tracksPerArtist: parameters.tracksPerArtist,
-                        eq: parameters.eq,
-                        visualizer: parameters.visualizer,
+                        visualizerType: parameters.visualizerType,
                         single: parameters.single
                     });
                 });

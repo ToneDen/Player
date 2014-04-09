@@ -38,9 +38,9 @@
                         'https://soundcloud.com/mutantbreakz/blacklist-vs-alt-a-fire'
                     ],
                     skin: 'light',
-                    eq: 'waves',
                     staticUrl: '//widget.dev/sdk/',
-                    tracksPerArtist: 4
+                    tracksPerArtist: 4,
+                    visualizerType: 'waves'
                 });
             });
         </script>
@@ -65,7 +65,7 @@
             //             'https://soundcloud.com/brotherboard'
             //         ],
             //         skin: 'light',
-            //         eq: 'waves'
+            //         visualizerType: 'waves'
             //     });
             // });
         </script>
@@ -96,8 +96,8 @@
                             'https://soundcloud.com/spazzkid/'
                         ],
                         skin: $(this).attr('data-theme'),
-                        eq: 'bars',
-                        tracksPerArtist: 1
+                        tracksPerArtist: 1,
+                        visualizerType: 'bars'
                     });
 
                     $('.skin-change-btn').removeClass('active');
