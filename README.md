@@ -15,7 +15,7 @@ Just copy the snippet below into your HTML page, and replace the commented porti
 
         script.type = 'text/javascript';
         script.async = true;
-        script.src = 'toneden.loader.js'
+        script.src = '//d27qmwyi8yof1p.cloudfront.net/production/toneden.loader.js'
 
         var entry = document.getElementsByTagName('script')[0];
         entry.parentNode.insertBefore(script, entry);
@@ -45,7 +45,7 @@ Sample Embed Code:
 
         script.type = 'text/javascript';
         script.async = true;
-        script.src = 'toneden.loader.js'
+        script.src = '//d27qmwyi8yof1p.cloudfront.net/production/toneden.loader.js'
 
         var entry = document.getElementsByTagName('script')[0];
         entry.parentNode.insertBefore(script, entry);
