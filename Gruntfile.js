@@ -38,11 +38,7 @@ module.exports = function(grunt) {
                 ]
             }
         },
-        clean: {
-            post: {
-                src: ['toneden.loader.js', 'toneden.js']
-            }
-        },
+        // TODO: Serve with gzip.
         compress: {
             options: {
                 mode: 'gzip',
@@ -63,38 +59,32 @@ module.exports = function(grunt) {
                 ]
             }
         },
-        rename: {
-            pre: {
-                files: [
-                    {
-                        src: 'toneden.loader.js',
-                        dest: 'toneden.loader.js.temp'
-                    },
-                    {
-                        src: 'toneden.js',
-                        dest: 'toneden.js.temp'
-                    }
-                ]
+        invalidate_cloudfront: {
+            options: {
+                key: process.env.AWS_ACCESS_KEY_ID,
+                secret: process.env.AWS_SECRET_ACCESS_KEY,
+                distribution: 'E3SYREX4SS26L7'
             },
-            post: {
-                files: [
-                    {
-                        src: 'toneden.loader.js.temp',
-                        dest: 'toneden.loader.js'
-                    },
-                    {
-                        src: 'toneden.js.temp',
-                        dest: 'toneden.js'
-                    }
-                ]
+            dev: {
+                files: [{
+                    expand: true,
+                    cwd: '.',
+                    src: ['/dev/toneden.js', '/dev/toneden.loader.js']
+                }]
+            },
+            production: {
+                files: [{
+                    expand: true,
+                    cwd: '.',
+                    src: ['/production/toneden.js', '/production/toneden.loader.js']
+                }]
             }
         }
     });
 
     grunt.loadNpmTasks('grunt-aws-s3');
-    grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-contrib-compress');
-    grunt.loadNpmTasks('grunt-rename');
+    grunt.loadNpmTasks('grunt-invalidate-cloudfront');
 
     var env = grunt.option('env') || 'dev';
 
@@ -102,6 +92,7 @@ module.exports = function(grunt) {
         //'rename:pre',
         //'compress',
         'aws_s3:dev',
+        'invalidate_cloudfront:dev',
         //'rename:post',
         //'clean:post'
     ]);
@@ -109,6 +100,7 @@ module.exports = function(grunt) {
     grunt.registerTask('production', [
         //'compress',
         'aws_s3:production',
+        'invalidate_cloudfront:production',
         //'clean:post'
     ]);
 
