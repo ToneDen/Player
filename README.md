@@ -69,51 +69,48 @@ Sample Embed Code:
 ```
 
 API
-* ToneDen
-  * .player
-    * .create(params)
+* **ToneDen**
+  * **.player**
+    * **.create(params)**
       Creates and returns a new player instance according to the given parameters object.
       Parameters:
-      * debug
-        default: false
-        True to output debug messages to the console.
-      * keyboardEvents
-        default: false
-        True to listen to keyboard events on the document body to control the player.
-        Left arrow key returns to the previous track, right arrow key skips to the next, and spacebar plays/pauses the current track.
-      * single
-        default: false
-        True to force the player to render as if there were only one track in the playlist.
-        This parameter is internally set to true if the playlist has only one track.
-      * skin
-        default: 'light'
-        The player color scheme to render. Options are 'light', 'dark', 'mojave', and 'aurora'.
-      * staticUrl
-        default: 'sdkUrl'
-        The URL path to load static files from. This should be left as the default, unless you are hosting the SDK yourself.
-      * tracksPerArtist
-        default: 4
-        How many tracks to load from an artist's SoundCloud account when the artist's SoundCloud URL is specified in the urls parameter.
-      * visualizer
-        default: true
-        False to hide the visualizer.
-      * visualizerType
-        default: 'waves'
-        What type of visualizer to show. Can be 'bars' or 'waves' to show those types of visualizers.
-        Any falsy value or 'none' will hide the visualizer.
-    * .getInstanceByDom(dom)
-      Returns the player instance that is associated with the given dom item.
+      * **debug**  
+        *default: false*   
+        True to output debug messages to the console.  
+      * **keyboardEvents**  
+        *default: false*   
+        True to listen to keyboard events on the document body to control the player.  
+        Left arrow key returns to the previous track, right arrow key skips to the next, and spacebar plays/pauses the current track.  
+      * **single**  
+        *default: false*   
+        True to force the player to render as if there were only one track in the playlist.  
+        This parameter is internally set to true if the playlist has only one track.  
+      * **skin**  
+        *default: 'light'*   
+        The player color scheme to render. Options are 'light', 'dark', 'mojave', and 'aurora'.  
+      * **staticUrl**  
+        *default: 'sdkUrl'*   
+        The URL path to load static files from. This should be left as the default, unless you are hosting the SDK yourself.  
+      * **tracksPerArtist**  
+        *default: 4*   
+        How many tracks to load from an artist's SoundCloud account when the artist's SoundCloud URL is specified in the urls parameter.  
+      * **visualizerType**  
+        *default: 'waves'*   
+        What type of visualizer to show. Can be 'bars' or 'waves' to show those types of visualizers.  
+        Any falsy value or 'none' will hide the visualizer.  
+    * **.getInstanceByDom(dom)**  
+      Returns the player instance that is associated with the given dom item.  
       The dom argument can be either a selector string (will be passed to jQuery) or a jQuery dom object.
-* player instance
-  * .destroy()
-    Destroys the given player instance and clears the containing element's HTML.
-  * .pause()
-    Pauses the track being played by the player.
-  * .parameters
-    The parameters object that the player is using.
-  * .play()
-    Play the currently selected track.
-  * .togglePause()
+* **Player Instance**
+  * **.destroy()**  
+    Destroys the given player instance and clears the containing element's HTML.  
+  * **.pause()**  
+    Pauses the track being played by the player.  
+  * **.parameters**  
+    The parameters object that the player is using.  
+  * **.play()**  
+    Play the currently selected track.  
+  * **.togglePause()**  
     Toggle the play state of the current track.
 
 Dev Setup
