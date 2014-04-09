@@ -800,9 +800,17 @@ cursor: pointer;
     width: 100%; }
 }
 
-.td.player table {}
+.td.player table {
+  background:none;
+  margin: 0px;
+  padding:0px;
+}
   .td.player table thead,
-  .td.player table tfoot {}
+  .td.player table tfoot {
+    background:none;
+    margin: 0px;
+    padding:0px;
+    }
     .td.player table thead tr th,
     .td.player table thead tr td,
     .td.player table tfoot tr th,

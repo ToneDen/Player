@@ -14,6 +14,7 @@ body {
 #player-banner {
   	font-family: 'Source Sans Pro', sans-serif;
 	background: white;
+	padding:60px 0px;
 }
 
 #header {
@@ -77,3 +78,29 @@ body {
 	background: #F58F86;
 }
 
+.tagline p {
+	font-size: 32px;
+	font-weight: 300;
+	text-align: center;
+}
+
+.doc-sec {
+	margin: 50px 0px;
+}
+
+.doc-sec h3 {
+	font-size: 24px;
+	font-weight: normal;
+}
+
+pre {
+	background: #F8FAFC;
+	margin: 10px 0px !important;
+	padding: 10px !important;
+}
+
+code {
+	font-weight: normal !important;
+	color: #3AC095 !important;
+	font-size: 14px;
+}
