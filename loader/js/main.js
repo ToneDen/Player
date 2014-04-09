@@ -31,8 +31,11 @@ require(['utils'], function(utils) {
         enforceDefine: true
     });
 
-    ToneDen.require(['sdk'], function(sdk) {
+    ToneDen.require(['toneden'], function(sdk) {
         ToneDen = utils.extend(ToneDen, sdk);
+
+        // Load fontawesome.
+        utils.loadStylesheet('//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css');
 
         if(window.ToneDenReady && window.ToneDenReady.length > 0) {
             for(var i = 0; i < ToneDenReady.length; i++) {

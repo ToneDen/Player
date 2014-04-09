@@ -17,14 +17,14 @@ module.exports = function(grunt) {
                     'dist/compiled.js',
                     'dist/templates.js'
                 ],
-                dest: 'dist/sdk.js'
+                dest: 'dist/toneden.js'
             },
             production: {
                 src: [
                     'dist/compiled.min.js',
                     'dist/templates.js'
                 ],
-                dest: 'dist/sdk.js'
+                dest: 'dist/toneden.js'
             }
         },
         cssmin: {
@@ -41,8 +41,8 @@ module.exports = function(grunt) {
             compile: {
                 options: {
                     baseUrl: './js',
-                    mainConfigFile: 'js/sdk.js',
-                    name: 'sdk', // Has to be the name of the final output file for some reason.
+                    mainConfigFile: 'js/toneden.js',
+                    name: 'toneden', // Has to be the name of the final output file for some reason.
                     optimize: 'none',
                     out: 'dist/compiled.js'
                 }
@@ -75,9 +75,9 @@ module.exports = function(grunt) {
 
         var after = '\'\n';
 
-        var sdk = grunt.file.read('dist/sdk.js');
+        var sdk = grunt.file.read('dist/toneden.js');
 
-        grunt.file.write('dist/sdk.js', before + css + after + sdk);
+        grunt.file.write('dist/toneden.js', before + css + after + sdk);
     });
 
     grunt.registerTask('default', [

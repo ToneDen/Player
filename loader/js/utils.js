@@ -36,7 +36,17 @@ define('utils', function() {
         return obj;
     };
 
+    var loadStylesheet = function(url) {
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = url;
+        var entry = document.getElementsByTagName('script')[0];
+        entry.parentNode.insertBefore(link, entry);
+    };
+
     return {
-        extend: extend
+        extend: extend,
+        loadStylesheet: loadStylesheet
     };
 });

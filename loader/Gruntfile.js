@@ -15,13 +15,13 @@ module.exports = function(grunt) {
                     'vendor/require.js',
                     'dist/loader.js'
                 ],
-                dest: 'dist/sdk.loader.js'
+                dest: 'dist/toneden.loader.js'
             },
             production: {
                 src: [
                     'dist/loader.min.js'
                 ],
-                dest: 'dist/sdk.loader.js'
+                dest: 'dist/toneden.loader.js'
             }
         },
         requirejs: {
@@ -46,7 +46,7 @@ module.exports = function(grunt) {
     });
 
     grunt.registerTask('wrap', 'Wraps files in an IIFE.', function() {
-        var path = 'dist/sdk.loader.js';
+        var path = 'dist/toneden.loader.js';
         var before = '(function() {\n';
         var after = '\n})();';
         var content = grunt.file.read(path);
