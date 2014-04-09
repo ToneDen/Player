@@ -11,7 +11,7 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-player', 'ven
                 keyboardEvents: false, // Should we listen to keyboard events?
                 single: false,
                 skin: 'light',
-                staticUrl: '//widget.dev/sdk/',
+                staticUrl: '//d27qmwyi8yof1p.cloudfront.net/',
                 tracksPerArtist: 4, // How many tracks to load when given an artist SoundCloud URL.
                 visualizerType: 'waves', // Equalizer type. 'waves' or 'bars'
             };
