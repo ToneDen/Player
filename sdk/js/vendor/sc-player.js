@@ -80,7 +80,7 @@ define(['vendor/soundmanager2', 'jquery', 'vendor/d3'], function(soundManager, j
 
         var flashFallback = false;
 
-        var sc_resolve_url = '//api.soundcloud.com/resolve?url=//soundcloud.com';
+        var scResolveUrl = '//api.soundcloud.com/resolve?url=http://soundcloud.com';
         var scApiUrl = '//api.soundcloud.com/';
         var urlregex = new RegExp(/[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&//=]*)?/gi);
 
@@ -634,7 +634,7 @@ define(['vendor/soundmanager2', 'jquery', 'vendor/d3'], function(soundManager, j
 
                 // Call the ajax
                 jQuery.ajax({
-                    url: sc_resolve_url + url +
+                    url: scResolveUrl + url +
                         '&format=json' +
                         '&consumer_key=' +self.config.consumerKey +
                         '&callback=?',
