@@ -23,7 +23,7 @@
 
                 script.type = 'text/javascript';
                 script.async = true;
-                script.src = "//widget.dev/loader/dist/sdk.loader.js"
+                script.src = '//widget.dev/loader/dist/toneden.loader.js'
 
                 var entry = document.getElementsByTagName('script')[0];
                 entry.parentNode.insertBefore(script, entry);
@@ -36,11 +36,12 @@
                     dom: '#player',
                     keyboardEvents: false,
                     urls: [
-                        'https://soundcloud.com/spazzkid/sets/desire-info-to-download-full'
+                        'https://soundcloud.com/mutantbreakz/blacklist-vs-alt-a-fire'
                     ],
                     skin: 'light',
-                    eq: 'waves',
-                    tracksPerArtist: 4
+                    staticUrl: '//widget.dev/sdk/',
+                    tracksPerArtist: 4,
+                    visualizerType: 'waves'
                 });
             });
         </script>
@@ -50,7 +51,7 @@
 
             //     script.type = 'text/javascript';
             //     script.async = true;
-            //     script.src = "//widget.dev/loader/dist/sdk.loader.js"
+            //     script.src = '//widget.dev/loader/dist/toneden.loader.js'
 
             //     var entry = document.getElementsByTagName('script')[0];
             //     entry.parentNode.insertBefore(script, entry);
@@ -65,7 +66,7 @@
             //             'https://soundcloud.com/brotherboard'
             //         ],
             //         skin: 'light',
-            //         eq: 'waves'
+            //         visualizerType: 'waves'
             //     });
             // });
         </script>
@@ -93,8 +94,8 @@
         <script src="js/foundation.min.js"></script>
         <script>
             $(document).ready(function() {
-                $(".skin-change-btn").on("click", function() {
-                    var id = $(this).attr("id");
+                $('.skin-change-btn').on('click', function() {
+                    var id = $(this).attr('id');
 
                     if(ToneDen.player.getInstanceByDom('#player')) {
                         ToneDen.player.getInstanceByDom('#player').destroy();
@@ -106,13 +107,13 @@
                         urls: [
                             'https://soundcloud.com/spazzkid/'
                         ],
-                        skin: $(this).attr("data-theme"),
-                        eq: 'bars',
-                        tracksPerArtist: 1
+                        skin: $(this).attr('data-theme'),
+                        tracksPerArtist: 1,
+                        visualizerType: 'bars'
                     });
 
-                    $(".skin-change-btn").removeClass("active");
-                    $(this).addClass("active");
+                    $('.skin-change-btn').removeClass('active');
+                    $(this).addClass('active');
                 });
             });
         </script>
