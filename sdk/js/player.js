@@ -3,7 +3,6 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-player', 'ven
         create: function(urls, dom, options) {
             ToneDen.players = ToneDen.players || [];
 
-            var staticUrl = '//widget.dev/sdk/';
             var player;
 
             // Default parameters go here.
@@ -13,6 +12,7 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-player', 'ven
                 keyboardEvents: false, // Should we listen to keyboard events?
                 single: false,
                 skin: 'light',
+                staticUrl: '//widget.dev/sdk/',
                 tracksPerArtist: 4, // How many tracks to load when given an artist SoundCloud URL.
                 visualizer: true // Show the visualizer?
             };
@@ -29,6 +29,10 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-player', 'ven
                 delete options.dom;
 
                 _.extend(parameters, options);
+
+                if(parameters.staticUrl.charAt(parameters.staticUrl.length - 1) !== '/') {
+                    parameters.staticUrl += '/';
+                }
             }
 
             // Visualizer is currently only supported in Chrome.
@@ -65,7 +69,6 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-player', 'ven
 
             function rerender(parameters) {
                 parameters = JSON.parse(JSON.stringify(parameters));
-                parameters.staticUrl = staticUrl;
 
                 if(parameters.nowPlaying) {
                     for(var i = 0; i < parameters.tracks.length; i++) {
@@ -296,7 +299,7 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-player', 'ven
 
             playerInstance.on('scplayer.stop', function(e) {
                 log('Stopped.');
-                container.find('.play').attr('src', staticUrl + 'img/play.png');
+                container.find('.play').attr('src', parameters.staticUrl + 'img/play.png');
             });
 
             playerInstance.on('scplayer.track.whileloading', function(e, percent) {
