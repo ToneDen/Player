@@ -4257,6 +4257,7 @@ function SoundManager(smURL, smID) {
         oAudio._called_load = false;
       }
 
+      oAudio.remove();
     }
 
     if (useGlobalHTML5Audio) {
