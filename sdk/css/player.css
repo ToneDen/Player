@@ -696,7 +696,7 @@ cursor: pointer;
 
 /*Loader*/
 .tdspinner {
-      margin: 100px auto;
+      margin: 30px auto;
       width: 50px;
       height: 30px;
       text-align: center;
@@ -704,7 +704,6 @@ cursor: pointer;
     }
 
     .tdspinner > div {
-      background-color: #333;
       height: 100%;
       width: 6px;
       display: inline-block;

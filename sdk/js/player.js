@@ -225,18 +225,17 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-player', 'ven
             }
 
             // Make sure the specified container is valid.
-            if(!container) {
-                log('ToneDen Player: the dom element specified does not exist.', 'error');
-                return;
-            } else {
+            if(container) {
                 rerender({
-                    nowPlaying: playerInstance.track(),
                     tracks: [],
                     skin: parameters.skin,
+                    eq: parameters.eq,
                     tracksPerArtist: parameters.tracksPerArtist,
-                    visualizerType: parameters.visualizerType,
-                    single: parameters.single
+                    visualizer: parameters.visualizer
                 });
+            } else {
+                log('ToneDen Player: the container specified does not exist.', 'error');
+                return;
             }
 
             var playerInstance = new scPlayer(urls, playerParameters);
@@ -355,6 +354,7 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-player', 'ven
                     if(tracks.length==1) {
                        parameters.single = true;
                     } 
+                    container.find('.tdspinner').hide();
 
                     rerender({
                         nowPlaying: playerInstance.track(),

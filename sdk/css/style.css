@@ -7,6 +7,10 @@ body {
     font-weight: normal;
 }
 
+#demo {
+	min-height: 800px;
+}
+
 #player {
 	margin: 20px auto 0px;
 }
