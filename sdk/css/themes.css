@@ -2,21 +2,25 @@
 .player.light {
   background: rgba(255,255,255,0.8);
   color: black;
+  border-color: #E4E4E4;
 }
 
 .player.dark {
   background: rgba(0,0,0,0.85);
   color: white;
+  border-color: #333;
 }
 
 .player.aurora {
     color: white;
     background: #192F41;
+    border-color: #1B4B4B;
 }
 
 .player.mojave {
     color: white;
     background: #4F4E70;
+    border-color: #6D6C9A;
 }
 
 .player.light div {
@@ -92,35 +96,35 @@
 }
 
 .player.light .td-icon {
-  background-image: url('https://s3.amazonaws.com/toneden-player/td-dark.png');
+  background-image: url('https://s3-us-west-1.amazonaws.com/toneden-sdk/resources/icons/td-dark.png');
 }
 
 .player.dark .td-icon {
-  background-image: url('https://s3.amazonaws.com/toneden-player/td-light.png');
+  background-image: url('https://s3-us-west-1.amazonaws.com/toneden-sdk/resources/icons/td-light.png');
 }
 
 .player.aurora .td-icon {
-  background-image: url('https://s3.amazonaws.com/toneden-player/td-light.png');
+  background-image: url('https://s3-us-west-1.amazonaws.com/toneden-sdk/resources/icons/td-light.png');
 }
 
 .player.mojave .td-icon {
-  background-image: url('https://s3.amazonaws.com/toneden-player/td-light.png');
+  background-image: url('https://s3-us-west-1.amazonaws.com/toneden-sdk/resources/icons/td-light.png');
 }
 
 .player.light .soundcloud-icon {
-  background-image: url('https://s3.amazonaws.com/toneden-player/sc-dark.png');
+  background-image: url('https://s3-us-west-1.amazonaws.com/toneden-sdk/resources/icons/sc-dark.png');
 }
 
 .player.dark .soundcloud-icon {
-  background-image: url('https://s3.amazonaws.com/toneden-player/sc-light.png');
+  background-image: url('https://s3-us-west-1.amazonaws.com/toneden-sdk/resources/icons/sc-light.png');
 }
 
 .player.aurora .soundcloud-icon {
-  background-image: url('https://s3.amazonaws.com/toneden-player/sc-light.png');
+  background-image: url('https://s3-us-west-1.amazonaws.com/toneden-sdk/resources/icons/sc-light.png');
 }
 
 .player.mojave .soundcloud-icon {
-  background-image: url('https://s3.amazonaws.com/toneden-player/sc-light.png');
+  background-image: url('https://s3-us-west-1.amazonaws.com/toneden-sdk/resources/icons/sc-light.png');
 }
 
 .player.light .follow-link {

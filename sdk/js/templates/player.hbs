@@ -1,9 +1,9 @@
-<div class="row player {{skin}}">
-    <div class="large-12 small-12 columns large-centered">
+<div class="td tdrow player {{skin}}">
+    <div class="tdlarge-12 tdsmall-12 tdcolumns tdlarge-centered">
         <a href="https://www.toneden.io" target="_blank" class="td-icon-link"><i class="td-icon"></i></a>
         {{#with nowPlaying}}
-            <div class="header row">
-                <div class="cover large-12 small-12 columns">
+            <div class="header tdrow">
+                <div class="cover tdlarge-12 tdsmall-12 tdcolumns">
                     <div class="cover-img">
                         {{#if artwork_url}}
                             <img src="{{artwork_url}}" />
@@ -12,61 +12,61 @@
                         {{/if}}
                     </div>
                 </div>
-                <div class="waveform large-12 small-6 columns">
+                <div class="waveform tdlarge-12 tdsmall-6 tdcolumns">
                 </div>
             </div>
-            <div class="row info ">
-                <div class="song-name large-12 small-12 columns">
+            <div class="tdrow info ">
+                <div class="song-name tdlarge-12 tdsmall-12 tdcolumns">
                     <a href="{{permalink_url}}">{{title}}</a>
                 </div>
-                <div class="artist-name large-12 small-12 columns">
+                <div class="artist-name tdlarge-12 tdsmall-12 tdcolumns">
                     <a href="{{user.permalink_url}}">{{user.username}}</a>
                 </div>
             </div>
-            <div class="row social">
+            <div class="tdrow social">
                 {{#ifCond purchase_url download_url}}
-                    <div class="follow large-3 small-12 columns">
-                        <a class="button expand follow-link" href="{{permalink_url}}"  target="_blank">
+                    <div class="follow tdlarge-3 tdsmall-12 tdcolumns">
+                        <a class="tdbutton expand follow-link" href="{{permalink_url}}"  target="_blank">
                             <i class="fa soundcloud-icon fw playlist-social-icon"></i>
                             FOLLOW
                         </a>
                     </div>
                 {{else}}
-                    <div class="follow large-6 small-12 columns">
-                        <a class="button expand follow-link" href="{{permalink_url}}"  target="_blank">
+                    <div class="follow tdlarge-6 tdsmall-12 tdcolumns">
+                        <a class="tdbutton expand follow-link" href="{{permalink_url}}"  target="_blank">
                             <i class="fa soundcloud-icon fw playlist-social-icon"></i>
                             FOLLOW
                         </a>
                     </div>
                 {{/ifCond}}
-                <div class="current-song-info large-6 columns small-12">
-                    <div class="track-info-plays large-3 small-3 columns">
+                <div class="current-song-info tdlarge-6 tdcolumns tdsmall-12">
+                    <div class="track-info-plays tdlarge-3 tdsmall-3 tdcolumns">
                         <i class="fa fa-play-circle fw current-song-social-icon"></i>
                         {{playback_count}}
                     </div>
-                    <div class="track-info-favorites large-3 small-3 columns">
+                    <div class="track-info-favorites tdlarge-3 tdsmall-3 tdcolumns">
                         <i class="fa fa-heart fw current-song-social-icon"></i>
                         {{favoritings_count}}
                     </div>
-                    <div class="track-info-comments large-3 small-3 columns">
+                    <div class="track-info-comments tdlarge-3 tdsmall-3 tdcolumns">
                         <i class="fa fa-comments fw current-song-social-icon"></i>
                         {{comments.length}}
                     </div>
-                    <div class="track-info-downloads large-3 small-3 columns">
+                    <div class="track-info-downloads tdlarge-3 tdsmall-3 tdcolumns">
                         <i class="fa fa-download fw current-song-social-icon"></i>
                         {{download_count}}
                     </div>
                 </div>
                 {{#if purchase_url}}
-                    <div class="buy large-3 small-12 columns">
-                        <a class="button expand  buy-link" href="{{purchase_url}}" target="_blank">
+                    <div class="buy tdlarge-3 tdsmall-12 tdcolumns">
+                        <a class="tdbutton expand  buy-link" href="{{purchase_url}}" target="_blank">
                             BUY
                         </a>
                     </div>
                 {{else}}
                     {{#if download_url}}
-                        <div class="buy large-3 small-12 columns">
-                            <a class="button expand buy-link" href="{{download_url}}" target="_blank">
+                        <div class="buy tdlarge-3 tdsmall-12 tdcolumns">
+                            <a class="tdbutton expand buy-link" href="{{download_url}}" target="_blank">
                                 DOWNLOAD
                             </a>
                         </div>
@@ -74,25 +74,25 @@
                 {{/if}}
             </div>
         {{/with}}
-        <div class="row controls">
-            <div class="buttons large-12 small-12 columns">
+        <div class="tdrow controls">
+            <div class="buttons tdlarge-12 tdsmall-12 tdcolumns">
                 <i class="fa fa-angle-double-left fw player-prev prev"></i>
                 <i class="fa fa-play-circle-o fw player-play play"></i>
                 <i class="fa fa-angle-double-right fw player-next next"></i>
             </div>
         </div>
-        <div class="row scrubber">
-            <div class="large-12 small-12 columns scrubber-box">
-                <div class="large-2 small-2 columns start-time">0:00</div>
-                <div class="large-8 small-8 columns scrub-bar-box">
+        <div class="tdrow scrubber">
+            <div class="tdlarge-12 tdsmall-12 tdcolumns scrubber-box">
+                <div class="tdlarge-2 tdsmall-2 tdcolumns start-time">0:00</div>
+                <div class="tdlarge-8 tdsmall-8 tdcolumns scrub-bar-box">
                     <input type="text" class="scrubber-slider">
                 </div>
-                <div class="large-2 small-2 columns stop-time">
+                <div class="tdlarge-2 tdsmall-2 tdcolumns stop-time">
                     {{msToTimestamp nowPlaying.duration}}
                 </div>
             </div>
         </div>
-        <div class="row playlist">
+        <div class="tdrow playlist">
             <table class="playlist-table" border=1>
                 {{#each tracks}}
                     {{#if playing}}
@@ -106,25 +106,25 @@
                             <td><div class="track-info" data-index={{@index}}></td>
                         {{/if}}
                             <td>
-                                <div class="track-info-name large-12 small-12 columns">
+                                <div class="track-info-name tdlarge-12 tdsmall-12 tdcolumns">
                                     {{title}}
                                 </div>
                             </td>
                             <td class="track-info-stats" style="width:50%">
-                                <div class="track-info-social large-12 small-12 columns">
-                                    <div class="track-info-plays  small-3 large-3 columns">
+                                <div class="track-info-social tdlarge-12 tdsmall-12 tdcolumns">
+                                    <div class="track-info-plays  tdsmall-3 tdlarge-3 tdcolumns">
                                         <i class="fa fa-play-circle fw playlist-social-icon"></i>
                                         {{playback_count}}
                                     </div>
-                                    <div class="track-info-favorites small-3 large-3 columns">
+                                    <div class="track-info-favorites tdsmall-3 tdlarge-3 tdcolumns">
                                         <i class="fa fa-heart fw playlist-social-icon"></i>
                                         {{favoritings_count}}
                                     </div>
-                                    <div class="track-info-comments large-3 small-3 columns">
+                                    <div class="track-info-comments tdlarge-3 tdsmall-3 tdcolumns">
                                         <i class="fa fa-comments fw playlist-social-icon"></i>
                                         {{comments.length}}
                                     </div>
-                                    <div class="track-info-downloads large-3 small-3 columns">
+                                    <div class="track-info-downloads tdlarge-3 tdsmall-3 tdcolumns">
                                         <i class="fa fa-download fw playlist-social-icon"></i>
                                         {{download_count}}
                                     </div>
