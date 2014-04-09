@@ -5,80 +5,56 @@
         <link href="css/foundation.min.css" rel="stylesheet">
         <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600' rel='stylesheet' type='text/css'>
         <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
-        <link rel="stylesheet" href="http://yandex.st/highlightjs/8.0/styles/solarized-dark.min.css">
     </head>
     <body>
-        <div id="header" class="large-12 small-12 columns large-centered small-centered">
-            <h2>toneden.js</h2>
-            <h1>A fresh new customizable SoundCloud player.</h1>
-        </div>
-        <div id="player-container">
-            <div id="player" class="large-6 small-12 small-centered large-centered columns">
+        <div id="demo">
+            <div id="header" class="large-12 small-12 columns large-centered small-centered">
+                <h2>toneden.js</h2>
+                <h1>A fresh new customizable SoundCloud player.</h1>
             </div>
-            <div id="player2" class="large-6 small-12 small-centered large-centered columns">
+            <div id="player-container">
+                <div id="player" class="large-6 small-12 small-centered large-centered columns">
+                </div>
+                <div id="player2" class="large-6 small-12 small-centered large-centered columns">
+                </div>
             </div>
-        </div>
-        <script>
-            (function() {
-                var script = document.createElement('script');
+            <script>
+                (function() {
+                    var script = document.createElement('script');
 
-                script.type = 'text/javascript';
-                script.async = true;
-                script.src = '//widget.dev/loader/dist/toneden.loader.js'
+                    script.type = 'text/javascript';
+                    script.async = true;
+                    script.src = '//widget.dev/loader/dist/toneden.loader.js'
 
-                var entry = document.getElementsByTagName('script')[0];
-                entry.parentNode.insertBefore(script, entry);
-            }());
+                    var entry = document.getElementsByTagName('script')[0];
+                    entry.parentNode.insertBefore(script, entry);
+                }());
 
-            ToneDenReady = window.ToneDenReady || [];
-            ToneDenReady.push(function() {
-                ToneDen.player.create({
-                    debug: false,
-                    dom: '#player',
-                    keyboardEvents: false,
-                    urls: [
-                        'https://soundcloud.com/teendaze'
-                    ],
-                    skin: 'light',
-                    staticUrl: '//widget.dev/sdk/',
-                    tracksPerArtist: 4,
-                    visualizerType: 'waves'
+                ToneDenReady = window.ToneDenReady || [];
+                ToneDenReady.push(function() {
+                    ToneDen.player.create({
+                        debug: false,
+                        dom: '#player',
+                        keyboardEvents: false,
+                        urls: [
+                            'https://soundcloud.com/teendaze'
+                        ],
+                        skin: 'light',
+                        staticUrl: '//widget.dev/sdk/',
+                        tracksPerArtist: 4,
+                        visualizerType: 'waves'
+                    });
                 });
-            });
-        </script>
-        <script>
-            // (function() {
-            //     var script = document.createElement('script');
-
-            //     script.type = 'text/javascript';
-            //     script.async = true;
-            //     script.src = '//widget.dev/loader/dist/toneden.loader.js'
-
-            //     var entry = document.getElementsByTagName('script')[0];
-            //     entry.parentNode.insertBefore(script, entry);
-            // }());
-
-            // ToneDenReady = window.ToneDenReady || [];
-            // ToneDenReady.push(function() {
-            //     ToneDen.player.create({
-            //         debug: true,
-            //         dom: '#player',
-            //         urls: [
-            //             'https://soundcloud.com/brotherboard'
-            //         ],
-            //         skin: 'light',
-            //         visualizerType: 'waves'
-            //     });
-            // });
-        </script>
-        <br>
-        <br>
-        <div class="row">
-            <div class="large-4 small-12 large-centered small-centered columns skin-change-container">
-                <a href="#" class="skin-change-btn active" id="light-btn" data-theme="light"></a>
-                <a href="#" class="skin-change-btn" id="dark-btn" data-theme="dark"></a>
-                <a href="#" class="skin-change-btn" id="aurora-btn" data-theme="aurora"></a>
-                <a href="#" class="skin-change-btn" id="mojave-btn" data-theme="mojave"></a>
+            </script>
+            <br>
+            <br>
+            <div class="row">
+                <div class="large-4 small-12 large-centered small-centered columns skin-change-container">
+                    <a href="#" class="skin-change-btn active" id="light-btn" data-theme="light"></a>
+                    <a href="#" class="skin-change-btn" id="dark-btn" data-theme="dark"></a>
+                    <a href="#" class="skin-change-btn" id="aurora-btn" data-theme="aurora"></a>
+                    <a href="#" class="skin-change-btn" id="mojave-btn" data-theme="mojave"></a>
+                </div>
             </div>
         </div>
         <div id="player-banner">
@@ -86,9 +62,7 @@
                 <div class="tagline"><p>Fully customizable, responsive, and extensible.</p></div>
                 <div class="doc-sec large-10 small-12 columns large-centered">
                     <h3>Basic usage:</h3>
-                    <p><i class="fa fa-angle-right fw"></i> Add this script to your page (before the closing body tag)</p>
-                    <pre><code>&lt;script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"&gt;&lt;/script&gt;</code></pre>
-                    <p><i class="fa fa-angle-right fw"></i> Add the following snippet of code.</p>
+                    <p><i class="fa fa-angle-right fw"></i> Add the following snippet of code to your page (before the closing <code>body</code> tag).</p>
                     <pre><code class="javascript">&lt;script&gt;
     (function() {
         var script = document.createElement('script');

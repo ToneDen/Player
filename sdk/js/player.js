@@ -228,6 +228,15 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-player', 'ven
             if(!container) {
                 log('ToneDen Player: the dom element specified does not exist.', 'error');
                 return;
+            } else {
+                rerender({
+                    nowPlaying: playerInstance.track(),
+                    tracks: [],
+                    skin: parameters.skin,
+                    tracksPerArtist: parameters.tracksPerArtist,
+                    visualizerType: parameters.visualizerType,
+                    single: parameters.single
+                });
             }
 
             var playerInstance = new scPlayer(urls, playerParameters);
