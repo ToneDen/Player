@@ -8,12 +8,13 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-player', 'ven
 
             // Default parameters go here.
             var parameters = {
-                debug: false,
-                skin: 'light',
-                tracksPerArtist: 4,
-                eq: 'waves',
-                visualizer: true,
+                debug: false, // Output debug messages?
+                eq: 'waves', // Equalizer type. 'waves' or 'bars'
+                keyboardEvents: false, // Should we listen to keyboard events?
                 single: false,
+                skin: 'light',
+                tracksPerArtist: 4, // How many tracks to load when given an artist SoundCloud URL.
+                visualizer: true // Show the visualizer?
             };
 
             // Setup the parameters object with the given arguments and
@@ -23,19 +24,16 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-player', 'ven
             } else {
                 parameters.urls = urls;
                 parameters.dom = dom;
-                parameters.skin = skin;
-                parameters.eq = eq;
-                parameters.visualizer = visualizer;
-                parameters.single = single;
 
                 delete options.urls;
                 delete options.dom;
-                delete options.skin;
-                delete options.eq;
-                delete options.visualizer;
-                delete options.single;
 
                 _.extend(parameters, options);
+            }
+
+            // Visualizer is currently only supported in Chrome.
+            if(navigator.userAgent.toLowerCase().indexOf('chrome') === -1) {
+                parameters.visualizer = false;
             }
 
             // Parameters for the SoundCloud player.
@@ -54,12 +52,13 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-player', 'ven
             var currentTimeIn = null;
 
             // Helper functions.
-            function log(message, isError) {
+            function log(message, level) {
+                // Level can be debug or error.
                 if(window.console) {
-                    if(!isError && parameters.debug) {
-                        console.log(message);
-                    } else if(level === 'error') {
+                    if(level === 'error') {
                         console.error(message);
+                    } else if(parameters.debug) {
+                        console.debug(message);
                     }
                 }
             }
@@ -110,7 +109,11 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-player', 'ven
 
             function drawEQ(data) {
                 if(!data) {
-                    var data = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+                    var data = [];
+
+                    for(var i = 0; i < 128; i++) {
+                        data.push(0);
+                    }
                 }
 
                 var d3Container = d3.select(container[0]);
@@ -215,18 +218,9 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-player', 'ven
                 }
             }
 
-            // Perform the initial rendering.
-            if(container) {
-                // rerender({
-                //     tracks: [],
-                //     skin: parameters.skin,
-                //     eq: parameters.eq,
-                //     tracksPerArtist: parameters.tracksPerArtist,
-                //     visualizer: parameters.visualizer,
-                //     single: parameters.single
-                // });
-            } else {
-                log('ToneDen Player: the container specified does not exist.', 'error');
+            // Make sure the specified container is valid.
+            if(!container) {
+                log('ToneDen Player: the dom element specified does not exist.', 'error');
                 return;
             }
 
@@ -237,8 +231,6 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-player', 'ven
             container.on('click', '.controls', function(e) {
                 e.preventDefault();
                 var target = $(e.target);
-
-                console.log(container[0]);
 
                 if(target.hasClass('play')) {
                     playerInstance.pause();
@@ -267,47 +259,37 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-player', 'ven
             });
 
             // Document-wide listeners.
-            function spacebarStop(e) {
-                if (e.keyCode == 32) {
-                    if(playerInstance) {
-                        playerInstance.pause();
-                    }
-                    e.preventDefault();
-                }
-            }
-            document.addEventListener('keydown', spacebarStop, false);
+            if(parameters.keyboardEvents) {
+                document.addEventListener('keydown', function(e) {
+                    if (e.keyCode == 32) {
+                        if(playerInstance) {
+                            playerInstance.pause();
+                        }
 
-            function keyTrackNext(e) {
-                if (e.keyCode == 39) {
-                    if(playerInstance) {
-                        playerInstance.next();
-                    }
-                    e.preventDefault();
-                }
-            }
-            document.addEventListener('keydown', keyTrackNext, false);
+                        e.preventDefault();
+                    } else if (e.keyCode == 39) {
+                        if(playerInstance) {
+                            playerInstance.next();
+                        }
 
-            function keyTrackPrev(e) {
-                if (e.keyCode == 37) {
-                    if(playerInstance) {
-                        playerInstance.prev();
+                        e.preventDefault();
+                    } else if (e.keyCode == 37) {
+                        if(playerInstance) {
+                            playerInstance.prev();
+                        }
+
+                        e.preventDefault();
                     }
-                    e.preventDefault();
-                }
+                }, false);
             }
-            document.addEventListener('keydown', keyTrackPrev, false);
 
             // Hook into SC player events.
             playerInstance.on('scplayer.play', function(e) {
-                log('Playing.');
-
                 changePlayButton(false);
             });
 
             playerInstance.on('scplayer.pause', function(e) {
                 var paused = playerInstance.sound().paused;
-
-                log('Pause state changed: ' + paused);
 
                 changePlayButton(paused);
             });
@@ -323,7 +305,7 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-player', 'ven
             });
 
             playerInstance.on('scplayer.track.whileplaying', function(e, percent, eqData) {
-                if(parameters.visualizer == true) {
+                if(parameters.visualizer) {
                     //Only enable waveform in Chrome. TODO Fix waveform when WebAudio bugs are resolved in Firefox & Safari
                     if(navigator.userAgent.toLowerCase().indexOf('chrome') > -1) {
                         drawEQ(eqData);
@@ -350,6 +332,10 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-player', 'ven
 
                 currentRatio = ratio;
                 currentTimeIn = timeIn;
+
+                if(parameters.visualizer == true) {
+                    drawEQ(eqData);
+                }
             });
 
             playerInstance.on('scplayer.playlist.preloaded', function(e) {

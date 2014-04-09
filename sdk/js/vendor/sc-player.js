@@ -9,13 +9,14 @@ define(['vendor/soundmanager2', 'jquery', 'vendor/d3'], function(soundManager, j
     if(typeof soundManager !== 'undefined'){
         soundManager.setup({
             debugMode: false,
+            flashVersion: 9,
             url: 'swf',
             useFlashBlock: false,
             useHighPerformance: false,
             waitForWindowLoad: true,
+            useConsole: true,
             useHTML5Audio: true,
-            wmode: 'transparent',
-            flashVersion: 9,
+            wmode: 'transparent'
         });
     }
 
@@ -97,6 +98,10 @@ define(['vendor/soundmanager2', 'jquery', 'vendor/d3'], function(soundManager, j
         this.currentTrackIndex = this.config.startOn;
         this.currentTrack = null;
         this.sound = null;
+
+        soundManager.setup({
+            debugMode: config.debug
+        });
 
         //flag for if we're already inited
         this.inited = false;
@@ -587,8 +592,6 @@ define(['vendor/soundmanager2', 'jquery', 'vendor/d3'], function(soundManager, j
                 }
             });
         
-            console.log(self.sound);
-
             self.trigger('scplayer.track.bindable', track, self.sound);
         };
 
