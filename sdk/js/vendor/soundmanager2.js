@@ -2854,8 +2854,8 @@ function SoundManager(smURL, smID) {
 
         proc.onaudioprocess = audioProcessEvent; 
 
-        s._fftLeft = new FFT( s._sample_size / 2, s._sample_rate );
-        s._fftRight = s._fftRightO = new FFT( s._sample_size / 2, s._sample_rate );
+        s._fftLeft = new dsp.FFT( s._sample_size / 2, s._sample_rate );
+        s._fftRight = s._fftRightO = new dsp.FFT( s._sample_size / 2, s._sample_rate );
 
         // var source = s._sourceNode = context.createMediaElementSource( s._a );
         // var analyser = (s._analyser || context.createAnalyser() );
@@ -2893,10 +2893,10 @@ function SoundManager(smURL, smID) {
       }
 
       if(s.instanceOptions.useEQData || s.instanceOptions.usePeakData){ 
-        s._fftLeft = new FFT( s._fbLength / s._channels, s._sample_rate );
+        s._fftLeft = new dsp.FFT( s._fbLength / s._channels, s._sample_rate );
         s._fftRight = s._fftLeft;
         if(s._channels > 1){
-          s._fftRight = new FFT( s._fbLength / s._channels, s._sample_rate );
+          s._fftRight = new dsp.FFT( s._fbLength / s._channels, s._sample_rate );
         }
       }
     };
@@ -3111,8 +3111,8 @@ function SoundManager(smURL, smID) {
 
       s.isHTML5 = true;
 
-      if(FFT && Float32Array){
-          //Use html5 for spectrum/waveform (dsp.js must be available)
+      if(dsp.FFT && Float32Array){
+        //Use html5 for spectrum/waveform (dsp.js must be available)
         var contextClass =(window.AudioContext || 
           window.webkitAudioContext || 
           window.mozAudioContext || 

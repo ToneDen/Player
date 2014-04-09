@@ -72,22 +72,6 @@ define([
       return xhr;
     };
 
-    // Returns the version of Windows Internet Explorer or a -1
-    // (indicating the use of another browser).
-    // Note: this is only for development mode. Does not run in production.
-    getIEVersion = function(){
-      // Return value assumes failure.
-      var rv = -1;
-      if (navigator.appName == 'Microsoft Internet Explorer') {
-        var ua = navigator.userAgent;
-        var re = new RegExp('MSIE ([0-9]{1,}[\.0-9]{0,})');
-        if (re.exec(ua) != null) {
-          rv = parseFloat( RegExp.$1 );
-        }
-      }
-      return rv;
-    };
-
     fetchText = function (url, callback) {
       var xdm = false;
       // If url is a fully qualified URL, it might be a cross domain request. Check for that.

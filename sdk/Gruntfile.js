@@ -67,7 +67,7 @@ module.exports = function(grunt) {
     });
 
     grunt.registerTask('injectCSS', 'Injects CSS into the javascript as a variable.', function() {
-        var before = 'var css=\'';
+        var before = 'var ToneDenSDKCSS=\'';
         var css = grunt.file.read('dist/all.css');
 
         css = css.replace(/'/g, '\\\'');
