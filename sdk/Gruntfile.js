@@ -17,14 +17,14 @@ module.exports = function(grunt) {
                     'dist/compiled.js',
                     'dist/templates.js'
                 ],
-                dest: 'dist/toneden.js'
+                dest: '../toneden.js'
             },
             production: {
                 src: [
                     'dist/compiled.min.js',
                     'dist/templates.js'
                 ],
-                dest: 'dist/toneden.js'
+                dest: '../toneden.js'
             }
         },
         cssmin: {
@@ -75,9 +75,9 @@ module.exports = function(grunt) {
 
         var after = '\'\n';
 
-        var sdk = grunt.file.read('dist/toneden.js');
+        var sdk = grunt.file.read('../toneden.js');
 
-        grunt.file.write('dist/toneden.js', before + css + after + sdk);
+        grunt.file.write('../toneden.js', before + css + after + sdk);
     });
 
     grunt.registerTask('default', [

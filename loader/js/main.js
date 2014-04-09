@@ -1,5 +1,4 @@
 require.config({
-    baseUrl: '//publisher.dev',
     namespace: 'ToneDen'
 });
 
@@ -25,9 +24,10 @@ require(['utils'], function(utils) {
     ToneDen.requirejs = requirejs;
 
     var parameters = defaultParameters;
+    var baseUrl = utils.getBaseUrl();
 
     ToneDen.require.config({
-        baseUrl: 'http://widget.dev/sdk/dist/',
+        baseUrl: baseUrl,
         enforceDefine: true
     });
 

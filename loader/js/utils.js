@@ -36,6 +36,23 @@ define('utils', function() {
         return obj;
     };
 
+    var getBaseUrl = function() {
+        var scripts = document.getElementsByTagName('script');
+        var element;
+        var src;
+
+        for (var i = 0; i < scripts.length; i++) {
+            element = scripts[i];
+            src = element.src;
+
+            if (src && /\/toneden\.loader\.js/.test(src)) {
+                return src.replace(/toneden\.loader\.js$/, '');
+            }
+        }
+
+        return null;
+    }
+
     var loadStylesheet = function(url) {
         var link = document.createElement('link');
         link.rel = 'stylesheet';
@@ -46,6 +63,7 @@ define('utils', function() {
     };
 
     return {
+        getBaseUrl: getBaseUrl,
         extend: extend,
         loadStylesheet: loadStylesheet
     };
