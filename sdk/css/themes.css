@@ -57,18 +57,70 @@
 
 .player.light .info {
   border-color: #E4E4E4;
+  color: black;
 }
 
 .player.dark .info {
   border-color: #333;
+  color: white;
 }
 
 .player.aurora .info {
   border-color: #1B4B4B;
+  color: white;
 }
 
 .player.mojave .info {
   border-color: #6D6C9A;
+  color: white;
+}
+
+.player.light .info a{
+  color: black;
+}
+
+.player.dark .info a{
+  color: white;
+}
+
+.player.aurora .info a{
+  color: white;
+}
+
+.player.mojave .info a{
+  color: white;
+}
+
+.player.light .td-icon {
+  background-image: url('https://s3.amazonaws.com/toneden-player/td-dark.png');
+}
+
+.player.dark .td-icon {
+  background-image: url('https://s3.amazonaws.com/toneden-player/td-light.png');
+}
+
+.player.aurora .td-icon {
+  background-image: url('https://s3.amazonaws.com/toneden-player/td-light.png');
+}
+
+.player.mojave .td-icon {
+  background-image: url('https://s3.amazonaws.com/toneden-player/td-light.png');
+}
+
+.player.light .soundcloud-icon {
+  background-image: url('https://s3.amazonaws.com/toneden-player/sc-dark.png');
+}
+
+.player.dark .soundcloud-icon {
+  background-image: url('https://s3.amazonaws.com/toneden-player/sc-light.png');
+}
+
+.player.aurora .soundcloud-icon {
+  background-image: url('https://s3.amazonaws.com/toneden-player/sc-light.png');
+}
+
+.player.mojave .soundcloud-icon {
+  background-image: url('https://s3.amazonaws.com/toneden-player/sc-light.png');
 }
 
 .player.light .follow-link {

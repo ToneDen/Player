@@ -1,41 +1,40 @@
 <div class="row player {{skin}}">
     <div class="large-12 small-12 columns large-centered">
+        <a href="https://www.toneden.io" target="_blank" class="td-icon-link"><i class="td-icon"></i></a>
         {{#with nowPlaying}}
             <div class="header row">
                 <div class="cover large-12 small-12 columns">
-                    <a href="{{permalink_url}}">
+                    <div class="cover-img">
                         {{#if artwork_url}}
                             <img src="{{artwork_url}}" />
                         {{else}}
                             <img src="{{user.avatar_url}}" />
                         {{/if}}
-                    </a>
+                    </div>
                 </div>
                 <div class="waveform large-12 small-6 columns">
                 </div>
             </div>
             <div class="row info ">
                 <div class="song-name large-12 small-12 columns">
-                    {{title}}
+                    <a href="{{permalink_url}}">{{title}}</a>
                 </div>
                 <div class="artist-name large-12 small-12 columns">
-                    {{user.username}}
+                    <a href="{{user.permalink_url}}">{{user.username}}</a>
                 </div>
             </div>
             <div class="row social">
                 {{#ifCond purchase_url download_url}}
                     <div class="follow large-3 small-12 columns">
                         <a class="button expand follow-link" href="{{permalink_url}}"  target="_blank">
-                            <i class="fa fa-cloud fw playlist-social-icon"></i>
-                            {{!-- <img src="{{../staticUrl}}img/sc-dark.png">  --}}
+                            <i class="fa soundcloud-icon fw playlist-social-icon"></i>
                             FOLLOW
                         </a>
                     </div>
                 {{else}}
                     <div class="follow large-6 small-12 columns">
                         <a class="button expand follow-link" href="{{permalink_url}}"  target="_blank">
-                            <i class="fa fa-cloud fw playlist-social-icon"></i>
-                            {{!-- <img src="{{../staticUrl}}img/sc-dark.png">  --}}
+                            <i class="fa soundcloud-icon fw playlist-social-icon"></i>
                             FOLLOW
                         </a>
                     </div>

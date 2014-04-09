@@ -7,8 +7,8 @@
     </head>
     <body>
         <div id="header" class="large-12 small-12 columns large-centered small-centered">
-            <h1>tonedenplayer.js</h1>
-            <h2>A customizable & responsive player for SoundCloud</h2>
+            <h2>tonedenplayer.js</h2>
+            <h1>A fresh new customizable SoundCloud player.</h1>
         </div>
         <div id="player-container">
             <div id="player" class="large-6 small-12 small-centered large-centered columns">
@@ -34,7 +34,7 @@
                     debug: true,
                     dom: '#player',
                     urls: [
-                        'https://soundcloud.com/atu_n/'
+                        'https://soundcloud.com/spazzkid/sets/desire-info-to-download-full'
                     ],
                     skin: 'light',
                     eq: 'waves',
@@ -83,17 +83,19 @@
                 $(".skin-change-btn").on("click", function() {
                     var id = $(this).attr("id");
 
-                    ToneDen.player.getInstanceByDom('#player').destroy();
+                    if(ToneDen.player.getInstanceByDom('#player')) {
+                        ToneDen.player.getInstanceByDom('#player').destroy();
+                    }
                     
                     ToneDen.player.create({
                         debug: true,
                         dom: '#player',
                         urls: [
-                            'https://soundcloud.com/giraffage/sets/giraffage-needs'
+                            'https://soundcloud.com/spazzkid/'
                         ],
                         skin: $(this).attr("data-theme"),
                         eq: 'bars',
-                        tracksPerArtist: 4
+                        tracksPerArtist: 1
                     });
 
                     $(".skin-change-btn").removeClass("active");

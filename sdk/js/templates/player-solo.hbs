@@ -1,5 +1,6 @@
 <div class="row player {{skin}} solo">
     <div class="large-12 small-12 columns large-centered small-centered">
+        <a href="https://www.toneden.io" target="_blank" class="td-icon-link"><i class="td-icon"></i></a>
         {{#with nowPlaying}}
             <div class="header large-4 small-12 columns">
                 <div class="cover large-12 small-12 columns">
@@ -24,7 +25,7 @@
                     {{#ifCond purchase_url download_url}}
                         <div class="follow large-6 small-12 columns">
                             <a class="button expand follow-link" href="{{permalink_url}}"  target="_blank">
-                                <i class="fa fa-cloud fw playlist-social-icon"></i>
+                                <i class="fa soundcloud-icon fw playlist-social-icon"></i>
                                 {{!-- <img src="{{../staticUrl}}img/sc-dark.png">  --}}
                                 FOLLOW
                             </a>
@@ -32,7 +33,7 @@
                     {{else}}
                         <div class="follow large-12 small-12 columns">
                             <a class="button expand follow-link" href="{{permalink_url}}"  target="_blank">
-                                <i class="fa fa-cloud fw playlist-social-icon"></i>
+                                <i class="fa soundcloud-icon fw playlist-social-icon"></i>
                                 {{!-- <img src="{{../staticUrl}}img/sc-dark.png">  --}}
                                 FOLLOW
                             </a>

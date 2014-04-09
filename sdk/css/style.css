@@ -15,20 +15,23 @@ body {
   	font-family: 'Source Sans Pro', sans-serif;
 	color: white;
 	text-align: center;
+	margin: 30px 0px;
 }
 
 #header h1 {
-	font-size: 24px;
-	font-weight: 300;
-	text-shadow: 0 0 5px #E0E0E0;
-}
-
-#header h2 {
 	font-size: 16px;
 	font-weight: 300;
 	font-style: italic;
 	text-shadow: 0 0 5px #E0E0E0;
+	color:black;
 	margin-top: 10px;
+}
+
+#header h2 {
+	font-size: 24px;
+	font-weight: 300;
+	text-shadow: 0 0 5px #E0E0E0;
+	color:black;
 }
 
 .skin-change-container {
