@@ -13,17 +13,11 @@ if(typeof window !== 'undefined') {
     ToneDen = window.ToneDen;
 }
 
-// Default loader parameters.
-var defaultParameters = {
-    baseUrl: 'static.toneden.io/sdk'
-};
-
 require(['utils'], function(utils) {
     ToneDen.define = define;
     ToneDen.require = require;
     ToneDen.requirejs = requirejs;
 
-    var parameters = defaultParameters;
     var baseUrl = utils.getBaseUrl();
 
     ToneDen.require.config({

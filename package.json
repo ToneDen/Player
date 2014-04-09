@@ -1,0 +1,8 @@
+{
+    "devDependencies": {
+        "grunt": "0.4.4",
+        "grunt-aws-s3": "~0.8.1",
+        "grunt-contrib": "0.9.0",
+        "grunt-rename": "~0.1.3"
+    }
+}
