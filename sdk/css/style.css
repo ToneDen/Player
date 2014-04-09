@@ -7,6 +7,10 @@ body {
     font-weight: normal;
 }
 
+#demo {
+	min-height: 800px;
+}
+
 #player {
 	margin: 20px auto 0px;
 }
@@ -103,4 +107,35 @@ code {
 	font-weight: normal !important;
 	color: #3AC095 !important;
 	font-size: 14px;
+}
+
+#tdsplash {
+	background: rgba(15, 45, 56, 0.63);
+	text-align: center;
+	padding: 80px 0px;
+}
+
+#tdsplash h4, #tdsplash h6 {
+	color: white;
+	text-align: center;
+}
+
+#tdsplash h4, #tdsplash h4 code {
+	font-size:32px;
+}
+
+#tdsplash .showcase {
+	margin: 40px auto;
+}
+
+#tdsplash .showcase-button {
+  	font-family: 'Source Sans Pro', sans-serif !important;
+    font-size: 18px;
+    font-weight: 300;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    background: none;
+    border: 1px solid white;
+    color: white;
+    border-radius: 2px;
 }

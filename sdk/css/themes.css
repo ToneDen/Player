@@ -454,3 +454,21 @@
 .player.mojave .buy-small .buy-link {
   border-color: #6D6C9A !important;
 }
+
+/*spinner*/
+
+.player.light .tdspinner > div {
+  background: #333;
+}
+
+.player.dark .tdspinner > div {
+  background: white ;
+}
+
+.player.aurora .tdspinner > div {
+  background: white ;
+}
+
+.player.mojave .tdspinner > div {
+  background: white;
+}

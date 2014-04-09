@@ -1,5 +1,14 @@
 <div class="td tdrow player {{skin}}">
-    <div class="tdlarge-12 tdsmall-12 tdcolumns tdlarge-centered">
+    {{#unless nowPlaying}}
+    <div class="tdspinner">
+        <div class="rect1"></div>
+        <div class="rect2"></div>
+        <div class="rect3"></div>
+        <div class="rect4"></div>
+        <div class="rect5"></div>
+    </div>
+    {{/unless}}
+    <div class="tdbody tdlarge-12 tdsmall-12 tdcolumns tdlarge-centered">
         <a href="https://www.toneden.io" target="_blank" class="td-icon-link"><i class="td-icon"></i></a>
         {{#with nowPlaying}}
             <div class="header tdrow">
@@ -73,25 +82,25 @@
                     {{/if}}
                 {{/if}}
             </div>
+            <div class="tdrow controls">
+                <div class="buttons tdlarge-12 tdsmall-12 tdcolumns">
+                    <i class="fa fa-angle-double-left fw player-prev prev"></i>
+                    <i class="fa fa-play-circle-o fw player-play play"></i>
+                    <i class="fa fa-angle-double-right fw player-next next"></i>
+                </div>
+            </div>
+            <div class="tdrow scrubber">
+                <div class="tdlarge-12 tdsmall-12 tdcolumns scrubber-box">
+                    <div class="tdlarge-2 tdsmall-2 tdcolumns start-time">0:00</div>
+                    <div class="tdlarge-8 tdsmall-8 tdcolumns scrub-bar-box">
+                        <input type="text" class="scrubber-slider">
+                    </div>
+                    <div class="tdlarge-2 tdsmall-2 tdcolumns stop-time">
+                        {{msToTimestamp nowPlaying.duration}}
+                    </div>
+                </div>
+            </div>
         {{/with}}
-        <div class="tdrow controls">
-            <div class="buttons tdlarge-12 tdsmall-12 tdcolumns">
-                <i class="fa fa-angle-double-left fw player-prev prev"></i>
-                <i class="fa fa-play-circle-o fw player-play play"></i>
-                <i class="fa fa-angle-double-right fw player-next next"></i>
-            </div>
-        </div>
-        <div class="tdrow scrubber">
-            <div class="tdlarge-12 tdsmall-12 tdcolumns scrubber-box">
-                <div class="tdlarge-2 tdsmall-2 tdcolumns start-time">0:00</div>
-                <div class="tdlarge-8 tdsmall-8 tdcolumns scrub-bar-box">
-                    <input type="text" class="scrubber-slider">
-                </div>
-                <div class="tdlarge-2 tdsmall-2 tdcolumns stop-time">
-                    {{msToTimestamp nowPlaying.duration}}
-                </div>
-            </div>
-        </div>
         <div class="tdrow playlist">
             <table class="playlist-table" border=1>
                 {{#each tracks}}
