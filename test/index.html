@@ -22,7 +22,7 @@
 
                 script.type = 'text/javascript';
                 script.async = true;
-                script.src = "//widget.dev/loader/dist/sdk.loader.js"
+                script.src = '//widget.dev/loader/dist/sdk.loader.js'
 
                 var entry = document.getElementsByTagName('script')[0];
                 entry.parentNode.insertBefore(script, entry);
@@ -50,7 +50,7 @@
 
             //     script.type = 'text/javascript';
             //     script.async = true;
-            //     script.src = "//widget.dev/loader/dist/sdk.loader.js"
+            //     script.src = '//widget.dev/loader/dist/sdk.loader.js'
 
             //     var entry = document.getElementsByTagName('script')[0];
             //     entry.parentNode.insertBefore(script, entry);
@@ -82,8 +82,8 @@
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
         <script>
             $(document).ready(function() {
-                $(".skin-change-btn").on("click", function() {
-                    var id = $(this).attr("id");
+                $('.skin-change-btn').on('click', function() {
+                    var id = $(this).attr('id');
 
                     if(ToneDen.player.getInstanceByDom('#player')) {
                         ToneDen.player.getInstanceByDom('#player').destroy();
@@ -95,13 +95,13 @@
                         urls: [
                             'https://soundcloud.com/spazzkid/'
                         ],
-                        skin: $(this).attr("data-theme"),
+                        skin: $(this).attr('data-theme'),
                         eq: 'bars',
                         tracksPerArtist: 1
                     });
 
-                    $(".skin-change-btn").removeClass("active");
-                    $(this).addClass("active");
+                    $('.skin-change-btn').removeClass('active');
+                    $(this).addClass('active');
                 });
             });
         </script>

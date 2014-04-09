@@ -1,5 +1,35 @@
-An Audio Player, By ToneDen
-=============
+Embeddable Goodness, by ToneDen
+===
+
+Loading
+---
+
+The ToneDen SDK is loaded asynchronously, which means your page doesn't have to wait for the SDK to load before rendering.
+This means that loading it is a little more complicated than just including a script tag. Don't worry though, we've taken care of all the complicated stuff for you.
+Just copy the snippet below into your HTML page, and replace the commented portion with your code calling the SDK.
+
+```
+<script>
+    (function() {
+        var script = document.createElement('script');
+
+        script.type = 'text/javascript';
+        script.async = true;
+        script.src = 'sdk.loader.js'
+
+        var entry = document.getElementsByTagName('script')[0];
+        entry.parentNode.insertBefore(script, entry);
+    }());
+
+    ToneDenReady = window.ToneDenReady || [];
+    ToneDenReady.push(function() {
+        // call SDK functions (ToneDen.player.create(), etc.)
+    });
+</script>
+```
+
+Player
+---
 
 A pure JS customizable audio player for your SoundCloud. 
 
@@ -7,9 +37,8 @@ JS API, responsive, customizable.
 
 ![alt tag](https://raw.github.com/tim-thimmaiah/tonedenplayer/master/mockupv1.png)
 
-=============
-
 Dev Setup:
+===
 
 1. Add the following lines to /etc/hosts:
 ```
@@ -28,7 +57,7 @@ VirtualHost *:80>
 </VirtualHost>  
 ```
 
-=============
+===
 
 The MIT License (MIT)
 
