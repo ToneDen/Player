@@ -99,14 +99,11 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-player', 'ven
                         container.find(".buy").addClass("buy-small").css("width", "100%");
                         container.find(".track-info-stats").hide();
                     }
-                }
 
-                // if(container.height()<600) {
-                //     container.find(".follow").addClass("follow-small").css("width", "100%");
-                //     container.find(".current-song-info").css("width", "100%").prependTo(container.find(".social"));
-                //     container.find(".buy").addClass("buy-small").css("width", "100%");
-                //     container.find(".track-info-stats").hide();
-                // }
+                    if(container.height()<400) {
+                        container.find(".player").addClass("shrink");
+                    }
+                }
 
                 container.find('.scrubber-slider').simpleSlider({
                     highlight: true

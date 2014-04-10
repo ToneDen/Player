@@ -49,20 +49,20 @@ cursor: pointer;
 }
 
 .td.player .header {
-	height: 100%;
+  height: 100%;
   text-align: center;
   position: relative;
 }
 
 .td.player .cover {
-	height: 100%;
-	display: table;
+  height: 100%;
+  display: table;
   z-index: 1;
 }
 
 .td.player .cover .cover-img {
-	display: table-cell;
-	vertical-align: middle;
+  display: table-cell;
+  vertical-align: middle;
   -webkit-animation: fadeIn 1s; /* Safari and Chrome */
      -moz-animation: fadeIn 1s; /* Firefox */
       -ms-animation: fadeIn 1s; /* Internet Explorer */
@@ -89,7 +89,7 @@ cursor: pointer;
 
 .td.player .info {
   border-bottom: 1px solid;
-	font-weight: bold;
+  font-weight: bold;
   padding: 5px 45px;
   font-size: 14px;
 }
@@ -147,33 +147,33 @@ cursor: pointer;
   vertical-align: middle;
 }
 
-.td.player .follow-link, .buy-link {
-	letter-spacing: 2px;
-	font-weight: 400;
-	font-size: 12px;
+.td.player .follow-link,.td.player .buy-link {
+  letter-spacing: 2px;
+  font-weight: 400;
+  font-size: 12px;
 }
 
 .td.player .current-song-info {
   font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
   font-weight: 300;
-	font-size: 12px;
+  font-size: 12px;
   text-align: center;
-	padding-top: 1rem;
-	padding-bottom: 1.0625rem;
+  padding-top: 1rem;
+  padding-bottom: 1.0625rem;
 }
 
 .td.player .current-song-social-icon {
-	font-size: 12px;
+  font-size: 12px;
 }
 
 .td.player .controls {
-	padding: 10px;
+  padding: 10px;
   border-top: 1px solid;
   border-bottom: 1px solid;
 }
 
 .td.player .player-prev {
-	font-size: 36px;
+  font-size: 36px;
   line-height: 50px !important;
   vertical-align: top;
   opacity: 0.8;
@@ -183,7 +183,7 @@ cursor: pointer;
 }
 
 .td.player .player-prev:hover {
-	opacity: 1; 
+  opacity: 1; 
   -webkit-transform: translateX(-5px);
     transform: translateX(-5px);
 
@@ -203,12 +203,12 @@ cursor: pointer;
 }
 
 .td.player .fa-play-circle-o:hover {
-	opacity: 1;
+  opacity: 1;
   font-size: 48px;
 }
 
 .td.player .player-next {
-	font-size: 36px;
+  font-size: 36px;
   line-height: 50px !important;
   vertical-align: top;
   opacity: 0.8;
@@ -218,7 +218,7 @@ cursor: pointer;
 }
 
 .td.player .player-next:hover {
-	opacity: 1;
+  opacity: 1;
   -webkit-transform: translateX(5px);
     transform: translateX(5px);
 }
@@ -269,19 +269,19 @@ cursor: pointer;
   border: 1px solid;
 }
 
-.td.player .start-time, .stop-time {
+.td.player .start-time,.td.player .stop-time {
   font-size: 12px;
   text-align: center;
 }
 
 .td.player .playlist-social-icon {
-	font-size: 12px;
+  font-size: 12px;
 }
 
 .td.player .title {
-	border-left: 1px solid;
-	margin-left: 40px;
-	height: 40px;
+  border-left: 1px solid;
+  margin-left: 40px;
+  height: 40px;
 }
 
 .td.player .track-info-social {
@@ -290,38 +290,38 @@ cursor: pointer;
 }
 
 .td.player .track-user, .track-title {
-	font-size: 12px;
-	display: inline-block;
-	margin: 14px 10px;
+  font-size: 12px;
+  display: inline-block;
+  margin: 14px 10px;
 }
 
 .td.player .track-title {
-	font-weight: bold;
+  font-weight: bold;
 }
 
 .td.player .playlist {
-	font-size: 12px;
+  font-size: 12px;
   max-height: 150px;
   overflow: scroll
 }
 
 .td.player .playlist-table {
-	width: 100%;
+  width: 100%;
 }
 
 .td.player .playlist-table tr {
-	cursor: pointer;
-	opacity: 0.5;
+  cursor: pointer;
+  opacity: 0.5;
 }
 
 .td.player .playlist-table tbody tr:hover {
-	cursor: pointer;
-	opacity: 1;
+  cursor: pointer;
+  opacity: 1;
   border-bottom: 1px solid;
 }
 
 .td.player .current-play-icon {
-	font-size: 14px;
+  font-size: 14px;
 }
 
 .td.player .playlist-table {
@@ -330,7 +330,7 @@ cursor: pointer;
 }
 
 .td.player .playlist-table tbody tr.playing {
-	opacity: 1;
+  opacity: 1;
 }
 
 .td.player .playlist-table tbody tr td {
@@ -559,6 +559,94 @@ cursor: pointer;
 .td.player.solo .solo-container-small {
   border-bottom: 1px solid;
 }
+
+.td.player.shrink .cover .cover-img img {
+  max-height: 80px;
+  margin: 10px 0px;
+}
+
+.td.player.shrink .info {
+  font-size: 12px;
+  padding: 0px 45px;
+}
+
+.td.player.shrink .song-name {
+  font-size: 12px;
+}
+
+.td.player.shrink .artist-name {
+  margin: 5px 0;
+}
+
+.td.player.shrink .tdbutton {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.td.player.shrink .buy-link, .td.player.shrink .follow-link {
+  font-size: 10px;
+}
+
+.td.player.shrink .soundcloud-icon {
+  height: 12px;
+  width: 14px;
+  background-size: 14px;
+}
+
+.td.player.shrink .current-song-info {
+  font-size: 10px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.td.player.shrink .controls {
+  padding:0px;
+}
+
+.td.player .player-prev,
+.td.player .player-next{
+  font-size: 24px;
+}
+
+.td.player.shrink .fa-play-circle-o{
+  font-size: 32px;
+}
+
+.td.player.shrink .fa-play-circle-o:hover{
+  font-size: 38px;
+}
+
+.td.player.shrink .scrubber {
+  line-height: 40px;
+  padding:0px 10px;
+}
+
+.td.player.shrink .stop-time, .td.player.shrink .start-time {
+  font-size: 10px;
+}
+
+.td.player.shrink .scrub-bar-box {
+  padding: 20px 0px;
+}
+
+.td.player.shrink .playlist {
+  font-size: 12px;
+  max-height: 85px;
+}
+
+.td.player.shrink .playlist-table tbody tr td {
+  font-size: 10px;
+  padding: 5px 10px;
+}
+
+.td.player.shrink .current-play-icon {
+  font-size: 12px;
+}
+
+.td.player.shrink .playlist-social-icon {
+  font-size: 10px;
+}
+
 /*Animations*/
 @-webkit-keyframes fadeIn {
   0% {
@@ -736,7 +824,7 @@ cursor: pointer;
     }
 
 @media only screen {
-	.tdcolumn.tdsmall-centered,
+  .tdcolumn.tdsmall-centered,
   .tdcolumns.tdsmall-centered {
     margin-left: auto;
     margin-right: auto;
@@ -940,4 +1028,4 @@ cursor: pointer;
     display: none;
   } 
 
-  }
+}
