@@ -28481,6 +28481,7 @@ ToneDen.define('player',['jquery', 'vendor/simple-slider', 'underscore', 'vendor
             var trackLoadedValue = null;
             var trackPlayingValue = null;
             var trackReady = false;
+            var trackSuspend = false;
 
             // Helper functions.
             function log(message, level) {
@@ -28737,9 +28738,13 @@ ToneDen.define('player',['jquery', 'vendor/simple-slider', 'underscore', 'vendor
             playerInstance.on('scplayer.track.whileloading', function(e, percent) {
                 // log('Loaded: ' + percent + '%');
                 trackLoadedValue = percent;
-                console.log(trackLoadedValue);
 
                 container.find('.buffer').css('width', percent + '%');
+
+                if((trackLoadedValue > trackPlayingValue) && trackSuspend == true) {
+                    playerInstance.pause();
+                    trackSuspend = false;
+                }
             });
 
             playerInstance.on('scplayer.track.whileplaying', function(e, percent, eqData) {
@@ -28767,11 +28772,11 @@ ToneDen.define('player',['jquery', 'vendor/simple-slider', 'underscore', 'vendor
 
                 currentRatio = ratio;
                 currentTimeIn = timeIn;
-                console.log(trackPlayingValue);
 
-                if(trackLoadedValue == trackPlayingValue || !eqData) {
+                if((trackLoadedValue == trackPlayingValue) || !eqData) {
                     playerInstance.pause();
-                }
+                    trackSuspend = true;
+                }            
             });
 
             playerInstance.on('scplayer.playlist.preloaded', function(e) {
