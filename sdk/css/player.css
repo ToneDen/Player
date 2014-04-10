@@ -612,6 +612,10 @@ cursor: pointer;
   font-size: 32px;
 }
 
+.td.player.shrink .fa.pause {
+  font-size: 24px;
+}
+
 .td.player.shrink .fa-play-circle-o:hover{
   font-size: 38px;
 }
