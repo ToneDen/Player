@@ -872,7 +872,8 @@ cursor: pointer;
       text-align: left; }
   .td.player table tr th,
   .td.player table tr td {
-    padding: 0.5625rem 0.625rem; }
+    padding: 0.5625rem 0.625rem;
+    color: inherit; }
   .td.player table tr.even, .td.player table tr.alt, .td.player table tr:nth-of-type(even) {
     background: none;
   }
