@@ -104,6 +104,8 @@ API
 **Player Instance**
 * **.destroy()**  
   Destroys the given player instance and clears the containing element's HTML.  
+* **id**
+  Randomly generated ID, unique to the player instance.
 * **.pause()**  
   Pauses the track being played by the player.  
 * **.parameters**  
