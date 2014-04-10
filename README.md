@@ -112,8 +112,6 @@ API
   The parameters object that the player is using.  
 * **.play()**  
   Play the currently selected track.  
-* **.togglePause()**  
-  Toggle the play state of the current track.
 
 Development
 ===

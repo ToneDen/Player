@@ -333,7 +333,7 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-player', 'ven
             });
 
             playerInstance.on('scplayer.track.whileplaying', function(e, percent, eqData) {
-                if(parameters.visualizerType) {
+                if(parameters.visualizerType && typeof(eqData[0]) === 'number' && !isNaN(eqData[0])) {
                     drawEQ(eqData);
                 }
 
@@ -418,17 +418,12 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-player', 'ven
                 playerInstance.play();
             }
 
-            function togglePause() {
-                playerInstance.togglePause();
-            }
-
             player = {
                 destroy: destroy,
                 id: playerID,
                 pause: pause,
                 parameters: parameters,
-                play: play,
-                togglePause: togglePause
+                play: play
             };
 
             ToneDen.players.push(player);

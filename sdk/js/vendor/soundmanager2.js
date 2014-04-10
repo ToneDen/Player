@@ -3122,7 +3122,10 @@ function SoundManager(smURL, smID) {
         if(window.AudioProcessingEvent && contextClass){
             //Webkit and WebAudio API
           
-            s._useAdvancedHTML5 = true;
+            if(!mobileHTML5) {
+                s._useAdvancedHTML5 = true;
+            }
+
             if(navigator.userAgent.toLowerCase().indexOf('firefox') > -1) {
               s._useMoz = true;
             }
