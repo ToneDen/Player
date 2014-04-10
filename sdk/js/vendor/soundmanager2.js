@@ -3974,7 +3974,7 @@ function SoundManager(smURL, smID) {
       if(s._useAdvancedHTML5){
         // Firefox fails due to cross-origin checks when attempting to get the
         // waveform.
-        if(s._useMoz){
+        if(s._useMoz || mobileHTML5){
             s._useAdvancedHTML5 = false;
         } else {
             s._create_WebAudio_Waveform_Parser();

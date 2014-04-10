@@ -3,10 +3,18 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-player', 'ven
         create: function(urls, dom, options) {
             ToneDen.players = ToneDen.players || [];
 
+            var container;
+            var currentRatio;
+            var currentTimeIn;
+            var dom;
+            var parameters;
             var player;
+            var playerID = randomID();
+            var playerParameters;
+            var urls;
 
             // Default parameters go here.
-            var parameters = {
+            parameters = {
                 debug: false, // Output debug messages?
                 keyboardEvents: false, // Should we listen to keyboard events?
                 single: false,
@@ -44,7 +52,8 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-player', 'ven
             }
 
             // Parameters for the SoundCloud player.
-            var playerParameters = {
+            playerParameters = {
+                cachePrefix: playerID,
                 consumerKey: '6f85bdf51b0a19b7ab2df7b969233901',
                 debug: parameters.debug,
                 preload: true,
@@ -52,13 +61,21 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-player', 'ven
                 tracksPerArtist: parameters.tracksPerArtist
             }
 
-            var dom = parameters.dom;
-            var urls = parameters.urls;
-            var container = $(dom);
-            var currentRatio = null;
-            var currentTimeIn = null;
+            dom = parameters.dom;
+            urls = parameters.urls;
+            container = $(dom);
+            currentRatio = null;
+            currentTimeIn = null;
 
             // Helper functions.
+            function randomID() {
+                var S4 = function() {
+                   return (((1+Math.random())*0x10000)|0).toString(16).substring(1);
+                };
+
+                return (S4()+S4()+"-"+S4()+"-"+S4()+"-"+S4()+"-"+S4()+S4()+S4());
+            }
+
             function log(message, level) {
                 // Level can be debug or error.
                 if(window.console) {
@@ -407,6 +424,7 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-player', 'ven
 
             player = {
                 destroy: destroy,
+                id: playerID,
                 pause: pause,
                 parameters: parameters,
                 play: play,

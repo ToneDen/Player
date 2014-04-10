@@ -8039,7 +8039,7 @@ function SoundManager(smURL, smID) {
       if(s._useAdvancedHTML5){
         // Firefox fails due to cross-origin checks when attempting to get the
         // waveform.
-        if(s._useMoz){
+        if(s._useMoz || mobileHTML5){
             s._useAdvancedHTML5 = false;
         } else {
             s._create_WebAudio_Waveform_Parser();
@@ -19649,6 +19649,7 @@ ToneDen.define('vendor/sc-player',['vendor/soundmanager2', 'jquery', 'vendor/d3'
             autoplay: false,
             autoswitch: true, // For playlists
             cache: true, // Caches the SC track lookup. Browser should handle the audio
+            cachePrefix: '', // Prefix to add to cache URLs
             debug: false,
             loop: false,
             preload: false, // Prefetch the sc track data
@@ -20074,13 +20075,13 @@ ToneDen.define('vendor/sc-player',['vendor/soundmanager2', 'jquery', 'vendor/d3'
 
         self.setCache = function(url, track) {
             if(self.config.cache === true) {
-                self.cache[url] = track;
+                self.cache[self.config.cachePrefix + url] = track;
             }
         };
 
         self.getCache = function(url) {
             if(self.config.cache === true) {
-                return self.cache[url] || null;
+                return self.cache[self.config.cachePrefix + url] || null;
             }
 
             return null;
@@ -20114,7 +20115,7 @@ ToneDen.define('vendor/sc-player',['vendor/soundmanager2', 'jquery', 'vendor/d3'
                 flashVersion: 9,
                 autoLoad: true,
                 useHighPerformance: false,
-                id: 'track_' + track.id,
+                id: 'track_' + track.id + self.config.cachePrefix,
                 multiShot: false,
                 loops: 1,
                 url: url,
@@ -20173,7 +20174,7 @@ ToneDen.define('vendor/sc-player',['vendor/soundmanager2', 'jquery', 'vendor/d3'
                     self.trigger('scplayer.track.ready', self.currentTrackIndex, self.currentTrack);
                 }
             });
-        
+
             self.trigger('scplayer.track.bindable', track, self.sound);
         };
 
@@ -28424,10 +28425,18 @@ ToneDen.define('player',['jquery', 'vendor/simple-slider', 'underscore', 'vendor
         create: function(urls, dom, options) {
             ToneDen.players = ToneDen.players || [];
 
+            var container;
+            var currentRatio;
+            var currentTimeIn;
+            var dom;
+            var parameters;
             var player;
+            var playerID = randomID();
+            var playerParameters;
+            var urls;
 
             // Default parameters go here.
-            var parameters = {
+            parameters = {
                 debug: false, // Output debug messages?
                 keyboardEvents: false, // Should we listen to keyboard events?
                 single: false,
@@ -28465,7 +28474,8 @@ ToneDen.define('player',['jquery', 'vendor/simple-slider', 'underscore', 'vendor
             }
 
             // Parameters for the SoundCloud player.
-            var playerParameters = {
+            playerParameters = {
+                cachePrefix: playerID,
                 consumerKey: '6f85bdf51b0a19b7ab2df7b969233901',
                 debug: parameters.debug,
                 preload: true,
@@ -28473,13 +28483,21 @@ ToneDen.define('player',['jquery', 'vendor/simple-slider', 'underscore', 'vendor
                 tracksPerArtist: parameters.tracksPerArtist
             }
 
-            var dom = parameters.dom;
-            var urls = parameters.urls;
-            var container = $(dom);
-            var currentRatio = null;
-            var currentTimeIn = null;
+            dom = parameters.dom;
+            urls = parameters.urls;
+            container = $(dom);
+            currentRatio = null;
+            currentTimeIn = null;
 
             // Helper functions.
+            function randomID() {
+                var S4 = function() {
+                   return (((1+Math.random())*0x10000)|0).toString(16).substring(1);
+                };
+
+                return (S4()+S4()+"-"+S4()+"-"+S4()+"-"+S4()+"-"+S4()+S4()+S4());
+            }
+
             function log(message, level) {
                 // Level can be debug or error.
                 if(window.console) {
@@ -28828,6 +28846,7 @@ ToneDen.define('player',['jquery', 'vendor/simple-slider', 'underscore', 'vendor
 
             player = {
                 destroy: destroy,
+                id: playerID,
                 pause: pause,
                 parameters: parameters,
                 play: play,

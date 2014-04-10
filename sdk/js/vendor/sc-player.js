@@ -65,6 +65,7 @@ define(['vendor/soundmanager2', 'jquery', 'vendor/d3'], function(soundManager, j
             autoplay: false,
             autoswitch: true, // For playlists
             cache: true, // Caches the SC track lookup. Browser should handle the audio
+            cachePrefix: '', // Prefix to add to cache URLs
             debug: false,
             loop: false,
             preload: false, // Prefetch the sc track data
@@ -490,13 +491,13 @@ define(['vendor/soundmanager2', 'jquery', 'vendor/d3'], function(soundManager, j
 
         self.setCache = function(url, track) {
             if(self.config.cache === true) {
-                self.cache[url] = track;
+                self.cache[self.config.cachePrefix + url] = track;
             }
         };
 
         self.getCache = function(url) {
             if(self.config.cache === true) {
-                return self.cache[url] || null;
+                return self.cache[self.config.cachePrefix + url] || null;
             }
 
             return null;
@@ -530,7 +531,7 @@ define(['vendor/soundmanager2', 'jquery', 'vendor/d3'], function(soundManager, j
                 flashVersion: 9,
                 autoLoad: true,
                 useHighPerformance: false,
-                id: 'track_' + track.id,
+                id: 'track_' + track.id + self.config.cachePrefix,
                 multiShot: false,
                 loops: 1,
                 url: url,
@@ -589,7 +590,7 @@ define(['vendor/soundmanager2', 'jquery', 'vendor/d3'], function(soundManager, j
                     self.trigger('scplayer.track.ready', self.currentTrackIndex, self.currentTrack);
                 }
             });
-        
+
             self.trigger('scplayer.track.bindable', track, self.sound);
         };
 

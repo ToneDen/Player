@@ -1,5 +1,6 @@
 require.config({
-    namespace: 'ToneDen'
+    namespace: 'ToneDen',
+    waitSeconds: 0
 });
 
 // Web setup. Makes ToneDen a global variable.
