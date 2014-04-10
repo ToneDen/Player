@@ -57,6 +57,9 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-player', 'ven
             var container = $(dom);
             var currentRatio = null;
             var currentTimeIn = null;
+            var trackLoadedValue = null;
+            var trackPlayingValue = null;
+            var trackReady = false;
 
             // Helper functions.
             function log(message, level) {
@@ -312,6 +315,9 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-player', 'ven
 
             playerInstance.on('scplayer.track.whileloading', function(e, percent) {
                 // log('Loaded: ' + percent + '%');
+                trackLoadedValue = percent;
+                console.log(trackLoadedValue);
+
                 container.find('.buffer').css('width', percent + '%');
             });
 
@@ -323,7 +329,7 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-player', 'ven
                 var ratio = percent / 100;
                 var timeIn = msToTimestamp(playerInstance.position());
                 var timeLeft = msToTimestamp(playerInstance.track().duration - playerInstance.position());
-
+                trackPlayingValue = Math.round(percent);
                 // Round ratio to the nearest 3 decimal points.
                 ratio = ratio.toFixed(3);
 
@@ -340,6 +346,11 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-player', 'ven
 
                 currentRatio = ratio;
                 currentTimeIn = timeIn;
+                console.log(trackPlayingValue);
+
+                if(trackLoadedValue == trackPlayingValue || !eqData) {
+                    playerInstance.pause();
+                }
             });
 
             playerInstance.on('scplayer.playlist.preloaded', function(e) {
@@ -362,6 +373,10 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-player', 'ven
                         single: parameters.single
                     });
                 });
+            });
+
+            playerInstance.on('scplayer.track.ready', function(e) {
+                trackReady = true;
             });
 
             playerInstance.on('scplayer.changing_track', function(e, trackIndex) {

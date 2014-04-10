@@ -19651,7 +19651,7 @@ ToneDen.define('vendor/sc-player',['vendor/soundmanager2', 'jquery', 'vendor/d3'
             cache: true, // Caches the SC track lookup. Browser should handle the audio
             debug: false,
             loop: false,
-            preload: false, // Prefetch the sc track data
+            preload: true, // Prefetch the sc track data
             startOn: 0,
             togglePause: true, //Should pause act as a toggle?
             tracksPerArtist: 5, // When given an artist URL, how many tracks to load?
@@ -28478,6 +28478,9 @@ ToneDen.define('player',['jquery', 'vendor/simple-slider', 'underscore', 'vendor
             var container = $(dom);
             var currentRatio = null;
             var currentTimeIn = null;
+            var trackLoadedValue = null;
+            var trackPlayingValue = null;
+            var trackReady = false;
 
             // Helper functions.
             function log(message, level) {
@@ -28733,6 +28736,9 @@ ToneDen.define('player',['jquery', 'vendor/simple-slider', 'underscore', 'vendor
 
             playerInstance.on('scplayer.track.whileloading', function(e, percent) {
                 // log('Loaded: ' + percent + '%');
+                trackLoadedValue = percent;
+                console.log(trackLoadedValue);
+
                 container.find('.buffer').css('width', percent + '%');
             });
 
@@ -28744,7 +28750,7 @@ ToneDen.define('player',['jquery', 'vendor/simple-slider', 'underscore', 'vendor
                 var ratio = percent / 100;
                 var timeIn = msToTimestamp(playerInstance.position());
                 var timeLeft = msToTimestamp(playerInstance.track().duration - playerInstance.position());
-
+                trackPlayingValue = Math.round(percent);
                 // Round ratio to the nearest 3 decimal points.
                 ratio = ratio.toFixed(3);
 
@@ -28761,6 +28767,11 @@ ToneDen.define('player',['jquery', 'vendor/simple-slider', 'underscore', 'vendor
 
                 currentRatio = ratio;
                 currentTimeIn = timeIn;
+                console.log(trackPlayingValue);
+
+                if(trackLoadedValue == trackPlayingValue || !eqData) {
+                    playerInstance.pause();
+                }
             });
 
             playerInstance.on('scplayer.playlist.preloaded', function(e) {
@@ -28783,6 +28794,10 @@ ToneDen.define('player',['jquery', 'vendor/simple-slider', 'underscore', 'vendor
                         single: parameters.single
                     });
                 });
+            });
+
+            playerInstance.on('scplayer.track.ready', function(e) {
+                trackReady = true;
             });
 
             playerInstance.on('scplayer.changing_track', function(e, trackIndex) {
