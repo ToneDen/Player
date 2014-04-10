@@ -34,7 +34,7 @@
                 ToneDenReady = window.ToneDenReady || [];
                 ToneDenReady.push(function() {
                     ToneDen.player.create({
-                        debug: false,
+                        debug: true,
                         dom: '#player',
                         keyboardEvents: false,
                         urls: [
@@ -43,6 +43,17 @@
                         skin: 'light',
                         staticUrl: '//widget.dev/sdk/',
                         tracksPerArtist: 4,
+                        visualizerType: 'waves'
+                    });
+                    ToneDen.player.create({
+                        debug: false,
+                        dom: '#single-player-demo',
+                        keyboardEvents: false,
+                        urls: [
+                            'https://soundcloud.com/flume/sintra'
+                        ],
+                        skin: 'light',
+                        staticUrl: '//widget.dev/sdk/',
                         visualizerType: 'waves'
                     });
                 });
@@ -100,9 +111,25 @@
                     <p>Check out the <a href="https://github.com/ToneDen/tonedenplayer">documentation</a> for a full list of the config parameters and defaults.</p>
                 </div>
                 <div class="doc-sec large-10 small-12 columns large-centered">
+                    <h3>Single Track Players:</h3>
+                    <p>If you want to feature a single track instead of a playlist, the player will automatically default to the single player below if a single track url is provided.</p>
+                    <p>You can also set <code>tracksPerArtist: 1</code> to force a single track to play for an artist url.</p>
+                    <p><em>Example:</em></p>
+                    <pre><code class="javascript">
+ ToneDen.player.create({
+    dom: '#player',
+    urls: [
+        'https://soundcloud.com/flume/sintra'
+    ]
+});
+                    </code></pre>
+                    <p><em>Demo:</em></p>
+                    <div id="single-player-demo"></div>
+                </div>
+                <div class="doc-sec large-10 small-12 columns large-centered">
                     <h3>Multiple Players:</h3>
                     <p>You can create as many players as you like by pushing multiple <code>ToneDen.player</code> objects to <code>ToneDenReady</code>.</p>
-                    <p>Example:</p>
+                    <p><em>Example:</em></p>
                     <pre><code class="javascript">
 ToneDenReady.push(function() {
         ToneDen.player.create({
