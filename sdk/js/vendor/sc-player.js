@@ -827,8 +827,8 @@ define(['vendor/soundmanager2', 'jquery', 'vendor/d3'], function(soundManager, j
             self.log('track.onready!!!');
 
             if(self.playWhenReady == true) {
-                self.play();
                 self.playWhenReady = false;
+                self.play();
             }
         });
 
