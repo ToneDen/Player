@@ -323,6 +323,7 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-player', 'ven
                 if((trackLoadedValue > trackPlayingValue) && trackSuspend == true) {
                     playerInstance.pause();
                     trackSuspend = false;
+                    container.find('.tdloader').fadeOut();
                 }
             });
 
@@ -355,6 +356,7 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-player', 'ven
                 if((trackLoadedValue == trackPlayingValue) || !eqData) {
                     playerInstance.pause();
                     trackSuspend = true;
+                    container.find('.tdloader').fadeIn();
                 }            
             });
 

@@ -472,3 +472,19 @@
 .player.mojave .tdspinner > div {
   background: white;
 }
+
+.player.light .tdloader {
+  color: #333;
+}
+
+.player.dark .tdloader {
+  color: white ;
+}
+
+.player.aurora .tdloader {
+  color: white ;
+}
+
+.player.mojave .tdloader {
+  color: white;
+}
