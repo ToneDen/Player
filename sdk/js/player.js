@@ -13,6 +13,7 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-player', 'ven
                 skin: 'light',
                 staticUrl: '//d27qmwyi8yof1p.cloudfront.net/',
                 tracksPerArtist: 4, // How many tracks to load when given an artist SoundCloud URL.
+                visualizer: true,
                 visualizerType: 'waves', // Equalizer type. 'waves' or 'bars'
             };
 
@@ -36,11 +37,11 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-player', 'ven
 
             // Visualizer is currently only supported in Chrome.
             if(navigator.userAgent.toLowerCase().indexOf('chrome') === -1) {
-                parameters.visualizerType = false;
+                parameters.visualizer = false;
             }
 
             if(parameters.visualizerType === 'none') {
-                parameters.visualizerType = false;
+                parameters.visualizer = false;
             }
 
             // Parameters for the SoundCloud player.
@@ -49,7 +50,8 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-player', 'ven
                 debug: parameters.debug,
                 preload: true,
                 togglePause: true,
-                tracksPerArtist: parameters.tracksPerArtist
+                tracksPerArtist: parameters.tracksPerArtist,
+                visualizer: parameters.visualizer
             }
 
             var dom = parameters.dom;
@@ -232,7 +234,6 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-player', 'ven
                     skin: parameters.skin,
                     eq: parameters.eq,
                     tracksPerArtist: parameters.tracksPerArtist,
-                    visualizer: parameters.visualizer
                 });
             } else {
                 log('ToneDen Player: the container specified does not exist.', 'error');
@@ -328,7 +329,7 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-player', 'ven
             });
 
             playerInstance.on('scplayer.track.whileplaying', function(e, percent, eqData) {
-                if(parameters.visualizerType && typeof(eqData[0]) === 'number' && !isNaN(eqData[0])) {
+                if(parameters.visualizer == true && typeof(eqData[0]) === 'number' && !isNaN(eqData[0])) {
                     drawEQ(eqData);
                 }
 

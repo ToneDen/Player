@@ -548,19 +548,21 @@ define(['vendor/soundmanager2', 'jquery', 'vendor/d3'], function(soundManager, j
                 },
                 whileplaying: function() {
                     eqBarValues = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
-    
-                    var b1 = 0, b2 = 0, b3 = 0, b4 = 0;
-                    for (var i=0;i<256;i++){
-                        if (i < 64)
-                            b1 += this.eqData.left[i];
-                        else if (i < 128)
-                            b2 += this.eqData.left[i];
-                        else if (i < 192)
-                            b3 += this.eqData.left[i];
-                        else
-                            b4 += this.eqData.left[i];
-                
-                        eqBarValues[(i/eqBarInterval)>>0] += this.eqData.left[i];
+                    
+                    if(self.config.visualizer == true && this.eqData.left) {
+                        var b1 = 0, b2 = 0, b3 = 0, b4 = 0;
+                        for (var i=0;i<256;i++){
+                            if (i < 64)
+                                b1 += this.eqData.left[i];
+                            else if (i < 128)
+                                b2 += this.eqData.left[i];
+                            else if (i < 192)
+                                b3 += this.eqData.left[i];
+                            else
+                                b4 += this.eqData.left[i];
+                    
+                            eqBarValues[(i/eqBarInterval)>>0] += this.eqData.left[i];
+                        }
                     }
 
                     var reverseEqBarValues = eqBarValues.slice().reverse();
