@@ -827,6 +827,11 @@ cursor: pointer;
       }
     }
 
+.tdloader {
+  font-size: 12px;
+  display: none;
+}
+
 @media only screen {
   .tdcolumn.tdsmall-centered,
   .tdcolumns.tdsmall-centered {

@@ -30,7 +30,7 @@ Player
 
 A pure JS customizable audio player for your SoundCloud. 
 
-JS API, responsive, customizable.
+JS API, responsive, customizable. Demo at https://toneden.io/player.
 
 ![alt tag](https://raw.github.com/tim-thimmaiah/tonedenplayer/master/mockupv1.png)
 
@@ -176,7 +176,7 @@ License
 
 The MIT License (MIT)
 
-Copyright (c) [2014] [ToneDen]
+Copyright (c) 2014 ToneDen, Inc
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of
 this software and associated documentation files (the "Software"), to deal in

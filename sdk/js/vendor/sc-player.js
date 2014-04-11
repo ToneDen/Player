@@ -68,7 +68,7 @@ define(['vendor/soundmanager2', 'jquery', 'vendor/d3'], function(soundManager, j
             cachePrefix: '', // Prefix to add to cache URLs
             debug: false,
             loop: false,
-            preload: false, // Prefetch the sc track data
+            preload: true, // Prefetch the sc track data
             startOn: 0,
             togglePause: true, //Should pause act as a toggle?
             tracksPerArtist: 5, // When given an artist URL, how many tracks to load?
