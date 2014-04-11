@@ -112,6 +112,8 @@ API
   The parameters object that the player is using.  
 * **.play()**  
   Play the currently selected track.  
+* **.togglePause()**  
+  Toggle the play state of the current track.
 
 Development
 ===
@@ -170,6 +172,11 @@ The sdk/ directory contains all the good stuff. The file toneden.js is the hub o
 It loads all the functions of the SDK (currently only the player) as dependencies,
 and returns them so that they can be attached to the global ToneDen object.
 The other important function of toneden.js is to grab the CSS that has been minified and concatenated by Grunt and insert it into the page as a `<style>` element.
+
+Questions?
+===
+
+You can contact us on GitHub or on Twitter: [@tonedenmusic](https://twitter.com/tonedenmusic)
 
 License
 ===
