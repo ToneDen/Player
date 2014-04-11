@@ -354,9 +354,11 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-player', 'ven
                 currentTimeIn = timeIn;
 
                 if((trackLoadedValue == trackPlayingValue) || !eqData) {
-                    playerInstance.pause();
-                    trackSuspend = true;
-                    container.find('.tdloader').fadeIn();
+                    if(trackPlayingValue != 100) {
+                        playerInstance.pause();
+                        trackSuspend = true;
+                        container.find('.tdloader').fadeIn();
+                    }
                 }            
             });
 
