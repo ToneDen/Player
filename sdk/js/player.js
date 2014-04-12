@@ -106,7 +106,7 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-player', 'ven
                         container.find(".track-info-stats").hide();
                     }
 
-                    if(container.height()<400) {
+                    if(container.height()<500) {
                         container.find(".player").addClass("shrink");
                     }
                 }
