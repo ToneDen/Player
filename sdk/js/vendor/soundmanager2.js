@@ -2808,22 +2808,26 @@ function SoundManager(smURL, smID) {
       var channels, resolution;
       channels = s._channels = e.inputBuffer.numberOfChannels;
 
-      s._waveformLeft = e.inputBuffer.getChannelData(0);
-      if(s.instanceOptions.useEQData){
-        s._fftLeft.forward(s._waveformLeft);
-        // s._frequencyData = new Uint8Array(s._analyser.frequencyBinCount);
-        // s._analyser.getByteFrequencyData(s._frequencyData);
-      }
-
-      if(channels > 1){
-        s._waveformRight = e.inputBuffer.getChannelData(1);
+      if(e && e.inputBuffer && e.inputBuffer.getChannelData(0)) {
+        s._waveformLeft = e.inputBuffer.getChannelData(0);
+        
         if(s.instanceOptions.useEQData){
-          s._fftRight = s._fftRightO;
-          s._fftRight.forward(s._waveformRight);
+          s._fftLeft.forward(s._waveformLeft);
+          // webAudio API frequency data
+          // s._frequencyData = new Uint8Array(s._analyser.frequencyBinCount);
+          // s._analyser.getByteFrequencyData(s._frequencyData);
         }
-      } else {
-        s._waveformRight = s._waveformLeft;
-        s._fftRight = s._fftLeft;
+
+        if(channels > 1){
+          s._waveformRight = e.inputBuffer.getChannelData(1);
+          if(s.instanceOptions.useEQData){
+            s._fftRight = s._fftRightO;
+            s._fftRight.forward(s._waveformRight);
+          }
+        } else {
+          s._waveformRight = s._waveformLeft;
+          s._fftRight = s._fftLeft;
+        }
       }
 
       s._onTimer(true);
