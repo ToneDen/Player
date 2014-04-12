@@ -5536,6 +5536,8 @@ function SoundManager(smURL, smID) {
     this._fbLength;
     this._sample_size;
     this._sample_rate;
+    this._analyser;
+    this._frequencyData;
 
     lastHTML5State = {
       // tracks duration + position (time)
@@ -6832,6 +6834,8 @@ function SoundManager(smURL, smID) {
       s.eqData.left = [];
       s.eqData.right = [];
 
+      s.frequencyData = [];
+
       s.failures = 0;
       s.isBuffering = false;
       s.instanceOptions = {};
@@ -6863,7 +6867,8 @@ function SoundManager(smURL, smID) {
     };
 
     var audioProcessEvent = function ( e ) {
-      if(s.paused) return;
+      if(s.paused || s.playState === 0) return;
+      console.log("processing");
       // When we're processing some data through the HTML WebAudio API
       var buffers = [];
       var channels, resolution;
@@ -6872,6 +6877,8 @@ function SoundManager(smURL, smID) {
       s._waveformLeft = e.inputBuffer.getChannelData(0);
       if(s.instanceOptions.useEQData){
         s._fftLeft.forward(s._waveformLeft);
+        // s._frequencyData = new Uint8Array(s._analyser.frequencyBinCount);
+        // s._analyser.getByteFrequencyData(s._frequencyData);
       }
 
       if(channels > 1){
@@ -6917,19 +6924,17 @@ function SoundManager(smURL, smID) {
 
         source.connect( context.destination );
 
-        proc.onaudioprocess = audioProcessEvent; 
+        proc.onaudioprocess = audioProcessEvent;   
 
         s._fftLeft = new dsp.FFT( s._sample_size / 2, s._sample_rate );
         s._fftRight = s._fftRightO = new dsp.FFT( s._sample_size / 2, s._sample_rate );
 
-        // var source = s._sourceNode = context.createMediaElementSource( s._a );
-        // var analyser = (s._analyser || context.createAnalyser() );
-        // analyser.smoothingTimeConstant = 0.8;
-        // analyser.fftSize = 512;
-        // source.connect( context.destination );
-        // s.fftLeft = new Uint8Array(analyser.frequencyBinCount);
-        // analyser.getByteFrequencyData(s._fftLeft);
-        // console.log(s.fftLeft);
+        // if(!s._analyser) {
+        //   s._analyser = context.createAnalyser();
+        // }
+        // s._analyser.smoothingTimeConstant = 0.8;
+        // source.connect(s._analyser);
+        // s._analyser.connect(context.destination);
       }
 
     };
@@ -6985,6 +6990,7 @@ function SoundManager(smURL, smID) {
       var waveformLeft = x;
       var waveformRight = x; 
       var eqData = x;
+      var frequencyData = x;
 
       if (s._hasTimer || bForce) {
 
@@ -7025,6 +7031,7 @@ function SoundManager(smURL, smID) {
                 }
                 if(s.instanceOptions.useEQData){
                     eqData = {leftEQ: s._fftLeft.spectrum};
+                    // frequencyData = s._frequencyData;
                 }
             }
             
@@ -7532,6 +7539,7 @@ function SoundManager(smURL, smID) {
           }
 
           s.eqData = {};
+          s.frequencyData = {};
           s.eqData.left = eqLeft;
           s.eqData.right= eqRight;
         }
@@ -20135,19 +20143,9 @@ ToneDen.define('vendor/sc-player',['vendor/soundmanager2', 'jquery', 'vendor/d3'
                 },
                 whileplaying: function() {
                     eqBarValues = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
-                    
-                    if(self.config.visualizer == true && this.eqData.left) {
-                        var b1 = 0, b2 = 0, b3 = 0, b4 = 0;
+
+                    if(self.config.visualizer == true && this.eqData) {
                         for (var i=0;i<256;i++){
-                            if (i < 64)
-                                b1 += this.eqData.left[i];
-                            else if (i < 128)
-                                b2 += this.eqData.left[i];
-                            else if (i < 192)
-                                b3 += this.eqData.left[i];
-                            else
-                                b4 += this.eqData.left[i];
-                    
                             eqBarValues[(i/eqBarInterval)>>0] += this.eqData.left[i];
                         }
                     }
