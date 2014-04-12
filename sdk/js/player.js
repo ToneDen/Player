@@ -89,7 +89,14 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-player', 'ven
 
                 if(parameters.single==true) {
                     container.html(template_solo(parameters));
-                    //container responsiveness  
+                    //container responsiveness
+                    if(parameters.tracks.length>1){
+                        container.find(".prev").show();
+                        container.find(".next").show();
+                    } else {
+                        container.find(".prev").hide();
+                        container.find(".next").hide();
+                    }
                      if(container.width()<500) {
                         container.find(".header").addClass("header-small").css("width", "100%");
                         container.find(".solo-container").addClass("solo-container-small").css("width", "100%").prependTo(container.find(".solo-buttons"));

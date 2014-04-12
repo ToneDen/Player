@@ -449,6 +449,7 @@ cursor: pointer;
 
 .td.player.solo .cover {
   position: relative;
+  z-index: inherit;
 }
 
 .td.player.solo .controls {
@@ -462,6 +463,7 @@ cursor: pointer;
   right: 0;
   margin: auto;
   padding: 0px;
+  z-index: 100;
 }
 
 .td.player.solo .solo-cover{
