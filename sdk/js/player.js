@@ -241,8 +241,7 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-player', 'ven
                     skin: parameters.skin,
                     eq: parameters.eq,
                     tracksPerArtist: parameters.tracksPerArtist,
-                });
-            } else {
+                });            } else {
                 log('ToneDen Player: the container specified does not exist.', 'error');
                 return;
             }

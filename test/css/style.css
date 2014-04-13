@@ -13,7 +13,9 @@ body {
 
 #player {
 	margin: 20px auto 0px;
+	height: 560px;
 }
+
 
 #player-banner {
   	font-family: 'Source Sans Pro', sans-serif;

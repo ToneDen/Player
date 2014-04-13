@@ -28669,8 +28669,7 @@ ToneDen.define('player',['jquery', 'vendor/simple-slider', 'underscore', 'vendor
                     skin: parameters.skin,
                     eq: parameters.eq,
                     tracksPerArtist: parameters.tracksPerArtist,
-                });
-            } else {
+                });            } else {
                 log('ToneDen Player: the container specified does not exist.', 'error');
                 return;
             }
