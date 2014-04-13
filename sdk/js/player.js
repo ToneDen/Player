@@ -15,7 +15,7 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-player', 'ven
                 tracksPerArtist: 4, // How many tracks to load when given an artist SoundCloud URL.
                 visualizer: true,
                 visualizerType: 'waves', // Equalizer type. 'waves' or 'bars'
-                mini: false
+                mini: false //Easter egg ;)
             };
 
             // Setup the parameters object with the given arguments and
@@ -103,7 +103,7 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-player', 'ven
                         container.find(".solo-container").addClass("solo-container-small").css("width", "100%").prependTo(container.find(".solo-buttons"));
                         container.find(".scrubber").hide();
                      }
-                } else if(parameters.mini=true) {
+                } else if(parameters.mini==true) {
                     container.html(template_mini(parameters));
                 } else {
                     container.html(template(parameters));
@@ -244,7 +244,10 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-player', 'ven
                     skin: parameters.skin,
                     eq: parameters.eq,
                     tracksPerArtist: parameters.tracksPerArtist,
-                });            } else {
+                    single: parameters.single,
+                    mini: parameters.mini
+                });            
+            } else {
                 log('ToneDen Player: the container specified does not exist.', 'error');
                 return;
             }
@@ -389,7 +392,8 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-player', 'ven
                         skin: parameters.skin,
                         tracksPerArtist: parameters.tracksPerArtist,
                         visualizerType: parameters.visualizerType,
-                        single: parameters.single
+                        single: parameters.single,
+                        mini: parameters.mini
                     });
                 });
             });
@@ -411,7 +415,8 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-player', 'ven
                         skin: parameters.skin,
                         tracksPerArtist: parameters.tracksPerArtist,
                         visualizerType: parameters.visualizerType,
-                        single: parameters.single
+                        single: parameters.single,
+                        mini: parameters.mini
                     });
                 });
             });
