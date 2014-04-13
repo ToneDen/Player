@@ -23,19 +23,19 @@
     border-color: #6D6C9A;
 }
 
-.player.light div {
+.player.light div, .player.light ul {
   border-color: #E4E4E4!important;
 }
 
-.player.dark div {
+.player.dark div, .player.dark ul {
   border-color: #333 !important;
 }
 
-.player.aurora div {
+.player.aurora div, .player.aurora ul {
     border-color: #1B4B4B !important;
 }
 
-.player.mojave div {
+.player.mojave div, .player.mojave ul {
     border-color: #6D6C9A !important;
 }
 

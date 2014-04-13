@@ -151,6 +151,7 @@ cursor: pointer;
   letter-spacing: 2px;
   font-weight: 400;
   font-size: 12px;
+  background: none;
 }
 
 .td.player .current-song-info {
@@ -541,6 +542,162 @@ cursor: pointer;
 .td.player.solo .current-song-social-icon {
   font-size: 10px;
 }
+
+/*Mini*/
+/*Mini*/
+.td.player.mini {
+  position: absolute;
+  width: 100%;
+  height:60px;
+}
+
+.td.player.mini.tdrow {
+  max-width: 100%;
+}
+
+.td.player.mini div {
+  display: inline-block;
+}
+
+.td.player.mini .cover {
+  max-height: 32px;
+  vertical-align: middle;
+  z-index: 1;
+  border-radius: 50px;
+}
+
+.td.player.mini .mini-controls {
+  line-height: 60px;
+  text-align: center;
+  padding:0px;
+  border-top: 0px;
+  border-bottom: 0px;
+}
+
+.td.player.mini .mini-buttons {
+  padding: 0px;
+}
+
+
+.td.player.mini .player-prev {
+  font-size: 21px;
+  margin: 0px 10px;
+  line-height: 60px !important;
+}
+
+.td.player.mini .player-play {
+  font-size: 32px;
+  width:initial;
+  line-height: 60px !important;
+}
+
+.td.player.mini .player-play:hover {
+  font-size: 38px;
+}
+
+.td.player.mini .fa-pause {
+  font-size: 22px;
+}
+
+.td.player.mini .fa-pause:hover {
+  font-size: 28px;
+}
+
+.td.player.mini .player-next {
+  font-size: 21px;
+  margin: 0px 10px;
+  line-height: 60px !important;
+}
+
+.td.player.mini .mini-info {
+  font-size: 12px;
+  display: table;
+  height: 100%;
+  box-sizing: border-box;
+  border-left: 1px solid;
+}
+
+.td.player.mini .mini-social {
+  list-style: none;
+  list-style-type: none;
+  font-size:12px;
+  text-align: center;
+  box-sizing: border-box;
+  border-left: 1px solid;
+}
+
+.td.player.mini .mini-scrubber {
+  padding: 0px 24px;
+  height: 100%;
+  border-left: 1px solid;
+  box-sizing: border-box;
+}
+
+.td.player.mini .mini-song-info {
+  display: inline-block;
+  display: table-cell;
+  vertical-align: middle;
+  float: none;
+  text-align: center;
+}
+
+.td.player.mini .slider {
+  padding-top: 10px;
+}
+
+.td.player.mini .scrubber-box {
+  padding: 24px 0px 0px;
+}
+
+.td.player.mini .scrub-bar-box {
+  padding: 0px;
+}
+
+.td.player.mini ul {
+  padding: 0px;
+  margin: 0px;
+  height: 100%;
+  display: table;
+}
+
+.td.player.mini li {
+  margin: 0px 10px;
+  display: table-cell;
+  vertical-align: middle;
+  height: 100%;
+}
+
+.td.player.mini .slider {
+  vertical-align: top;
+}
+
+.td.player.mini .mini-connect {
+  padding: 0px;
+}
+
+.td.player.mini .follow-link, .td.player.mini .buy-link {
+  line-height: 58px;
+  padding-top: 0px;
+  padding-bottom: 0px;
+  border-left:1px solid;
+  border-right: 0px;
+  box-sizing: border-box;
+  font-size: 10px;
+  letter-spacing: 1px;
+  margin-bottom: 0px;
+}
+
+.td.player.mini .soundcloud-icon {
+  vertical-align: inherit;
+}
+
+.td.player.mini .tdspinner {
+  margin: 15px auto;
+  position: absolute;
+  left: 0;
+  right: 0;
+}
+
 
 /*Container Responsiveness*/
 .td.player .follow-small, 
