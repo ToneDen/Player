@@ -44,7 +44,7 @@
                         staticUrl: '//widget.dev/sdk/',
                         tracksPerArtist: 4,
                         visualizerType: 'waves',
-                        mini:true
+                        single:true
                     });
                     ToneDen.player.create({
                         debug: false,
@@ -76,7 +76,7 @@
                 <div class="doc-sec large-10 small-12 columns large-centered">
                     <h3>Basic usage:</h3>
                     <p><i class="fa fa-angle-right fw"></i> Add the following snippet of code to your page (before the closing <code>body</code> tag).</p>
-                    <pre><code class="javascript">&lt;script&gt;
+                    <pre class="large-12 small-12 columns"><code class="large-12 small-12 columns javascript">&lt;script&gt;
     (function() {
         var script = document.createElement('script');
 
@@ -116,7 +116,7 @@
                     <p>If you want to feature a single track instead of a playlist, the player will automatically default to the single player below if a single track url is provided.</p>
                     <p>You can also set <code>tracksPerArtist: 1</code> to force a single track to play for an artist url.</p>
                     <p><em>Example:</em></p>
-                    <pre><code class="javascript">
+                    <pre class="large-12 small-12 columns"><code class="javascript large-12 small-12 columns ">
  ToneDen.player.create({
     dom: '#player',
     urls: [
@@ -131,7 +131,7 @@
                     <h3>Multiple Players:</h3>
                     <p>You can create as many players as you like by pushing multiple <code>ToneDen.player</code> objects to <code>ToneDenReady</code>.</p>
                     <p><em>Example:</em></p>
-                    <pre><code class="javascript">
+                    <pre class="large-12 small-12 columns"><code class="large-12 small-12 columns javascript">
 ToneDenReady.push(function() {
         ToneDen.player.create({
             dom: '#player1',

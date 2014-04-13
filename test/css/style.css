@@ -12,9 +12,6 @@ body {
 }
 
 #player {
-	margin:0px;
-	padding: 0px;
-	width: 100%;
 	height: 560px;
 }
 
@@ -110,6 +107,9 @@ code {
 	font-weight: normal !important;
 	color: #3AC095 !important;
 	font-size: 14px;
+	overflow: hidden;
+	word-wrap: normal;
+	text-overflow: ellipsis;
 }
 
 #tdsplash {

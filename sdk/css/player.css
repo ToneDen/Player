@@ -544,7 +544,6 @@ cursor: pointer;
 }
 
 /*Mini*/
-/*Mini*/
 .td.player.mini {
   position: absolute;
   width: 100%;
@@ -577,7 +576,6 @@ cursor: pointer;
 .td.player.mini .mini-buttons {
   padding: 0px;
 }
-
 
 .td.player.mini .player-prev {
   font-size: 21px;
@@ -615,6 +613,19 @@ cursor: pointer;
   height: 100%;
   box-sizing: border-box;
   border-left: 1px solid;
+}
+
+.td.player.mini .song-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin-top: 0px;
+  font-size: 12px;
+}
+
+.td.player.mini .artist-name {
+  margin: 0px;
+  font-weight: bold;
 }
 
 .td.player.mini .mini-social {
@@ -1192,8 +1203,30 @@ cursor: pointer;
 }
 
 @media only screen and (max-width: 40em){
+
   .td.player .track-info-stats {
     display: none;
   } 
+
+  .td.player.mini {
+    height: initial;
+  }
+
+  .td.player.mini .player-play {
+    width: 80px;
+  }
+
+  .td.player.mini .tdspinner {
+    display: none;
+  }
+
+  .td.player.mini .mini-scrubber, .td.player.mini .mini-connect{
+    display: none;
+  }
+
+  .td.player.mini .mini-info, .td.player.mini .mini-social {
+    padding: 10px 0px;
+    border-top:1px solid;
+  }
 
 }
