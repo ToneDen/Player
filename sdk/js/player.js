@@ -381,7 +381,7 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-player', 'ven
                 playerInstance.tracks(function(tracks) {
                     log(tracks);
 
-                    if(tracks.length==1) {
+                    if(tracks.length==1 && parameters.mini == false) {
                        parameters.single = true;
                     } 
                     container.find('.tdspinner').hide();
