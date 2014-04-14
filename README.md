@@ -30,7 +30,7 @@ Player
 
 A pure JS customizable audio player for your SoundCloud. 
 
-JS API, responsive, customizable. Demo at https://toneden.io/player.
+JS API, responsive, customizable. Demo at https://www.toneden.io/player.
 
 ![alt tag](https://raw.github.com/toneden/toneden-sdk/master/mockupv1.png)
 
