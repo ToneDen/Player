@@ -41,7 +41,7 @@
                             'https://soundcloud.com/giraffage/music-sounds-better-with-you',
                             'https://soundcloud.com/wave-racer/wave-racer-streamers',
                             'https://soundcloud.com/flume/sleepless-feat-jezzabell-doran',
-                            'https://soundcloud.com/ryanhemsworth/kitty-sasha-go-hard-tink',
+                            'https://soundcloud.com/ryanhemsworth/ribs-lets-have-a-sleepover',
                         ],
                         single: false,
                         skin: 'light',
@@ -77,31 +77,31 @@
         <div id="player-banner">
             <div class="row">
                 <div class="tagline"><p>Fully customizable, responsive, and extensible.</p></div>
-                <div class="doc-sec large-10 small-12 columns large-centered">
+                <div class="doc-sec large-10 small-12 columns large-centered" style="height: 450px;">
                     <h3>Basic usage:</h3>
                     <p><i class="fa fa-angle-right fw"></i> Add the following snippet of code to your page (before the closing <code>body</code> tag).</p>
                     <pre class="large-12 small-12 columns"><code class="large-12 small-12 columns javascript">&lt;script&gt;
-    (function() {
-        var script = document.createElement('script');
+        (function() {
+            var script = document.createElement('script');
 
-        script.type = 'text/javascript';
-        script.async = true;
-        script.src = '//sd.toneden.io/production/toneden.loader.js'
+            script.type = 'text/javascript';
+            script.async = true;
+            script.src = '//sd.toneden.io/production/toneden.loader.js'
 
-        var entry = document.getElementsByTagName('script')[0];
-        entry.parentNode.insertBefore(script, entry);
-    }());
+            var entry = document.getElementsByTagName('script')[0];
+            entry.parentNode.insertBefore(script, entry);
+        }());
 
-    ToneDenReady = window.ToneDenReady || [];
-    ToneDenReady.push(function() {
-        // This is where all the action happens:
-        ToneDen.player.create({
-            dom: '#player',
-            urls: [
-                'https://soundcloud.com/giraffage'
-            ]
+        ToneDenReady = window.ToneDenReady || [];
+        ToneDenReady.push(function() {
+            // This is where all the action happens:
+            ToneDen.player.create({
+                dom: '#player',
+                urls: [
+                    'https://soundcloud.com/giraffage'
+                ]
+            });
         });
-    });
 &lt;/script&gt;</code></pre>
 
                 </div>
@@ -178,7 +178,7 @@ ToneDenReady.push(function() {
         </div>
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
         <script src="//yandex.st/highlightjs/8.0/highlight.min.js"></script>
-        <script>hljs.initHighlightingOnLoad();</script>
+        <!-- <script>hljs.initHighlightingOnLoad();</script> -->
         <script>
             $(document).ready(function() {
                 $('.skin-change-btn').on('click', function() {

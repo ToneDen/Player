@@ -28633,7 +28633,7 @@ ToneDen.define('player',['jquery', 'vendor/simple-slider', 'underscore', 'vendor
             function rerender(parameters) {
                 parameters = JSON.parse(JSON.stringify(parameters));
 
-                var empty = !_.any(parameters.tracks);
+                var empty = !_.any(parameters.tracks) && parameters.tracks.length > 0;
 
                 if(parameters.nowPlaying) {
                     for(var i = 0; i < parameters.tracks.length; i++) {
