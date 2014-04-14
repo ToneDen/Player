@@ -12,7 +12,7 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-player', 'ven
                 single: false,
                 skin: 'light',
                 staticUrl: '//d27qmwyi8yof1p.cloudfront.net/',
-                tracksPerArtist: 4, // How many tracks to load when given an artist SoundCloud URL.
+                tracksPerArtist: 10, // How many tracks to load when given an artist SoundCloud URL.
                 visualizer: true,
                 visualizerType: 'waves', // Equalizer type. 'waves' or 'bars'
                 mini: false
@@ -110,9 +110,9 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-player', 'ven
 
                     //container responsiveness
                     if(container.width()<500) {
-                        container.find(".follow").addClass("follow-small").css("width", "100%");
                         container.find(".current-song-info").css("width", "100%").prependTo(container.find(".social"));
-                        container.find(".buy").addClass("buy-small").css("width", "100%");
+                        container.find(".buy").hide();
+                        container.find(".follow").hide();
                         container.find(".track-info-stats").hide();
                     }
 

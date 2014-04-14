@@ -1209,6 +1209,10 @@ cursor: pointer;
     display: none;
   } 
 
+  .td.player .follow, .td.player.buy {
+    display: none;
+  }
+
   .td.player.mini {
     height: initial;
   }
