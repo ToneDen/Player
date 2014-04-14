@@ -36,9 +36,12 @@
                     ToneDen.player.create({
                         debug: true,
                         dom: '#player',
-                        keyboardEvents: true,
+                        keyboardEvents: false,
                         urls: [
-                            'https://soundcloud.com/ryanhemsworth'
+                            'https://soundcloud.com/giraffage/music-sounds-better-with-you',
+                            'https://soundcloud.com/wave-racer/wave-racer-streamers',
+                            'https://soundcloud.com/flume/sleepless-feat-jezzabell-doran',
+                            'https://soundcloud.com/ryanhemsworth/kitty-sasha-go-hard-tink',
                         ],
                         skin: 'light',
                         staticUrl: '//widget.dev/sdk/',
@@ -46,15 +49,16 @@
                         visualizerType: 'waves',
                     });
                     ToneDen.player.create({
-                        debug: false,
+                        debug: true,
                         dom: '#single-player-demo',
                         keyboardEvents: false,
                         urls: [
-                            'https://soundcloud.com/flume/sintra'
+                            'https://soundcloud.com/saintpepsi/unhappy'
                         ],
                         skin: 'light',
                         staticUrl: '//widget.dev/sdk/',
-                        visualizerType: 'waves'
+                        visualizerType: 'bars',
+                        single: true
                     });
                 });
             </script>
@@ -119,7 +123,7 @@
  ToneDen.player.create({
     dom: '#player',
     urls: [
-        'https://soundcloud.com/flume/sintra'
+        'https://soundcloud.com/saintpepsi/unhappy'
     ]
 });
                     </code></pre>
@@ -178,7 +182,7 @@ ToneDenReady.push(function() {
             $(document).ready(function() {
                 $('.skin-change-btn').on('click', function() {
                     var id = $(this).attr('id');
-                    var urls = ['https://soundcloud.com/spazzkid/'];
+                    var urls = [];
                     var tracksPerArtist = 1;
                     var oldPlayer = ToneDen.player.getInstanceByDom('#player');
 

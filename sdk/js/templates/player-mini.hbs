@@ -31,25 +31,25 @@
         <div class="tdlarge-4 tdsmall-12 tdcolumns mini-info">
             <div class="mini-song-info tdlarge-12 tdsmall-12 tdcolumns">
                 <div class="tdlarge-12 tdsmall-12 columns song-name">
-                    {{title}}
+                    <a href="{{permalink_url}}" target="_blank">{{title}}</a>
                 </div>
                 <div class="tdlarge-12 tdsmall-12 columns artist-name">
-                    {{user.username}}
+                    <a href="{{user.permalink_url}}" target="_blank">{{user.username}}</a>
                 </div>
             </div>
         </div>
         <ul class="tdlarge-3 tdsmall-12 tdcolumns mini-social">
             <li class="track-info-plays">
                 <i class="fa fa-play-circle fw current-song-social-icon"></i>
-                {{playback_count}}
+                {{commanator playback_count}}
             </li>
             <li class="track-info-favorites">
                 <i class="fa fa-heart fw current-song-social-icon"></i>
-                {{favoritings_count}}
+                {{commanator favoritings_count}}
             </li>
             <li class="track-info-comments">
                 <i class="fa fa-comments fw current-song-social-icon"></i>
-                {{comments.length}}
+                {{commanator comment_count}}
             </li>
             {{!-- <li class="track-info-downloads">
                 <i class="fa fa-download fw current-song-social-icon"></i>

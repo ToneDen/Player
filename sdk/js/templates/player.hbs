@@ -26,10 +26,10 @@
             </div>
             <div class="tdrow info ">
                 <div class="song-name tdlarge-12 tdsmall-12 tdcolumns">
-                    <a href="{{permalink_url}}">{{title}}</a>
+                    <a href="{{permalink_url}}" target="_blank">{{title}}</a>
                 </div>
                 <div class="artist-name tdlarge-12 tdsmall-12 tdcolumns">
-                    <a href="{{user.permalink_url}}">{{user.username}}</a>
+                    <a href="{{user.permalink_url}}" target="_blank">{{user.username}}</a>
                 </div>
             </div>
             <div class="tdrow social">
@@ -51,15 +51,15 @@
                 <div class="current-song-info tdlarge-6 tdcolumns tdsmall-12">
                     <div class="track-info-plays tdlarge-4 tdsmall-4 tdcolumns">
                         <i class="fa fa-play-circle fw current-song-social-icon"></i>
-                        {{playback_count}}
+                        {{commanator playback_count}}
                     </div>
                     <div class="track-info-favorites tdlarge-4 tdsmall-4 tdcolumns">
                         <i class="fa fa-heart fw current-song-social-icon"></i>
-                        {{favoritings_count}}
+                        {{commanator favoritings_count}}
                     </div>
                     <div class="track-info-comments tdlarge-4 tdsmall-4 tdcolumns">
                         <i class="fa fa-comments fw current-song-social-icon"></i>
-                        {{comments.length}}
+                        {{commanator comment_count}}
                     </div>
                     {{!-- <div class="track-info-downloads tdlarge-3 tdsmall-3 tdcolumns">
                         <i class="fa fa-download fw current-song-social-icon"></i>
@@ -124,15 +124,15 @@
                                 <div class="track-info-social tdlarge-12 tdsmall-12 tdcolumns">
                                     <div class="track-info-plays tdsmall-4 tdlarge-4 tdcolumns">
                                         <i class="fa fa-play-circle fw playlist-social-icon"></i>
-                                        {{playback_count}}
+                                        {{commanator playback_count}}
                                     </div>
                                     <div class="track-info-favorites tdsmall-4 tdlarge-4 tdcolumns">
                                         <i class="fa fa-heart fw playlist-social-icon"></i>
-                                        {{favoritings_count}}
+                                        {{commanator favoritings_count}}
                                     </div>
                                     <div class="track-info-comments tdlarge-4 tdsmall-4 tdcolumns">
                                         <i class="fa fa-comments fw playlist-social-icon"></i>
-                                        {{comments.length}}
+                                        {{commanator comment_count}}
                                     </div>
                                     {{!-- <div class="track-info-downloads tdlarge-3 tdsmall-3 tdcolumns">
                                         <i class="fa fa-download fw playlist-social-icon"></i>
