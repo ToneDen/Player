@@ -690,6 +690,7 @@ cursor: pointer;
   line-height: 58px;
   padding-top: 0px;
   padding-bottom: 0px;
+  border:0px;
   border-left:1px solid;
   border-right: 0px;
   box-sizing: border-box;
@@ -1207,6 +1208,10 @@ cursor: pointer;
   .td.player .track-info-stats {
     display: none;
   } 
+
+  .td.player .follow, .td.player.buy {
+    display: none;
+  }
 
   .td.player.mini {
     height: initial;

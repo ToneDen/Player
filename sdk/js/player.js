@@ -9,7 +9,7 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-player', 'ven
             var parameters = {
                 debug: false, // Output debug messages?
                 keyboardEvents: false, // Should we listen to keyboard events?
-                single: false,
+                single: null,
                 skin: 'light',
                 staticUrl: '//sd.toneden.io/',
                 tracksPerArtist: 10, // How many tracks to load when given an artist SoundCloud URL.
@@ -103,16 +103,16 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-player', 'ven
                         container.find(".solo-container").addClass("solo-container-small").css("width", "100%").prependTo(container.find(".solo-buttons"));
                         container.find(".scrubber").hide();
                      }
-                } else if(parameters.mini=true) {
+                } else if(parameters.mini==true) {
                     container.html(template_mini(parameters));
                 } else {
                     container.html(template(parameters));
 
                     //container responsiveness
                     if(container.width()<500) {
-                        container.find(".follow").addClass("follow-small").css("width", "100%");
                         container.find(".current-song-info").css("width", "100%").prependTo(container.find(".social"));
-                        container.find(".buy").addClass("buy-small").css("width", "100%");
+                        container.find(".buy").hide();
+                        container.find(".follow").hide();
                         container.find(".track-info-stats").hide();
                     }
 
