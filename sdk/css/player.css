@@ -310,7 +310,7 @@ opacity: 0.4;
 .td.player .playlist {
   font-size: 12px;
   max-height: 150px;
-  overflow-y: scroll
+  overflow-y: scroll;
   overflow-x: hidden;
 }
 
