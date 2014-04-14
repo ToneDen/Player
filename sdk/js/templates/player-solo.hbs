@@ -66,10 +66,10 @@
             <div class="solo-container tdlarge-8 tdsmall-12 tdcolumns">
                 <div class="tdrow info ">
                     <div class="song-name tdlarge-12 tdsmall-12 tdcolumns">
-                        {{title}}
+                        <a href="{{permalink_url}}" target="_blank">{{title}}</a>
                     </div>
                     <div class="artist-name tdlarge-12 tdsmall-12 tdcolumns">
-                        {{user.username}}
+                        <a href="{{user.permalink_url}}" target="_blank">{{user.username}}</a>
                     </div>
                 </div>
                 <div class="tdrow scrubber">
@@ -88,15 +88,15 @@
                     <div class="current-song-info tdlarge-12 tdcolumns tdsmall-12">
                         <div class="track-info-plays tdlarge-4 tdsmall-4 tdcolumns">
                             <i class="fa fa-play-circle fw current-song-social-icon"></i>
-                            {{playback_count}}
+                            {{commanator playback_count}}
                         </div>
                         <div class="track-info-favorites tdlarge-4 tdsmall-4 tdcolumns">
                             <i class="fa fa-heart fw current-song-social-icon"></i>
-                            {{favoritings_count}}
+                            {{commanator favoritings_count}}
                         </div>
                         <div class="track-info-comments tdlarge-4 tdsmall-4 tdcolumns">
                             <i class="fa fa-comments fw current-song-social-icon"></i>
-                            {{comments.length}}
+                            {{commanator comment_count}}
                         </div>
                         {{!-- <div class="track-info-downloads tdlarge-3 tdsmall-3 tdcolumns">
                             <i class="fa fa-download fw current-song-social-icon"></i>
