@@ -11,8 +11,8 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-player', 'ven
                 keyboardEvents: false, // Should we listen to keyboard events?
                 single: false,
                 skin: 'light',
-                staticUrl: '//d27qmwyi8yof1p.cloudfront.net/',
-                tracksPerArtist: 4, // How many tracks to load when given an artist SoundCloud URL.
+                staticUrl: '//sd.toneden.io/',
+                tracksPerArtist: 10, // How many tracks to load when given an artist SoundCloud URL.
                 visualizer: true,
                 visualizerType: 'waves', // Equalizer type. 'waves' or 'bars'
                 mini: false
@@ -379,9 +379,12 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-player', 'ven
                 playerInstance.tracks(function(tracks) {
                     log(tracks);
 
-                    if(tracks.length==1) {
+                    // If parameters.single is not explicitly set to false and
+                    // there is only one track, render the single-track player.
+                    if(tracks.length === 1 && parameters.single !== false) {
                        parameters.single = true;
-                    } 
+                    }
+
                     container.find('.tdspinner').hide();
 
                     rerender({

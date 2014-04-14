@@ -83,7 +83,8 @@ API
     * **single**  
       *default: false*   
       True to force the player to render as if there were only one track in the playlist.  
-      This parameter is internally set to true if the playlist has only one track.  
+      This parameter is internally set to true if the playlist has only one track,
+      *unless* the single parameter is explicitly set to false.  
     * **skin**  
       *default: 'light'*   
       The player color scheme to render. Options are 'light', 'dark', 'mojave', and 'aurora'.  
@@ -91,7 +92,7 @@ API
       *default: 'sdkUrl'*   
       The URL path to load static files from. This should be left as the default, unless you are hosting the SDK yourself.  
     * **tracksPerArtist**  
-      *default: 4*   
+      *default: 10*   
       How many tracks to load from an artist's SoundCloud account when the artist's SoundCloud URL is specified in the urls parameter.  
     * **visualizerType**  
       *default: 'waves'*   
