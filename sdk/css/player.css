@@ -20,8 +20,11 @@ text-align: center;
 cursor: pointer;
 }
 
-.td.player .tdempty div {
+.td.player .tdempty{
+margin: 25px auto;
 text-align: center;
+font-size: 14px;
+opacity: 0.4;
 }
 
 .td.player .td-icon-link {
@@ -825,6 +828,9 @@ text-align: center;
 .td.player.shrink .playlist-social-icon {
   font-size: 10px;
 }
+
+/*Misc*/
+
 
 /*Animations*/
 @-webkit-keyframes fadeIn {

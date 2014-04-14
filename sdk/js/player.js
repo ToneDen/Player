@@ -340,7 +340,6 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-player', 'ven
                 if((trackLoadedValue > trackPlayingValue) && trackSuspend == true) {
                     playerInstance.pause();
                     trackSuspend = false;
-                    container.find('.tdloader').fadeOut();
                 }
             });
 
@@ -371,10 +370,11 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-player', 'ven
                 currentTimeIn = timeIn;
 
                 if((trackLoadedValue == trackPlayingValue) || !eqData) {
+                    var loader = $('<i class="fa fw fa-spinner fa-spin tdloader"></i>');
                     if(trackPlayingValue != 100) {
                         playerInstance.pause();
                         trackSuspend = true;
-                        container.find('.tdloader').fadeIn();
+                        container.find('.stop-time').empty().append(loader);
                     }
                 }
             });

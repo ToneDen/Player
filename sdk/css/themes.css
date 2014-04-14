@@ -488,3 +488,19 @@
 .td.player.mojave .tdloader {
   color: white;
 }
+
+.td.player.light .tdempty{
+  color: #333;
+}
+
+.td.player.dark .tdempty{
+  color: white;
+}
+
+.td.player.aurora .tdempty{
+  color: white;
+}
+
+.td.player.mojave .tdempty{
+  color: white;
+}
