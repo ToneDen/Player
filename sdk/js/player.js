@@ -249,10 +249,10 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-player', 'ven
                     tracks: [],
                     skin: parameters.skin,
                     eq: parameters.eq,
-                    tracksPerArtist: parameters.tracksPerArtist,
+                    tracksPerArtist: parameters.tracksPerArtist
                 });
             } else {
-                log('ToneDen Player: the container specified does not exist.', 'error');
+                log('ToneDen Player: the container specified by "' + parameters.dom + '" does not exist.', 'error');
                 return;
             }
 
