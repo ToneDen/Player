@@ -370,7 +370,7 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-player', 'ven
                         trackSuspend = true;
                         container.find('.tdloader').fadeIn();
                     }
-                }            
+                }
             });
 
             playerInstance.on('scplayer.playlist.preloaded', function(e) {
