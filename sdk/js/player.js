@@ -238,13 +238,14 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-player', 'ven
             }
 
             // Make sure the specified container is valid.
-            if(container) {
+            if(container.length > 0) {
                 rerender({
                     tracks: [],
                     skin: parameters.skin,
                     eq: parameters.eq,
                     tracksPerArtist: parameters.tracksPerArtist,
-                });            } else {
+                });
+            } else {
                 log('ToneDen Player: the container specified does not exist.', 'error');
                 return;
             }
