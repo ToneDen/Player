@@ -32,7 +32,7 @@ A pure JS customizable audio player for your SoundCloud.
 
 JS API, responsive, customizable. Demo at https://toneden.io/player.
 
-![alt tag](https://raw.github.com/tim-thimmaiah/tonedenplayer/master/mockupv1.png)
+![alt tag](https://raw.github.com/toneden/toneden-sdk/master/mockupv1.png)
 
 Sample Embed Code:
 ```
@@ -130,11 +130,11 @@ Setup
 2. Add the following lines to /etc/apache2/extra/https-vhosts.conf:  
 ```
 VirtualHost *:80>  
-    DocumentRoot "<repo location>/tonedenplayer/test"  
+    DocumentRoot "<repo location>/toneden-sdk/test"  
     ServerName publisher.dev  
 </VirtualHost>  
 VirtualHost *:80>  
-    DocumentRoot "<repo location>/tonedenplayer"  
+    DocumentRoot "<repo location>/toneden-sdk"  
     ServerName widget.dev  
 </VirtualHost>  
 ```
