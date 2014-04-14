@@ -1,4 +1,4 @@
-define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-player', 'vendor/handlebars', 'hbs!templates/player', 'hbs!templates/player-solo', 'hbs!templates/player-mini', 'hbs!templates/player-empty', 'templates/helpers/msToTimestamp', 'vendor/d3'], function($, SimpleSlider, _, scPlayer, Handlebars, template, template_solo, template_mini, template_empty, msToTimestamp, d3) {
+define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-interface', 'vendor/handlebars', 'hbs!templates/player', 'hbs!templates/player-solo', 'hbs!templates/player-mini', 'hbs!templates/player-empty', 'templates/helpers/msToTimestamp', 'vendor/d3'], function($, SimpleSlider, _, scPlayer, Handlebars, template, template_solo, template_mini, template_empty, msToTimestamp, d3) {
     return {
         create: function(urls, dom, options) {
             ToneDen.players = ToneDen.players || [];
@@ -60,8 +60,11 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-player', 'ven
             var container = $(dom);
             var currentRatio = null;
             var currentTimeIn = null;
-            var trackLoadedValue = null;
-            var trackPlayingValue = null;
+            var bufferPauseThreshold = 3000; // If the track plays within this many milliseconds of the buffer edge, pause and wait.
+            var bufferResumeThreshold = 6000; // Once the buffer is this var past the play progress, it will resume.
+            var trackLoadedPercent = null;
+            var trackLoadedTime = null;
+            var trackPlayedPercent = null;
             var trackReady = false;
             var trackSuspend = false;
 
@@ -258,7 +261,7 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-player', 'ven
                 return;
             }
 
-            var playerInstance = new scPlayer(urls, playerParameters);
+            var scInstance = new scPlayer(urls, playerParameters);
             var titleArea = container.find('.title');
 
             // Set up listeners for dom elements.
@@ -267,11 +270,11 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-player', 'ven
                 var target = $(e.target);
 
                 if(target.hasClass('play')) {
-                    playerInstance.pause();
+                    scInstance.pause();
                 } else if(target.hasClass('next')) {
-                    playerInstance.next();
+                    scInstance.next();
                 } else if(target.hasClass('prev')) {
-                    playerInstance.prev();
+                    scInstance.prev();
                 }
             });
 
@@ -281,35 +284,35 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-player', 'ven
                 var index = Number(row.attr('data-index'));
 
                 if(cls.indexOf('playing') === -1) {
-                    playerInstance.goto(index);
+                    scInstance.goto(index);
                 }
             });
 
             container.on('slider:changed', '.scrubber-slider', function(e, slider) {
-                playerInstance.play();
+                scInstance.play();
                 log('Slider Ratio: ' + slider.ratio);
                 
-                playerInstance.seek(slider.ratio);
+                scInstance.seek(slider.ratio);
             });
 
             // Document-wide listeners.
             if(parameters.keyboardEvents) {
                 document.addEventListener('keydown', function(e) {
                     if (e.keyCode == 32) {
-                        if(playerInstance) {
-                            playerInstance.pause();
+                        if(scInstance) {
+                            scInstance.pause();
                         }
 
                         e.preventDefault();
                     } else if (e.keyCode == 39) {
-                        if(playerInstance) {
-                            playerInstance.next();
+                        if(scInstance) {
+                            scInstance.next();
                         }
 
                         e.preventDefault();
                     } else if (e.keyCode == 37) {
-                        if(playerInstance) {
-                            playerInstance.prev();
+                        if(scInstance) {
+                            scInstance.prev();
                         }
 
                         e.preventDefault();
@@ -318,42 +321,45 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-player', 'ven
             }
 
             // Hook into SC player events.
-            playerInstance.on('scplayer.play', function(e) {
+            scInstance.on('scplayer.play', function(e) {
                 changePlayButton(false);
             });
 
-            playerInstance.on('scplayer.pause', function(e) {
-                var paused = playerInstance.sound().paused;
+            scInstance.on('scplayer.pause', function(e) {
+                var paused = scInstance.sound().paused;
 
                 changePlayButton(paused);
             });
 
-            playerInstance.on('scplayer.stop', function(e) {
+            scInstance.on('scplayer.stop', function(e) {
                 log('Stopped.');
                 container.find('.play').attr('src', parameters.staticUrl + 'img/play.png');
             });
 
-            playerInstance.on('scplayer.track.whileloading', function(e, percent) {
-                // log('Loaded: ' + percent + '%');
-                trackLoadedValue = percent;
+            scInstance.on('scplayer.track.whileloading', function(e, percent) {
+                trackLoadedPercent = percent;
+                trackLoadedTime = percent / 100 * scInstance.sound().duration;
 
                 container.find('.buffer').css('width', percent + '%');
 
-                if((trackLoadedValue > trackPlayingValue) && trackSuspend == true) {
-                    playerInstance.pause();
+                if(trackSuspend && (trackLoadedTime - scInstance.position()) > bufferResumeThreshold) {
+                    scInstance.pause();
+
                     trackSuspend = false;
                 }
             });
 
-            playerInstance.on('scplayer.track.whileplaying', function(e, percent, eqData) {
+            scInstance.on('scplayer.track.whileplaying', function(e, percent, eqData) {
                 if(parameters.visualizer == true && typeof(eqData[0]) === 'number' && !isNaN(eqData[0])) {
                     drawEQ(eqData);
                 }
 
                 var ratio = percent / 100;
-                var timeIn = msToTimestamp(playerInstance.position());
-                var timeLeft = msToTimestamp(playerInstance.track().duration - playerInstance.position());
-                trackPlayingValue = Math.round(percent);
+                var timeIn = msToTimestamp(scInstance.position());
+                var timeLeft = msToTimestamp(scInstance.track().duration - scInstance.position());
+
+                trackPlayedPercent = Math.round(percent);
+
                 // Round ratio to the nearest 3 decimal points.
                 ratio = ratio.toFixed(3);
 
@@ -371,21 +377,25 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-player', 'ven
                 currentRatio = ratio;
                 currentTimeIn = timeIn;
 
-                if((trackLoadedValue == trackPlayingValue) || !eqData || (trackLoadedValue/100) < ratio) {
+                var waitToBuffer = (trackLoadedTime - scInstance.position()) < bufferPauseThreshold ||
+                    !eqData || (trackLoadedPercent / 100) < currentRatio;
+
+                if(waitToBuffer) {
                     var loader = $('<i class="fa fw fa-spinner fa-spin tdloader"></i>');
-                    if(trackPlayingValue != 100) {
-                        playerInstance.pause();
+
+                    if(trackPlayedPercent != 100) {
+                        scInstance.pause();
                         trackSuspend = true;
                         container.find('.stop-time').empty().append(loader);
                     }
                 }
             });
 
-            playerInstance.on('scplayer.playlist.preloaded', function(e) {
+            scInstance.on('scplayer.playlist.preloaded', function(e) {
                 log('All tracks loaded.');
 
-                playerInstance.tracks(function(tracks) {
-                    var nowPlaying = playerInstance.track();
+                scInstance.tracks(function(tracks) {
+                    var nowPlaying = scInstance.track();
 
                     log(tracks);
 
@@ -409,19 +419,19 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-player', 'ven
                 });
             });
 
-            playerInstance.on('scplayer.track.ready', function(e) {
+            scInstance.on('scplayer.track.ready', function(e) {
                 trackReady = true;
             });
 
-            playerInstance.on('scplayer.changing_track', function(e, trackIndex) {
+            scInstance.on('scplayer.changing_track', function(e, trackIndex) {
                 log('New track index: ' + trackIndex);
 
                 container.find('.played').css('width', '0%');
                 container.find('.buffer').css('width', '0%');
 
-                playerInstance.tracks(function(tracks) {
+                scInstance.tracks(function(tracks) {
                     rerender({
-                        nowPlaying: playerInstance.track(),
+                        nowPlaying: scInstance.track(),
                         tracks: tracks,
                         skin: parameters.skin,
                         tracksPerArtist: parameters.tracksPerArtist,
@@ -437,18 +447,18 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-player', 'ven
                 container.off();
                 container.html('');
 
-                playerInstance.destroy();
+                scInstance.destroy();
 
                 ToneDen.players.splice(ToneDen.players.indexOf(player), 1);
                 delete player;
             }
 
             function pause() {
-                playerInstance.pause();
+                scInstance.pause();
             }
 
             function play() {
-                playerInstance.play();
+                scInstance.play();
             }
 
             player = {
