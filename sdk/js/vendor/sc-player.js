@@ -504,6 +504,10 @@ define(['vendor/soundmanager2', 'jquery', 'vendor/d3'], function(soundManager, j
         };
 
         self.setSound = function(track) {
+            if(!track) {
+                return;
+            }
+
             var isMoz = navigator.userAgent.toLowerCase().indexOf('firefox') > -1;
 
             if(isMoz==true) var flashFallback = true;
@@ -745,6 +749,10 @@ define(['vendor/soundmanager2', 'jquery', 'vendor/d3'], function(soundManager, j
             var trackUrls = [];
             var start_index = self.tracks.indexOf(url);
             var tracksProcessed = 0;
+
+            if(!_tracks || _tracks.length === 0) {
+                return cb([]);
+            }
 
             for(var x = 0, l = _tracks.length; x < l; x++) {
                 var _track = _tracks[x];

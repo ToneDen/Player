@@ -1,4 +1,4 @@
-define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-player', 'vendor/handlebars', 'hbs!templates/player', 'hbs!templates/player-solo', 'hbs!templates/player-mini', 'templates/helpers/msToTimestamp', 'vendor/d3'], function($, SimpleSlider, _, scPlayer, Handlebars, template, template_solo, template_mini, msToTimestamp, d3) {
+define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-player', 'vendor/handlebars', 'hbs!templates/player', 'hbs!templates/player-solo', 'hbs!templates/player-mini', 'hbs!templates/player-empty', 'templates/helpers/msToTimestamp', 'vendor/d3'], function($, SimpleSlider, _, scPlayer, Handlebars, template, template_solo, template_mini, template_empty, msToTimestamp, d3) {
     return {
         create: function(urls, dom, options) {
             ToneDen.players = ToneDen.players || [];
@@ -80,6 +80,8 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-player', 'ven
             function rerender(parameters) {
                 parameters = JSON.parse(JSON.stringify(parameters));
 
+                var empty = !_.any(parameters.tracks);
+
                 if(parameters.nowPlaying) {
                     for(var i = 0; i < parameters.tracks.length; i++) {
                         if(parameters.tracks[i].title === parameters.nowPlaying.title) {
@@ -88,8 +90,11 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-player', 'ven
                     }
                 }
 
-                if(parameters.single==true) {
+                if(empty) {
+                    container.html(template_empty(parameters));
+                } else if(parameters.single == true) {
                     container.html(template_solo(parameters));
+
                     //container responsiveness
                     if(parameters.tracks.length>1){
                         container.find(".prev").show();
@@ -98,11 +103,12 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-player', 'ven
                         container.find(".prev").hide();
                         container.find(".next").hide();
                     }
-                     if(container.width()<500) {
+
+                    if(container.width()<500) {
                         container.find(".header").addClass("header-small").css("width", "100%");
                         container.find(".solo-container").addClass("solo-container-small").css("width", "100%").prependTo(container.find(".solo-buttons"));
                         container.find(".scrubber").hide();
-                     }
+                    }
                 } else if(parameters.mini==true) {
                     container.html(template_mini(parameters));
                 } else {
@@ -377,6 +383,8 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-player', 'ven
                 log('All tracks loaded.');
 
                 playerInstance.tracks(function(tracks) {
+                    var nowPlaying = playerInstance.track();
+
                     log(tracks);
 
                     // If parameters.single is not explicitly set to false and
@@ -388,7 +396,7 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-player', 'ven
                     container.find('.tdspinner').hide();
 
                     rerender({
-                        nowPlaying: playerInstance.track(),
+                        nowPlaying: nowPlaying,
                         tracks: tracks,
                         skin: parameters.skin,
                         tracksPerArtist: parameters.tracksPerArtist,
