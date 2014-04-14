@@ -28839,7 +28839,7 @@ ToneDen.define('player',['jquery', 'vendor/simple-slider', 'underscore', 'vendor
             container.on('slider:changed', '.scrubber-slider', function(e, slider) {
                 playerInstance.play();
                 log('Slider Ratio: ' + slider.ratio);
-
+                
                 playerInstance.seek(slider.ratio);
             });
 
@@ -28922,7 +28922,7 @@ ToneDen.define('player',['jquery', 'vendor/simple-slider', 'underscore', 'vendor
                 currentRatio = ratio;
                 currentTimeIn = timeIn;
 
-                if((trackLoadedValue == trackPlayingValue) || !eqData) {
+                if((trackLoadedValue == trackPlayingValue) || !eqData || (trackLoadedValue/100) < ratio) {
                     var loader = $('<i class="fa fw fa-spinner fa-spin tdloader"></i>');
                     if(trackPlayingValue != 100) {
                         playerInstance.pause();
