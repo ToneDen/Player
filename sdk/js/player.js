@@ -103,7 +103,7 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-player', 'ven
                         container.find(".solo-container").addClass("solo-container-small").css("width", "100%").prependTo(container.find(".solo-buttons"));
                         container.find(".scrubber").hide();
                      }
-                } else if(parameters.mini=true) {
+                } else if(parameters.mini==true) {
                     container.html(template_mini(parameters));
                 } else {
                     container.html(template(parameters));
@@ -379,7 +379,7 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-player', 'ven
                 playerInstance.tracks(function(tracks) {
                     log(tracks);
 
-                    if(tracks.length==1) {
+                    if(tracks.length==1 && parameters.mini==false) {
                        parameters.single = true;
                     } 
                     container.find('.tdspinner').hide();
