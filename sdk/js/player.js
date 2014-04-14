@@ -1,4 +1,4 @@
-define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-player', 'vendor/handlebars', 'hbs!templates/player', 'hbs!templates/player-solo', 'hbs!templates/player-mini', 'templates/helpers/msToTimestamp', 'vendor/d3'], function($, SimpleSlider, _, scPlayer, Handlebars, template, template_solo, template_mini, msToTimestamp, d3) {
+define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-player', 'vendor/handlebars', 'hbs!templates/player', 'hbs!templates/player-solo', 'hbs!templates/player-mini', 'hbs!templates/player-empty', 'templates/helpers/msToTimestamp', 'vendor/d3'], function($, SimpleSlider, _, scPlayer, Handlebars, template, template_solo, template_mini, template_empty, msToTimestamp, d3) {
     return {
         create: function(urls, dom, options) {
             ToneDen.players = ToneDen.players || [];
@@ -9,9 +9,9 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-player', 'ven
             var parameters = {
                 debug: false, // Output debug messages?
                 keyboardEvents: false, // Should we listen to keyboard events?
-                single: false,
+                single: null,
                 skin: 'light',
-                staticUrl: '//d27qmwyi8yof1p.cloudfront.net/',
+                staticUrl: '//sd.toneden.io/',
                 tracksPerArtist: 10, // How many tracks to load when given an artist SoundCloud URL.
                 visualizer: true,
                 visualizerType: 'waves', // Equalizer type. 'waves' or 'bars'
@@ -80,6 +80,8 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-player', 'ven
             function rerender(parameters) {
                 parameters = JSON.parse(JSON.stringify(parameters));
 
+                var empty = !_.any(parameters.tracks) && parameters.tracks.length > 0;
+
                 if(parameters.nowPlaying) {
                     for(var i = 0; i < parameters.tracks.length; i++) {
                         if(parameters.tracks[i].title === parameters.nowPlaying.title) {
@@ -88,8 +90,11 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-player', 'ven
                     }
                 }
 
-                if(parameters.single==true) {
+                if(empty) {
+                    container.html(template_empty(parameters));
+                } else if(parameters.single == true) {
                     container.html(template_solo(parameters));
+
                     //container responsiveness
                     if(parameters.tracks.length>1){
                         container.find(".prev").show();
@@ -98,11 +103,12 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-player', 'ven
                         container.find(".prev").hide();
                         container.find(".next").hide();
                     }
-                     if(container.width()<500) {
+
+                    if(container.width()<500) {
                         container.find(".header").addClass("header-small").css("width", "100%");
                         container.find(".solo-container").addClass("solo-container-small").css("width", "100%").prependTo(container.find(".solo-buttons"));
                         container.find(".scrubber").hide();
-                     }
+                    }
                 } else if(parameters.mini==true) {
                     container.html(template_mini(parameters));
                 } else {
@@ -370,22 +376,27 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-player', 'ven
                         trackSuspend = true;
                         container.find('.stop-time').empty().append(loader);
                     }
-                }            
+                }
             });
 
             playerInstance.on('scplayer.playlist.preloaded', function(e) {
                 log('All tracks loaded.');
 
                 playerInstance.tracks(function(tracks) {
+                    var nowPlaying = playerInstance.track();
+
                     log(tracks);
 
-                    if(tracks.length==1 && parameters.mini==false) {
+                    // If parameters.single is not explicitly set to false and
+                    // there is only one track, render the single-track player.
+                    if(tracks.length === 1 && parameters.single !== false) {
                        parameters.single = true;
-                    } 
+                    }
+
                     container.find('.tdspinner').hide();
 
                     rerender({
-                        nowPlaying: playerInstance.track(),
+                        nowPlaying: nowPlaying,
                         tracks: tracks,
                         skin: parameters.skin,
                         tracksPerArtist: parameters.tracksPerArtist,
