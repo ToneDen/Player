@@ -79,19 +79,19 @@
   color: white;
 }
 
-.td.player.light .info a{
+.td.player.light .info a, .td.player.light .mini-song-info a{
   color: black;
 }
 
-.td.player.dark .info a{
+.td.player.dark .info a, .td.player.dark .mini-song-info a{
   color: white;
 }
 
-.td.player.aurora .info a{
+.td.player.aurora .info a, .td.player.aurora .mini-song-info a{
   color: white;
 }
 
-.td.player.mojave .info a{
+.td.player.mojave .info a, .td.player.mojave .mini-song-info a{
   color: white;
 }
 

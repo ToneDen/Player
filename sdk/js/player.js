@@ -249,7 +249,9 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-player', 'ven
                     tracks: [],
                     skin: parameters.skin,
                     eq: parameters.eq,
-                    tracksPerArtist: parameters.tracksPerArtist
+                    tracksPerArtist: parameters.tracksPerArtist,
+                    single: parameters.single,
+                    mini: parameters.mini
                 });
             } else {
                 log('ToneDen Player: the container specified by "' + parameters.dom + '" does not exist.', 'error');
@@ -389,7 +391,7 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-player', 'ven
 
                     // If parameters.single is not explicitly set to false and
                     // there is only one track, render the single-track player.
-                    if(tracks.length === 1 && parameters.single !== false) {
+                    if(tracks.length === 1 && parameters.single !== false && parameters.mini == false) {
                        parameters.single = true;
                     }
 
@@ -401,7 +403,8 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-player', 'ven
                         skin: parameters.skin,
                         tracksPerArtist: parameters.tracksPerArtist,
                         visualizerType: parameters.visualizerType,
-                        single: parameters.single
+                        single: parameters.single,
+                        mini: parameters.mini
                     });
                 });
             });
@@ -423,7 +426,8 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-player', 'ven
                         skin: parameters.skin,
                         tracksPerArtist: parameters.tracksPerArtist,
                         visualizerType: parameters.visualizerType,
-                        single: parameters.single
+                        single: parameters.single,
+                        mini: parameters.mini
                     });
                 });
             });
