@@ -60,8 +60,8 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-interface', '
             var container = $(dom);
             var currentRatio = null;
             var currentTimeIn = null;
-            var bufferPauseThreshold = 3000; // If the track plays within this many milliseconds of the buffer edge, pause and wait.
-            var bufferResumeThreshold = 6000; // Once the buffer is this var past the play progress, it will resume.
+            var bufferPauseThreshold = 5000; // If the track plays within this many milliseconds of the buffer edge, pause and wait.
+            var bufferResumeThreshold = 10000; // Once the buffer is this var past the play progress, it will resume.
             var trackLoadedPercent = null;
             var trackLoadedTime = null;
             var trackPlayedPercent = null;
