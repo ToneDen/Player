@@ -355,8 +355,9 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-interface', '
                 }
 
                 var ratio = percent / 100;
-                var timeIn = msToTimestamp(scInstance.position());
-                var timeLeft = msToTimestamp(scInstance.track().duration - scInstance.position());
+                var playPosition = scInstance.position();
+                var timeIn = msToTimestamp(playPosition);
+                var timeLeft = msToTimestamp(scInstance.track().duration - playPosition);
 
                 trackPlayedPercent = Math.round(percent);
 
@@ -377,8 +378,8 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-interface', '
                 currentRatio = ratio;
                 currentTimeIn = timeIn;
 
-                var waitToBuffer = (trackLoadedTime - scInstance.position()) < bufferPauseThreshold ||
-                    !eqData || (trackLoadedPercent / 100) < currentRatio;
+                var waitToBuffer = (trackLoadedTime - playPosition) < bufferPauseThreshold &&
+                    timeLeft > bufferPauseThreshold || !eqData || (trackLoadedPercent / 100) < currentRatio;
 
                 if(waitToBuffer) {
                     var loader = $('<i class="fa fw fa-spinner fa-spin tdloader"></i>');
