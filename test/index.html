@@ -184,25 +184,12 @@ ToneDenReady.push(function() {
         <script>
             $(document).ready(function() {
                 $('.skin-change-btn').on('click', function() {
-                    var id = $(this).attr('id');
-                    var urls = [];
-                    var tracksPerArtist = 1;
-                    var oldPlayer = ToneDen.player.getInstanceByDom('#player');
+                    var player = $('#player .player');
+                    var oldTheme = $('.skin-change-btn.active').attr('data-theme');
+                    var newTheme = $(this).attr('data-theme');
 
-                    if(oldPlayer) {
-                        tracksPerArtist = oldPlayer.parameters.tracksPerArtist;
-                        urls = JSON.parse(JSON.stringify(oldPlayer.parameters.urls));
-                        oldPlayer.destroy();
-                    }
-                    
-                    ToneDen.player.create({
-                        debug: true,
-                        dom: '#player',
-                        urls: urls,
-                        skin: $(this).attr('data-theme'),
-                        tracksPerArtist: tracksPerArtist,
-                        visualizerType: 'bars'
-                    });
+                    player.removeClass(oldTheme);
+                    player.addClass(newTheme);
 
                     $('.skin-change-btn').removeClass('active');
                     $(this).addClass('active');
