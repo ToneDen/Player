@@ -4001,6 +4001,8 @@ function SoundManager(smURL, smID) {
 
       var s = this._s;
 
+      sm2._wD(s.id + ': canplaythrough');
+
       if (!s.loaded) {
         s._onbufferchange(0);
         s._whileloading(s.bytesLoaded, s.bytesTotal, s._get_html5_duration());
@@ -4128,11 +4130,11 @@ function SoundManager(smURL, smID) {
           for (i=0; i<j; i++) {
             progStr.push(e.target.buffered.start(i)*msecScale +'-'+ e.target.buffered.end(i)*msecScale);
           }
-          sm2._wD(this._s.id + ': progress, timeRanges: ' + progStr.join(', '));
+          //sm2._wD(this._s.id + ': progress, timeRanges: ' + progStr.join(', '));
         }
 
         if (isProgress && !isNaN(loaded)) {
-          sm2._wD(this._s.id + ': progress, ' + Math.floor(loaded*100) + '% loaded');
+          //sm2._wD(this._s.id + ': progress, ' + Math.floor(loaded*100) + '% loaded');
         }
         // </d>
 

@@ -8,13 +8,13 @@ Just copy the snippet below into your HTML page, and replace the commented porti
 ```
 <script>
     (function() {
-        var script = document.createElement('script');
+        var script = document.createElement("script");
 
-        script.type = 'text/javascript';
+        script.type = "text/javascript";
         script.async = true;
-        script.src = '//sd.toneden.io/production/toneden.loader.js'
+        script.src = "//sd.toneden.io/production/toneden.loader.js"
 
-        var entry = document.getElementsByTagName('script')[0];
+        var entry = document.getElementsByTagName("script")[0];
         entry.parentNode.insertBefore(script, entry);
     }());
 
@@ -38,13 +38,13 @@ Sample Embed Code:
 ```
 <script>
     (function() {
-        var script = document.createElement('script');
+        var script = document.createElement("script");
 
-        script.type = 'text/javascript';
+        script.type = "text/javascript";
         script.async = true;
-        script.src = '//sd.toneden.io/production/toneden.loader.js'
+        script.src = "//sd.toneden.io/production/toneden.loader.js"
 
-        var entry = document.getElementsByTagName('script')[0];
+        var entry = document.getElementsByTagName("script")[0];
         entry.parentNode.insertBefore(script, entry);
     }());
 
@@ -52,13 +52,12 @@ Sample Embed Code:
     ToneDenReady.push(function() {
         // This is where all the action happens:
         ToneDen.player.create({
-            dom: '#player',
-            eq: 'waves',
-            skin: 'light',
-            staticUrl: '//widget.dev/sdk/',
+            dom: "#player",
+            eq: "waves",
+            skin: "light",
             tracksPerArtist: 4,
             urls: [
-                'https://soundcloud.com/mutantbreakz/blacklist-vs-alt-a-fire'
+                "https://soundcloud.com/mutantbreakz/blacklist-vs-alt-a-fire"
             ]
         });
     });
