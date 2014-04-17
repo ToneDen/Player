@@ -19674,7 +19674,7 @@ ToneDen.define('vendor/sc-interface',['vendor/soundmanager2', 'jquery', 'vendor/
             startOn: 0,
             togglePause: true, //Should pause act as a toggle?
             tracksPerArtist: 5, // When given an artist URL, how many tracks to load?
-            volume: 50,
+            volume: 100,
             useEQData: true,
             useHTML5Audio: true,
             flashVersion: 9,
@@ -28156,7 +28156,7 @@ function program3(depth0,data) {
     + "\n                    </div>\n                </div>\n                ";
   stack1 = helpers['if'].call(depth0, (depth0 && depth0.purchase_url), {hash:{},inverse:self.program(14, program14, data),fn:self.program(12, program12, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\n            </div>\n            <div class=\"tdrow controls\">\n                <div class=\"buttons tdlarge-12 tdsmall-12 tdcolumns\">\n                    <div class=\"tdlarge-3 tdsmall-12 tdcolumns\">\n                        <i class=\"fa fa-repeat fw repeat-init\"></i>\n                    </div>\n                    <div class=\"tdlarge-6 tdmall-12 tdcolumns button-controls\">\n                        <i class=\"fa fa-angle-double-left fw player-prev prev\"></i>\n                        <i class=\"fa fa-play-circle-o fw player-play play\"></i>\n                        <i class=\"fa fa-angle-double-right fw player-next next\"></i>\n                    </div>\n                    <div class=\"volume-controls tdlarge-3 tdsmall-12 tdcolumns\">\n                        <i class=\"fa fa-volume-down fw volume-init\"></i>\n                        <div class=\"tdlarge-10 tdmsall-12 tdcolumns tdlarge-centered tdmsall-centered volume-select\" style=\"display:none;\">\n                            <i class=\"fa fa-volume-off fw volume-off\" data-class=\"fa fa-volume-off fw\"></i>\n                            <i class=\"fa fa-volume-down fw volume-med volume-active\" data-class=\"fa fa-volume-down fw\"></i>\n                            <i class=\"fa fa-volume-up fw volume-max\" data-class=\"fa fa-volume-up fw\"></i>\n                        </div>\n                    </div>\n                </div>\n            </div>\n            <div class=\"tdrow scrubber\">\n                <div class=\"tdlarge-12 tdsmall-12 tdcolumns scrubber-box\">\n                    <div class=\"tdlarge-2 tdsmall-2 tdcolumns start-time\">0:00</div>\n                    <div class=\"tdlarge-8 tdsmall-8 tdcolumns scrub-bar-box\">\n                        <input type=\"text\" class=\"scrubber-slider\">\n                    </div>\n                    <div class=\"tdlarge-2 tdsmall-2 tdcolumns stop-time\">\n                        "
+  buffer += "\n            </div>\n            <div class=\"tdrow controls\">\n                <div class=\"buttons tdlarge-12 tdsmall-12 tdcolumns\">\n                    <div class=\"tdlarge-3 tdsmall-12 tdcolumns\">\n                        <i class=\"fa fa-repeat fw repeat-init\"></i>\n                    </div>\n                    <div class=\"tdlarge-6 tdmall-12 tdcolumns button-controls\">\n                        <i class=\"fa fa-angle-double-left fw player-prev prev\"></i>\n                        <i class=\"fa fa-play-circle-o fw player-play play\"></i>\n                        <i class=\"fa fa-angle-double-right fw player-next next\"></i>\n                    </div>\n                    <div class=\"volume-controls tdlarge-3 tdsmall-12 tdcolumns\">\n                        <i class=\"fa fa-volume-up fw volume-init\"></i>\n                        <div class=\"tdlarge-10 tdmsall-12 tdcolumns tdlarge-centered tdmsall-centered volume-select\" style=\"display:none;\">\n                            <i class=\"fa fa-volume-off fw volume-off\" data-class=\"fa fa-volume-off fw\"></i>\n                            <i class=\"fa fa-volume-down fw volume-med\" data-class=\"fa fa-volume-down fw\"></i>\n                            <i class=\"fa fa-volume-up fw volume-max volume-active\" data-class=\"fa fa-volume-up fw\"></i>\n                        </div>\n                    </div>\n                </div>\n            </div>\n            <div class=\"tdrow scrubber\">\n                <div class=\"tdlarge-12 tdsmall-12 tdcolumns scrubber-box\">\n                    <div class=\"tdlarge-2 tdsmall-2 tdcolumns start-time\">0:00</div>\n                    <div class=\"tdlarge-8 tdsmall-8 tdcolumns scrub-bar-box\">\n                        <input type=\"text\" class=\"scrubber-slider\">\n                    </div>\n                    <div class=\"tdlarge-2 tdsmall-2 tdcolumns stop-time\">\n                        "
     + escapeExpression((helper = helpers.msToTimestamp || (depth0 && depth0.msToTimestamp),options={hash:{},data:data},helper ? helper.call(depth0, ((stack1 = (depth0 && depth0.nowPlaying)),stack1 == null || stack1 === false ? stack1 : stack1.duration), options) : helperMissing.call(depth0, "msToTimestamp", ((stack1 = (depth0 && depth0.nowPlaying)),stack1 == null || stack1 === false ? stack1 : stack1.duration), options)))
     + "\n                        <i class=\"fa fw fa-spinner fa-spin tdloader\"></i>\n                    </div>\n                </div>\n            </div>\n        ";
   return buffer;
@@ -28347,7 +28347,7 @@ function program3(depth0,data) {
     + escapeExpression(((stack1 = ((stack1 = (depth0 && depth0.user)),stack1 == null || stack1 === false ? stack1 : stack1.permalink_url)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
     + "\" target=\"_blank\">"
     + escapeExpression(((stack1 = ((stack1 = (depth0 && depth0.user)),stack1 == null || stack1 === false ? stack1 : stack1.username)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
-    + "</a>\n                    </div>\n                </div>\n                <div class=\"volume-controls tdlarge-2 tdsmall-12 tdcolumns\">\n                    <i class=\"fa fa-volume-down fw volume-init\"></i>\n                    <div class=\"tdlarge-10 tdmsall-12 tdcolumns tdlarge-centered tdmsall-centered volume-select\" style=\"display:none;\">\n                        <i class=\"fa fa-volume-off fw volume-off\" data-class=\"fa fa-volume-off fw\"></i>\n                        <i class=\"fa fa-volume-down fw volume-med volume-active\" data-class=\"fa fa-volume-down fw\"></i>\n                        <i class=\"fa fa-volume-up fw volume-max\" data-class=\"fa fa-volume-up fw\"></i>\n                    </div>\n                </div>\n                <div class=\"tdrow scrubber\">\n                    <div class=\"tdlarge-12 tdsmall-12 tdcolumns scrubber-box\">\n                        <div class=\"tdlarge-2 tdsmall-2 tdcolumns start-time\">0:00</div>\n                        <div class=\"tdlarge-8 tdsmall-8 tdcolumns scrub-bar-box\">\n                            <input type=\"text\" class=\"scrubber-slider\">\n                        </div>\n                        <div class=\"tdlarge-2 tdsmall-2 tdcolumns stop-time\">\n                            "
+    + "</a>\n                    </div>\n                </div>\n                <div class=\"volume-controls tdlarge-2 tdsmall-12 tdcolumns\">\n                    <i class=\"fa fa-volume-up fw volume-init\"></i>\n                    <div class=\"tdlarge-10 tdmsall-12 tdcolumns tdlarge-centered tdmsall-centered volume-select\" style=\"display:none;\">\n                        <i class=\"fa fa-volume-off fw volume-off\" data-class=\"fa fa-volume-off fw\"></i>\n                        <i class=\"fa fa-volume-down fw volume-med\" data-class=\"fa fa-volume-down fw\"></i>\n                        <i class=\"fa fa-volume-up fw volume-max volume-active\" data-class=\"fa fa-volume-up fw\"></i>\n                    </div>\n                </div>\n                <div class=\"tdrow scrubber\">\n                    <div class=\"tdlarge-12 tdsmall-12 tdcolumns scrubber-box\">\n                        <div class=\"tdlarge-2 tdsmall-2 tdcolumns start-time\">0:00</div>\n                        <div class=\"tdlarge-8 tdsmall-8 tdcolumns scrub-bar-box\">\n                            <input type=\"text\" class=\"scrubber-slider\">\n                        </div>\n                        <div class=\"tdlarge-2 tdsmall-2 tdcolumns stop-time\">\n                            "
     + escapeExpression((helper = helpers.msToTimestamp || (depth0 && depth0.msToTimestamp),options={hash:{}},helper ? helper.call(depth0, ((stack1 = (depth0 && depth0.nowPlaying)),stack1 == null || stack1 === false ? stack1 : stack1.duration), options) : helperMissing.call(depth0, "msToTimestamp", ((stack1 = (depth0 && depth0.nowPlaying)),stack1 == null || stack1 === false ? stack1 : stack1.duration), options)))
     + "\n                            <i class=\"fa fw fa-spinner fa-spin tdloader\"></i>\n                        </div>\n                    </div>\n                </div>\n                <div class=\"tdrow social\">\n                    <div class=\"current-song-info tdlarge-12 tdcolumns tdsmall-12\">\n                        <div class=\"track-info-plays tdlarge-4 tdsmall-4 tdcolumns\">\n                            <i class=\"fa fa-play-circle fw current-song-social-icon\"></i>\n                            "
     + escapeExpression((helper = helpers.commanator || (depth0 && depth0.commanator),options={hash:{}},helper ? helper.call(depth0, (depth0 && depth0.playback_count), options) : helperMissing.call(depth0, "commanator", (depth0 && depth0.playback_count), options)))
@@ -28570,6 +28570,7 @@ ToneDen.define('player',['jquery', 'vendor/simple-slider', 'underscore', 'vendor
             ToneDen.players = ToneDen.players || [];
 
             var player;
+            var playerVolume=100;
             var repeat;
 
             // Default parameters go here.
@@ -28635,6 +28636,9 @@ ToneDen.define('player',['jquery', 'vendor/simple-slider', 'underscore', 'vendor
             var trackReady = false;
             var trackSuspend = false;
 
+            var scInstance = new scPlayer(urls, playerParameters);
+            var titleArea = container.find('.title');
+
             // Helper functions.
             function log(message, level) {
                 // Level can be debug or error.
@@ -28664,6 +28668,7 @@ ToneDen.define('player',['jquery', 'vendor/simple-slider', 'underscore', 'vendor
                     container.html(template_empty(parameters));
                 } else if(parameters.single == true) {
                     container.html(template_solo(parameters));
+                    modifyVolumeUI();
 
                     //container responsiveness
                     if(parameters.tracks.length>1){
@@ -28683,6 +28688,7 @@ ToneDen.define('player',['jquery', 'vendor/simple-slider', 'underscore', 'vendor
                     container.html(template_mini(parameters));
                 } else {
                     container.html(template(parameters));
+                    modifyVolumeUI();
 
                     //container responsiveness
                     if(container.width()<500) {
@@ -28799,6 +28805,24 @@ ToneDen.define('player',['jquery', 'vendor/simple-slider', 'underscore', 'vendor
                 redrawEQ(chart, data);
             }
 
+            //TODO: Refactor
+            function modifyVolumeUI() {
+                console.log(playerVolume);
+                if(playerVolume==100) {
+                    container.find(".volume-init").removeClass().addClass("fa fa-volume-up fw volume-init");
+                    container.find(".volume-select i.volume-active").removeClass("volume-active");
+                    container.find(".volume-select i.volume-max").addClass("volume-active");
+                } else if(playerVolume==0) {
+                    container.find(".volume-init").removeClass().addClass("fa fa-volume-off fw volume-init");
+                    container.find(".volume-select i.volume-active").removeClass("volume-active");
+                    container.find(".volume-select i.volume-off").addClass("volume-active");
+                } else {
+                    container.find(".volume-init").removeClass().addClass("fa fa-volume-down fw volume-init");
+                    container.find(".volume-select i.volume-active").removeClass("volume-active");
+                    container.find(".volume-select i.volume-med").addClass("volume-active");
+                }
+            }
+
             function changePlayButton(paused) {
                 var playClass = 'fa-play-circle-o';
                 var pauseClass = 'fa-pause';
@@ -28827,10 +28851,6 @@ ToneDen.define('player',['jquery', 'vendor/simple-slider', 'underscore', 'vendor
                 log('ToneDen Player: the container specified by "' + parameters.dom + '" does not exist.', 'error');
                 return;
             }
-
-            var scInstance = new scPlayer(urls, playerParameters);
-            var titleArea = container.find('.title');
-
             // Set up listeners for dom elements.
             container.on('click', '.controls', function(e) {
                 e.preventDefault();
@@ -28879,19 +28899,21 @@ ToneDen.define('player',['jquery', 'vendor/simple-slider', 'underscore', 'vendor
                     target.addClass('volume-active');
                     container.find(".volume-init").fadeIn().removeClass().addClass(newClass + " volume-init");
                     container.find(".volume-select").hide();
+                    playerVolume = 0;
                 } else if(target.hasClass('volume-med')) {
                     scInstance.volume(50);
                     container.find(".volume-select i").removeClass('volume-active');
                     target.addClass('volume-active');
                     container.find(".volume-init").fadeIn().removeClass().addClass(newClass + " volume-init");
                     container.find(".volume-select").hide();
+                    playerVolume = 50;
                 } else if(target.hasClass('volume-max')) {
                     scInstance.volume(100);
                     container.find(".volume-select i").removeClass('volume-active');
                     target.addClass('volume-active');
                     container.find(".volume-init").fadeIn().removeClass().addClass(newClass + " volume-init");
                     container.find(".volume-select").hide();
-
+                    playerVolume = 50;
                 }
             });
 
