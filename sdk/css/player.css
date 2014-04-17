@@ -17,7 +17,10 @@
 .td.player .controls div {
 display: inline-block;
 text-align: center;
-cursor: pointer;
+}
+
+.td.player .controls i {
+  cursor: pointer;
 }
 
 .td.player .tdempty{
@@ -243,6 +246,48 @@ opacity: 0.4;
 
 .td.player .fa-pause:hover {
     opacity: 1;
+}
+
+.td.player .repeat-init {
+  line-height: 50px;
+  font-size: 14px;
+  opacity: 0.4;
+}
+
+.td.player .repeat-init:hover {
+  opacity: 1;
+}
+
+.td.player .volume-controls {
+  text-align: center;
+}
+
+.td.player .volume-init {
+  line-height: 50px;
+  font-size: 16px;
+  opacity: 0.4;
+}
+
+.td.player .volume-init:hover {
+  opacity: 1;
+}
+
+.td.player .volume-select i{
+  line-height: 50px;
+  margin: 0px 10px;
+  font-size: 16px;
+  opacity: 0.4;
+  transition: all 0.2s;
+  -webkit-transition: all 0.2s;
+    -moz-transition: all 0.2s;  
+}
+
+.td.player .volume-select i:hover {
+  opacity: 1;
+}
+
+.td.player .volume-select i.volume-active {
+  opacity: 1;
 }
 
 .td.player .scrubber {
@@ -499,10 +544,19 @@ opacity: 0.4;
 
 .td.player.solo .scrubber {
   border-left: 1px solid;
+  padding: 0px;
+}
+
+.td.player.solo .scrubber-box {
+  border-top: 1px solid;
 }
 
 .td.player.solo .solo-buttons {
   border-top: 1px solid;
+}
+
+.td.player.solo .info{
+  border-bottom: 0px;
 }
 
 .td.player.solo .buttons {
@@ -533,8 +587,7 @@ opacity: 0.4;
 }
 
 .td.player.solo .info {
-  border-left: 1px solid;
-  padding: 6px 35px;
+  padding: 6px 10px;
 }
 
 .td.player.solo .song-name {
@@ -549,6 +602,55 @@ opacity: 0.4;
 
 .td.player.solo .current-song-social-icon {
   font-size: 10px;
+}
+
+.td.player.solo .repeat-column {
+  text-align: center;
+}
+
+.td.player.solo .repeat-init {
+  margin: 5px 5px;
+  font-size: 14px;
+  opacity: 0.4;
+  cursor: pointer;
+}
+
+.td.player.solo .repeat-init:hover {
+  opacity: 1;
+}
+
+.td.player.solo .volume-controls {
+  text-align: center;
+}
+
+.td.player.solo .volume-init {
+  margin: 5px;
+  font-size: 14px;
+  cursor: pointer;
+  opacity: 0.4;
+}
+
+.td.player.solo .volume-init:hover {
+  opacity: 1;
+}
+
+.td.player.solo .volume-select i{
+  cursor: pointer;
+  display: inline-block;
+  margin: 5px;
+  font-size: 14px;
+  opacity: 0.4;
+  transition: all 0.2s;
+  -webkit-transition: all 0.2s;
+    -moz-transition: all 0.2s;  
+}
+
+.td.player.solo .volume-select i:hover {
+  opacity: 1;
+}
+
+.td.player.solo .volume-select i.volume-active {
+  opacity: 1;
 }
 
 /*Mini*/
@@ -1245,4 +1347,11 @@ opacity: 0.4;
     border-top:1px solid;
   }
 
+  .td.player .repeat-init, .td.player .volume-init, .td.player .volume-select {
+    margin: 15px 0px;
+  }
+
+  .td.player.solo .repeat-init, .td.player.solo .volume-init {
+    display: none;
+  }
 }

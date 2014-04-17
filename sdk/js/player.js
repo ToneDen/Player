@@ -278,6 +278,36 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-interface', '
                 }
             });
 
+            container.on('click', '.volume-controls', function(e) {
+                e.preventDefault();
+                var target = $(e.target);
+                var newClass = target.attr("data-class");
+
+                if(target.hasClass('volume-init')) {
+                    container.find(".volume-init").hide();
+                    container.find(".volume-select").fadeIn();
+                }else if(target.hasClass('volume-off')) {
+                    scInstance.mute();
+                    container.find(".volume-select i").removeClass('volume-active');
+                    target.addClass('volume-active');
+                    container.find(".volume-init").fadeIn().removeClass().addClass(newClass + " volume-init");
+                    container.find(".volume-select").hide();
+                } else if(target.hasClass('volume-med')) {
+                    scInstance.volume(50);
+                    container.find(".volume-select i").removeClass('volume-active');
+                    target.addClass('volume-active');
+                    container.find(".volume-init").fadeIn().removeClass().addClass(newClass + " volume-init");
+                    container.find(".volume-select").hide();
+                } else if(target.hasClass('volume-max')) {
+                    scInstance.volume(100);
+                    container.find(".volume-select i").removeClass('volume-active');
+                    target.addClass('volume-active');
+                    container.find(".volume-init").fadeIn().removeClass().addClass(newClass + " volume-init");
+                    container.find(".volume-select").hide();
+
+                }
+            });
+
             container.on('click', '.track-info', function(e) {
                 var row = $(this);
                 var cls = row.attr('class');

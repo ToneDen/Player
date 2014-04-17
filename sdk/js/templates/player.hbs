@@ -61,10 +61,6 @@
                         <i class="fa fa-comments fw current-song-social-icon"></i>
                         {{commanator comment_count}}
                     </div>
-                    {{!-- <div class="track-info-downloads tdlarge-3 tdsmall-3 tdcolumns">
-                        <i class="fa fa-download fw current-song-social-icon"></i>
-                        {{download_count}}
-                    </div> --}}
                 </div>
                 {{#if purchase_url}}
                     <div class="buy tdlarge-3 tdsmall-12 tdcolumns">
@@ -84,9 +80,22 @@
             </div>
             <div class="tdrow controls">
                 <div class="buttons tdlarge-12 tdsmall-12 tdcolumns">
-                    <i class="fa fa-angle-double-left fw player-prev prev"></i>
-                    <i class="fa fa-play-circle-o fw player-play play"></i>
-                    <i class="fa fa-angle-double-right fw player-next next"></i>
+                    <div class="tdlarge-3 tdsmall-12 tdcolumns">
+                        <i class="fa fa-repeat fw repeat-init"></i>
+                    </div>
+                    <div class="tdlarge-6 tdmall-12 tdcolumns button-controls">
+                        <i class="fa fa-angle-double-left fw player-prev prev"></i>
+                        <i class="fa fa-play-circle-o fw player-play play"></i>
+                        <i class="fa fa-angle-double-right fw player-next next"></i>
+                    </div>
+                    <div class="volume-controls tdlarge-3 tdsmall-12 tdcolumns">
+                        <i class="fa fa-volume-down fw volume-init"></i>
+                        <div class="tdlarge-10 tdmsall-12 tdcolumns tdlarge-centered tdmsall-centered volume-select" style="display:none;">
+                            <i class="fa fa-volume-off fw volume-off" data-class="fa fa-volume-off fw"></i>
+                            <i class="fa fa-volume-down fw volume-med volume-active" data-class="fa fa-volume-down fw"></i>
+                            <i class="fa fa-volume-up fw volume-max" data-class="fa fa-volume-up fw"></i>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="tdrow scrubber">

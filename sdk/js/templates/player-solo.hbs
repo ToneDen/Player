@@ -64,12 +64,23 @@
                 </div>
             </div>
             <div class="solo-container tdlarge-8 tdsmall-12 tdcolumns">
-                <div class="tdrow info ">
+                <div class="tdlarge-2 tdsmall-12 tdcolumns repeat-column">
+                    <i class="fa fa-repeat fw repeat-init"></i>
+                </div>
+                <div class="tdlarge-8 tdsmall-12 tdcolumns info">
                     <div class="song-name tdlarge-12 tdsmall-12 tdcolumns">
                         <a href="{{permalink_url}}" target="_blank">{{title}}</a>
                     </div>
                     <div class="artist-name tdlarge-12 tdsmall-12 tdcolumns">
                         <a href="{{user.permalink_url}}" target="_blank">{{user.username}}</a>
+                    </div>
+                </div>
+                <div class="volume-controls tdlarge-2 tdsmall-12 tdcolumns">
+                    <i class="fa fa-volume-down fw volume-init"></i>
+                    <div class="tdlarge-10 tdmsall-12 tdcolumns tdlarge-centered tdmsall-centered volume-select" style="display:none;">
+                        <i class="fa fa-volume-off fw volume-off" data-class="fa fa-volume-off fw"></i>
+                        <i class="fa fa-volume-down fw volume-med volume-active" data-class="fa fa-volume-down fw"></i>
+                        <i class="fa fa-volume-up fw volume-max" data-class="fa fa-volume-up fw"></i>
                     </div>
                 </div>
                 <div class="tdrow scrubber">
