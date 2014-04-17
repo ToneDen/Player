@@ -72,7 +72,7 @@ define(['vendor/soundmanager2', 'jquery', 'vendor/d3'], function(soundManager, j
             startOn: 0,
             togglePause: true, //Should pause act as a toggle?
             tracksPerArtist: 5, // When given an artist URL, how many tracks to load?
-            volume: 100,
+            volume: 50,
             useEQData: true,
             useHTML5Audio: true,
             flashVersion: 9,
@@ -840,9 +840,7 @@ define(['vendor/soundmanager2', 'jquery', 'vendor/d3'], function(soundManager, j
                 self.seek(0);
             } else if(self.config.autoswitch && (self.config.loop || self.hasNext())) {
                 self.log('finished and autoswitch');
-                if(self.loopTrack == true) {
-                    self.next().play();
-                }
+                self.next().play();
             }
         });
 
