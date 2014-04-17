@@ -99,6 +99,7 @@ define(['vendor/soundmanager2', 'jquery', 'vendor/d3'], function(soundManager, j
         this.currentTrackIndex = this.config.startOn;
         this.currentTrack = null;
         this.sound = null;
+        this.loopTrack = false;
 
         soundManager.setup({
             debugMode: config.debug
@@ -835,10 +836,13 @@ define(['vendor/soundmanager2', 'jquery', 'vendor/d3'], function(soundManager, j
         self.on('scplayer.track.finished', function(e) {
             self.log('track finished');
 
-            if(self.config.autoswitch && (self.config.loop || self.hasNext())) {
+            if(self.loopTrack == true) {
+                self.seek(0);
+            } else if(self.config.autoswitch && (self.config.loop || self.hasNext())) {
                 self.log('finished and autoswitch');
-
-                self.next().play();
+                if(self.loopTrack == true) {
+                    self.next().play();
+                }
             }
         });
 

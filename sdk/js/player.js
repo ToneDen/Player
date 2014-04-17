@@ -4,6 +4,7 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-interface', '
             ToneDen.players = ToneDen.players || [];
 
             var player;
+            var repeat;
 
             // Default parameters go here.
             var parameters = {
@@ -274,7 +275,27 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-interface', '
                 } else if(target.hasClass('next')) {
                     scInstance.next();
                 } else if(target.hasClass('prev')) {
-                    scInstance.prev();
+                    if(scInstance.position() > 5) {
+                        scInstance.seek(0);
+                    }
+                    else {
+                        scInstance.prev();
+                    }
+                }
+            });
+
+            container.on('click', '.repeat-init', function(e) {
+                e.preventDefault();
+                var target = $(e.target);
+
+                if(target.hasClass('repeat-on')) {
+                    target.removeClass("repeat-on");
+                    repeat = false;
+                    scInstance.loopTrack = false;
+                } else {
+                    target.addClass("repeat-on");
+                    repeat = true;
+                    scInstance.loopTrack = true;
                 }
             });
 
@@ -287,7 +308,7 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-interface', '
                     container.find(".volume-init").hide();
                     container.find(".volume-select").fadeIn();
                 }else if(target.hasClass('volume-off')) {
-                    scInstance.mute();
+                    scInstance.volume(0);
                     container.find(".volume-select i").removeClass('volume-active');
                     target.addClass('volume-active');
                     container.find(".volume-init").fadeIn().removeClass().addClass(newClass + " volume-init");

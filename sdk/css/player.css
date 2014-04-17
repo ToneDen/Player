@@ -258,6 +258,10 @@ opacity: 0.4;
   opacity: 1;
 }
 
+.td.player .repeat-init.repeat-on {
+  opacity: 1;
+}
+
 .td.player .volume-controls {
   text-align: center;
 }
