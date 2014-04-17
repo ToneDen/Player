@@ -72,7 +72,7 @@ define(['vendor/soundmanager2', 'jquery', 'vendor/d3'], function(soundManager, j
             startOn: 0,
             togglePause: true, //Should pause act as a toggle?
             tracksPerArtist: 5, // When given an artist URL, how many tracks to load?
-            volume: 50,
+            volume: 100,
             useEQData: true,
             useHTML5Audio: true,
             flashVersion: 9,

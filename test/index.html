@@ -36,7 +36,7 @@
                 ToneDenReady = window.ToneDenReady || [];
                 ToneDenReady.push(function() {
                     ToneDen.player.create({
-                        debug: false,
+                        debug: true,
                         dom: '#player',
                         keyboardEvents: false,
                         urls: [
@@ -52,7 +52,7 @@
                         visualizerType: 'waves',
                     });
                     ToneDen.player.create({
-                        debug: false,
+                        debug: true,
                         dom: '#single-player-demo',
                         keyboardEvents: false,
                         urls: [
@@ -196,7 +196,7 @@ ToneDenReady.push(function() {
                     }
                     
                     ToneDen.player.create({
-                        debug: false,
+                        debug: true,
                         dom: '#player',
                         urls: urls,
                         skin: $(this).attr('data-theme'),

@@ -4,6 +4,7 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-interface', '
             ToneDen.players = ToneDen.players || [];
 
             var player;
+            var playerVolume=100;
             var repeat;
 
             // Default parameters go here.
@@ -69,6 +70,9 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-interface', '
             var trackReady = false;
             var trackSuspend = false;
 
+            var scInstance = new scPlayer(urls, playerParameters);
+            var titleArea = container.find('.title');
+
             // Helper functions.
             function log(message, level) {
                 // Level can be debug or error.
@@ -98,6 +102,7 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-interface', '
                     container.html(template_empty(parameters));
                 } else if(parameters.single == true) {
                     container.html(template_solo(parameters));
+                    modifyVolumeUI();
 
                     //container responsiveness
                     if(parameters.tracks.length>1){
@@ -117,6 +122,7 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-interface', '
                     container.html(template_mini(parameters));
                 } else {
                     container.html(template(parameters));
+                    modifyVolumeUI();
 
                     //container responsiveness
                     if(container.width()<500) {
@@ -233,6 +239,24 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-interface', '
                 redrawEQ(chart, data);
             }
 
+            //TODO: Refactor
+            function modifyVolumeUI() {
+                console.log(playerVolume);
+                if(playerVolume==100) {
+                    container.find(".volume-init").removeClass().addClass("fa fa-volume-up fw volume-init");
+                    container.find(".volume-select i.volume-active").removeClass("volume-active");
+                    container.find(".volume-select i.volume-max").addClass("volume-active");
+                } else if(playerVolume==0) {
+                    container.find(".volume-init").removeClass().addClass("fa fa-volume-off fw volume-init");
+                    container.find(".volume-select i.volume-active").removeClass("volume-active");
+                    container.find(".volume-select i.volume-off").addClass("volume-active");
+                } else {
+                    container.find(".volume-init").removeClass().addClass("fa fa-volume-down fw volume-init");
+                    container.find(".volume-select i.volume-active").removeClass("volume-active");
+                    container.find(".volume-select i.volume-med").addClass("volume-active");
+                }
+            }
+
             function changePlayButton(paused) {
                 var playClass = 'fa-play-circle-o';
                 var pauseClass = 'fa-pause';
@@ -261,10 +285,6 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-interface', '
                 log('ToneDen Player: the container specified by "' + parameters.dom + '" does not exist.', 'error');
                 return;
             }
-
-            var scInstance = new scPlayer(urls, playerParameters);
-            var titleArea = container.find('.title');
-
             // Set up listeners for dom elements.
             container.on('click', '.controls', function(e) {
                 e.preventDefault();
@@ -313,19 +333,21 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-interface', '
                     target.addClass('volume-active');
                     container.find(".volume-init").fadeIn().removeClass().addClass(newClass + " volume-init");
                     container.find(".volume-select").hide();
+                    playerVolume = 0;
                 } else if(target.hasClass('volume-med')) {
                     scInstance.volume(50);
                     container.find(".volume-select i").removeClass('volume-active');
                     target.addClass('volume-active');
                     container.find(".volume-init").fadeIn().removeClass().addClass(newClass + " volume-init");
                     container.find(".volume-select").hide();
+                    playerVolume = 50;
                 } else if(target.hasClass('volume-max')) {
                     scInstance.volume(100);
                     container.find(".volume-select i").removeClass('volume-active');
                     target.addClass('volume-active');
                     container.find(".volume-init").fadeIn().removeClass().addClass(newClass + " volume-init");
                     container.find(".volume-select").hide();
-
+                    playerVolume = 50;
                 }
             });
 
