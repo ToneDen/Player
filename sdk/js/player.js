@@ -291,11 +291,11 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-interface', '
                 if(target.hasClass('repeat-on')) {
                     target.removeClass("repeat-on");
                     repeat = false;
-                    scInstance.loopTrack = false;
+                    scInstance.config.loopTrack = false;
                 } else {
                     target.addClass("repeat-on");
                     repeat = true;
-                    scInstance.loopTrack = true;
+                    scInstance.config.loopTrack = true;
                 }
             });
 

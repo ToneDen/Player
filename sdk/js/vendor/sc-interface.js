@@ -37,6 +37,7 @@ define(['vendor/soundmanager2', 'jquery', 'vendor/d3'], function(soundManager, j
     /*
         scplayer.playlist.next
         scplayer.playlist.looped
+        scplayer.playlist.trackLooped
         scplayer.playlist.ended
         scplayer.playlist.prev
         scplayer.playlist.looped
@@ -68,6 +69,7 @@ define(['vendor/soundmanager2', 'jquery', 'vendor/d3'], function(soundManager, j
             cachePrefix: '', // Prefix to add to cache URLs
             debug: false,
             loop: false,
+            loopTrack: false,
             preload: true, // Prefetch the sc track data
             startOn: 0,
             togglePause: true, //Should pause act as a toggle?
@@ -236,7 +238,11 @@ define(['vendor/soundmanager2', 'jquery', 'vendor/d3'], function(soundManager, j
 
             self.log(self.playWhenReady);
 
-            if(self.tracks[self.currentTrackIndex + 1]) {
+            if(self.config.loopTrack) {
+                self.trigger('scplayer.playlist.trackLooped');
+
+                self.changeTrack();
+            } else if(self.tracks[self.currentTrackIndex + 1]) {
                 self.currentTrackIndex += 1;
                 self.changeTrack();
 
@@ -836,9 +842,7 @@ define(['vendor/soundmanager2', 'jquery', 'vendor/d3'], function(soundManager, j
         self.on('scplayer.track.finished', function(e) {
             self.log('track finished');
 
-            if(self.loopTrack == true) {
-                self.seek(0);
-            } else if(self.config.autoswitch && (self.config.loop || self.hasNext())) {
+            if(self.config.autoswitch && (self.config.loop || self.hasNext())) {
                 self.log('finished and autoswitch');
                 self.next().play();
             }
@@ -868,6 +872,7 @@ define(['vendor/soundmanager2', 'jquery', 'vendor/d3'], function(soundManager, j
 
         //expose only the public methods
         return {
+            config: this.config,
             play: this.play,
             pause: this.pause,
             resume: this.resume,
