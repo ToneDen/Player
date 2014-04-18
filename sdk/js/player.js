@@ -6,6 +6,7 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-interface', '
             var player;
             var playerVolume=100;
             var repeat;
+            var showVisualizer = true;
 
             // Default parameters go here.
             var parameters = {
@@ -15,7 +16,6 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-interface', '
                 skin: 'light',
                 staticUrl: '//sd.toneden.io/',
                 tracksPerArtist: 10, // How many tracks to load when given an artist SoundCloud URL.
-                visualizer: true,
                 visualizerType: 'waves', // Equalizer type. 'waves' or 'bars'
                 mini: false
             };
@@ -40,21 +40,21 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-interface', '
 
             // Visualizer is currently only supported in Chrome.
             if(navigator.userAgent.toLowerCase().indexOf('chrome') === -1) {
-                parameters.visualizer = false;
+                showVisualizer = false;
             }
 
             if(parameters.visualizerType === 'none') {
-                parameters.visualizer = false;
+                showVisualizer = false;
             }
 
             // Parameters for the SoundCloud player.
-            var playerParameters = {
+            var scInstanceParameters = {
                 consumerKey: '6f85bdf51b0a19b7ab2df7b969233901',
                 debug: parameters.debug,
                 preload: true,
                 togglePause: true,
                 tracksPerArtist: parameters.tracksPerArtist,
-                visualizer: parameters.visualizer
+                visualizer: showVisualizer
             }
 
             var dom = parameters.dom;
@@ -70,7 +70,7 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-interface', '
             var trackReady = false;
             var trackSuspend = false;
 
-            var scInstance = new scPlayer(urls, playerParameters);
+            var scInstance = new scPlayer(urls, scInstanceParameters);
             var titleArea = container.find('.title');
 
             // Helper functions.
@@ -87,6 +87,8 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-interface', '
 
             function rerender(parameters) {
                 parameters = JSON.parse(JSON.stringify(parameters));
+
+                parameters.repeat = scInstance.config.loopTrack;
 
                 var empty = !_.any(parameters.tracks) && parameters.tracks.length > 0;
 
@@ -310,11 +312,9 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-interface', '
 
                 if(target.hasClass('repeat-on')) {
                     target.removeClass("repeat-on");
-                    repeat = false;
                     scInstance.config.loopTrack = false;
                 } else {
                     target.addClass("repeat-on");
-                    repeat = true;
                     scInstance.config.loopTrack = true;
                 }
             });
@@ -423,7 +423,7 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-interface', '
             });
 
             scInstance.on('scplayer.track.whileplaying', function(e, percent, eqData) {
-                if(parameters.visualizer == true && typeof(eqData[0]) === 'number' && !isNaN(eqData[0])) {
+                if(showVisualizer == true && typeof(eqData[0]) === 'number' && !isNaN(eqData[0])) {
                     drawEQ(eqData);
                 }
 

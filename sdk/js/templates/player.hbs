@@ -81,7 +81,11 @@
             <div class="tdrow controls">
                 <div class="buttons tdlarge-12 tdsmall-12 tdcolumns">
                     <div class="tdlarge-3 tdsmall-12 tdcolumns">
-                        <i class="fa fa-repeat fw repeat-init"></i>
+                        {{#if ../repeat}}
+                            <i class="fa fa-repeat repeat-on fw repeat-init"></i>
+                        {{else}}
+                            <i class="fa fa-repeat fw repeat-init"></i>
+                        {{/if}}
                     </div>
                     <div class="tdlarge-6 tdmall-12 tdcolumns button-controls">
                         <i class="fa fa-angle-double-left fw player-prev prev"></i>

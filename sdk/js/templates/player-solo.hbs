@@ -65,7 +65,11 @@
             </div>
             <div class="solo-container tdlarge-8 tdsmall-12 tdcolumns">
                 <div class="tdlarge-2 tdsmall-12 tdcolumns repeat-column">
-                    <i class="fa fa-repeat fw repeat-init"></i>
+                    {{#if ../repeat}}
+                        <i class="fa fa-repeat repeat-on fw repeat-init"></i>
+                    {{else}}
+                        <i class="fa fa-repeat fw repeat-init"></i>
+                    {{/if}}
                 </div>
                 <div class="tdlarge-8 tdsmall-12 tdcolumns info">
                     <div class="song-name tdlarge-12 tdsmall-12 tdcolumns">
