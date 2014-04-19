@@ -254,12 +254,8 @@ opacity: 0.4;
   opacity: 0.4;
 }
 
-.td.player .repeat-init:hover {
-  opacity: 1;
-}
-
 .td.player .repeat-init.repeat-on {
-  opacity: 1;
+  opacity: 1 !important;
 }
 
 .td.player .volume-controls {
@@ -546,6 +542,11 @@ opacity: 0.4;
           animation: fadeIn 1s;
 }
 
+.td.player.solo .info-solo {
+  border-left:1px solid;
+  position: relative;
+}
+
 .td.player.solo .scrubber {
   border-left: 1px solid;
   padding: 0px;
@@ -561,6 +562,7 @@ opacity: 0.4;
 
 .td.player.solo .info{
   border-bottom: 0px;
+  position: relative;
 }
 
 .td.player.solo .buttons {
@@ -625,6 +627,7 @@ opacity: 0.4;
 
 .td.player.solo .volume-controls {
   text-align: center;
+  position: relative;
 }
 
 .td.player.solo .volume-init {
@@ -636,6 +639,10 @@ opacity: 0.4;
 
 .td.player.solo .volume-init:hover {
   opacity: 1;
+}
+
+.td.player.solo .volume-select {
+  position: absolute;
 }
 
 .td.player.solo .volume-select i{
