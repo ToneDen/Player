@@ -311,6 +311,7 @@ opacity: 0.4;
 
 .td.player .scrubber-box {
   display: inline-block;
+  line-height: 50px;
 }
 
 .td.player .scrub-bar-box {
@@ -332,6 +333,7 @@ opacity: 0.4;
 .td.player .start-time,.td.player .stop-time {
   font-size: 12px;
   text-align: center;
+  line-height: 50px;
 }
 
 .td.player .playlist-social-icon {
