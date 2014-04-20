@@ -511,6 +511,7 @@ opacity: 0.4;
 .td.player.solo .cover {
   position: relative;
   z-index: inherit;
+  height: 118px;
 }
 
 .td.player.solo .controls {
