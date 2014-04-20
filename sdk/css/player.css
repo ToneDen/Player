@@ -14,6 +14,12 @@
           animation: fadeIn 0.5s;
 }
 
+.td.player div,.td.player ul {
+  -moz-box-sizing: border-box;
+   -webkit-box-sizing: border-box; 
+  box-sizing: border-box;
+}
+
 .td.player .controls div {
 display: inline-block;
 text-align: center;
