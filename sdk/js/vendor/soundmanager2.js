@@ -6222,10 +6222,10 @@ function SoundManager(smURL, smID) {
 } // SoundManager()
 
 // SM2_DEFER details: http://www.schillmania.com/projects/soundmanager2/doc/getstarted/#lazy-loading
-
-if (window.SM2_DEFER === undefined || !SM2_DEFER) {
+// We always want to return a real soundmanager object, since this is requirejs.
+//if (window.SM2_DEFER === undefined || !SM2_DEFER) {
   soundManager = new SoundManager();
-}
+//}
 
 /**
  * SoundManager public interfaces
@@ -6234,7 +6234,3 @@ if (window.SM2_DEFER === undefined || !SM2_DEFER) {
 
 return soundManager;
 });
-//window.SoundManager = SoundManager; // constructor
-//window.soundManager = soundManager; // public API, flash callbacks etc.
-
-
