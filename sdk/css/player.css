@@ -45,7 +45,7 @@ opacity: 0.4;
   width: 16px;
   margin: 10px;
   display: block;
-  z-index: 100;
+  z-index: 999;
   opacity: 0.2;
   -webkit-transition: opacity 300ms ease-out;
   -moz-transition: opacity 300ms ease-out;
@@ -583,6 +583,9 @@ opacity: 0.4;
 
 .td.player.solo .buttons {
   margin: 35px 0px;
+  height: inherit;
+  padding: 0px;
+  width: inherit;
 }
 
 .td.player.solo .fa-play-circle-o {
