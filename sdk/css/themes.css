@@ -271,6 +271,22 @@
   color: white;
 }
 
+.td.player.light .playlist-table tr {
+  color: #000;
+}
+
+.td.player.dark .playlist-table tr {
+  color: white;
+}
+
+.td.player.aurora .playlist-table tr {
+  color: #02DDA8;
+}
+
+.td.player.mojave .playlist-table tr {
+  color: white;
+}
+
 .td.player.light tbody tr:hover {
   border-color: rgba(175, 175, 175, 0.5);
 }

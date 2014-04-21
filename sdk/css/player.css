@@ -14,6 +14,13 @@
           animation: fadeIn 0.5s;
 }
 
+.td.player div,.td.player ul {
+  -moz-box-sizing: border-box;
+   -webkit-box-sizing: border-box; 
+  box-sizing: border-box;
+  line-height: normal;
+}
+
 .td.player .controls div {
 display: inline-block;
 text-align: center;
@@ -254,12 +261,8 @@ opacity: 0.4;
   opacity: 0.4;
 }
 
-.td.player .repeat-init:hover {
-  opacity: 1;
-}
-
 .td.player .repeat-init.repeat-on {
-  opacity: 1;
+  opacity: 1 !important;
 }
 
 .td.player .volume-controls {
@@ -308,6 +311,7 @@ opacity: 0.4;
 
 .td.player .scrubber-box {
   display: inline-block;
+  line-height: 50px;
 }
 
 .td.player .scrub-bar-box {
@@ -329,6 +333,7 @@ opacity: 0.4;
 .td.player .start-time,.td.player .stop-time {
   font-size: 12px;
   text-align: center;
+  line-height: 50px;
 }
 
 .td.player .playlist-social-icon {
@@ -508,6 +513,7 @@ opacity: 0.4;
 .td.player.solo .cover {
   position: relative;
   z-index: inherit;
+  height: 118px;
 }
 
 .td.player.solo .controls {
@@ -546,13 +552,23 @@ opacity: 0.4;
           animation: fadeIn 1s;
 }
 
+.td.player.solo .info-solo {
+  border-left:1px solid;
+  position: relative;
+}
+
 .td.player.solo .scrubber {
   border-left: 1px solid;
   padding: 0px;
+  line-height: 55px;
 }
 
 .td.player.solo .scrubber-box {
   border-top: 1px solid;
+}
+
+.td.player.solo .scrub-bar-box {
+  height: 55px;
 }
 
 .td.player.solo .solo-buttons {
@@ -561,6 +577,8 @@ opacity: 0.4;
 
 .td.player.solo .info{
   border-bottom: 0px;
+  position: relative;
+  padding: 6px 10px;
 }
 
 .td.player.solo .buttons {
@@ -590,8 +608,8 @@ opacity: 0.4;
   font-size: 12px;
 }
 
-.td.player.solo .info {
-  padding: 6px 10px;
+.td.player.solo .artist-name {
+  margin: 5px 0px;
 }
 
 .td.player.solo .song-name {
@@ -619,12 +637,9 @@ opacity: 0.4;
   cursor: pointer;
 }
 
-.td.player.solo .repeat-init:hover {
-  opacity: 1;
-}
-
 .td.player.solo .volume-controls {
   text-align: center;
+  position: relative;
 }
 
 .td.player.solo .volume-init {
@@ -636,6 +651,10 @@ opacity: 0.4;
 
 .td.player.solo .volume-init:hover {
   opacity: 1;
+}
+
+.td.player.solo .volume-select {
+  position: absolute;
 }
 
 .td.player.solo .volume-select i{
@@ -655,6 +674,21 @@ opacity: 0.4;
 
 .td.player.solo .volume-select i.volume-active {
   opacity: 1;
+}
+
+.td.player.solo .start-time, 
+.td.player.solo .stop-time {
+  height: 55px;
+  line-height: 55px;
+}
+
+.td.player.solo .stop-time {
+  display: table;
+}
+
+.td.player.solo .stop-time i{
+  display: table-cell;
+  vertical-align: middle;
 }
 
 /*Mini*/
