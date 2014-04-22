@@ -243,7 +243,6 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-interface', '
 
             //TODO: Refactor
             function modifyVolumeUI() {
-                console.log(playerVolume);
                 if(playerVolume==100) {
                     container.find(".volume-init").removeClass().addClass("fa fa-volume-up fw volume-init");
                     container.find(".volume-select i.volume-active").removeClass("volume-active");
