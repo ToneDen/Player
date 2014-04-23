@@ -813,7 +813,7 @@ opacity: 0.4;
 
 .td.player.mini .start-time, 
 .td.player.mini .stop-time {
-  height: 60px;
+  line-height: 60px;
 }
 
 .td.player.mini .slider {
