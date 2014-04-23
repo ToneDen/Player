@@ -795,6 +795,14 @@ opacity: 0.4;
   box-sizing: border-box;
 }
 
+.td.player.mini .scrubber-box {
+  padding:0px;  
+}
+
+.td.player.mini .scrub-bar-box {
+  padding:25px 0px;  
+}
+
 .td.player.mini .mini-song-info {
   display: inline-block;
   display: table-cell;
@@ -803,16 +811,13 @@ opacity: 0.4;
   text-align: center;
 }
 
+.td.player.mini .start-time, 
+.td.player.mini .stop-time {
+  height: 60px;
+}
+
 .td.player.mini .slider {
   padding-top: 10px;
-}
-
-.td.player.mini .scrubber-box {
-  padding: 24px 0px 0px;
-}
-
-.td.player.mini .scrub-bar-box {
-  padding: 0px;
 }
 
 .td.player.mini ul {
