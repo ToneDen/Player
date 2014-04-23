@@ -514,6 +514,7 @@ opacity: 0.4;
   position: relative;
   z-index: inherit;
   height: 118px;
+  display: block;
 }
 
 .td.player.solo .controls {
@@ -531,8 +532,6 @@ opacity: 0.4;
 }
 
 .td.player.solo .solo-cover{
-  display: table-cell;
-  vertical-align: middle;
   -webkit-animation: fadeIn 1s; /* Safari and Chrome */
      -moz-animation: fadeIn 1s; /* Firefox */
       -ms-animation: fadeIn 1s; /* Internet Explorer */
