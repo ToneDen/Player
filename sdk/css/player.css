@@ -21,6 +21,10 @@
   line-height: normal;
 }
 
+.td.player .controls {
+  width: 100%;
+}
+
 .td.player .controls div {
 display: inline-block;
 text-align: center;
