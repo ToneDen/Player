@@ -21,7 +21,7 @@
   line-height: normal;
 }
 
-.td.player .controls {
+.td.player .controls, .td.player .buttons{
   width: 100%;
 }
 
