@@ -719,6 +719,11 @@ opacity: 0.4;
   border-radius: 50px;
 }
 
+
+.td.player.mini .controls, .td.player.mini .buttons{
+  width: initial;
+}
+
 .td.player.mini .mini-controls {
   line-height: 60px;
   text-align: center;
@@ -965,7 +970,7 @@ opacity: 0.4;
 
 .td.player.shrink .playlist {
   font-size: 12px;
-  max-height: 85px;
+  max-height: 75px;
 }
 
 .td.player.shrink .playlist-table tbody tr td {
