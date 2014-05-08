@@ -17,7 +17,8 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-interface', '
                 staticUrl: '//sd.toneden.io/',
                 tracksPerArtist: 10, // How many tracks to load when given an artist SoundCloud URL.
                 visualizerType: 'waves', // Equalizer type. 'waves' or 'bars'
-                mini: false
+                mini: false,
+                onTrackFinished: null
             };
 
             // Setup the parameters object with the given arguments and
@@ -91,7 +92,7 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-interface', '
                 parameters.repeat = scInstance.config.loopTrack;
 
                 var empty = !_.any(parameters.tracks) && parameters.tracks.length > 0;
-
+                
                 if(parameters.nowPlaying) {
                     for(var i = 0; i < parameters.tracks.length; i++) {
                         if(parameters.tracks[i].title === parameters.nowPlaying.title) {

@@ -473,6 +473,7 @@ define(['vendor/soundmanager2', 'jquery', 'vendor/d3'], function(soundManager, j
             var urls = self.getPlaylist();
             var trackObjects = [];
 
+
             for(var i = 0; i < urls.length; i++) {
                 self.trackInfo(urls[i], function(info) {
                     trackObjects.push(info);
@@ -646,6 +647,7 @@ define(['vendor/soundmanager2', 'jquery', 'vendor/d3'], function(soundManager, j
                     },
                     success: function(_track){
                         // Three types of 'tracks': users, sets, and individual tracks.
+
                         if(_track.kind === 'user') {
                             self.getTracksForUser(_track, self.config.tracksPerArtist, function(tracks) {
                                 self.parseTracks(url, tracks, function(tracks) {
@@ -657,7 +659,6 @@ define(['vendor/soundmanager2', 'jquery', 'vendor/d3'], function(soundManager, j
                         } else if(_track.tracks && _track.tracks.length > 0) {
                             self.parseTracks(url, _track.tracks, function(tracks) {
                                 _track = tracks[0];
-
                                 trackPromise.resolve(_track);
                             });
                         } else {
@@ -712,11 +713,9 @@ define(['vendor/soundmanager2', 'jquery', 'vendor/d3'], function(soundManager, j
         // Preload the SC track info.
         self.preloadSCTracks = function(cb) {
             var promises = [];
-
             for(var x = 0, l = self.tracks.length; x < l; x++) {
                 var _track = self.tracks[x];
                 var promise = self.resolveTrack(_track);
-
                 promises.push(promise);
             }
 
@@ -754,6 +753,7 @@ define(['vendor/soundmanager2', 'jquery', 'vendor/d3'], function(soundManager, j
         self.parseTracks = function(url, _tracks, cb) {
             var setTracks = [];
             var trackUrls = [];
+            var ogTrackOrder = _tracks;
             var start_index = self.tracks.indexOf(url);
             var tracksProcessed = 0;
 
@@ -784,8 +784,21 @@ define(['vendor/soundmanager2', 'jquery', 'vendor/d3'], function(soundManager, j
 
                         // Add tracks to playlist
                         self.tracks.splice.apply(self.tracks, args);
+                        
+                        var sortSetTracks = [];
+                        var sortSelfTracks = [];
 
-                        return cb(setTracks);
+                        //sort tracks to original
+                        for (var k = 0; k<l;k++) {
+                            for(var j = 0; j<l;j++) {
+                                if(ogTrackOrder[k].id==setTracks[j].id) sortSetTracks[k] = setTracks[j];
+                                if(ogTrackOrder[k].permalink_url.substring(21)===self.tracks[j]) sortSelfTracks[k] = self.tracks[j];
+                            }
+                        }
+
+                        self.tracks = sortSelfTracks;
+
+                        return cb(sortSetTracks);
                     }
                 });
             }
