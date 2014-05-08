@@ -28697,7 +28697,7 @@ ToneDen.define('player',['jquery', 'vendor/simple-slider', 'underscore', 'vendor
                 parameters.repeat = scInstance.config.loopTrack;
 
                 var empty = !_.any(parameters.tracks) && parameters.tracks.length > 0;
-                
+
                 if(parameters.nowPlaying) {
                     for(var i = 0; i < parameters.tracks.length; i++) {
                         if(parameters.tracks[i].title === parameters.nowPlaying.title) {
@@ -28902,7 +28902,8 @@ ToneDen.define('player',['jquery', 'vendor/simple-slider', 'underscore', 'vendor
                 } else if(target.hasClass('next')) {
                     scInstance.next();
                 } else if(target.hasClass('prev')) {
-                    if(scInstance.position() > 5) {
+                    console.log(scInstance.position());
+                    if(scInstance.position() > 4000) {
                         scInstance.seek(0);
                     }
                     else {
