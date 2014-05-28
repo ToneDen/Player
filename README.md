@@ -97,23 +97,51 @@ API
       *default: 'waves'*   
       What type of visualizer to show. Can be 'bars' or 'waves' to show those types of visualizers.  
       Any falsy value or 'none' will hide the visualizer.  
+    * **onTrackReady**  
+      *default: 'null'*   
+      A callback function to be executed when the track is ready to play.
+    * **onTrackFinished**  
+      *default: 'null'*   
+      A callback function to be executed when the track has finished playing.
+    * **onPlaylistFinished**  
+      *default: 'null'*   
+      A callback function to be executed when the playlist has finished playing.
   * **.getInstanceByDom(dom)**  
       Returns the player instance that is associated with the given dom item.  
       The dom argument can be either a selector string (will be passed to jQuery) or a jQuery dom object.
 
 **Player Instance**
-* **.destroy()**  
-  Destroys the given player instance and clears the containing element's HTML.  
 * **id**
   Randomly generated ID, unique to the player instance.
-* **.pause()**  
-  Pauses the track being played by the player.  
 * **.parameters**  
   The parameters object that the player is using.  
+* **.destroy()**  
+  Destroys the given player instance and clears the containing element's HTML.
 * **.play()**  
-  Play the currently selected track.  
-* **.togglePause()**  
-  Toggle the play state of the current track.
+  Play the currently selected track. 
+* **.pause()**  
+  Pauses the track being played by the player.
+* **.mute()**  
+  Mutes the player.
+* **.next()**  
+  Skips to the next track.
+* **.prev()**  
+  Jumps to the previous track.
+* **.skipTo(index)**  
+  Jumps to a track specified by a index parameter.
+* **.getTrack()**  
+  Gets information for the current track.
+* **.getAllTracks()**  
+  Gets all of the tracks loaded into the player as an array.
+* **.getSound()**  
+  Gets the sound object of the current track.
+
+Sample API Usage:
+``` 
+ToneDen.player.getInstanceByDom("#player").play();
+ToneDen.player.getInstanceByDom("#player").pause();
+ToneDen.player.getInstanceByDom("#player").getTrack();
+```
 
 Development
 ===
