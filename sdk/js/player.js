@@ -456,7 +456,7 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-interface', '
                     timeLeft > bufferPauseThreshold || !eqData || (trackLoadedPercent / 100) < currentRatio;
 
                 if(waitToBuffer) {
-                    var loader = $('<i class="fa fw fa-spinner fa-spin tdloader"></i>');
+                    var loader = $('<i class="fa fw fa-circle-o-notch fa-spin tdloader"></i>');
 
                     if(trackPlayedPercent != 100) {
                         scInstance.pause();
