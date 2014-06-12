@@ -874,30 +874,39 @@ opacity: 0.4;
 }
 
 /*Feed*/
+.td.player.feed .header {
+  position: absolute;
+  left: 0;
+}
+
 .td.player.feed .feed-cover{
   text-align: left;  
 }
 
 .td.player.feed .feed-cover img{
-  height: 90px;
-  max-height: 90px;
+  height: 80px;
+  max-height: 80px;
 }
 
 .td.player.feed .controls {
-  width: 16.66667%;
+  width: 33.33333%;
   display: table;
   border-top: 0px;
+  padding:0px;
   border-bottom: 0px;
+  padding-left: 80px;
 }
 
 .td.player.feed .buttons {
   display: table-cell;
   vertical-align: middle;
+  padding:0px;
+  border-left: 1px solid;
 }
 
 .td.player.feed .player-play {
   width: 100%;
-  line-height: 70px !important;
+  line-height: 80px !important;
 }
 
 .td.player.feed .fa-play-circle-o {
@@ -920,8 +929,16 @@ opacity: 0.4;
 }
 
 .td.player.feed .tdspinner{
-  max-height: 90px;
+  max-height: 80px;
   margin: 30px auto;
+}
+
+.td.player.feed .start-time, .td.player.feed .stop-time {
+  line-height: 40px;
+}
+
+.td.player.feed .scrub-bar-box {
+  padding: 20px 0px;
 }
 
 /*Container Responsiveness*/

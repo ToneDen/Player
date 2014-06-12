@@ -8,21 +8,21 @@
         <div class="rect5"></div>
     </div>
     {{/unless}}
-    <div class="tdlarge-12 tdsmall-12 tdcolumns tdlarge-centered tdsmall-centered">
         {{!-- <a href="https://www.toneden.io" target="_blank" class="td-icon-link"><i class="td-icon"></i></a> --}}
-        {{#with nowPlaying}}
-            <div class="header tdlarge-2 tdsmall-2 tdcolumns">
-                <div class="cover tdlarge-12 tdsmall-12 tdcolumns">
-                    <div class="feed-cover">
-                        {{#if artwork_url}}
-                            <img src="{{artwork_url}}" />
-                        {{else}}
-                            <img src="{{user.avatar_url}}" />
-                        {{/if}}
-                    </div>
+    {{#with nowPlaying}}
+        <div class="header">
+            <div class="cover">
+                <div class="feed-cover">
+                    {{#if artwork_url}}
+                        <img src="{{artwork_url}}" />
+                    {{else}}
+                        <img src="{{user.avatar_url}}" />
+                    {{/if}}
                 </div>
             </div>
-            <div class="controls tdlarge-2 tdsmall-2 tdcolumns">
+        </div>
+        <div class="tdlarge-12 tdsmall-12 tdcolumns tdlarge-centered tdsmall-centered">
+            <div class="controls tdlarge-4 tdsmall-2 tdcolumns">
                 <div class="buttons tdlarge-12 tdsmall-12 tdcolumns">
                     <i class="fa fa-play-circle-o fw player-play play"></i>
                 </div>
@@ -47,7 +47,7 @@
                         </div>
                     </div>
                 </div>
-            {{/with}}
+            </div>
         </div>
-    </div>
+    {{/with}}
 </div>
