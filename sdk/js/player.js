@@ -1,4 +1,4 @@
-define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/td-interface', 'vendor/handlebars', 'hbs!templates/player', 'hbs!templates/player-solo', 'hbs!templates/player-mini', 'hbs!templates/player-empty', 'templates/helpers/msToTimestamp', 'vendor/d3'], function($, SimpleSlider, _, tdPlayer, Handlebars, template, template_solo, template_mini, template_empty, msToTimestamp, d3) {
+define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/td-interface', 'vendor/handlebars', 'hbs!templates/player', 'hbs!templates/player-solo', 'hbs!templates/player-mini',  'hbs!templates/player-feed','hbs!templates/player-empty', 'templates/helpers/msToTimestamp', 'vendor/d3'], function($, SimpleSlider, _, tdPlayer, Handlebars, template, template_solo, template_mini, template_feed, template_empty, msToTimestamp, d3) {
     return {
         create: function(urls, dom, options) {
             ToneDen.players = ToneDen.players || [];
@@ -13,6 +13,7 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/td-interface', '
                 debug: false, // Output debug messages?
                 keyboardEvents: false, // Should we listen to keyboard events?
                 single: null,
+                feed: null,
                 skin: 'light',
                 staticUrl: '//sd.toneden.io/',
                 tracksPerArtist: 10, // How many tracks to load when given an artist SoundCloud URL.
@@ -128,6 +129,8 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/td-interface', '
                     }
                 } else if(parameters.mini==true) {
                     container.html(template_mini(parameters));
+                } else if(parameters.feed==true) {
+                    container.html(template_feed(parameters));
                 } else {
                     container.html(template(parameters));
                     modifyVolumeUI();
@@ -286,7 +289,8 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/td-interface', '
                     eq: parameters.eq,
                     tracksPerArtist: parameters.tracksPerArtist,
                     single: parameters.single,
-                    mini: parameters.mini
+                    mini: parameters.mini,
+                    feed: parameters.feed
                 });
             } else {
                 log('ToneDen Player: the container specified by "' + parameters.dom + '" does not exist.', 'error');
@@ -481,7 +485,7 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/td-interface', '
 
                     // If parameters.single is not explicitly set to false and
                     // there is only one track, render the single-track player.
-                    if(tracks.length === 1 && parameters.single !== false && parameters.mini == false) {
+                    if(tracks.length === 1 && parameters.single !== false && parameters.mini == false && parameters.feed == false) {
                        parameters.single = true;
                     }
 
@@ -494,7 +498,8 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/td-interface', '
                         tracksPerArtist: parameters.tracksPerArtist,
                         visualizerType: parameters.visualizerType,
                         single: parameters.single,
-                        mini: parameters.mini
+                        mini: parameters.mini,
+                        feed: parameters.feed
                     });
                 });
             });
@@ -517,7 +522,8 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/td-interface', '
                         tracksPerArtist: parameters.tracksPerArtist,
                         visualizerType: parameters.visualizerType,
                         single: parameters.single,
-                        mini: parameters.mini
+                        mini: parameters.mini,
+                        feed: parameters.feed
                     });
                 });
             });

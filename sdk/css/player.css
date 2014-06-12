@@ -35,7 +35,7 @@ text-align: center;
 }
 
 .td.player .tdempty{
-margin: 25px auto;
+margin: 20px auto;
 text-align: center;
 font-size: 14px;
 opacity: 0.4;
@@ -719,7 +719,6 @@ opacity: 0.4;
   border-radius: 50px;
 }
 
-
 .td.player.mini .controls, .td.player.mini .buttons{
   width: initial;
 }
@@ -874,6 +873,56 @@ opacity: 0.4;
   right: 0;
 }
 
+/*Feed*/
+.td.player.feed .feed-cover{
+  text-align: left;  
+}
+
+.td.player.feed .feed-cover img{
+  height: 90px;
+  max-height: 90px;
+}
+
+.td.player.feed .controls {
+  width: 16.66667%;
+  display: table;
+  border-top: 0px;
+  border-bottom: 0px;
+}
+
+.td.player.feed .buttons {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.td.player.feed .player-play {
+  width: 100%;
+  line-height: 70px !important;
+}
+
+.td.player.feed .fa-play-circle-o {
+  font-size: 42px;
+}
+
+.td.player.feed .info {
+  border-bottom: 0px
+}
+
+.td.player.feed .song-name {
+}
+
+.td.player.feed .scrubber {
+  border-bottom:0px;
+}
+
+.td.player.feed .feed-container {
+  border-left: 1px solid;
+}
+
+.td.player.feed .tdspinner{
+  max-height: 90px;
+  margin: 30px auto;
+}
 
 /*Container Responsiveness*/
 .td.player .follow-small, 
