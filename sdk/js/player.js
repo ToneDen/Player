@@ -21,7 +21,8 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/td-interface', '
                 mini: false,
                 onTrackReady: null,
                 onTrackFinished: null,
-                onPlaylistFinished: null
+                onPlaylistFinished: null,
+                togglePause: true,
             };
 
             // Setup the parameters object with the given arguments and
@@ -56,7 +57,7 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/td-interface', '
                 consumerKey: '6f85bdf51b0a19b7ab2df7b969233901',
                 debug: parameters.debug,
                 preload: true,
-                togglePause: true,
+                togglePause: parameters.togglePause,
                 tracksPerArtist: parameters.tracksPerArtist,
                 visualizer: showVisualizer,
                 onTrackReady: parameters.onTrackReady,
