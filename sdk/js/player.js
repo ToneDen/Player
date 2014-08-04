@@ -98,7 +98,7 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/td-interface', '
 
                 parameters.repeat = tdInstance.config.loopTrack;
 
-                var empty = !_.any(parameters.tracks) && parameters.tracks.length > 0;
+                var empty = parameters.tracks==null && !_.any(parameters.tracks);
 
                 if(parameters.nowPlaying) {
                     for(var i = 0; i < parameters.tracks.length; i++) {
@@ -284,8 +284,14 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/td-interface', '
 
             // Make sure the specified container is valid.
             if(container.length > 0) {
+                if(parameters.urls && parameters.urls.length>0) {
+                    var tracks = [];
+                } else {
+                    var tracks = null;
+                }
+
                 rerender({
-                    tracks: [],
+                    tracks: tracks,
                     skin: parameters.skin,
                     eq: parameters.eq,
                     tracksPerArtist: parameters.tracksPerArtist,
@@ -307,7 +313,6 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/td-interface', '
                 } else if(target.hasClass('next')) {
                     tdInstance.next();
                 } else if(target.hasClass('prev')) {
-                    console.log(tdInstance.position());
                     if(tdInstance.position() > 4000) {
                         tdInstance.seek(0);
                     }
@@ -549,7 +554,6 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/td-interface', '
             }
 
             function on(evt, callback) {
-                console.log("here");
                 console.log(callback);
                 console.log(evt);
                 tdInstance.on(evt, callback);
