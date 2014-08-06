@@ -877,10 +877,17 @@ opacity: 0.4;
 .td.player.feed .header {
   position: absolute;
   left: 0;
+  border-right: 1px solid;
 }
 
 .td.player.feed .feed-cover{
   text-align: left;  
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.td.player.feed .song-name {
+  font-size: 13px;
 }
 
 .td.player.feed .feed-cover img{
@@ -895,13 +902,17 @@ opacity: 0.4;
   padding:0px;
   border-bottom: 0px;
   padding-left: 80px;
+  position: absolute;
+  margin: auto;
+  height: 80px;
+  bottom: 0;
+  top: 0;
 }
 
 .td.player.feed .buttons {
   display: table-cell;
   vertical-align: middle;
   padding:0px;
-  border-left: 1px solid;
 }
 
 .td.player.feed .player-play {
