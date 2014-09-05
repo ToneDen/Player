@@ -20,43 +20,43 @@ define(['vendor/soundmanager2', 'jquery', 'vendor/d3'], function(soundManager, j
         });
     }
 
-    /* SCPLAYER EVENTS */
+    /* tdplayer EVENTS */
     /*
-        scplayer.init
-        scplayer.play
-        scplayer.pause
-        scplayer.stop
-        scplayer.mute
-        scplayer.position
-        scplayer.volume
-        scplayer.changing_track
-        scplayer.loop_changed
+        tdplayer.init
+        tdplayer.play
+        tdplayer.pause
+        tdplayer.stop
+        tdplayer.mute
+        tdplayer.position
+        tdplayer.volume
+        tdplayer.changing_track
+        tdplayer.loop_changed
 
     */
-    /* SCPLAYER PLAYLIST EVENTS */
+    /* tdplayer PLAYLIST EVENTS */
     /*
-        scplayer.playlist.next
-        scplayer.playlist.looped
-        scplayer.playlist.trackLooped
-        scplayer.playlist.ended
-        scplayer.playlist.prev
-        scplayer.playlist.looped
-        scplayer.playlist.restarted
-        scplayer.playlist.goto
-        scplayer.playlist.preloaded
+        tdplayer.playlist.next
+        tdplayer.playlist.looped
+        tdplayer.playlist.trackLooped
+        tdplayer.playlist.ended
+        tdplayer.playlist.prev
+        tdplayer.playlist.looped
+        tdplayer.playlist.restarted
+        tdplayer.playlist.goto
+        tdplayer.playlist.preloaded
     */
-    /* SCPLAYER TRACK EVENTS */
+    /* tdplayer TRACK EVENTS */
     /*
-        scplayer.track.info_loaded
-        scplayer.track.bindable
-        scplayer.track.ready
-        scplayer.track.finished
-        scplayer.track.whileloading
-        scplayer.track.whileplaying
-        scplayer.track.played
-        scplayer.track.paused
-        scplayer.track.resumed
-        scplayer.track.stopped
+        tdplayer.track.info_loaded
+        tdplayer.track.bindable
+        tdplayer.track.ready
+        tdplayer.track.finished
+        tdplayer.track.whileloading
+        tdplayer.track.whileplaying
+        tdplayer.track.played
+        tdplayer.track.paused
+        tdplayer.track.resumed
+        tdplayer.track.stopped
     */
 
     //SoundCloud Player class
@@ -73,7 +73,7 @@ define(['vendor/soundmanager2', 'jquery', 'vendor/d3'], function(soundManager, j
             preload: true, // Prefetch the sc track data
             startOn: 0,
             togglePause: true, //Should pause act as a toggle?
-            tracksPerArtist: 5, // When given an artist URL, how many tracks to load?
+            tracksPerArtist: 10, // When given an artist URL, how many tracks to load?
             volume: 100,
             useEQData: true,
             useHTML5Audio: true,
@@ -122,7 +122,7 @@ define(['vendor/soundmanager2', 'jquery', 'vendor/d3'], function(soundManager, j
             }
 
             self.changeTrack();
-            self.trigger('scplayer.init');
+            self.trigger('tdplayer.init');
 
             if(self.config.autoplay) {
                 self.play();
@@ -154,7 +154,7 @@ define(['vendor/soundmanager2', 'jquery', 'vendor/d3'], function(soundManager, j
                 url = self.tracks[i];
                 self.resolveTrack(url, self.setSound);
 
-                self.trigger('scplayer.changing_track', i);
+                self.trigger('tdplayer.changing_track', i);
             }
 
             return self;
@@ -174,7 +174,7 @@ define(['vendor/soundmanager2', 'jquery', 'vendor/d3'], function(soundManager, j
                 self.playWhenReady = true;
             }
 
-            self.trigger('scplayer.play', self.currentTrackIndex);
+            self.trigger('tdplayer.play', self.currentTrackIndex);
 
             return self;
         };
@@ -191,7 +191,7 @@ define(['vendor/soundmanager2', 'jquery', 'vendor/d3'], function(soundManager, j
                     self.sound.pause();
                 }
 
-                self.trigger('scplayer.pause', self.sound.paused);
+                self.trigger('tdplayer.pause', self.sound.paused);
             }
 
             return self;
@@ -209,7 +209,7 @@ define(['vendor/soundmanager2', 'jquery', 'vendor/d3'], function(soundManager, j
                     self.sound.resume();
                 }
 
-                self.trigger('scplayer.pause', self.sound.paused);
+                self.trigger('tdplayer.pause', self.sound.paused);
             }
 
             return self;
@@ -220,7 +220,7 @@ define(['vendor/soundmanager2', 'jquery', 'vendor/d3'], function(soundManager, j
                 self.sound.stop();
             }
 
-            self.trigger('scplayer.stop');
+            self.trigger('tdplayer.stop');
             self.log('stop');
 
             return self;
@@ -239,25 +239,25 @@ define(['vendor/soundmanager2', 'jquery', 'vendor/d3'], function(soundManager, j
             self.log(self.playWhenReady);
 
             if(self.config.loopTrack) {
-                self.trigger('scplayer.playlist.trackLooped');
+                self.trigger('tdplayer.playlist.trackLooped');
 
                 self.changeTrack();
             } else if(self.tracks[self.currentTrackIndex + 1]) {
                 self.currentTrackIndex += 1;
                 self.changeTrack();
 
-                self.trigger('scplayer.playlist.next', self.currentTrackIndex-1, self.currentTrackIndex);
+                self.trigger('tdplayer.playlist.next', self.currentTrackIndex-1, self.currentTrackIndex);
                 self.log('has next');
             } else if(self.config.loop) {
                 self.currentTrackIndex = 0;
                 self.changeTrack();
 
-                self.trigger('scplayer.playlist.looped');
+                self.trigger('tdplayer.playlist.looped');
                 self.log('looped');
             } else {
                 self.currentTrackIndex = self.tracks.length - 1;
 
-                self.trigger('scplayer.playlist.ended');
+                self.trigger('tdplayer.playlist.ended', self.config.onPlaylistFinished);
                 self.log('no mas');
             }
 
@@ -276,15 +276,15 @@ define(['vendor/soundmanager2', 'jquery', 'vendor/d3'], function(soundManager, j
                 self.currentTrackIndex -= 1;
                 self.changeTrack();
 
-                self.trigger('scplayer.playlist.prev');
+                self.trigger('tdplayer.playlist.prev');
             } else if(self.config.loop) {
                 self.currentTrackIndex = self.tracks.length - 1;
                 self.changeTrack();
 
-                self.trigger('scplayer.playlist.looped');
+                self.trigger('tdplayer.playlist.looped');
             } else {
                 self.currentTrackIndex = 0;
-                self.trigger('scplayer.playlist.restarted');
+                self.trigger('tdplayer.playlist.restarted');
             }
 
             return self;
@@ -303,7 +303,7 @@ define(['vendor/soundmanager2', 'jquery', 'vendor/d3'], function(soundManager, j
             if(self.tracks[index]) {
                 self.currentTrackIndex = index;
 
-                self.trigger('scplayer.playlist.goto');
+                self.trigger('tdplayer.playlist.goto');
                 self.changeTrack();
             }
 
@@ -321,7 +321,7 @@ define(['vendor/soundmanager2', 'jquery', 'vendor/d3'], function(soundManager, j
                 self.sound.toggleMute();
             }
 
-            self.trigger('scplayer.mute', self.sound.muted);
+            self.trigger('tdplayer.mute', self.sound.muted);
 
             return self;
         };
@@ -373,12 +373,12 @@ define(['vendor/soundmanager2', 'jquery', 'vendor/d3'], function(soundManager, j
                     pos = Math.min(self.sound.duration, pos);
                     pos = Math.max(0, pos);
 
-                    self.trigger('scplayer.position', pos);
+                    self.trigger('tdplayer.position', pos);
 
                     //setter
                     return self.sound.setPosition(pos);
                 } else {
-                    self.trigger('scplayer.position', self.sound.position);
+                    self.trigger('tdplayer.position', self.sound.position);
 
                     //getter
                     return self.sound.position;
@@ -395,13 +395,13 @@ define(['vendor/soundmanager2', 'jquery', 'vendor/d3'], function(soundManager, j
                     vol = Math.min(100, vol);
                     vol = Math.max(0, vol);
 
-                    self.trigger('scplayer.volume', vol);
+                    self.trigger('tdplayer.volume', vol);
 
                     //setter
                     self.config.volume = vol;
                     return self.sound.setVolume(vol);
                 } else {
-                    self.trigger('scplayer.volume', self.sound.volume);
+                    self.trigger('tdplayer.volume', self.sound.volume);
 
                     //getter
                     return self.sound.volume;
@@ -424,7 +424,7 @@ define(['vendor/soundmanager2', 'jquery', 'vendor/d3'], function(soundManager, j
         this.loop = function(doLoop){
             if(doLoop){
                 self.config.loop = doLoop;
-                self.trigger('scplayer.loop_changed', self.config.loop);
+                self.trigger('tdplayer.loop_changed', self.config.loop);
             }
 
             return self.config.loop;
@@ -476,11 +476,16 @@ define(['vendor/soundmanager2', 'jquery', 'vendor/d3'], function(soundManager, j
             for(var i = 0; i < urls.length; i++) {
                 self.trackInfo(urls[i], function(info) {
                     trackObjects.push(info);
-
-                    if(trackObjects.length === urls.length) {
-                        return callback(trackObjects);
-                    }
                 });
+            }
+
+            if(trackObjects.length === urls.length) {
+                if(callback) {
+                    return callback(trackObjects);
+                }
+                else {
+                    return trackObjects;
+                }
             }
         };
 
@@ -520,7 +525,7 @@ define(['vendor/soundmanager2', 'jquery', 'vendor/d3'], function(soundManager, j
             if(isMoz==true) var flashFallback = true;
 
             self.log('setSound');
-            self.trigger('scplayer.track.info_loaded', track);
+            self.trigger('tdplayer.track.info_loaded', track);
 
             // Store the current track object
             self.currentTrack = track;
@@ -555,7 +560,7 @@ define(['vendor/soundmanager2', 'jquery', 'vendor/d3'], function(soundManager, j
                 whileloading: function() {
                     // Only use whole number percents.
                     var percent = Math.round(this.bytesLoaded / this.bytesTotal * 100);
-                    self.trigger('scplayer.track.whileloading', percent);
+                    self.trigger('tdplayer.track.whileloading', percent);
                 },
                 whileplaying: function() {
                     eqBarValues = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
@@ -570,31 +575,31 @@ define(['vendor/soundmanager2', 'jquery', 'vendor/d3'], function(soundManager, j
                     var fullEQ = reverseEqBarValues.concat(eqBarValues);
                     // Round to nearest 10th of a percent for performance
                     var percent = Math.round(this.position / track.duration * 100 * 10) / 10;
-                    self.trigger('scplayer.track.whileplaying', percent, fullEQ);
+                    self.trigger('tdplayer.track.whileplaying', percent, fullEQ);
                 },
                 onplay: function() {
                     self.log('track.onplay');
-                    self.trigger('scplayer.track.played');
+                    self.trigger('tdplayer.track.played');
                 },
                 onresume: function() {
-                    self.trigger('scplayer.track.resumed');
+                    self.trigger('tdplayer.track.resumed');
                 },
                 onstop: function() {
-                    self.trigger('scplayer.track.stopped');
+                    self.trigger('tdplayer.track.stopped');
                 },
                 onpause: function() {
-                    self.trigger('scplayer.track.paused');
+                    self.trigger('tdplayer.track.paused');
                 },
                 onfinish: function() {
-                    self.trigger('scplayer.track.finished');
+                    self.trigger('tdplayer.track.finished', self.config.onTrackFinished);
                 },
                 onload: function() {
                     self.log('onload');
-                    self.trigger('scplayer.track.ready', self.currentTrackIndex, self.currentTrack);
+                    self.trigger('tdplayer.track.ready',self.config.onTrackReady);
                 }
             });
 
-            self.trigger('scplayer.track.bindable', track, self.sound);
+            self.trigger('tdplayer.track.bindable', track, self.sound);
         };
 
         // Gets a SC url and goes to SC to fetch the track data.
@@ -646,6 +651,7 @@ define(['vendor/soundmanager2', 'jquery', 'vendor/d3'], function(soundManager, j
                     },
                     success: function(_track){
                         // Three types of 'tracks': users, sets, and individual tracks.
+
                         if(_track.kind === 'user') {
                             self.getTracksForUser(_track, self.config.tracksPerArtist, function(tracks) {
                                 self.parseTracks(url, tracks, function(tracks) {
@@ -657,7 +663,6 @@ define(['vendor/soundmanager2', 'jquery', 'vendor/d3'], function(soundManager, j
                         } else if(_track.tracks && _track.tracks.length > 0) {
                             self.parseTracks(url, _track.tracks, function(tracks) {
                                 _track = tracks[0];
-
                                 trackPromise.resolve(_track);
                             });
                         } else {
@@ -712,17 +717,15 @@ define(['vendor/soundmanager2', 'jquery', 'vendor/d3'], function(soundManager, j
         // Preload the SC track info.
         self.preloadSCTracks = function(cb) {
             var promises = [];
-
             for(var x = 0, l = self.tracks.length; x < l; x++) {
                 var _track = self.tracks[x];
                 var promise = self.resolveTrack(_track);
-
                 promises.push(promise);
             }
 
             // Have to do apply to pass many promises as list instead of array.
             jQuery.when.apply(jQuery, promises).then(function() {
-                self.trigger('scplayer.playlist.preloaded');
+                self.trigger('tdplayer.playlist.preloaded');
 
                 if(cb) {
                     cb();
@@ -754,6 +757,7 @@ define(['vendor/soundmanager2', 'jquery', 'vendor/d3'], function(soundManager, j
         self.parseTracks = function(url, _tracks, cb) {
             var setTracks = [];
             var trackUrls = [];
+            var ogTrackOrder = _tracks;
             var start_index = self.tracks.indexOf(url);
             var tracksProcessed = 0;
 
@@ -784,8 +788,21 @@ define(['vendor/soundmanager2', 'jquery', 'vendor/d3'], function(soundManager, j
 
                         // Add tracks to playlist
                         self.tracks.splice.apply(self.tracks, args);
+                        
+                        var sortSetTracks = [];
+                        var sortSelfTracks = [];
 
-                        return cb(setTracks);
+                        //sort tracks to original
+                        for (var k = 0; k<l;k++) {
+                            for(var j = 0; j<l;j++) {
+                                if(ogTrackOrder[k].id==setTracks[j].id) sortSetTracks[k] = setTracks[j];
+                                if(ogTrackOrder[k].permalink_url.substring(21)===self.tracks[j]) sortSelfTracks[k] = self.tracks[j];
+                            }
+                        }
+
+                        self.tracks = sortSelfTracks;
+
+                        return cb(sortSetTracks);
                     }
                 });
             }
@@ -830,30 +847,42 @@ define(['vendor/soundmanager2', 'jquery', 'vendor/d3'], function(soundManager, j
         };
 
         /* internal events */
-        self.on('scplayer.track.ready', function(e) {
+        self.on('tdplayer.track.ready', function(e, cb) {
             self.log('track.onready!!!');
 
             if(self.playWhenReady == true) {
                 self.playWhenReady = false;
                 self.play();
             }
+
+            if(cb) {
+                cb();
+            }
         });
 
-        self.on('scplayer.track.finished', function(e) {
+        self.on('tdplayer.track.finished', function(e, cb) {
             self.log('track finished');
 
             if(self.config.autoswitch && (self.config.loop || self.hasNext())) {
                 self.log('finished and autoswitch');
                 self.next().play();
             }
+
+            if(cb) {
+                cb();
+            }
         });
 
         // This shouldn't be necessary, but we want to make sure.
-        self.on('scplayer.playlist.ended', function(e) {
+        self.on('tdplayer.playlist.ended', function(e, cb) {
             self.log('playlist ended');
 
             if(!self.config.loop) {
                 self.stop();
+            }
+
+            if(cb) {
+                cb();
             }
         });
 
@@ -897,7 +926,7 @@ define(['vendor/soundmanager2', 'jquery', 'vendor/d3'], function(soundManager, j
             sound: this.getSound,
             playlist: this.getPlaylist,
             destroy: this.destroy,
-            addTracks: this.addTracks
+            addTracks: this.addTracks,
         };
     };
 

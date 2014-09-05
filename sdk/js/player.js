@@ -1,4 +1,4 @@
-define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-interface', 'vendor/handlebars', 'hbs!templates/player', 'hbs!templates/player-solo', 'hbs!templates/player-mini', 'hbs!templates/player-empty', 'templates/helpers/msToTimestamp', 'vendor/d3'], function($, SimpleSlider, _, scPlayer, Handlebars, template, template_solo, template_mini, template_empty, msToTimestamp, d3) {
+define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/td-interface', 'vendor/handlebars', 'hbs!templates/player', 'hbs!templates/player-solo', 'hbs!templates/player-mini',  'hbs!templates/player-feed','hbs!templates/player-empty', 'templates/helpers/msToTimestamp', 'vendor/d3'], function($, SimpleSlider, _, tdPlayer, Handlebars, template, template_solo, template_mini, template_feed, template_empty, msToTimestamp, d3) {
     return {
         create: function(urls, dom, options) {
             ToneDen.players = ToneDen.players || [];
@@ -13,11 +13,16 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-interface', '
                 debug: false, // Output debug messages?
                 keyboardEvents: false, // Should we listen to keyboard events?
                 single: null,
+                feed: null,
                 skin: 'light',
                 staticUrl: '//sd.toneden.io/',
                 tracksPerArtist: 10, // How many tracks to load when given an artist SoundCloud URL.
                 visualizerType: 'waves', // Equalizer type. 'waves' or 'bars'
-                mini: false
+                mini: false,
+                onTrackReady: null,
+                onTrackFinished: null,
+                onPlaylistFinished: null,
+                togglePause: true,
             };
 
             // Setup the parameters object with the given arguments and
@@ -48,13 +53,16 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-interface', '
             }
 
             // Parameters for the SoundCloud player.
-            var scInstanceParameters = {
+            var tdInstanceParameters = {
                 consumerKey: '6f85bdf51b0a19b7ab2df7b969233901',
                 debug: parameters.debug,
                 preload: true,
-                togglePause: true,
+                togglePause: parameters.togglePause,
                 tracksPerArtist: parameters.tracksPerArtist,
-                visualizer: showVisualizer
+                visualizer: showVisualizer,
+                onTrackReady: parameters.onTrackReady,
+                onTrackFinished: parameters.onTrackFinished,
+                onPlaylistFinished: parameters.onPlaylistFinished
             }
 
             var dom = parameters.dom;
@@ -70,7 +78,7 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-interface', '
             var trackReady = false;
             var trackSuspend = false;
 
-            var scInstance = new scPlayer(urls, scInstanceParameters);
+            var tdInstance = new tdPlayer(urls, tdInstanceParameters);
             var titleArea = container.find('.title');
 
             // Helper functions.
@@ -88,9 +96,9 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-interface', '
             function rerender(parameters) {
                 parameters = JSON.parse(JSON.stringify(parameters));
 
-                parameters.repeat = scInstance.config.loopTrack;
+                parameters.repeat = tdInstance.config.loopTrack;
 
-                var empty = !_.any(parameters.tracks) && parameters.tracks.length > 0;
+                var empty = parameters.tracks==null && !_.any(parameters.tracks);
 
                 if(parameters.nowPlaying) {
                     for(var i = 0; i < parameters.tracks.length; i++) {
@@ -122,6 +130,8 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-interface', '
                     }
                 } else if(parameters.mini==true) {
                     container.html(template_mini(parameters));
+                } else if(parameters.feed==true) {
+                    container.html(template_feed(parameters));
                 } else {
                     container.html(template(parameters));
                     modifyVolumeUI();
@@ -243,7 +253,6 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-interface', '
 
             //TODO: Refactor
             function modifyVolumeUI() {
-                console.log(playerVolume);
                 if(playerVolume==100) {
                     container.find(".volume-init").removeClass().addClass("fa fa-volume-up fw volume-init");
                     container.find(".volume-select i.volume-active").removeClass("volume-active");
@@ -275,13 +284,20 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-interface', '
 
             // Make sure the specified container is valid.
             if(container.length > 0) {
+                if(parameters.urls && parameters.urls.length>0) {
+                    var tracks = [];
+                } else {
+                    var tracks = null;
+                }
+
                 rerender({
-                    tracks: [],
+                    tracks: tracks,
                     skin: parameters.skin,
                     eq: parameters.eq,
                     tracksPerArtist: parameters.tracksPerArtist,
                     single: parameters.single,
-                    mini: parameters.mini
+                    mini: parameters.mini,
+                    feed: parameters.feed
                 });
             } else {
                 log('ToneDen Player: the container specified by "' + parameters.dom + '" does not exist.', 'error');
@@ -293,15 +309,15 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-interface', '
                 var target = $(e.target);
 
                 if(target.hasClass('play')) {
-                    scInstance.pause();
+                    tdInstance.pause();
                 } else if(target.hasClass('next')) {
-                    scInstance.next();
+                    tdInstance.next();
                 } else if(target.hasClass('prev')) {
-                    if(scInstance.position() > 5) {
-                        scInstance.seek(0);
+                    if(tdInstance.position() > 4000) {
+                        tdInstance.seek(0);
                     }
                     else {
-                        scInstance.prev();
+                        tdInstance.prev();
                     }
                 }
             });
@@ -312,10 +328,10 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-interface', '
 
                 if(target.hasClass('repeat-on')) {
                     target.removeClass("repeat-on");
-                    scInstance.config.loopTrack = false;
+                    tdInstance.config.loopTrack = false;
                 } else {
                     target.addClass("repeat-on");
-                    scInstance.config.loopTrack = true;
+                    tdInstance.config.loopTrack = true;
                 }
             });
 
@@ -328,21 +344,21 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-interface', '
                     container.find(".volume-init").hide();
                     container.find(".volume-select").fadeIn();
                 }else if(target.hasClass('volume-off')) {
-                    scInstance.volume(0);
+                    tdInstance.volume(0);
                     container.find(".volume-select i").removeClass('volume-active');
                     target.addClass('volume-active');
                     container.find(".volume-init").fadeIn().removeClass().addClass(newClass + " volume-init");
                     container.find(".volume-select").hide();
                     playerVolume = 0;
                 } else if(target.hasClass('volume-med')) {
-                    scInstance.volume(50);
+                    tdInstance.volume(50);
                     container.find(".volume-select i").removeClass('volume-active');
                     target.addClass('volume-active');
                     container.find(".volume-init").fadeIn().removeClass().addClass(newClass + " volume-init");
                     container.find(".volume-select").hide();
                     playerVolume = 50;
                 } else if(target.hasClass('volume-max')) {
-                    scInstance.volume(100);
+                    tdInstance.volume(100);
                     container.find(".volume-select i").removeClass('volume-active');
                     target.addClass('volume-active');
                     container.find(".volume-init").fadeIn().removeClass().addClass(newClass + " volume-init");
@@ -357,35 +373,35 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-interface', '
                 var index = Number(row.attr('data-index'));
 
                 if(cls.indexOf('playing') === -1) {
-                    scInstance.goto(index);
+                    tdInstance.goto(index);
                 }
             });
 
             container.on('slider:changed', '.scrubber-slider', function(e, slider) {
-                scInstance.play();
+                tdInstance.play();
                 log('Slider Ratio: ' + slider.ratio);
                 
-                scInstance.seek(slider.ratio);
+                tdInstance.seek(slider.ratio);
             });
 
             // Document-wide listeners.
             if(parameters.keyboardEvents) {
                 document.addEventListener('keydown', function(e) {
                     if (e.keyCode == 32) {
-                        if(scInstance) {
-                            scInstance.pause();
+                        if(tdInstance) {
+                            tdInstance.pause();
                         }
 
                         e.preventDefault();
                     } else if (e.keyCode == 39) {
-                        if(scInstance) {
-                            scInstance.next();
+                        if(tdInstance) {
+                            tdInstance.next();
                         }
 
                         e.preventDefault();
                     } else if (e.keyCode == 37) {
-                        if(scInstance) {
-                            scInstance.prev();
+                        if(tdInstance) {
+                            tdInstance.prev();
                         }
 
                         e.preventDefault();
@@ -394,43 +410,43 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-interface', '
             }
 
             // Hook into SC player events.
-            scInstance.on('scplayer.play', function(e) {
+            tdInstance.on('tdplayer.play', function(e) {
                 changePlayButton(false);
             });
 
-            scInstance.on('scplayer.pause', function(e) {
-                var paused = scInstance.sound().paused;
+            tdInstance.on('tdplayer.pause', function(e) {
+                var paused = tdInstance.sound().paused;
 
                 changePlayButton(paused);
             });
 
-            scInstance.on('scplayer.stop', function(e) {
+            tdInstance.on('tdplayer.stop', function(e) {
                 log('Stopped.');
                 container.find('.play').attr('src', parameters.staticUrl + 'img/play.png');
             });
 
-            scInstance.on('scplayer.track.whileloading', function(e, percent) {
+            tdInstance.on('tdplayer.track.whileloading', function(e, percent) {
                 trackLoadedPercent = percent;
-                trackLoadedTime = percent / 100 * scInstance.sound().duration;
+                trackLoadedTime = percent / 100 * tdInstance.sound().duration;
 
                 container.find('.buffer').css('width', percent + '%');
 
-                if(trackSuspend && (trackLoadedTime - scInstance.position()) > bufferResumeThreshold) {
-                    scInstance.pause();
+                if(trackSuspend && (trackLoadedTime - tdInstance.position()) > bufferResumeThreshold) {
+                    tdInstance.pause();
 
                     trackSuspend = false;
                 }
             });
 
-            scInstance.on('scplayer.track.whileplaying', function(e, percent, eqData) {
+            tdInstance.on('tdplayer.track.whileplaying', function(e, percent, eqData) {
                 if(showVisualizer == true && typeof(eqData[0]) === 'number' && !isNaN(eqData[0])) {
                     drawEQ(eqData);
                 }
 
                 var ratio = percent / 100;
-                var playPosition = scInstance.position();
+                var playPosition = tdInstance.position();
                 var timeIn = msToTimestamp(playPosition);
-                var timeLeft = msToTimestamp(scInstance.track().duration - playPosition);
+                var timeLeft = msToTimestamp(tdInstance.track().duration - playPosition);
 
                 trackPlayedPercent = Math.round(percent);
 
@@ -455,27 +471,27 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-interface', '
                     timeLeft > bufferPauseThreshold || !eqData || (trackLoadedPercent / 100) < currentRatio;
 
                 if(waitToBuffer) {
-                    var loader = $('<i class="fa fw fa-spinner fa-spin tdloader"></i>');
+                    var loader = $('<i class="fa fw fa-circle-o-notch fa-spin tdloader"></i>');
 
                     if(trackPlayedPercent != 100) {
-                        scInstance.pause();
+                        tdInstance.pause();
                         trackSuspend = true;
                         container.find('.stop-time').empty().append(loader);
                     }
                 }
             });
 
-            scInstance.on('scplayer.playlist.preloaded', function(e) {
+            tdInstance.on('tdplayer.playlist.preloaded', function(e) {
                 log('All tracks loaded.');
 
-                scInstance.tracks(function(tracks) {
-                    var nowPlaying = scInstance.track();
+                tdInstance.tracks(function(tracks) {
+                    var nowPlaying = tdInstance.track();
 
                     log(tracks);
 
                     // If parameters.single is not explicitly set to false and
                     // there is only one track, render the single-track player.
-                    if(tracks.length === 1 && parameters.single !== false && parameters.mini == false) {
+                    if(tracks.length === 1 && parameters.single !== false && parameters.mini == false && parameters.feed == false) {
                        parameters.single = true;
                     }
 
@@ -488,30 +504,32 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-interface', '
                         tracksPerArtist: parameters.tracksPerArtist,
                         visualizerType: parameters.visualizerType,
                         single: parameters.single,
-                        mini: parameters.mini
+                        mini: parameters.mini,
+                        feed: parameters.feed
                     });
                 });
             });
 
-            scInstance.on('scplayer.track.ready', function(e) {
+            tdInstance.on('tdplayer.track.ready', function(e) {
                 trackReady = true;
             });
 
-            scInstance.on('scplayer.changing_track', function(e, trackIndex) {
+            tdInstance.on('tdplayer.changing_track', function(e, trackIndex) {
                 log('New track index: ' + trackIndex);
 
                 container.find('.played').css('width', '0%');
                 container.find('.buffer').css('width', '0%');
 
-                scInstance.tracks(function(tracks) {
+                tdInstance.tracks(function(tracks) {
                     rerender({
-                        nowPlaying: scInstance.track(),
+                        nowPlaying: tdInstance.track(),
                         tracks: tracks,
                         skin: parameters.skin,
                         tracksPerArtist: parameters.tracksPerArtist,
                         visualizerType: parameters.visualizerType,
                         single: parameters.single,
-                        mini: parameters.mini
+                        mini: parameters.mini,
+                        feed: parameters.feed
                     });
                 });
             });
@@ -521,25 +539,77 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/sc-interface', '
                 container.off();
                 container.html('');
 
-                scInstance.destroy();
+                tdInstance.destroy();
 
                 ToneDen.players.splice(ToneDen.players.indexOf(player), 1);
                 delete player;
             }
 
             function pause() {
-                scInstance.pause();
+                tdInstance.pause();
             }
 
             function play() {
-                scInstance.play();
+                tdInstance.play();
+            }
+
+            function on(evt, callback) {
+                console.log(callback);
+                console.log(evt);
+                tdInstance.on(evt, callback);
+            }
+
+            function mute() {
+                tdInstance.volume(0);
+                container.find(".volume-select i").removeClass('volume-active');
+                target.addClass('volume-active');
+                container.find(".volume-init").fadeIn().removeClass().addClass(newClass + " volume-init");
+                container.find(".volume-select").hide();
+                playerVolume = 0;
+            }
+
+            //Skip to the next track
+            function next() {
+                tdInstance.next();
+            }
+
+            //Jump to the previous track
+            function prev() {
+                tdInstance.prev();
+            }
+
+            //Jump to a track in a playlist specified by its index/postion
+            function skipTo(index) {
+                tdInstance.goto(index)
+            }
+
+            //Get the current track thats playing
+            function getTrack() {
+                return tdInstance.track();
+            }
+
+            //Returns an array of tracks loaded in the player
+            function getAllTracks() {
+                return tdInstance.tracks();
+            }
+
+            //Get the sound object for the curent track
+            function getSound() {
+                return tdInstance.sound();
             }
 
             player = {
-                destroy: destroy,
-                pause: pause,
                 parameters: parameters,
-                play: play
+                destroy: destroy,
+                play: play,
+                pause: pause,
+                mute: mute,
+                next: next,
+                skipTo: skipTo,
+                prev: prev,
+                getTrack: getTrack,
+                getAllTracks: getAllTracks,
+                getSound: getSound
             };
 
             ToneDen.players.push(player);
