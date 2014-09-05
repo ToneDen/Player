@@ -30,7 +30,7 @@ require(['utils'], function(utils) {
         ToneDen = utils.extend(ToneDen, sdk);
 
         // Load fontawesome.
-        utils.loadStylesheet('//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css');
+        utils.loadStylesheet('//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css?cache=' + new Date().getTime());
 
         if(window.ToneDenReady && window.ToneDenReady.length > 0) {
             for(var i = 0; i < ToneDenReady.length; i++) {
