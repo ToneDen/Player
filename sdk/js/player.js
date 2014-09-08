@@ -22,7 +22,8 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/td-interface', '
                 onTrackReady: null,
                 onTrackFinished: null,
                 onPlaylistFinished: null,
-                togglePause: true,
+                shrink: true, // Default option to shrink player responsively if container is too small
+                togglePause: true, // Default option to toggle pause/play when clicked
             };
 
             // Setup the parameters object with the given arguments and
@@ -144,7 +145,7 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/td-interface', '
                         container.find(".track-info-stats").hide();
                     }
 
-                    if(container.height()<500) {
+                    if(container.height()<500 && parameters.shrink==true) {
                         container.find(".player").addClass("shrink");
                     }
                 }
@@ -297,7 +298,8 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/td-interface', '
                     tracksPerArtist: parameters.tracksPerArtist,
                     single: parameters.single,
                     mini: parameters.mini,
-                    feed: parameters.feed
+                    feed: parameters.feed,
+                    shrink: parameters.shrink
                 });
             } else {
                 log('ToneDen Player: the container specified by "' + parameters.dom + '" does not exist.', 'error');
@@ -505,7 +507,8 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/td-interface', '
                         visualizerType: parameters.visualizerType,
                         single: parameters.single,
                         mini: parameters.mini,
-                        feed: parameters.feed
+                        feed: parameters.feed,
+                        shrink: parameters.shrink
                     });
                 });
             });
@@ -529,7 +532,8 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/td-interface', '
                         visualizerType: parameters.visualizerType,
                         single: parameters.single,
                         mini: parameters.mini,
-                        feed: parameters.feed
+                        feed: parameters.feed,
+                        shrink: parameters.shrink
                     });
                 });
             });
