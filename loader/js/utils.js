@@ -55,10 +55,12 @@ define('utils', function() {
 
     var loadStylesheet = function(url) {
         var link = document.createElement('link');
+        var entry = document.getElementsByTagName('script')[0];
+
         link.rel = 'stylesheet';
         link.type = 'text/css';
         link.href = url;
-        var entry = document.getElementsByTagName('script')[0];
+
         entry.parentNode.insertBefore(link, entry);
     };
 

@@ -11,18 +11,18 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/td-interface', '
             // Default parameters go here.
             var parameters = {
                 debug: false, // Output debug messages?
+                feed: false,
                 keyboardEvents: false, // Should we listen to keyboard events?
-                single: null,
-                feed: null,
-                skin: 'light',
-                staticUrl: '//sd.toneden.io/',
-                tracksPerArtist: 10, // How many tracks to load when given an artist SoundCloud URL.
-                visualizerType: 'waves', // Equalizer type. 'waves' or 'bars'
                 mini: false,
                 onTrackReady: null,
                 onTrackFinished: null,
                 onPlaylistFinished: null,
+                single: null,
+                skin: 'light',
+                staticUrl: '//sd.toneden.io/',
                 togglePause: true,
+                tracksPerArtist: 10, // How many tracks to load when given an artist SoundCloud URL.
+                visualizerType: 'waves' // Equalizer type. 'waves' or 'bars'
             };
 
             // Setup the parameters object with the given arguments and
@@ -128,9 +128,9 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/td-interface', '
                         container.find(".solo-container").addClass("solo-container-small").css("width", "100%").prependTo(container.find(".solo-buttons"));
                         container.find(".scrubber").hide();
                     }
-                } else if(parameters.mini==true) {
+                } else if(parameters.mini ==== true) {
                     container.html(template_mini(parameters));
-                } else if(parameters.feed==true) {
+                } else if(parameters.feed === true) {
                     container.html(template_feed(parameters));
                 } else {
                     container.html(template(parameters));

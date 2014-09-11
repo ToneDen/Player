@@ -79,6 +79,19 @@ API
       *default: false*   
       True to listen to keyboard events on the document body to control the player.  
       Left arrow key returns to the previous track, right arrow key skips to the next, and spacebar plays/pauses the current track.  
+    * **mini**
+      *default: false*
+      True to use the 'mini' version of the player. This renders as a narrower bar with controls laid out horizontally.
+      For an example, check out the player on [ToneDen OneSheets](https://apedrums.toneden.io/onesheet).
+    * **onPlaylistFinished**  
+      *default: 'null'*   
+      A callback function to be executed when the playlist has finished playing.
+    * **onTrackFinished**  
+      *default: 'null'*   
+      A callback function to be executed when the track has finished playing.
+    * **onTrackReady**  
+      *default: 'null'*   
+      A callback function to be executed when the track is ready to play.
     * **single**  
       *default: false*   
       True to force the player to render as if there were only one track in the playlist.  
@@ -97,15 +110,6 @@ API
       *default: 'waves'*   
       What type of visualizer to show. Can be 'bars' or 'waves' to show those types of visualizers.  
       Any falsy value or 'none' will hide the visualizer.  
-    * **onTrackReady**  
-      *default: 'null'*   
-      A callback function to be executed when the track is ready to play.
-    * **onTrackFinished**  
-      *default: 'null'*   
-      A callback function to be executed when the track has finished playing.
-    * **onPlaylistFinished**  
-      *default: 'null'*   
-      A callback function to be executed when the playlist has finished playing.
   * **.getInstanceByDom(dom)**  
       Returns the player instance that is associated with the given dom item.  
       The dom argument can be either a selector string (will be passed to jQuery) or a jQuery dom object.

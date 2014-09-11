@@ -42,6 +42,12 @@ module.exports = function(grunt) {
                 ],
                 dest: 'dist/loader.min.js'
             }
+        },
+        watch: {
+            files: [
+                'js/**'
+            ],
+            tasks: 'dev'
         }
     });
 
