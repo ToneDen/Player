@@ -75,14 +75,14 @@ API
     * **debug**  
       *default: false*   
       True to output debug messages to the console.  
-    * **feed**
+    * **feed** 
       *default: false*
       True to display a simplified version of the player, no bells and whistles here.
     * **keyboardEvents**  
       *default: false*   
       True to listen to keyboard events on the document body to control the player.  
       Left arrow key returns to the previous track, right arrow key skips to the next, and spacebar plays/pauses the current track.  
-    * **mini**
+    * **mini** 
       *default: false*
       True to use the 'mini' version of the player. This renders as a narrower bar with controls laid out horizontally.
       For an example, check out the player on [ToneDen OneSheets](https://apedrums.toneden.io/onesheet).
@@ -95,7 +95,7 @@ API
     * **onTrackReady**  
       *default: 'null'*   
       A callback function to be executed when the track is ready to play.
-    * **shrink**
+    * **shrink** 
       *default: true*
       By default, the player shrinks to the size of its parent container.
       Set this to false to disable that behavior.
