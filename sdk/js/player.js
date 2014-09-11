@@ -129,7 +129,7 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/td-interface', '
                         container.find(".solo-container").addClass("solo-container-small").css("width", "100%").prependTo(container.find(".solo-buttons"));
                         container.find(".scrubber").hide();
                     }
-                } else if(parameters.mini ==== true) {
+                } else if(parameters.mini === true) {
                     container.html(template_mini(parameters));
                 } else if(parameters.feed === true) {
                     container.html(template_feed(parameters));
