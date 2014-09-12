@@ -651,8 +651,10 @@ define(['vendor/soundmanager2', 'jquery', 'vendor/d3', 'vendor/async'], function
                         '&consumer_key=' +self.config.consumerKey +
                         '&callback=?',
                     dataType: 'jsonp',
+                    timeout: 3000,
                     error: function(jqXHR, textStatus, errorThrown){
-                        trackPromise.reject(jqXHR, textStatus, errorThrown);
+                        // TODO: Add metadata to the track so it renders with an error message.
+                        trackPromise.resolve({});
                     },
                     success: function(_track){
                         // Three types of 'tracks': users, sets, and individual tracks.
