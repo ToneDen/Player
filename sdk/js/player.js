@@ -55,6 +55,8 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/td-interface', '
 
             // Parameters for the SoundCloud player.
             var tdInstanceParameters = {
+                cache: true,
+                cachePrefix: new Date().getTime(),
                 consumerKey: '6f85bdf51b0a19b7ab2df7b969233901',
                 debug: parameters.debug,
                 preload: true,
@@ -97,9 +99,11 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/td-interface', '
             function rerender(parameters) {
                 parameters = JSON.parse(JSON.stringify(parameters));
 
+                console.log(parameters);
+
                 parameters.repeat = tdInstance.config.loopTrack;
 
-                var empty = parameters.tracks==null && !_.any(parameters.tracks);
+                var empty = parameters.tracks == null && !_.any(parameters.tracks);
 
                 if(parameters.nowPlaying) {
                     for(var i = 0; i < parameters.tracks.length; i++) {
@@ -115,7 +119,6 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/td-interface', '
                     container.html(template_solo(parameters));
                     modifyVolumeUI();
 
-                    //container responsiveness
                     if(parameters.tracks.length>1){
                         container.find(".prev").show();
                         container.find(".next").show();
@@ -124,6 +127,7 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/td-interface', '
                         container.find(".next").hide();
                     }
 
+                    //container responsiveness
                     if(container.width()<500) {
                         container.find(".header").addClass("header-small").css("width", "100%");
                         container.find(".solo-container").addClass("solo-container-small").css("width", "100%").prependTo(container.find(".solo-buttons"));
@@ -484,8 +488,6 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/td-interface', '
             });
 
             tdInstance.on('tdplayer.playlist.preloaded', function(e) {
-                log('All tracks loaded.');
-
                 tdInstance.tracks(function(tracks) {
                     var nowPlaying = tdInstance.track();
 
@@ -558,8 +560,6 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/td-interface', '
             }
 
             function on(evt, callback) {
-                console.log(callback);
-                console.log(evt);
                 tdInstance.on(evt, callback);
             }
 

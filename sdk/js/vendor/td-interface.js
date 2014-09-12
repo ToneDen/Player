@@ -1,7 +1,7 @@
 /**
  * Refactored from: https://github.com/kilokeith/soundcloud-soundmanager-player
  */
-define(['vendor/soundmanager2', 'jquery', 'vendor/d3'], function(soundManager, jQuery, d3) {
+define(['vendor/soundmanager2', 'jquery', 'vendor/d3', 'vendor/async'], function(soundManager, jQuery, d3, async) {
     //object slice
     __slice = [].slice;
 
@@ -152,7 +152,9 @@ define(['vendor/soundmanager2', 'jquery', 'vendor/d3'], function(soundManager, j
 
             if(index !== self.currentTrackIndex || !index) {
                 url = self.tracks[i];
-                self.resolveTrack(url, self.setSound);
+                self.resolveTrack(url, function(track) {
+                    self.setSound(track);
+                });
 
                 self.trigger('tdplayer.changing_track', i);
             }
@@ -473,20 +475,17 @@ define(['vendor/soundmanager2', 'jquery', 'vendor/d3'], function(soundManager, j
             var urls = self.getPlaylist();
             var trackObjects = [];
 
-            for(var i = 0; i < urls.length; i++) {
-                self.trackInfo(urls[i], function(info) {
-                    trackObjects.push(info);
+            async.map(urls, function(url, done) {
+                self.trackInfo(url, function(track) {
+                    return done(null, track);
                 });
-            }
-
-            if(trackObjects.length === urls.length) {
-                if(callback) {
+            }, function(err, trackObjects) {
+                if(err) {
+                    return callback([]);
+                } else {
                     return callback(trackObjects);
                 }
-                else {
-                    return trackObjects;
-                }
-            }
+            });
         };
 
         self.getTrackIndex = function() {
@@ -516,19 +515,22 @@ define(['vendor/soundmanager2', 'jquery', 'vendor/d3'], function(soundManager, j
         };
 
         self.setSound = function(track) {
-            if(!track) {
-                return;
-            }
-
             var isMoz = navigator.userAgent.toLowerCase().indexOf('firefox') > -1;
+            var flashFallback;
 
-            if(isMoz==true) var flashFallback = true;
-
-            self.log('setSound');
-            self.trigger('tdplayer.track.info_loaded', track);
+            if(isMoz === true) {
+                flashFallback = true;
+            }
 
             // Store the current track object
             self.currentTrack = track;
+            self.log('setSound');
+            self.trigger('tdplayer.track.info_loaded', track);
+
+            if(!track || !track.streamable) {
+                return;
+            }
+
 
             // Get a SC url
             var url = track.stream_url;
@@ -595,7 +597,7 @@ define(['vendor/soundmanager2', 'jquery', 'vendor/d3'], function(soundManager, j
                 },
                 onload: function() {
                     self.log('onload');
-                    self.trigger('tdplayer.track.ready',self.config.onTrackReady);
+                    self.trigger('tdplayer.track.ready', self.config.onTrackReady);
                 }
             });
 
@@ -605,11 +607,13 @@ define(['vendor/soundmanager2', 'jquery', 'vendor/d3'], function(soundManager, j
         // Gets a SC url and goes to SC to fetch the track data.
         self.resolveTrack = function(url, cb) {
             var trackPromise = new jQuery.Deferred();
+            var cached;
+            var _track;
 
             // allow non SC tracks (watch for bugs)
             // look for a url, but not soundcloud.com
             if(url.match(urlregex) && url.search(/soundcloud\.com/i) === -1) {
-                var _track = {
+                _track = {
                     stream_url:url,
                     id:0,
                     permalink_url:url,
@@ -622,10 +626,11 @@ define(['vendor/soundmanager2', 'jquery', 'vendor/d3'], function(soundManager, j
             // trim url
             url = url.replace(/https?\:\/\/soundcloud\.com/gi, "");
 
-            var cached = self.getCache(url);
 
             // if we're caching, check cache first
             if(self.config.cache === true && cached) {
+                cached = self.getCache(url);
+
                 if(cb) {
                     trackPromise.done(function() {
                         cb(cached);

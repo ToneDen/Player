@@ -10,12 +10,13 @@ require.config({
     },
     namespace: 'ToneDen',
     paths: {
+        //async: 'vendor/async',
+        d3: 'vendor/d3',
+        dsp: 'vendor/dsp',
         hbs: 'vendor/hbs',
         jquery: 'vendor/jquery',
         soundmanager2: 'vendor/soundmanager2',
-        underscore: 'vendor/underscore',
-        dsp: 'vendor/dsp',
-        d3: 'vendor/d3',
+        underscore: 'vendor/underscore'
     },
     shim: {
         soundmanager2: {
