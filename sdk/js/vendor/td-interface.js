@@ -606,8 +606,10 @@ define(['vendor/soundmanager2', 'jquery', 'vendor/d3', 'vendor/async'], function
 
         // Gets a SC url and goes to SC to fetch the track data.
         self.resolveTrack = function(url, cb) {
+            url = url.replace(/https?\:\/\/soundcloud\.com/gi, "");
+
             var trackPromise = new jQuery.Deferred();
-            var cached;
+            var cached = self.getCache(url);
             var _track;
 
             // allow non SC tracks (watch for bugs)
@@ -623,13 +625,8 @@ define(['vendor/soundmanager2', 'jquery', 'vendor/d3', 'vendor/async'], function
                 trackPromise.resolve(_track);
             }
 
-            // trim url
-            url = url.replace(/https?\:\/\/soundcloud\.com/gi, "");
-
-
             // if we're caching, check cache first
             if(self.config.cache === true && cached) {
-                cached = self.getCache(url);
 
                 if(cb) {
                     trackPromise.done(function() {
@@ -653,8 +650,16 @@ define(['vendor/soundmanager2', 'jquery', 'vendor/d3', 'vendor/async'], function
                     dataType: 'jsonp',
                     timeout: 3000,
                     error: function(jqXHR, textStatus, errorThrown){
-                        // TODO: Add metadata to the track so it renders with an error message.
-                        trackPromise.resolve({});
+                        var track = {
+                            error: true,
+                            errorMessage: 'Error loading track.'
+                        };
+
+                        if(self.config.cache) {
+                            self.setCache(url, track);
+                        }
+
+                        trackPromise.resolve(track);
                     },
                     success: function(_track){
                         // Three types of 'tracks': users, sets, and individual tracks.
@@ -675,7 +680,7 @@ define(['vendor/soundmanager2', 'jquery', 'vendor/d3', 'vendor/async'], function
                         } else {
                             // maybe cache the track
                             self.processTrack(_track, function(track) {
-                                if(self.config.cache === true) {
+                                if(self.config.cache) {
                                     self.setCache(url, track);
                                 }
 

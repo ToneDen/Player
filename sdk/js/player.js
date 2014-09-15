@@ -98,9 +98,6 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/td-interface', '
 
             function rerender(parameters) {
                 parameters = JSON.parse(JSON.stringify(parameters));
-
-                console.log(parameters);
-
                 parameters.repeat = tdInstance.config.loopTrack;
 
                 var empty = parameters.tracks == null && !_.any(parameters.tracks);

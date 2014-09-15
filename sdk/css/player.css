@@ -323,6 +323,12 @@ opacity: 0.4;
   padding: 24px 0px;
 }
 
+.td.player .track-error-box {
+  display: table;
+  padding: 24px 0px;
+  text-align: center;
+}
+
 .td.player .scrub-bar {
   display: table-cell;
   vertical-align: middle;

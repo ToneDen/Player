@@ -102,25 +102,37 @@
                     </div>
                 </div>
             </div>
-            {{#if streamable}}
-                <div class="tdrow scrubber">
-                    <div class="tdlarge-12 tdsmall-12 tdcolumns scrubber-box">
-                        <div class="tdlarge-2 tdsmall-2 tdcolumns start-time">0:00</div>
-                        <div class="tdlarge-8 tdsmall-8 tdcolumns scrub-bar-box">
-                            <input type="text" class="scrubber-slider">
-                        </div>
-                        <div class="tdlarge-2 tdsmall-2 tdcolumns stop-time">
-                            {{msToTimestamp nowPlaying.duration}}
-                            <i class="fa fw fa-circle-o-notch fa-spin tdloader"></i>
+            {{#if error}}
+                <div class="tdrow">
+                    <div class="tdlarge-12 tdsmall-12 tdcolumns">
+                        <div class="tdlarge-12 tdsmall-12 tdcolumns track-error-box">
+                            {{errorMessage}}
                         </div>
                     </div>
                 </div>
             {{else}}
-                <div class="tdrow">
-                    <div class="tdlarge-12 tdsmall-12 tdcolumns">
-                        This track is not streamable.
+                {{#if streamable}}
+                    <div class="tdrow scrubber">
+                        <div class="tdlarge-12 tdsmall-12 tdcolumns scrubber-box">
+                            <div class="tdlarge-2 tdsmall-2 tdcolumns start-time">0:00</div>
+                            <div class="tdlarge-8 tdsmall-8 tdcolumns scrub-bar-box">
+                                <input type="text" class="scrubber-slider">
+                            </div>
+                            <div class="tdlarge-2 tdsmall-2 tdcolumns stop-time">
+                                {{msToTimestamp nowPlaying.duration}}
+                                <i class="fa fw fa-circle-o-notch fa-spin tdloader"></i>
+                            </div>
+                        </div>
                     </div>
-                </div>
+                {{else}}
+                    <div class="tdrow">
+                        <div class="tdlarge-12 tdsmall-12 tdcolumns">
+                            <div class="tdlarge-12 tdsmall-12 tdcolumns track-error-box">
+                                This track is not streamable.
+                            </div>
+                        </div>
+                    </div>
+                {{/if}}
             {{/if}}
         {{/with}}
         <div class="tdrow playlist">
