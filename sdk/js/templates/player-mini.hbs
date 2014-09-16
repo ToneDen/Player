@@ -17,11 +17,9 @@
             </div>
         </div>
         {{#if error}}
-            <div class="tdrow">
-                <div class="tdlarge-12 tdsmall-12 tdcolumns">
-                    <div class="tdlarge-12 tdsmall-12 tdcolumns track-error-box">
-                        {{errorMessage}}
-                    </div>
+            <div class="tdlarge-3 tdsmall-12 tdcolumns">
+                <div class="tdlarge-12 tdsmall-12 tdcolumns track-error-box">
+                    <span class="track-error-box-span"><i class="fa fw fa-warning"></i> {{errorMessage}} </span>
                 </div>
             </div>
         {{else}}
@@ -39,11 +37,9 @@
                     </div>
                 </div>
             {{else}}
-                <div class="tdrow">
-                    <div class="tdlarge-12 tdsmall-12 tdcolumns">
-                        <div class="tdlarge-12 tdsmall-12 tdcolumns track-error-box">
-                            This track is not streamable.
-                        </div>
+                <div class="tdlarge-3 tdsmall-12 tdcolumns">
+                    <div class="tdlarge-12 tdsmall-12 tdcolumns track-error-box">
+                        <span class="track-error-box-span"><i class="fa fw fa-warning"></i> This track is not streamable.</span>
                     </div>
                 </div>
             {{/if}}

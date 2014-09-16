@@ -325,8 +325,14 @@ opacity: 0.4;
 
 .td.player .track-error-box {
   display: table;
-  padding: 24px 0px;
+  padding: 24px 0;
   text-align: center;
+  font-size: 12px;
+  border-bottom: 1px solid;
+}
+
+.td.player .track-error-box-span {
+  opacity: 0.4;
 }
 
 .td.player .scrub-bar {
@@ -703,6 +709,20 @@ opacity: 0.4;
   vertical-align: middle;
 }
 
+.td.player .track-error-box {
+  display: table;
+  padding: 20px 0;
+  text-align: center;
+  font-size: 12px;
+  border-bottom: 1px solid;
+  border-top: 1px solid;
+  border-left: 1px solid;
+}
+
+.td.player .track-error-box-span {
+  opacity: 0.4;
+}
+
 /*Mini*/
 .td.player.mini {
   position: absolute;
@@ -879,6 +899,20 @@ opacity: 0.4;
   right: 0;
 }
 
+.td.player.mini .track-error-box {
+  display: table;
+  padding: 22px 0;
+  text-align: center;
+  font-size: 12px;
+  border-bottom: 0px;
+  border-top: 0px;
+  border-left: 1px solid;
+}
+
+.td.player.mini .track-error-box-span {
+  opacity: 0.4;
+}
+
 /*Feed*/
 .td.player.feed .header {
   position: absolute;
@@ -956,6 +990,18 @@ opacity: 0.4;
 
 .td.player.feed .scrub-bar-box {
   padding: 20px 0px;
+}
+
+.td.player.feed .track-error-box {
+  display: table;
+  padding: 15px 0;
+  text-align: center;
+  font-size: 12px;
+  border: 0 none;
+}
+
+.td.player.feed .track-error-box-span {
+  opacity: 0.4;
 }
 
 /*Container Responsiveness*/
@@ -1067,6 +1113,15 @@ opacity: 0.4;
 
 .td.player.shrink .playlist-social-icon {
   font-size: 10px;
+}
+
+.td.player.shrink .track-error-box {
+  display: table;
+  padding: 18px 0;
+  text-align: center;
+  font-size: 12px;
+  border: 0px;
+  border-bottom: 1px solid;
 }
 
 /*Misc*/
