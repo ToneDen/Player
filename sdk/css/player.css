@@ -325,7 +325,7 @@ opacity: 0.4;
 
 .td.player .track-error-box {
   display: table;
-  padding: 24px 0;
+  padding: 18px 0;
   text-align: center;
   font-size: 12px;
   border-bottom: 1px solid;
@@ -709,7 +709,7 @@ opacity: 0.4;
   vertical-align: middle;
 }
 
-.td.player .track-error-box {
+.td.player.solo .track-error-box {
   display: table;
   padding: 20px 0;
   text-align: center;
@@ -719,7 +719,7 @@ opacity: 0.4;
   border-left: 1px solid;
 }
 
-.td.player .track-error-box-span {
+.td.player.solo .track-error-box-span {
   opacity: 0.4;
 }
 
@@ -1305,7 +1305,6 @@ opacity: 0.4;
 
 .tdloader {
   font-size: 12px;
-  display: none;
 }
 
 @media only screen {

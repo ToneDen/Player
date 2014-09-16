@@ -27,7 +27,7 @@ require(['utils'], function(utils) {
     });
     
     // Load fontawesome.
-    utils.loadStylesheet('//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css?cache=' + new Date().getTime());
+    utils.loadStylesheet('//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css?cache=' + new Date().getTime());
 
     ToneDen.require(['toneden'], function(sdk) {
         ToneDen = utils.extend(ToneDen, sdk);
