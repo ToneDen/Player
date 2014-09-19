@@ -627,7 +627,6 @@ define(['vendor/soundmanager2', 'jquery', 'vendor/d3', 'vendor/async'], function
 
             // if we're caching, check cache first
             if(self.config.cache === true && cached) {
-
                 if(cb) {
                     trackPromise.done(function() {
                         cb(cached);
@@ -645,14 +644,12 @@ define(['vendor/soundmanager2', 'jquery', 'vendor/d3', 'vendor/async'], function
                 jQuery.ajax({
                     url: scResolveUrl + url +
                         '&format=json' +
-                        '&consumer_key=' +self.config.consumerKey +
-                        '&callback=?',
-                    dataType: 'jsonp',
-                    timeout: 3000,
+                        '&consumer_key=' +self.config.consumerKey,
+                    dataType: 'json',
                     error: function(jqXHR, textStatus, errorThrown){
                         var track = {
                             error: true,
-                            errorMessage: 'Error loading track.'
+                            errorMessage: 'Error loading track. (' + jqXHR.status + ')'
                         };
 
                         if(self.config.cache) {
