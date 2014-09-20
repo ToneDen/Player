@@ -644,8 +644,9 @@ define(['vendor/soundmanager2', 'jquery', 'vendor/d3', 'vendor/async'], function
                 jQuery.ajax({
                     url: scResolveUrl + url +
                         '&format=json' +
-                        '&consumer_key=' +self.config.consumerKey,
-                    dataType: 'json',
+                        '&consumer_key=' +self.config.consumerKey +
+                        '&callback=?',
+                    dataType: 'jsonp',
                     error: function(jqXHR, textStatus, errorThrown){
                         var track = {
                             error: true,
