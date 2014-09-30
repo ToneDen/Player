@@ -1,4 +1,4 @@
-define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/td-interface', 'vendor/handlebars', 'hbs!templates/player', 'hbs!templates/player-solo', 'hbs!templates/player-mini',  'hbs!templates/player-feed','hbs!templates/player-empty', 'templates/helpers/msToTimestamp', 'vendor/d3'], function($, SimpleSlider, _, tdPlayer, Handlebars, template, template_solo, template_mini, template_feed, template_empty, msToTimestamp, d3) {
+define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/td-interface', 'vendor/handlebars', 'hbs!templates/player', 'hbs!templates/player-solo', 'hbs!templates/player-mini',  'hbs!templates/player-feed','hbs!templates/player-empty', 'templates/helpers/msToTimestamp', 'vendor/d3', 'analytics'], function($, SimpleSlider, _, tdPlayer, Handlebars, template, template_solo, template_mini, template_feed, template_empty, msToTimestamp, d3, analytics) {
     return {
         create: function(urls, dom, options) {
             ToneDen.players = ToneDen.players || [];
@@ -414,13 +414,27 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/td-interface', '
 
             // Hook into SC player events.
             tdInstance.on('tdplayer.play', function(e) {
+                log('Playing.');
                 changePlayButton(false);
             });
 
             tdInstance.on('tdplayer.pause', function(e) {
-                var paused = tdInstance.sound().paused;
+                var sound = tdInstance.sound();
+                var paused = sound.paused;
+                var ratio = sound.position / sound.duration;
 
                 changePlayButton(paused);
+
+                console.log(ratio);
+
+                if(ratio === 0 && !paused) {
+                    analytics('ToneDenTracker.send', {
+                        hitType: 'event',
+                        eventCategory: 'track',
+                        action: 'started',
+                        label: sound.url.replace(/stream\?.+$/, '')
+                    });
+                }
             });
 
             tdInstance.on('tdplayer.stop', function(e) {

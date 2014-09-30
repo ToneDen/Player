@@ -10,7 +10,6 @@ require.config({
     },
     namespace: 'ToneDen',
     paths: {
-        //async: 'vendor/async',
         d3: 'vendor/d3',
         dsp: 'vendor/dsp',
         hbs: 'vendor/hbs',
@@ -25,7 +24,7 @@ require.config({
     }
 });
 
-define(['player'], function(player) {
+define(['analytics', 'player'], function(analytics, player) {
     ToneDen.ready = true;
 
     // Inject CSS into the dom.
@@ -33,7 +32,7 @@ define(['player'], function(player) {
     var css = ToneDenSDKCSS.replace(/\}/g, "}\n");
     style.type = 'text/css';
 
-    if (style.styleSheet) {
+    if(style.styleSheet) {
         style.styleSheet.cssText = css;
     } else {
         style.appendChild(document.createTextNode(css));
@@ -41,6 +40,14 @@ define(['player'], function(player) {
 
     var entry = document.getElementsByTagName('script')[0];
     entry.parentNode.insertBefore(style, entry);
+
+    // Record initial load event.
+    analytics('ToneDenTracker.send', {
+        hitType: 'event',
+        eventCategory: 'sdk',
+        eventAction: 'loaded',
+        eventLabel: window.location.href
+    });
 
     return {
         player: player
