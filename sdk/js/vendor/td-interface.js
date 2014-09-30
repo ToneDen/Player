@@ -712,8 +712,15 @@ define(['vendor/soundmanager2', 'jquery', 'vendor/d3', 'vendor/async'], function
 
         // Get the comments for a given track.
         self.getComments = function(track, cb) {
+            var privatePattern = /secret_token=([\w-]+)/g;
+            var match = privatePattern.exec(track.stream_url);
+
             var trackCommentsUrl = scApiUrl + 'tracks/' + track.id +
                 '/comments.json?consumer_key=' + self.config.consumerKey;
+
+            if(match) {
+                trackCommentsUrl += '&secret_token=' + match[1];
+            }
 
             jQuery.ajax({
                 url: trackCommentsUrl,
@@ -748,9 +755,6 @@ define(['vendor/soundmanager2', 'jquery', 'vendor/d3', 'vendor/async'], function
         // Helper function that is called on every track returned from SoundCloud.
         // Use this to modify any fields on the track.
         self.processTrack = function(track, cb) {
-            var trackCommentsUrl = scApiUrl + 'tracks/' + track.id +
-                '/comments.json?consumer_key=' + self.config.consumerKey;
-
             // Change the artwork_url to a larger format.
             if(track.artwork_url) {
                 track.artwork_url = track.artwork_url.replace('large.jpg', 't500x500.jpg');
