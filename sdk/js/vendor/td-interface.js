@@ -760,12 +760,7 @@ define(['vendor/soundmanager2', 'jquery', 'vendor/d3', 'vendor/async'], function
                 track.artwork_url = track.artwork_url.replace('large.jpg', 't500x500.jpg');
             }
 
-            // Get the track's comments and attach them to the track object.
-            self.getComments(track, function(comments) {
-                track.comments = comments;
-
-                return cb(track);
-            });
+            return cb(track);
         };
 
         self.parseTracks = function(url, _tracks, cb) {
