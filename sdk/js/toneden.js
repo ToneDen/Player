@@ -18,6 +18,9 @@ require.config({
         underscore: 'vendor/underscore'
     },
     shim: {
+        'jquery-jsonp': {
+            deps: ['jquery']
+        },
         soundmanager2: {
             exports: 'soundManager'
         }

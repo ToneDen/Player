@@ -1,5 +1,5 @@
 <div class="td tdrow player {{skin}}">
-    {{#unless nowPlaying}}
+    {{#if loading}}
         <div class="tdspinner">
             <div class="rect1"></div>
             <div class="rect2"></div>
@@ -7,7 +7,7 @@
             <div class="rect4"></div>
             <div class="rect5"></div>
         </div>
-    {{/unless}}
+    {{/if}}
     <div class="tdbody tdlarge-12 tdsmall-12 tdcolumns tdlarge-centered">
         <a href="https://www.toneden.io" target="_blank" class="td-icon-link"><i class="td-icon"></i></a>
         {{#with nowPlaying}}
