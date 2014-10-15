@@ -1,7 +1,7 @@
 /**
  * Refactored from: https://github.com/kilokeith/soundcloud-soundmanager-player
  */
-define(['vendor/soundmanager2', 'jquery', 'vendor/d3', 'vendor/async'], function(soundManager, jQuery, d3, async) {
+define(['vendor/soundmanager2', 'jquery', 'vendor/jquery-jsonp', 'vendor/d3', 'vendor/async'], function(soundManager, $, jquery_jsonp, d3, async) {
     //object slice
     __slice = [].slice;
 
@@ -93,11 +93,11 @@ define(['vendor/soundmanager2', 'jquery', 'vendor/d3', 'vendor/async'], function
         var eqBarInterval = 256 / numEqBars;
         //keep ref to local scope
         var self = this;
-        var $this = jQuery(this);
+        var $this = $(this);
 
         //local vars
         this.tracks = [];
-        this.config = jQuery.extend(defaults, config);
+        this.config = $.extend(defaults, config);
         this.currentTrackIndex = this.config.startOn;
         this.currentTrack = null;
         this.sound = null;
@@ -608,7 +608,7 @@ define(['vendor/soundmanager2', 'jquery', 'vendor/d3', 'vendor/async'], function
         self.resolveTrack = function(url, cb) {
             url = url.replace(/https?\:\/\/soundcloud\.com/gi, "");
 
-            var trackPromise = new jQuery.Deferred();
+            var trackPromise = new $.Deferred();
             var cached = self.getCache(url);
             var _track;
 
@@ -640,8 +640,8 @@ define(['vendor/soundmanager2', 'jquery', 'vendor/d3', 'vendor/async'], function
                     }
                 });
 
-                // Call the ajax
-                jQuery.ajax({
+                // Use jquery-jsonp to handle jsonp errors
+                $.jsonp({
                     url: scResolveUrl + url +
                         '&format=json' +
                         '&consumer_key=' +self.config.consumerKey +
@@ -650,7 +650,7 @@ define(['vendor/soundmanager2', 'jquery', 'vendor/d3', 'vendor/async'], function
                     error: function(jqXHR, textStatus, errorThrown){
                         var track = {
                             error: true,
-                            errorMessage: 'Error loading track. (' + jqXHR.status + ')'
+                            errorMessage: 'We couldn\'t load that track :('
                         };
 
                         if(self.config.cache) {
@@ -697,7 +697,7 @@ define(['vendor/soundmanager2', 'jquery', 'vendor/d3', 'vendor/async'], function
             var tracksUrl = scApiUrl + 'users/' + user.id + '/tracks.json?' +
                 'consumer_key=' + self.config.consumerKey;
 
-            jQuery.ajax({
+            $.ajax({
                 url: tracksUrl,
                 error: function(jqXHR, textStatus, errorThrown) {
                     return cb([]);
@@ -722,7 +722,7 @@ define(['vendor/soundmanager2', 'jquery', 'vendor/d3', 'vendor/async'], function
                 trackCommentsUrl += '&secret_token=' + match[1];
             }
 
-            jQuery.ajax({
+            $.ajax({
                 url: trackCommentsUrl,
                 error: function(jqXHR, textStatus, errorThrown) {
                     return cb([]);
@@ -741,7 +741,7 @@ define(['vendor/soundmanager2', 'jquery', 'vendor/d3', 'vendor/async'], function
             }
 
             // Have to do apply to pass many promises as list instead of array.
-            jQuery.when.apply(jQuery, promises).then(function() {
+            $.when.apply($, promises).then(function() {
                 self.trigger('tdplayer.playlist.preloaded');
 
                 if(cb) {

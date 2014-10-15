@@ -167,11 +167,11 @@ Setup
 ```
 2. Add the following lines to /etc/apache2/extra/https-vhosts.conf:  
 ```
-VirtualHost *:80>  
+<VirtualHost *:80>  
     DocumentRoot "<repo location>/toneden-sdk/test"  
     ServerName publisher.dev  
 </VirtualHost>  
-VirtualHost *:80>  
+<VirtualHost *:80>  
     DocumentRoot "<repo location>/toneden-sdk"  
     ServerName widget.dev  
 </VirtualHost>  

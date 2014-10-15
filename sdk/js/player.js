@@ -9,7 +9,7 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/td-interface', '
             var showVisualizer = true;
 
             // Default parameters go here.
-            var parameters = {
+            var playerParameters = {
                 debug: false, // Output debug messages?
                 feed: false,
                 keyboardEvents: false, // Should we listen to keyboard events?
@@ -29,18 +29,18 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/td-interface', '
             // Setup the parameters object with the given arguments and
             // override the default parameters with the given options.
             if(arguments.length === 1 && typeof arguments[0] === 'object') {
-                _.extend(parameters, arguments[0]);
+                _.extend(playerParameters, arguments[0]);
             } else {
-                parameters.urls = urls;
-                parameters.dom = dom;
+                playerParameters.urls = urls;
+                playerParameters.dom = dom;
 
                 delete options.urls;
                 delete options.dom;
 
-                _.extend(parameters, options);
+                _.extend(playerParameters, options);
 
-                if(parameters.staticUrl.charAt(parameters.staticUrl.length - 1) !== '/') {
-                    parameters.staticUrl += '/';
+                if(playerParameters.staticUrl.charAt(playerParameters.staticUrl.length - 1) !== '/') {
+                    playerParameters.staticUrl += '/';
                 }
             }
 
@@ -49,7 +49,7 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/td-interface', '
                 showVisualizer = false;
             }
 
-            if(parameters.visualizerType === 'none') {
+            if(playerParameters.visualizerType === 'none') {
                 showVisualizer = false;
             }
 
@@ -58,18 +58,18 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/td-interface', '
                 cache: true,
                 cachePrefix: new Date().getTime(),
                 consumerKey: '6f85bdf51b0a19b7ab2df7b969233901',
-                debug: parameters.debug,
+                debug: playerParameters.debug,
                 preload: true,
-                togglePause: parameters.togglePause,
-                tracksPerArtist: parameters.tracksPerArtist,
+                togglePause: playerParameters.togglePause,
+                tracksPerArtist: playerParameters.tracksPerArtist,
                 visualizer: showVisualizer,
-                onTrackReady: parameters.onTrackReady,
-                onTrackFinished: parameters.onTrackFinished,
-                onPlaylistFinished: parameters.onPlaylistFinished
+                onTrackReady: playerParameters.onTrackReady,
+                onTrackFinished: playerParameters.onTrackFinished,
+                onPlaylistFinished: playerParameters.onPlaylistFinished
             }
 
-            var dom = parameters.dom;
-            var urls = parameters.urls;
+            var dom = playerParameters.dom;
+            var urls = playerParameters.urls;
             var container = $(dom);
             var currentRatio = null;
             var currentTimeIn = null;
@@ -90,7 +90,7 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/td-interface', '
                 if(window.console) {
                     if(level === 'error') {
                         console.error(message);
-                    } else if(parameters.debug) {
+                    } else if(playerParameters.debug) {
                         console.debug(message);
                     }
                 }
@@ -100,7 +100,11 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/td-interface', '
                 parameters = JSON.parse(JSON.stringify(parameters));
                 parameters.repeat = tdInstance.config.loopTrack;
 
-                var empty = parameters.tracks == null && !_.any(parameters.tracks);
+                // Render the empty template if no urls were originally supplied
+                // or if all of the tracks are falsy.
+                var empty = !playerParameters.urls ||
+                    !_.any(playerParameters.urls) || 
+                    (!_.any(parameters.tracks) && !parameters.loading);
 
                 if(parameters.nowPlaying) {
                     for(var i = 0; i < parameters.tracks.length; i++) {
@@ -204,14 +208,14 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/td-interface', '
                         .attr('height', height + margin.top + margin.bottom)
                         .append('g');
 
-                    if(parameters.visualizerType == 'waves'){
+                    if(playerParameters.visualizerType == 'waves'){
                         chart.selectAll('path')
                             .data([data])
                             .enter()
                             .append('svg:path')
                             .attr('d', line)
                             .attr('stroke-width', 3);
-                    } else if(parameters.visualizerType == 'bars') {
+                    } else if(playerParameters.visualizerType == 'bars') {
                         chart.selectAll('rect')
                             .data(data)
                             .enter().append('rect')
@@ -229,14 +233,14 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/td-interface', '
                 }
 
                 function redrawEQ(svg, data) {
-                    if(parameters.visualizerType === 'waves') {
+                    if(playerParameters.visualizerType === 'waves') {
                         svg.selectAll('path')
                             .data([data])
                             .attr('d', line)
                             .transition()
                                 .ease('linear')
                                 .duration(100);
-                    } else if(parameters.visualizerType == 'bars') {
+                    } else if(playerParameters.visualizerType == 'bars') {
                         chart.selectAll('rect')
                             .data(data)
                             .transition()
@@ -286,24 +290,19 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/td-interface', '
 
             // Make sure the specified container is valid.
             if(container.length > 0) {
-                if(parameters.urls && parameters.urls.length>0) {
-                    var tracks = [];
-                } else {
-                    var tracks = null;
-                }
-
                 rerender({
-                    tracks: tracks,
-                    skin: parameters.skin,
-                    eq: parameters.eq,
-                    tracksPerArtist: parameters.tracksPerArtist,
-                    single: parameters.single,
-                    mini: parameters.mini,
-                    feed: parameters.feed,
-                    shrink: parameters.shrink
+                    eq: playerParameters.eq,
+                    feed: playerParameters.feed,
+                    loading: true,
+                    mini: playerParameters.mini,
+                    shrink: playerParameters.shrink,
+                    single: playerParameters.single,
+                    skin: playerParameters.skin,
+                    tracks: [],
+                    tracksPerArtist: playerParameters.tracksPerArtist
                 });
             } else {
-                log('ToneDen Player: the container specified by "' + parameters.dom + '" does not exist.', 'error');
+                log('ToneDen Player: the container specified by "' + playerParameters.dom + '" does not exist.', 'error');
                 return;
             }
             // Set up listeners for dom elements.
@@ -388,7 +387,7 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/td-interface', '
             });
 
             // Document-wide listeners.
-            if(parameters.keyboardEvents) {
+            if(playerParameters.keyboardEvents) {
                 document.addEventListener('keydown', function(e) {
                     if (e.keyCode == 32) {
                         if(tdInstance) {
@@ -439,7 +438,7 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/td-interface', '
 
             tdInstance.on('tdplayer.stop', function(e) {
                 log('Stopped.');
-                container.find('.play').attr('src', parameters.staticUrl + 'img/play.png');
+                container.find('.play').attr('src', playerParameters.staticUrl + 'img/play.png');
             });
 
             tdInstance.on('tdplayer.track.whileloading', function(e, percent) {
@@ -506,8 +505,8 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/td-interface', '
 
                     // If parameters.single is not explicitly set to false and
                     // there is only one track, render the single-track player.
-                    if(tracks.length === 1 && parameters.single !== false && parameters.mini == false && parameters.feed == false) {
-                       parameters.single = true;
+                    if(tracks.length === 1 && playerParameters.single !== false && playerParameters.mini == false && playerParameters.feed == false) {
+                       playerParameters.single = true;
                     }
 
                     container.find('.tdspinner').hide();
@@ -515,13 +514,13 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/td-interface', '
                     rerender({
                         nowPlaying: nowPlaying,
                         tracks: tracks,
-                        skin: parameters.skin,
-                        tracksPerArtist: parameters.tracksPerArtist,
-                        visualizerType: parameters.visualizerType,
-                        single: parameters.single,
-                        mini: parameters.mini,
-                        feed: parameters.feed,
-                        shrink: parameters.shrink
+                        skin: playerParameters.skin,
+                        tracksPerArtist: playerParameters.tracksPerArtist,
+                        visualizerType: playerParameters.visualizerType,
+                        single: playerParameters.single,
+                        mini: playerParameters.mini,
+                        feed: playerParameters.feed,
+                        shrink: playerParameters.shrink
                     });
                 });
             });
@@ -540,13 +539,13 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/td-interface', '
                     rerender({
                         nowPlaying: tdInstance.track(),
                         tracks: tracks,
-                        skin: parameters.skin,
-                        tracksPerArtist: parameters.tracksPerArtist,
-                        visualizerType: parameters.visualizerType,
-                        single: parameters.single,
-                        mini: parameters.mini,
-                        feed: parameters.feed,
-                        shrink: parameters.shrink
+                        skin: playerParameters.skin,
+                        tracksPerArtist: playerParameters.tracksPerArtist,
+                        visualizerType: playerParameters.visualizerType,
+                        single: playerParameters.single,
+                        mini: playerParameters.mini,
+                        feed: playerParameters.feed,
+                        shrink: playerParameters.shrink
                     });
                 });
             });
@@ -614,7 +613,7 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/td-interface', '
             }
 
             player = {
-                parameters: parameters,
+                parameters: playerParameters,
                 destroy: destroy,
                 play: play,
                 pause: pause,
