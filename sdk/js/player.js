@@ -536,6 +536,10 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/td-interface', '
                         tracksPerArtist: playerParameters.tracksPerArtist,
                         visualizerType: playerParameters.visualizerType
                     });
+
+                    if(tdInstance.sound() && !tdInstance.sound().paused) {
+                        changePlayButton(false);
+                    }
                 });
             });
 
@@ -567,6 +571,10 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/td-interface', '
             /**
              * PUBLIC INSTANCE METHODS
              */
+
+            function addTracks(urls) {
+                tdInstance.addTracks(urls);
+            }
 
             function destroy() {
                 container.off();
@@ -672,6 +680,7 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/td-interface', '
             }
 
             player = {
+                addTracks: addTracks,
                 destroy: destroy,
                 getAllTracks: getAllTracks,
                 getSound: getSound,

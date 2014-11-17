@@ -734,21 +734,21 @@ define(['vendor/soundmanager2', 'jquery', 'vendor/jquery-jsonp', 'vendor/d3', 'v
         // Preload the SC track info.
         self.preloadSCTracks = function(cb) {
             var promises = [];
-            for(var x = 0, l = self.tracks.length; x < l; x++) {
-                var _track = self.tracks[x];
-                var promise = self.resolveTrack(_track);
-                promises.push(promise);
-            }
 
-            // Have to do apply to pass many promises as list instead of array.
-            $.when.apply($, promises).then(function() {
+            async.each(self.tracks, function(track, next) {
+                self.resolveTrack(track, function(resolved) {
+                    next();
+                });
+            }, function(err) {
+                if(err) {
+                    self.log('Failed to preload tracks.');
+                }
+                
                 self.trigger('tdplayer.playlist.preloaded');
 
                 if(cb) {
-                    cb();
+                    return cb();
                 }
-            }, function() {
-                self.log('promises failed to preload tracks');
             });
         };
 
