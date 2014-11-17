@@ -574,6 +574,9 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/td-interface', '
 
             function addTracks(urls) {
                 tdInstance.addTracks(urls);
+                playerParameters.urls = tdInstance.playlist();
+
+                return playerParameters.urls;
             }
 
             function destroy() {
@@ -627,9 +630,10 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/td-interface', '
                 return tdInstance.track();
             }
 
-            // Returns an array of tracks loaded in the player
+            // Returns an array of urls loaded in the player
             function getAllTracks() {
-                return tdInstance.tracks();
+                // TODO: Return array of objects.
+                return playerParameters.urls;
             }
 
             // Get the sound object for the curent track

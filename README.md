@@ -127,11 +127,11 @@ API
 * **.parameters**  
   The parameters object that the player is using.  
 * **.addTracks(urls)**  
-  Adds the given urls to the end of the current playlist.
+  Adds the given urls to the end of the current playlist, and returns the new array of URLs.
 * **.destroy()**  
   Destroys the given player instance and clears the containing element's HTML.
 * **.getAllTracks()**  
-  Gets all of the tracks loaded into the player as an array.
+  Gets all of the URLs loaded into the player as an array.
 * **.getSound()**  
   Gets the sound object of the current track.
 * **.getTrack()**  
@@ -147,7 +147,7 @@ API
 * **.prev()**  
   Jumps to the previous track.
 * **.skipTo(index)**  
-  Jumps to a track specified by a index parameter.
+  Jumps to a track specified by an index parameter.
 * **.update(params)**  
   Updates the player with the given parameters. All parameters are supported except 'dom'.
 
