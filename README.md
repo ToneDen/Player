@@ -126,7 +126,7 @@ API
   Randomly generated ID, unique to the player instance.
 * **.parameters**  
   The parameters object that the player is using.  
-* **.addTracks(urls)**
+* **.addTracks(urls)**  
   Adds the given urls to the end of the current playlist.
 * **.destroy()**  
   Destroys the given player instance and clears the containing element's HTML.
@@ -148,7 +148,7 @@ API
   Jumps to the previous track.
 * **.skipTo(index)**  
   Jumps to a track specified by a index parameter.
-* **.update(params)**
+* **.update(params)**  
   Updates the player with the given parameters. All parameters are supported except 'dom'.
 
 Sample API Usage:
