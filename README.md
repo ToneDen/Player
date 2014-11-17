@@ -128,24 +128,26 @@ API
   The parameters object that the player is using.  
 * **.destroy()**  
   Destroys the given player instance and clears the containing element's HTML.
-* **.play()**  
-  Play the currently selected track. 
-* **.pause()**  
-  Pauses the track being played by the player.
-* **.mute()**  
-  Mutes the player.
-* **.next()**  
-  Skips to the next track.
-* **.prev()**  
-  Jumps to the previous track.
-* **.skipTo(index)**  
-  Jumps to a track specified by a index parameter.
-* **.getTrack()**  
-  Gets information for the current track.
 * **.getAllTracks()**  
   Gets all of the tracks loaded into the player as an array.
 * **.getSound()**  
   Gets the sound object of the current track.
+* **.getTrack()**  
+  Gets information for the current track.
+* **.mute()**  
+  Mutes the player.
+* **.next()**  
+  Skips to the next track.
+* **.pause()**  
+  Pauses the track being played by the player.
+* **.play()**  
+  Play the currently selected track. 
+* **.prev()**  
+  Jumps to the previous track.
+* **.skipTo(index)**  
+  Jumps to a track specified by a index parameter.
+* **.update(params)**
+  Updates the player with the given parameters. All parameters are supported except 'dom'.
 
 Sample API Usage:
 ``` 
