@@ -836,6 +836,25 @@ define(['vendor/soundmanager2', 'jquery', 'vendor/jquery-jsonp', 'vendor/d3', 'v
             }
         };
 
+        self.setTracks = function(tracks) {
+            // take a single string or array of strings
+            if(typeof tracks === 'string') {
+                tracks = [tracks];
+            }
+
+            if(tracks != null && tracks.length > 0) {
+                // Set current playlist to the list of tracks.
+                self.tracks = tracks;
+
+                // preload SC data? or init
+                if(self.config.preload == true) {
+                    self.preloadSCTracks.call(self, self.init);
+                } else {
+                    self.init.call(self);
+                }
+            }
+        };
+
         self.log = function() {
             if(self.config.debug && window.console) {
                 console.log.apply(console, arguments);
@@ -928,14 +947,15 @@ define(['vendor/soundmanager2', 'jquery', 'vendor/jquery-jsonp', 'vendor/d3', 'v
             hasNext: this.hasNext,
             hasPrev: this.hasPrev,
             on: this.on,
+            addTracks: this.addTracks,
+            setTracks: this.setTracks,
             trigger: this.trigger,
             track: this.getTrack,
             tracks: this.getTracks,
             trackIndex: this.getTrackIndex,
             sound: this.getSound,
             playlist: this.getPlaylist,
-            destroy: this.destroy,
-            addTracks: this.addTracks,
+            destroy: this.destroy
         };
     };
 
