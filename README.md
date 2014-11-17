@@ -138,16 +138,16 @@ API
   Gets information for the current track.
 * **.mute()**  
   Mutes the player.
-* **.next()**  
-  Skips to the next track.
+* **.next(play)**  
+  Skip to the next track, and play it if the 'play' argument is true.
 * **.pause()**  
   Pauses the track being played by the player.
 * **.play()**  
   Play the currently selected track. 
-* **.prev()**  
-  Jumps to the previous track.
-* **.skipTo(index)**  
-  Jumps to a track specified by an index parameter.
+* **.prev(play)**  
+  Jumps to the previous track, and play it if the 'play' argument is true.
+* **.skipTo(index, play)**  
+  Jumps to a track specified by an index parameter, and plays it if the 'play' argument is true.
 * **.update(params)**  
   Updates the player with the given parameters. All parameters are supported except 'dom'.
 

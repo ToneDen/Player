@@ -30709,6 +30709,7 @@ ToneDen.define('player',['jquery', 'vendor/simple-slider', 'underscore', 'vendor
              * PUBLIC INSTANCE METHODS
              */
 
+            // Add the array of url strings to the player.
             function addTracks(urls) {
                 tdInstance.addTracks(urls);
                 playerParameters.urls = tdInstance.playlist();
@@ -30747,33 +30748,34 @@ ToneDen.define('player',['jquery', 'vendor/simple-slider', 'underscore', 'vendor
                 playerVolume = 0;
             }
 
-            // Skip to the next track
-            function next() {
-                tdInstance.next();
+            // Skip to the next track.
+            function next(play) {
+                tdInstance.next(play);
             }
 
-            // Jump to the previous track
-            function prev() {
-                tdInstance.prev();
+            // Jump to the previous track.
+            function prev(play) {
+                tdInstance.prev(play);
             }
 
-            // Jump to a track in a playlist specified by its index/postion
-            function skipTo(index) {
-                tdInstance.goto(index)
+            // Jump to a track in a playlist specified by its index/position.
+            // If the 'play' parameter is true, play the track.
+            function skipTo(index, play) {
+                tdInstance.goto(index, play);
             }
 
-            // Get the current track thats playing
+            // Get the current track that's playing.
             function getTrack() {
                 return tdInstance.track();
             }
 
-            // Returns an array of urls loaded in the player
+            // Returns an array of urls loaded in the player.
             function getAllTracks() {
                 // TODO: Return array of objects.
-                return playerParameters.urls;
+                return tdInstance.playlist();
             }
 
-            // Get the sound object for the curent track
+            // Get the sound object for the current track.
             function getSound() {
                 return tdInstance.sound();
             }
