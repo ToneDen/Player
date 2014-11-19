@@ -9,6 +9,11 @@ module.exports = function(grunt) {
                 debug: false
             },
             dev: {
+                options: {
+                    params: {
+                        ContentEncoding: 'gzip'
+                    }
+                },
                 files: [
                     {
                         expand: true,
@@ -24,6 +29,11 @@ module.exports = function(grunt) {
                 ]
             },
             production: {
+                options: {
+                    params: {
+                        ContentEncoding: 'gzip'
+                    }
+                },
                 files: [
                     {
                         src: ['toneden.loader.js', 'toneden.js'],
@@ -61,40 +71,73 @@ module.exports = function(grunt) {
             main: {
                 files: [
                     {
-                        expand: true,
-                        src: 'toneden.loader.js.temp',
-                        dest: 'toneden.loader.js'
+                        src: 'toneden.loader.temp.js',
+                        dest: 'toneden.loader.js.gz'
                     },
                     {
-                        expand: true,
-                        src: 'toneden.js.temp',
-                        dest: 'toneden.js'
+                        src: 'toneden.temp.js',
+                        dest: 'toneden.js.gz'
                     }
                 ]
             }
         },
+        rename: {
+            preLoader: {
+                src: 'toneden.loader.js',
+                dest: 'toneden.loader.temp.js'
+            },
+            preSDK: {
+                src: 'toneden.js',
+                dest: 'toneden.temp.js'
+            },
+            compressedLoader: {
+                src: 'toneden.loader.js.gz',
+                dest: 'toneden.loader.js'
+            },
+            compressedSDK: {
+                src: 'toneden.js.gz',
+                dest: 'toneden.js'
+            },
+            postLoader: {
+                src: 'toneden.loader.temp.js',
+                dest: 'toneden.loader.js'
+            },
+            postSDK: {
+                src: 'toneden.temp.js',
+                dest: 'toneden.js'
+            }
+        }
     });
 
     grunt.loadNpmTasks('grunt-aws-s3');
     grunt.loadNpmTasks('grunt-cloudfront-clear');
     grunt.loadNpmTasks('grunt-contrib-compress');
+    grunt.loadNpmTasks('grunt-rename');
 
     var env = grunt.option('env') || 'dev';
 
     grunt.registerTask('dev', [
-        //'rename:pre',
-        //'compress',
+        'rename:preLoader',
+        'rename:preSDK',
+        'compress',
+        'rename:compressedLoader',
+        'rename:compressedSDK',
         'aws_s3:dev',
         'cloudfront_clear:dev',
-        //'rename:post',
-        //'clean:post'
+        'rename:postLoader',
+        'rename:postSDK'
     ]);
 
     grunt.registerTask('production', [
-        //'compress',
+        'rename:preLoader',
+        'rename:preSDK',
+        'compress',
+        'rename:compressedLoader',
+        'rename:compressedSDK',
         'aws_s3:production',
         'cloudfront_clear:production',
-        //'clean:post'
+        'rename:postLoader',
+        'rename:postSDK'
     ]);
 
     grunt.registerTask('default', [
