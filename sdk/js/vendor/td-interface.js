@@ -733,10 +733,12 @@ define(['vendor/soundmanager2', 'jquery', 'vendor/jquery-jsonp', 'vendor/d3', 'v
 
         // Preload the SC track info.
         self.preloadSCTracks = function(cb) {
-            var promises = [];
+            // Make a copy of the original tracks array, since it will be mutated
+            // if one turns out to be the URL of a set or artist.
+            var originalURLs = JSON.parse(JSON.stringify(self.tracks));
 
-            async.each(self.tracks, function(track, next) {
-                self.resolveTrack(track, function(resolved) {
+            async.each(originalURLs, function(url, next) {
+                self.resolveTrack(url, function(resolved) {
                     next();
                 });
             }, function(err) {
