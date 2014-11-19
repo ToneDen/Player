@@ -438,8 +438,6 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/td-interface', '
 
                 changePlayButton(paused);
 
-                console.log(ratio);
-
                 if(ratio === 0 && !paused) {
                     analytics('ToneDenTracker.send', {
                         hitType: 'event',
