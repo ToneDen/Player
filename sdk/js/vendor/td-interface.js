@@ -748,7 +748,7 @@ define(['vendor/soundmanager2', 'jquery', 'vendor/jquery-jsonp', 'vendor/d3', 'v
                 
                 self.trigger('tdplayer.playlist.preloaded');
 
-                if(cb) {
+                if(typeof cb === 'function') {
                     return cb();
                 }
             });
@@ -838,6 +838,22 @@ define(['vendor/soundmanager2', 'jquery', 'vendor/jquery-jsonp', 'vendor/d3', 'v
             }
         };
 
+        self.removeTracks = function(index, howMany) {
+            // If the current track is in the range to be removed, move to the
+            // next available track.
+            if(self.getTrackIndex() >= index && self.getTrackIndex() <= (index + howMany)) {
+                if(self.tracks.length > index + howMany) {
+                    self.changeTrack(index + howMany);
+                } else if(index > 0) {
+                    self.changeTrack(index - 1);
+                } else {
+                    self.changeTrack(0);
+                }
+            }
+
+            return self.tracks.splice(index, howMany);
+        };
+
         self.setTracks = function(tracks) {
             // take a single string or array of strings
             if(typeof tracks === 'string') {
@@ -885,7 +901,7 @@ define(['vendor/soundmanager2', 'jquery', 'vendor/jquery-jsonp', 'vendor/d3', 'v
                 self.play();
             }
 
-            if(cb) {
+            if(typeof cb === 'function') {
                 cb();
             }
         });
@@ -898,7 +914,7 @@ define(['vendor/soundmanager2', 'jquery', 'vendor/jquery-jsonp', 'vendor/d3', 'v
                 self.next().play();
             }
 
-            if(cb) {
+            if(typeof cb === 'function') {
                 cb();
             }
         });
@@ -911,7 +927,7 @@ define(['vendor/soundmanager2', 'jquery', 'vendor/jquery-jsonp', 'vendor/d3', 'v
                 self.stop();
             }
 
-            if(cb) {
+            if(typeof cb === 'function') {
                 cb();
             }
         });
@@ -950,6 +966,7 @@ define(['vendor/soundmanager2', 'jquery', 'vendor/jquery-jsonp', 'vendor/d3', 'v
             hasPrev: this.hasPrev,
             on: this.on,
             addTracks: this.addTracks,
+            removeTracks: this.removeTracks,
             setTracks: this.setTracks,
             trigger: this.trigger,
             track: this.getTrack,

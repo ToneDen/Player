@@ -91,6 +91,8 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/td-interface', '
                 if(window.console) {
                     if(level === 'error') {
                         console.error(message);
+                    } else if(level === 'warning') {
+                        console.warn(message);
                     } else if(playerParameters.debug) {
                         console.debug(message);
                     }
@@ -619,6 +621,37 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/td-interface', '
                 tdInstance.prev(play);
             }
 
+            // Remove tracks from the current playlist. Syntax is similar to 
+            // JavaScript's Array.splice() function.
+            function removeTracks(index, howMany) {
+                if(typeof index !== 'number') {
+                    log('Index argument is not a number.', 'error');
+                    return [];
+                }
+
+                playerParameters.urls.splice(index, howMany);
+                var tracksRemoved = tdInstance.removeTracks(index, howMany);
+
+                tdInstance.tracks(function(tracks) {
+                    rerender({
+                        feed: playerParameters.feed,
+                        loading: false,
+                        mini: playerParameters.mini,
+                        nowPlaying: tdInstance.track(),
+                        shrink: playerParameters.shrink,
+                        single: playerParameters.single,
+                        skin: playerParameters.skin,
+                        tracks: tracks,
+                        tracksPerArtist: playerParameters.tracksPerArtist,
+                        visualizerType: playerParameters.visualizerType
+                    });
+
+                    tdInstance.pause(true);
+                });
+
+                return tracksRemoved;
+            }
+
             // Jump to a track in a playlist specified by its index/position.
             // If the 'play' parameter is true, play the track.
             function skipTo(index, play) {
@@ -695,6 +728,7 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/td-interface', '
                 pause: pause,
                 play: play,
                 prev: prev,
+                removeTracks: removeTracks,
                 skipTo: skipTo,
                 update: update
             };
