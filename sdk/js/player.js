@@ -132,7 +132,7 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/td-interface', '
                     }
 
                     //container responsiveness
-                    if(container.width() < 500) {
+                    if(container.width() < 400) {
                         container.find('.header').addClass('header-small').css('width', '100%');
                         container.find('.solo-container').addClass('solo-container-small').css('width', '100%').prependTo(container.find('.solo-buttons'));
                         container.find('.scrubber').hide();
