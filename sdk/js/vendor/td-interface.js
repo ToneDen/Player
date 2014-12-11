@@ -606,7 +606,9 @@ define(['vendor/soundmanager2', 'jquery', 'vendor/jquery-jsonp', 'vendor/d3', 'v
 
         // Gets a SC url and goes to SC to fetch the track data.
         self.resolveTrack = function(url, cb) {
-            url = url.replace(/https?\:\/\/soundcloud\.com/gi, "");
+            var originalUrl = url;
+
+            url = url.replace(/https?\:\/\/(www\.)?soundcloud\.com/gi, "");
 
             var trackPromise = new $.Deferred();
             var cached = self.getCache(url);
@@ -664,14 +666,14 @@ define(['vendor/soundmanager2', 'jquery', 'vendor/jquery-jsonp', 'vendor/d3', 'v
 
                         if(_track.kind === 'user') {
                             self.getTracksForUser(_track, self.config.tracksPerArtist, function(tracks) {
-                                self.parseTracks(url, tracks, function(tracks) {
+                                self.parseTracks(originalUrl, tracks, function(tracks) {
                                     _track = tracks[0];
 
                                     trackPromise.resolve(_track);
                                 });
                             });
                         } else if(_track.tracks && _track.tracks.length > 0) {
-                            self.parseTracks(url, _track.tracks, function(tracks) {
+                            self.parseTracks(originalUrl, _track.tracks, function(tracks) {
                                 _track = tracks[0];
                                 trackPromise.resolve(_track);
                             });
@@ -766,57 +768,41 @@ define(['vendor/soundmanager2', 'jquery', 'vendor/jquery-jsonp', 'vendor/d3', 'v
         };
 
         self.parseTracks = function(url, _tracks, cb) {
-            var setTracks = [];
-            var trackUrls = [];
-            var ogTrackOrder = _tracks;
-            var start_index = self.tracks.indexOf(url);
-            var tracksProcessed = 0;
+            var startIndex = self.tracks.indexOf(url);
 
             if(!_tracks || _tracks.length === 0) {
                 return cb([]);
             }
 
-            for(var x = 0, l = _tracks.length; x < l; x++) {
-                var _track = _tracks[x];
-
-                self.processTrack(_track, function(_track) {
+            async.map(_tracks, function(track, next) {
+                self.processTrack(track, function(processedTrack) {
                     // Slice out track url - begins with http://soundcloud.com/
-                    var trackUrl = _track.permalink_url.substring(21);
+                    var trackUrl = processedTrack.permalink_url.substring(21);
 
                     // Cache tracks
                     if(self.config.cache === true) {
-                        self.setCache(trackUrl, _track);
+                        self.setCache(trackUrl, processedTrack);
                     }
 
-                    setTracks.push(_track);
-                    trackUrls.push(trackUrl);
-
-                    tracksProcessed += 1;
-
-                    if(tracksProcessed === l) {
-                        // Splice at start_index, delete 1, splice in expanded tracks.
-                        var args = [start_index, 1].concat(trackUrls);
-
-                        // Add tracks to playlist
-                        self.tracks.splice.apply(self.tracks, args);
-                        
-                        var sortSetTracks = [];
-                        var sortSelfTracks = [];
-
-                        //sort tracks to original
-                        for (var k = 0; k<l;k++) {
-                            for(var j = 0; j<l;j++) {
-                                if(ogTrackOrder[k].id==setTracks[j].id) sortSetTracks[k] = setTracks[j];
-                                if(ogTrackOrder[k].permalink_url.substring(21)===self.tracks[j]) sortSelfTracks[k] = self.tracks[j];
-                            }
-                        }
-
-                        self.tracks = sortSelfTracks;
-
-                        return cb(sortSetTracks);
-                    }
+                    return next(null, processedTrack);
                 });
-            }
+            }, function(err, processedTracks) {
+                if(err) {
+                    console.error('Error processing tracks.');
+                    console.error(err);
+
+                    return cb([]);
+                }
+
+                // Add tracks to playlist
+                self.tracks = self.tracks.slice(0, startIndex)
+                    .concat(processedTracks.map(function(track) {
+                        return track.permalink_url.substring(21);
+                    }))
+                    .concat(self.tracks.slice(startIndex + 1));
+                
+                return cb(processedTracks);
+            });
         };
 
         self.addTracks = function(tracks) {
