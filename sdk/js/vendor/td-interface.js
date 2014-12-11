@@ -1,7 +1,7 @@
 /**
  * Refactored from: https://github.com/kilokeith/soundcloud-soundmanager-player
  */
-define(['vendor/soundmanager2', 'jquery', 'vendor/jquery-jsonp', 'vendor/d3', 'vendor/async'], function(soundManager, $, jquery_jsonp, d3, async) {
+define(['vendor/soundmanager2', 'jquery', 'vendor/d3', 'vendor/async'], function(soundManager, $, d3, async) {
     //object slice
     __slice = [].slice;
 
@@ -643,12 +643,13 @@ define(['vendor/soundmanager2', 'jquery', 'vendor/jquery-jsonp', 'vendor/d3', 'v
                 });
 
                 // Use jquery-jsonp to handle jsonp errors
-                $.jsonp({
+                $.ajax({
+                    type: 'GET',
+                    datatype: 'json',
                     url: scResolveUrl + url +
                         '&format=json' +
-                        '&consumer_key=' +self.config.consumerKey +
-                        '&callback=?',
-                    dataType: 'jsonp',
+                        '&consumer_key=' + self.config.consumerKey,
+                    crossDomain: true,
                     error: function(jqXHR, textStatus, errorThrown){
                         var track = {
                             error: true,
