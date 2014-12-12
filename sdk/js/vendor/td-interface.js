@@ -1,7 +1,8 @@
 /**
  * Refactored from: https://github.com/kilokeith/soundcloud-soundmanager-player
  */
-define(['vendor/soundmanager2', 'jquery', 'vendor/d3', 'vendor/async'], function(soundManager, $, d3, async) {
+define(['vendor/soundmanager2', 'jquery', 'vendor/jquery-jsonp', 'vendor/d3', 'vendor/async'], function(soundManager, $, jqueryjsonp, d3, async) {
+    var isSafari = (Object.prototype.toString.call(window.HTMLElement).indexOf('Constructor') > 0) == true;
     //object slice
     __slice = [].slice;
 
@@ -642,13 +643,30 @@ define(['vendor/soundmanager2', 'jquery', 'vendor/d3', 'vendor/async'], function
                     }
                 });
 
-                // Use jquery-jsonp to handle jsonp errors
-                $.ajax({
-                    type: 'GET',
-                    datatype: 'json',
-                    url: scResolveUrl + url +
+                var datatype;
+                var resolveUrl;
+                var ajaxFunctionName;
+
+                // Safari is stupid, and doesn't follow redirects with json datatype.
+                if(isSafari) {
+                    ajaxFunctionName = 'jsonp';
+                    datatype = 'jsonp';
+                    resolveUrl = scResolveUrl + url +
+                        '&format=jsonp' +
+                        '&consumer_key=' +self.config.consumerKey +
+                        '&callback=?';
+                } else {
+                    ajaxFunctionName = 'ajax';
+                    datatype = 'json';
+                    resolveUrl = scResolveUrl + url +
                         '&format=json' +
-                        '&consumer_key=' + self.config.consumerKey,
+                        '&consumer_key=' + self.config.consumerKey;
+                }
+
+                $[ajaxFunctionName]({
+                    type: 'GET',
+                    datatype: datatype,
+                    url: resolveUrl,
                     crossDomain: true,
                     error: function(jqXHR, textStatus, errorThrown){
                         var track = {
