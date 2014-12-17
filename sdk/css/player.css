@@ -936,12 +936,11 @@ opacity: 0.4;
 }
 
 .td.player.feed .controls {
-  width: 33.33333%;
+  width: 16.66667%;
   display: table;
   border-top: 0px;
   padding:0px;
   border-bottom: 0px;
-  padding-left: 80px;
   position: absolute;
   margin: auto;
   height: 80px;
@@ -965,10 +964,13 @@ opacity: 0.4;
 }
 
 .td.player.feed .info {
-  border-bottom: 0px
+  border-bottom: 0px;
+  text-align: left;
+  padding: 0px;
 }
 
-.td.player.feed .song-name {
+.td.player.feed .song-name, .td.player.feed .artist-name {
+  text-align: left;
 }
 
 .td.player.feed .scrubber {
@@ -976,7 +978,7 @@ opacity: 0.4;
 }
 
 .td.player.feed .feed-container {
-  border-left: 1px solid;
+  border-left: 0px;
 }
 
 .td.player.feed .tdspinner{
