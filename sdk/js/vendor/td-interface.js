@@ -652,8 +652,8 @@ define(['vendor/soundmanager2', 'jquery', 'vendor/jquery-jsonp', 'vendor/d3', 'v
                     ajaxFunctionName = 'jsonp';
                     datatype = 'jsonp';
                     resolveUrl = scResolveUrl + url +
-                        '&format=jsonp' +
-                        '&consumer_key=' +self.config.consumerKey +
+                        '&format=json' +
+                        '&consumer_key=' + self.config.consumerKey +
                         '&callback=?';
                 } else {
                     ajaxFunctionName = 'ajax';
