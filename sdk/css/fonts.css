@@ -26,69 +26,69 @@
 
 
 .icon-share:before {
-	content: "\e60a";
+	content: "\\e60a";
 }
 
 .icon-td_logo:before {
-	content: "\e60b";
+	content: "\\e60b";
 }
 
 .icon-heart:before {
-	content: "\f004";
+	content: "\\f004";
 }
 
 .icon-angle-double-left:before {
-	content: "\f100";
+	content: "\\f100";
 }
 
 .icon-angle-double-right:before {
-	content: "\f101";
+	content: "\\f101";
 }
 
 .icon-circle-o-notch:before {
-	content: "\f1ce";
+	content: "\\f1ce";
 }
 
 .icon-pause-circle-fill:before {
-	content: "\e600";
+	content: "\\e600";
 }
 
 .icon-pause-circle-outline:before {
-	content: "\e601";
+	content: "\\e601";
 }
 
 .icon-play-circle-fill:before {
-	content: "\e602";
+	content: "\\e602";
 }
 
 .icon-play-circle-outline:before {
-	content: "\e603";
+	content: "\\e603";
 }
 
 .icon-skip-next:before {
-	content: "\e604";
+	content: "\\e604";
 }
 
 .icon-skip-previous:before {
-	content: "\e605";
+	content: "\\e605";
 }
 
 .icon-volume-down:before {
-	content: "\e606";
+	content: "\\e606";
 }
 
 .icon-volume-off:before {
-	content: "\e607";
+	content: "\\e607";
 }
 
 .icon-volume-up:before {
-	content: "\e608";
+	content: "\\e608";
 }
 
 .icon-repeat:before {
-	content: "\e609";
+	content: "\\e609";
 }
 
 .icon-soundcloud:before {
-	content: "\e60c";
+	content: "\\e60c";
 }
