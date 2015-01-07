@@ -95,36 +95,35 @@
   color: white;
 }
 
-.td.player.light .td-icon {
-  background-image: url('https://s3-us-west-1.amazonaws.com/toneden-sdk/resources/icons/td-dark.png');
+.td.player.light .icon-td_logo {
+  color: #222;
 }
 
-.td.player.dark .td-icon {
-  background-image: url('https://s3-us-west-1.amazonaws.com/toneden-sdk/resources/icons/td-light.png');
+.td.player.dark .icon-td_logo {
+  color:white;
 }
 
-.td.player.aurora .td-icon {
-  background-image: url('https://s3-us-west-1.amazonaws.com/toneden-sdk/resources/icons/td-light.png');
+.td.player.aurora .icon-td_logo {
+  color:white;
 }
 
-.td.player.mojave .td-icon {
-  background-image: url('https://s3-us-west-1.amazonaws.com/toneden-sdk/resources/icons/td-light.png');
+.td.player.mojave .icon-td_logo {
+  color:white;
 }
 
 .td.player.light .soundcloud-icon {
-  background-image: url('https://s3-us-west-1.amazonaws.com/toneden-sdk/resources/icons/sc-dark.png');
 }
 
 .td.player.dark .soundcloud-icon {
-  background-image: url('https://s3-us-west-1.amazonaws.com/toneden-sdk/resources/icons/sc-light.png');
+  color:white;
 }
 
 .td.player.aurora .soundcloud-icon {
-  background-image: url('https://s3-us-west-1.amazonaws.com/toneden-sdk/resources/icons/sc-light.png');
+  color:white;
 }
 
 .td.player.mojave .soundcloud-icon {
-  background-image: url('https://s3-us-west-1.amazonaws.com/toneden-sdk/resources/icons/sc-light.png');
+  color:white;
 }
 
 .td.player.light .follow-link {

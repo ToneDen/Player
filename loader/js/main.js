@@ -25,9 +25,6 @@ require(['utils'], function(utils) {
         baseUrl: baseUrl,
         enforceDefine: true
     });
-    
-    // Load fontawesome.
-    utils.loadStylesheet('//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css?cache=' + new Date().getTime());
 
     ToneDen.require(['toneden'], function(sdk) {
         ToneDen = utils.extend(ToneDen, sdk);

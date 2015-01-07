@@ -11,9 +11,9 @@
     {{#with nowPlaying}}
         <div class="tdlarge-1 tdsmall-12 tdcolumns controls mini-controls">
             <div class="buttons mini-buttons tdlarge-12 tdsmall-12 tdcolumns">
-                <i class="fa fa-angle-double-left fw player-prev prev"></i>
-                <i class="fa fa-play-circle-o fw player-play play"></i>
-                <i class="fa fa-angle-double-right fw player-next next"></i>
+                <i class="icon-angle-double-left player-prev prev"></i>
+                <i class="icon-play-circle-outline player-play play"></i>
+                <i class="icon-angle-double-right player-next next"></i>
             </div>
         </div>
         {{#if error}}
@@ -32,7 +32,7 @@
                         </div>
                         <div class="tdlarge-2 tdsmall-2 tdcolumns stop-time">
                             {{msToTimestamp nowPlaying.duration}}
-                            <i class="fa fw fa-circle-o-notch fa-spin tdloader"></i>
+                            <i class="icon-circle-o-notch fa-spin tdloader"></i>
                         </div>
                     </div>
                 </div>
@@ -56,11 +56,11 @@
         </div>
         <ul class="tdlarge-3 tdsmall-12 tdcolumns mini-social">
             <li class="track-info-plays">
-                <i class="fa fa-play-circle fw current-song-social-icon"></i>
+                <i class="icon-play-circle-fill current-song-social-icon"></i>
                 {{commanator playback_count}}
             </li>
             <li class="track-info-favorites">
-                <i class="fa fa-heart fw current-song-social-icon"></i>
+                <i class="icon-heart current-song-social-icon"></i>
                 {{commanator favoritings_count}}
             </li>
             {{!-- <li class="track-info-downloads">
@@ -85,14 +85,14 @@
             {{#ifCond purchase_url download_url}}
                 <div class="tdlarge-4 tdsmall-6 tdcolumns follow">
                     <a class="button expand follow-link" href="{{permalink_url}}"  target="_blank">
-                        <i class="fa soundcloud-icon fw playlist-social-icon"></i>
+                        <i class="icon-soundcloud playlist-social-icon"></i>
                         {{!-- FOLLOW --}}
                     </a>
                 </div>
             {{else}}
                 <div class="tdlarge-4 tdsmall-6 tdcolumns follow">
                     <a class="button expand follow-link" href="{{permalink_url}}"  target="_blank">
-                        <i class="fa soundcloud-icon fw playlist-social-icon"></i>
+                        <i class="icon-soundcloud playlist-social-icon"></i>
                         {{!-- FOLLOW --}}
                     </a>
                 </div>

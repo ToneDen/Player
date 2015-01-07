@@ -269,23 +269,23 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/td-interface', '
             //TODO: Refactor
             function modifyVolumeUI() {
                 if(playerVolume==100) {
-                    container.find('.volume-init').removeClass().addClass('fa fa-volume-up fw volume-init');
+                    container.find('.volume-init').removeClass().addClass('fa icon-volume-up fw volume-init');
                     container.find('.volume-select i.volume-active').removeClass('volume-active');
                     container.find('.volume-select i.volume-max').addClass('volume-active');
                 } else if(playerVolume==0) {
-                    container.find('.volume-init').removeClass().addClass('fa fa-volume-off fw volume-init');
+                    container.find('.volume-init').removeClass().addClass('icon-volume-off volume-init');
                     container.find('.volume-select i.volume-active').removeClass('volume-active');
                     container.find('.volume-select i.volume-off').addClass('volume-active');
                 } else {
-                    container.find('.volume-init').removeClass().addClass('fa fa-volume-down fw volume-init');
+                    container.find('.volume-init').removeClass().addClass('icon-volume-down volume-init');
                     container.find('.volume-select i.volume-active').removeClass('volume-active');
                     container.find('.volume-select i.volume-med').addClass('volume-active');
                 }
             }
 
             function changePlayButton(paused) {
-                var playClass = 'fa-play-circle-o';
-                var pauseClass = 'fa-pause';
+                var playClass = 'icon-play-circle-outline';
+                var pauseClass = 'icon-pause-circle-outline';
                 var playButton = container.find('.play');
 
                 if(paused) {
@@ -501,7 +501,7 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/td-interface', '
                     timeLeft > bufferPauseThreshold || !eqData || (trackLoadedPercent / 100) < currentRatio;
 
                 if(waitToBuffer) {
-                    var loader = $('<i class="fa fw fa-circle-o-notch fa-spin tdloader"></i>');
+                    var loader = $('<i class="icon-circle-o-notch fa-spin tdloader"></i>');
 
                     if(trackPlayedPercent != 100) {
                         tdInstance.pause();
