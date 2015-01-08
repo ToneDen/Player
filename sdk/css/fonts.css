@@ -9,7 +9,7 @@
 	font-style: normal;
 }
 
-[class^="icon-"], [class*=" icon-"] {
+[class^="tdicon-"], [class*="tdicon-"] {
 	font-family: 'td-player';
 	speak: none;
 	font-style: normal;
@@ -25,74 +25,74 @@
 }
 
 
-.icon-share:before {
+.tdicon-share:before {
 	content: "\\e60a";
 }
 
-.icon-td_logo:before {
+.tdicon-td_logo:before {
 	content: "\\e60b";
 }
 
-.icon-heart:before {
+.tdicon-heart:before {
 	content: "\\f004";
 }
 
-.icon-angle-double-left:before {
+.tdicon-angle-double-left:before {
 	content: "\\f100";
 }
 
-.icon-angle-double-right:before {
+.tdicon-angle-double-right:before {
 	content: "\\f101";
 }
 
-.icon-circle-o-notch:before {
+.tdicon-circle-o-notch:before {
 	content: "\\f1ce";
 }
 
-.icon-pause-circle-fill:before {
+.tdicon-pause-circle-fill:before {
 	content: "\\e600";
 }
 
-.icon-pause-circle-outline:before {
+.tdicon-pause-circle-outline:before {
 	content: "\\e601";
 }
 
-.icon-play-circle-fill:before {
+.tdicon-play-circle-fill:before {
 	content: "\\e602";
 }
 
-.icon-play-circle-outline:before {
+.tdicon-play-circle-outline:before {
 	content: "\\e603";
 }
 
-.icon-skip-next:before {
+.tdicon-skip-next:before {
 	content: "\\e604";
 }
 
-.icon-skip-previous:before {
+.tdicon-skip-previous:before {
 	content: "\\e605";
 }
 
-.icon-volume-down:before {
+.tdicon-volume-down:before {
 	content: "\\e606";
 }
 
-.icon-volume-off:before {
+.tdicon-volume-off:before {
 	content: "\\e607";
 }
 
-.icon-volume-up:before {
+.tdicon-volume-up:before {
 	content: "\\e608";
 }
 
-.icon-repeat:before {
+.tdicon-repeat:before {
 	content: "\\e609";
 }
 
-.icon-soundcloud:before {
+.tdicon-soundcloud:before {
 	content: "\\e60c";
 }
 
-.icon-warning:before {
+.tdicon-warning:before {
 	content: "\\e60d";
 }

@@ -11,15 +11,15 @@
     {{#with nowPlaying}}
         <div class="tdlarge-1 tdsmall-12 tdcolumns controls mini-controls">
             <div class="buttons mini-buttons tdlarge-12 tdsmall-12 tdcolumns">
-                <i class="icon-angle-double-left player-prev prev"></i>
-                <i class="icon-play-circle-outline player-play play"></i>
-                <i class="icon-angle-double-right player-next next"></i>
+                <i class="tdicon-angle-double-left player-prev prev"></i>
+                <i class="tdicon-play-circle-outline player-play play"></i>
+                <i class="tdicon-angle-double-right player-next next"></i>
             </div>
         </div>
         {{#if error}}
             <div class="tdlarge-3 tdsmall-12 tdcolumns">
                 <div class="tdlarge-12 tdsmall-12 tdcolumns track-error-box">
-                    <span class="track-error-box-span"><i class="icon-warning"></i> {{errorMessage}} </span>
+                    <span class="track-error-box-span"><i class="tdicon-warning"></i> {{errorMessage}} </span>
                 </div>
             </div>
         {{else}}
@@ -32,14 +32,14 @@
                         </div>
                         <div class="tdlarge-2 tdsmall-2 tdcolumns stop-time">
                             {{msToTimestamp nowPlaying.duration}}
-                            <i class="icon-circle-o-notch spin tdloader"></i>
+                            <i class="tdicon-circle-o-notch spin tdloader"></i>
                         </div>
                     </div>
                 </div>
             {{else}}
                 <div class="tdlarge-3 tdsmall-12 tdcolumns">
                     <div class="tdlarge-12 tdsmall-12 tdcolumns track-error-box">
-                        <span class="track-error-box-span"><i class="icon-warning"></i> This track is not streamable.</span>
+                        <span class="track-error-box-span"><i class="tdicon-warning"></i> This track is not streamable.</span>
                     </div>
                 </div>
             {{/if}}
@@ -56,11 +56,11 @@
         </div>
         <ul class="tdlarge-3 tdsmall-12 tdcolumns mini-social">
             <li class="track-info-plays">
-                <i class="icon-play-circle-fill current-song-social-icon"></i>
+                <i class="tdicon-play-circle-fill current-song-social-icon"></i>
                 {{commanator playback_count}}
             </li>
             <li class="track-info-favorites">
-                <i class="icon-heart current-song-social-icon"></i>
+                <i class="tdicon-heart current-song-social-icon"></i>
                 {{commanator favoritings_count}}
             </li>
             {{!-- <li class="track-info-downloads">
@@ -85,14 +85,14 @@
             {{#ifCond purchase_url download_url}}
                 <div class="tdlarge-4 tdsmall-6 tdcolumns follow">
                     <a class="button expand follow-link" href="{{permalink_url}}"  target="_blank">
-                        <i class="icon-soundcloud playlist-social-icon"></i>
+                        <i class="tdicon-soundcloud playlist-social-icon"></i>
                         {{!-- FOLLOW --}}
                     </a>
                 </div>
             {{else}}
                 <div class="tdlarge-4 tdsmall-6 tdcolumns follow">
                     <a class="button expand follow-link" href="{{permalink_url}}"  target="_blank">
-                        <i class="icon-soundcloud playlist-social-icon"></i>
+                        <i class="tdicon-soundcloud playlist-social-icon"></i>
                         {{!-- FOLLOW --}}
                     </a>
                 </div>

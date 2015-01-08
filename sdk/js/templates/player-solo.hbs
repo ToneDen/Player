@@ -9,7 +9,7 @@
     </div>
     {{/unless}}
     <div class="tdlarge-12 tdsmall-12 tdcolumns tdlarge-centered tdsmall-centered">
-        <a href="https://www.toneden.io" target="_blank" class="icon-td_logo-link"><i class="icon-td_logo"></i></a>
+        <a href="https://www.toneden.io" target="_blank" class="tdicon-td_logo-link"><i class="tdicon-td_logo"></i></a>
         {{#with nowPlaying}}
             <div class="header tdlarge-4 tdsmall-12 tdcolumns">
                 <div class="cover tdlarge-12 tdsmall-12 tdcolumns">
@@ -22,9 +22,9 @@
                     </div>
                     <div class="controls">
                         <div class="buttons tdlarge-12 tdsmall-12 tdcolumns">
-                            <i class="icon-angle-double-left player-prev prev"></i> 
-                            <i class="icon-play-circle-outline player-play play"></i>
-                            <i class="icon-angle-double-right player-next next"></i>
+                            <i class="tdicon-angle-double-left player-prev prev"></i> 
+                            <i class="tdicon-play-circle-outline player-play play"></i>
+                            <i class="tdicon-angle-double-right player-next next"></i>
                         </div>
                     </div>
                 </div>
@@ -34,14 +34,14 @@
                     {{#ifCond purchase_url download_url}}
                         <div class="follow tdlarge-6 tdsmall-12 tdcolumns">
                             <a class="tdbutton expand follow-link" href="{{permalink_url}}"  target="_blank">
-                                <i class="icon-soundcloud playlist-social-icon"></i>
+                                <i class="tdicon-soundcloud playlist-social-icon"></i>
                                 FOLLOW
                             </a>
                         </div>
                     {{else}}
                         <div class="follow tdlarge-12 tdsmall-12 tdcolumns">
                             <a class="tdbutton expand follow-link" href="{{permalink_url}}"  target="_blank">
-                                <i class="icon-soundcloud playlist-social-icon"></i>
+                                <i class="tdicon-soundcloud playlist-social-icon"></i>
                                 FOLLOW
                             </a>
                         </div>
@@ -67,9 +67,9 @@
                 <div class="tdrow info-solo">
                     <div class="tdlarge-2 tdsmall-12 tdcolumns repeat-column">
                         {{#if ../repeat}}
-                            <i class="icon-repeat repeat-on repeat-init"></i>
+                            <i class="tdicon-repeat repeat-on repeat-init"></i>
                         {{else}}
-                            <i class="icon-repeat repeat-init"></i>
+                            <i class="tdicon-repeat repeat-init"></i>
                         {{/if}}
                     </div>
                     <div class="tdlarge-8 tdsmall-12 tdcolumns info">
@@ -81,11 +81,11 @@
                         </div>
                     </div>
                     <div class="volume-controls tdlarge-2 tdsmall-12 tdcolumns">
-                        <i class="icon-volume-up volume-init"></i>
+                        <i class="tdicon-volume-up volume-init"></i>
                         <div class="tdlarge-12 tdmsall-12 tdcolumns tdlarge-centered tdmsall-centered volume-select" style="display:none;">
-                            <i class="icon-volume-off volume-off" data-class="icon-volume-off"></i>
-                            <i class="icon-volume-down volume-med" data-class="icon-volume-down"></i>
-                            <i class="icon-volume-up volume-max volume-active" data-class="icon-volume-up"></i>
+                            <i class="tdicon-volume-off volume-off" data-class="tdicon-volume-off"></i>
+                            <i class="tdicon-volume-down volume-med" data-class="tdicon-volume-down"></i>
+                            <i class="tdicon-volume-up volume-max volume-active" data-class="tdicon-volume-up"></i>
                         </div>
                     </div>
                 </div>
@@ -93,7 +93,7 @@
                     <div class="tdrow">
                         <div class="tdlarge-12 tdsmall-12 tdcolumns">
                             <div class="tdlarge-12 tdsmall-12 tdcolumns track-error-box">
-                                <span class="track-error-box-span"><i class="icon-warning"></i> {{errorMessage}} </span>
+                                <span class="track-error-box-span"><i class="tdicon-warning"></i> {{errorMessage}} </span>
                             </div>
                         </div>
                     </div>
@@ -107,7 +107,7 @@
                                 </div>
                                 <div class="tdlarge-2 tdsmall-2 tdcolumns stop-time">
                                     {{msToTimestamp nowPlaying.duration}}
-                                    <i class="icon-circle-o-notch spin tdloader"></i>
+                                    <i class="tdicon-circle-o-notch spin tdloader"></i>
                                 </div>
                             </div>
                         </div>
@@ -115,7 +115,7 @@
                         <div class="tdrow">
                             <div class="tdlarge-12 tdsmall-12 tdcolumns">
                                 <div class="tdlarge-12 tdsmall-12 tdcolumns track-error-box">
-                                    <span class="track-error-box-span"><i class="icon-warning"></i> This track is not streamable.</span>
+                                    <span class="track-error-box-span"><i class="tdicon-warning"></i> This track is not streamable.</span>
                                 </div>
                             </div>
                         </div>
@@ -124,11 +124,11 @@
                 <div class="tdrow social">
                     <div class="current-song-info tdlarge-12 tdcolumns tdsmall-12">
                         <div class="track-info-plays tdlarge-6 tdsmall-6 tdcolumns">
-                            <i class="icon-play-circle-fill current-song-social-icon"></i>
+                            <i class="tdicon-play-circle-fill current-song-social-icon"></i>
                             {{commanator playback_count}}
                         </div>
                         <div class="track-info-favorites tdlarge-6 tdsmall-6 tdcolumns">
-                            <i class="icon-heart current-song-social-icon"></i>
+                            <i class="tdicon-heart current-song-social-icon"></i>
                             {{commanator favoritings_count}}
                         </div>
                         {{!-- <div class="track-info-downloads tdlarge-3 tdsmall-3 tdcolumns">
