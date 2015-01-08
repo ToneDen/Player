@@ -19,7 +19,7 @@
         {{#if error}}
             <div class="tdlarge-3 tdsmall-12 tdcolumns">
                 <div class="tdlarge-12 tdsmall-12 tdcolumns track-error-box">
-                    <span class="track-error-box-span"><i class="fa fw fa-warning"></i> {{errorMessage}} </span>
+                    <span class="track-error-box-span"><i class="icon-warning"></i> {{errorMessage}} </span>
                 </div>
             </div>
         {{else}}
@@ -32,14 +32,14 @@
                         </div>
                         <div class="tdlarge-2 tdsmall-2 tdcolumns stop-time">
                             {{msToTimestamp nowPlaying.duration}}
-                            <i class="icon-circle-o-notch fa-spin tdloader"></i>
+                            <i class="icon-circle-o-notch spin tdloader"></i>
                         </div>
                     </div>
                 </div>
             {{else}}
                 <div class="tdlarge-3 tdsmall-12 tdcolumns">
                     <div class="tdlarge-12 tdsmall-12 tdcolumns track-error-box">
-                        <span class="track-error-box-span"><i class="fa fw fa-warning"></i> This track is not streamable.</span>
+                        <span class="track-error-box-span"><i class="icon-warning"></i> This track is not streamable.</span>
                     </div>
                 </div>
             {{/if}}
@@ -64,7 +64,7 @@
                 {{commanator favoritings_count}}
             </li>
             {{!-- <li class="track-info-downloads">
-                <i class="fa fa-download fw current-song-social-icon"></i>
+                <i class="fa-download current-song-social-icon"></i>
                 {{download_count}}
             </li> --}}
         </ul>

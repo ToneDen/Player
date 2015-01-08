@@ -67,9 +67,9 @@
                 <div class="tdrow info-solo">
                     <div class="tdlarge-2 tdsmall-12 tdcolumns repeat-column">
                         {{#if ../repeat}}
-                            <i class="fa icon-repeat repeat-on fw repeat-init"></i>
+                            <i class="icon-repeat repeat-on repeat-init"></i>
                         {{else}}
-                            <i class="fa icon-repeat fw repeat-init"></i>
+                            <i class="icon-repeat repeat-init"></i>
                         {{/if}}
                     </div>
                     <div class="tdlarge-8 tdsmall-12 tdcolumns info">
@@ -81,11 +81,11 @@
                         </div>
                     </div>
                     <div class="volume-controls tdlarge-2 tdsmall-12 tdcolumns">
-                        <i class="fa icon-volume-up fw volume-init"></i>
+                        <i class="icon-volume-up volume-init"></i>
                         <div class="tdlarge-12 tdmsall-12 tdcolumns tdlarge-centered tdmsall-centered volume-select" style="display:none;">
                             <i class="icon-volume-off volume-off" data-class="icon-volume-off"></i>
                             <i class="icon-volume-down volume-med" data-class="icon-volume-down"></i>
-                            <i class="fa icon-volume-up fw volume-max volume-active" data-class="fa icon-volume-up fw"></i>
+                            <i class="icon-volume-up volume-max volume-active" data-class="icon-volume-up"></i>
                         </div>
                     </div>
                 </div>
@@ -93,7 +93,7 @@
                     <div class="tdrow">
                         <div class="tdlarge-12 tdsmall-12 tdcolumns">
                             <div class="tdlarge-12 tdsmall-12 tdcolumns track-error-box">
-                                <span class="track-error-box-span"><i class="fa fw fa-warning"></i> {{errorMessage}} </span>
+                                <span class="track-error-box-span"><i class="icon-warning"></i> {{errorMessage}} </span>
                             </div>
                         </div>
                     </div>
@@ -107,7 +107,7 @@
                                 </div>
                                 <div class="tdlarge-2 tdsmall-2 tdcolumns stop-time">
                                     {{msToTimestamp nowPlaying.duration}}
-                                    <i class="icon-circle-o-notch fa-spin tdloader"></i>
+                                    <i class="icon-circle-o-notch spin tdloader"></i>
                                 </div>
                             </div>
                         </div>
@@ -115,7 +115,7 @@
                         <div class="tdrow">
                             <div class="tdlarge-12 tdsmall-12 tdcolumns">
                                 <div class="tdlarge-12 tdsmall-12 tdcolumns track-error-box">
-                                    <span class="track-error-box-span"><i class="fa fw fa-warning"></i> This track is not streamable.</span>
+                                    <span class="track-error-box-span"><i class="icon-warning"></i> This track is not streamable.</span>
                                 </div>
                             </div>
                         </div>
@@ -132,7 +132,7 @@
                             {{commanator favoritings_count}}
                         </div>
                         {{!-- <div class="track-info-downloads tdlarge-3 tdsmall-3 tdcolumns">
-                            <i class="fa fa-download fw current-song-social-icon"></i>
+                            <i class="fa-download current-song-social-icon"></i>
                             {{download_count}}
                         </div> --}}
                     </div>

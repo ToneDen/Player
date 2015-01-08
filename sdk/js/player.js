@@ -269,7 +269,7 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/td-interface', '
             //TODO: Refactor
             function modifyVolumeUI() {
                 if(playerVolume==100) {
-                    container.find('.volume-init').removeClass().addClass('fa icon-volume-up fw volume-init');
+                    container.find('.volume-init').removeClass().addClass('icon-volume-up volume-init');
                     container.find('.volume-select i.volume-active').removeClass('volume-active');
                     container.find('.volume-select i.volume-max').addClass('volume-active');
                 } else if(playerVolume==0) {
@@ -501,7 +501,7 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/td-interface', '
                     timeLeft > bufferPauseThreshold || !eqData || (trackLoadedPercent / 100) < currentRatio;
 
                 if(waitToBuffer) {
-                    var loader = $('<i class="icon-circle-o-notch fa-spin tdloader"></i>');
+                    var loader = $('<i class="icon-circle-o-notch spin tdloader"></i>');
 
                     if(trackPlayedPercent != 100) {
                         tdInstance.pause();
