@@ -176,7 +176,6 @@ opacity: 0.4;
 }
 
 .td.player .current-song-info {
-  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
   font-weight: 300;
   font-size: 12px;
   text-align: center;
@@ -362,7 +361,6 @@ opacity: 0.4;
 }
 
 .td.player .track-info-social {
-  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
   font-weight: 300;
 }
 
@@ -926,6 +924,7 @@ opacity: 0.4;
 
 .td.player.feed .song-name {
   font-size: 14px;
+  padding-top: 0px;
 }
 
 .td.player.feed .artist-name {
@@ -952,6 +951,10 @@ opacity: 0.4;
   margin: auto;
   padding: 0px;
   z-index: 100;
+}
+
+.td.player.info-feed {
+  margin-bottom: 5px;
 }
 
 .td.player.feed .feed-cover{
@@ -1021,6 +1024,7 @@ opacity: 0.4;
 }
 
 .td.player.feed .tdbutton {
+  border: 0px;
   -webkit-animation: fadeIn 1s; /* Safari and Chrome */
      -moz-animation: fadeIn 1s; /* Firefox */
       -ms-animation: fadeIn 1s; /* Internet Explorer */
