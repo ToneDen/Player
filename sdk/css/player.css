@@ -966,7 +966,6 @@ opacity: 0.4;
   max-height: 80px;
   vertical-align: initial;
   border-radius: 3px;
-  margin: 10px 0px;
   -webkit-animation: fadeIn 1s; /* Safari and Chrome */
      -moz-animation: fadeIn 1s; /* Firefox */
       -ms-animation: fadeIn 1s; /* Internet Explorer */
@@ -978,6 +977,18 @@ opacity: 0.4;
   display: table-cell;
   vertical-align: middle;
   padding:0px;
+}
+
+.td.player.feed .tdicon-play-circle-outline {
+  font-size: 55px;
+  color: white;
+  text-shadow: 0px 0px 5px #4E4E4E;
+}
+
+.td.player.feed .tdicon-pause-circle-outline {
+  font-size: 55px;
+  color: white;
+  text-shadow: 0px 0px 5px #4E4E4E;
 }
 
 .td.player.feed .current-song-info {
