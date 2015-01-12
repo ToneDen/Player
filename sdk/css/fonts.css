@@ -94,7 +94,7 @@
 }
 
 .tdicon-file-download:before {
-	content: "\e60e";
+	content: "\\e60e";
 }
 
 .tdicon-warning:before {
