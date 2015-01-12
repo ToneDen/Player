@@ -1024,12 +1024,17 @@ opacity: 0.4;
 }
 
 .td.player.feed .tdbutton {
-  border: 0px;
+  border: 0;
+  opacity: 0.3;
   -webkit-animation: fadeIn 1s; /* Safari and Chrome */
      -moz-animation: fadeIn 1s; /* Firefox */
       -ms-animation: fadeIn 1s; /* Internet Explorer */
        -o-animation: fadeIn 1s; /* Opera */
           animation: fadeIn 1s;
+}
+
+.td.player.feed .tdbutton:hover {
+  opacity: 1;
 }
 
 .td.player.feed .song-name, .td.player.feed .artist-name {
