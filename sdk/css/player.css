@@ -920,6 +920,7 @@ opacity: 0.4;
 /*Feed*/
 .td.player.feed .header {
   left: 0;
+  height: auto;
 }
 
 .td.player.feed .song-name {
