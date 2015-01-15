@@ -609,6 +609,10 @@ define(['vendor/soundmanager2', 'jquery', 'vendor/jquery-jsonp', 'vendor/d3', 'v
         self.resolveTrack = function(url, cb) {
             var originalUrl = url;
 
+            if(!url) {
+                return;
+            }
+
             url = url.replace(/https?\:\/\/(www\.)?soundcloud\.com/gi, "");
 
             var trackPromise = new $.Deferred();
