@@ -32,7 +32,13 @@ define(['analytics', 'player'], function(analytics, player) {
 
     // Inject CSS into the dom.
     var style = document.createElement('style');
-    var css = ToneDenSDKCSS.replace(/\}/g, "}\n");
+    var css = ToneDenSDKCSS.replace(/\}/g, '}\n');
+
+    // Hacky hack to replace protocol-relative URLs with http:// in the case that we load with a file:// protocol.
+    if(window.location.protocol === 'file:') {
+        css = css.replace(/\/\/sd.toneden.io/g, 'http://sd.toneden.io');
+    }
+
     style.type = 'text/css';
 
     if(style.styleSheet) {

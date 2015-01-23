@@ -1,4 +1,4 @@
-define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/td-interface', 'vendor/handlebars', 'hbs!templates/player', 'hbs!templates/player-solo', 'hbs!templates/player-mini',  'hbs!templates/player-feed','hbs!templates/player-empty', 'templates/helpers/msToTimestamp', 'vendor/d3', 'analytics'], function($, SimpleSlider, _, tdPlayer, Handlebars, template, template_solo, template_mini, template_feed, template_empty, msToTimestamp, d3, analytics) {
+define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/td-interface', 'vendor/handlebars', 'hbs!templates/player', 'hbs!templates/player-solo', 'hbs!templates/player-mini',  'hbs!templates/player-feed','hbs!templates/player-empty', 'templates/helpers/msToTimestamp', 'vendor/d3', 'analytics', 'constants'], function($, SimpleSlider, _, tdPlayer, Handlebars, template, template_solo, template_mini, template_feed, template_empty, msToTimestamp, d3, analytics, constants) {
     return {
         create: function(urls, dom, options) {
             ToneDen.players = ToneDen.players || [];
@@ -20,7 +20,7 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/td-interface', '
                 shrink: true, // Default option to shrink player responsively if container is too small
                 single: null,
                 skin: 'light',
-                staticUrl: '//sd.toneden.io/',
+                staticUrl: constants.protocol + '//sd.toneden.io/',
                 togglePause: true, // Default option to toggle pause/play when clicked
                 tracksPerArtist: 10, // How many tracks to load when given an artist SoundCloud URL.
                 visualizerType: 'waves' // Equalizer type. 'waves' or 'bars'

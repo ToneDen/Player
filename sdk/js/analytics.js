@@ -1,4 +1,4 @@
-define(function(require) {
+define(['constants'], function(constants) {
     var trackerName = 'ToneDenTracker';
 
     if(!window.ga) {
@@ -20,7 +20,7 @@ define(function(require) {
           a.async = 1;
           a.src = g;
           m.parentNode.insertBefore(a, m)
-        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+        })(window, document, 'script', constants.protocol + '//www.google-analytics.com/analytics.js', 'ga');
     }
 
     if(!ga.getByName || !ga.getByName(trackerName)) {
