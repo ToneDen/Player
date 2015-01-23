@@ -417,7 +417,7 @@ define(['vendor/soundmanager2', 'jquery', 'vendor/jquery-jsonp', 'vendor/d3', 'v
         // Move to a new position in the song given a click location in the
         // form of a fraction of the song length.
         this.seek = function(relative) {
-            var pos = self.currentTrack.duration * relative;
+            var pos = self.sound.duration * relative;
             self.position(pos);
 
             return self;
@@ -577,7 +577,7 @@ define(['vendor/soundmanager2', 'jquery', 'vendor/jquery-jsonp', 'vendor/d3', 'v
                     var reverseEqBarValues = eqBarValues.slice().reverse();
                     var fullEQ = reverseEqBarValues.concat(eqBarValues);
                     // Round to nearest 10th of a percent for performance
-                    var percent = Math.round(this.position / track.duration * 100 * 10) / 10;
+                    var percent = Math.round(this.position / this.duration * 100 * 10) / 10;
                     self.trigger('tdplayer.track.whileplaying', percent, fullEQ);
                 },
                 onplay: function() {
@@ -621,12 +621,13 @@ define(['vendor/soundmanager2', 'jquery', 'vendor/jquery-jsonp', 'vendor/d3', 'v
 
             // allow non SC tracks (watch for bugs)
             // look for a url, but not soundcloud.com
-            if(url.match(urlregex) && url.search(/soundcloud\.com/i) === -1) {
+            if(url.match(urlregex) && (url.search(/soundcloud\.com/i) === -1 || url.search('.mp3') !== -1)) {
                 _track = {
-                    stream_url:url,
-                    id:0,
-                    permalink_url:url,
-                    duration:0
+                    stream_url: url,
+                    id: 0,
+                    permalink_url: url,
+                    streamable: true,
+                    duration: 0
                 };
 
                 trackPromise.resolve(_track);
@@ -646,7 +647,9 @@ define(['vendor/soundmanager2', 'jquery', 'vendor/jquery-jsonp', 'vendor/d3', 'v
                         return cb(_track);
                     }
                 });
+            }
 
+            if(trackPromise.state() !== 'resolved') {
                 var datatype;
                 var resolveUrl;
                 var ajaxFunctionName;

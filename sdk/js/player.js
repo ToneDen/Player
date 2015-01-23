@@ -393,7 +393,10 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/td-interface', '
             });
 
             container.on('slider:changed', '.scrubber-slider', function(e, slider) {
-                tdInstance.play();
+                if(tdInstance.sound().paused || tdInstance.sound().playState === 0) {
+                    tdInstance.play();
+                }
+
                 log('Slider Ratio: ' + slider.ratio);
                 
                 tdInstance.seek(slider.ratio);
@@ -476,7 +479,7 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/td-interface', '
                 var ratio = percent / 100;
                 var playPosition = tdInstance.position();
                 var timeIn = msToTimestamp(playPosition);
-                var timeLeft = msToTimestamp(tdInstance.track().duration - playPosition);
+                var timeLeft = msToTimestamp(tdInstance.sound().duration - playPosition);
 
                 trackPlayedPercent = Math.round(percent);
 
