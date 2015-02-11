@@ -1,7 +1,7 @@
 /**
  * Refactored from: https://github.com/kilokeith/soundcloud-soundmanager-player
  */
-define(['vendor/soundmanager2', 'jquery', 'vendor/jquery-jsonp', 'vendor/d3', 'vendor/async'], function(soundManager, $, jqueryjsonp, d3, async) {
+define(['vendor/soundmanager2', 'jquery', 'vendor/jquery-jsonp', 'vendor/d3', 'vendor/async', 'constants'], function(soundManager, $, jqueryjsonp, d3, async, constants) {
     var isSafari = (Object.prototype.toString.call(window.HTMLElement).indexOf('Constructor') > 0) == true;
     //object slice
     __slice = [].slice;
@@ -84,8 +84,8 @@ define(['vendor/soundmanager2', 'jquery', 'vendor/jquery-jsonp', 'vendor/d3', 'v
 
         var flashFallback = false;
 
-        var scResolveUrl = '//api.soundcloud.com/resolve?url=http://soundcloud.com';
-        var scApiUrl = '//api.soundcloud.com/';
+        var scResolveUrl = constants.protocol + '//api.soundcloud.com/resolve?url=http://soundcloud.com';
+        var scApiUrl = constants.protocol + '//api.soundcloud.com/';
         var urlregex = new RegExp(/[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&//=]*)?/gi);
 
         var numEqBars = 64;
@@ -608,6 +608,10 @@ define(['vendor/soundmanager2', 'jquery', 'vendor/jquery-jsonp', 'vendor/d3', 'v
         // Gets a SC url and goes to SC to fetch the track data.
         self.resolveTrack = function(url, cb) {
             var originalUrl = url;
+
+            if(!url) {
+                return;
+            }
 
             url = url.replace(/https?\:\/\/(www\.)?soundcloud\.com/gi, "");
 
