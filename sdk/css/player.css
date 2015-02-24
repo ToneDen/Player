@@ -54,6 +54,7 @@ opacity: 0.4;
   -webkit-transition: opacity 300ms ease-out;
   -moz-transition: opacity 300ms ease-out;
   transition: opacity 300ms ease-out;
+  color: #222;
 }
 
 .td.player .tdicon-td_logo-link:hover {
@@ -67,6 +68,7 @@ opacity: 0.4;
   right: 0;
   top:0;
   font-size: 12px;
+  color: #222;
 }
 
 .td.player .header {
@@ -350,7 +352,7 @@ opacity: 0.4;
 }
 
 .td.player .playlist-social-icon {
-  font-size: 12px;
+  font-size: 14px;
 }
 
 .td.player .title {
