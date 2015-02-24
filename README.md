@@ -113,6 +113,9 @@ API
     * **tracksPerArtist**  
       *default: 10*   
       How many tracks to load from an artist's SoundCloud account when the artist's SoundCloud URL is specified in the urls parameter.  
+    * **useCustomPurchaseTitle**  
+      *default: false*   
+      Whether to use tracks' custom purchase titles. If false, the purchase link text will be 'BUY'.  
     * **visualizerType**  
       *default: 'waves'*   
       What type of visualizer to show. Can be 'bars' or 'waves' to show those types of visualizers.  

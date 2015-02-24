@@ -49,7 +49,11 @@
                     {{#if purchase_url}}
                         <div class="buy tdlarge-6 tdsmall-12 tdcolumns">
                             <a class="tdbutton expand buy-link" href="{{purchase_url}}" target="_blank">
-                                BUY
+                                {{#if useCustomPurchaseTitle}}
+                                    {{purchase_title}}
+                                {{else}}
+                                    BUY
+                                {{/if}}
                             </a>
                         </div>
                     {{else}}

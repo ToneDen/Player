@@ -23,6 +23,7 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/td-interface', '
                 staticUrl: constants.protocol + '//sd.toneden.io/',
                 togglePause: true, // Default option to toggle pause/play when clicked
                 tracksPerArtist: 10, // How many tracks to load when given an artist SoundCloud URL.
+                useCustomPurchaseTitle: false,
                 visualizerType: 'waves' // Equalizer type. 'waves' or 'bars'
             };
 
@@ -110,6 +111,10 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/td-interface', '
                     (!_.any(parameters.tracks) && !parameters.loading);
 
                 if(parameters.nowPlaying) {
+                    if(parameters.nowPlaying.purchase_title) {
+                        parameters.nowPlaying.useCustomPurchaseTitle = playerParameters.useCustomPurchaseTitle;
+                    }
+
                     for(var i = 0; i < parameters.tracks.length; i++) {
                         if(parameters.tracks[i].title === parameters.nowPlaying.title) {
                             parameters.tracks[i].playing = true;

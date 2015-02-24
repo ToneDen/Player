@@ -1340,7 +1340,7 @@ function SoundManager(smURL, smID) {
 
     // <d>
     if (!excludeInit) {
-      sm2._wD(sm + ': Rebooting...');
+      //sm2._wD(sm + ': Rebooting...');
     }
     // </d>
 
@@ -4513,7 +4513,7 @@ function SoundManager(smURL, smID) {
     sm2Loaded: 'SoundManager 2: Ready.',
     reset: sm + '.reset(): Removing event callbacks',
     mobileUA: 'Mobile UA detected, preferring HTML5 by default.',
-    globalHTML5: 'Using singleton HTML5 Audio() pattern for this device.'
+    globalHTML5: '', //'Using singleton HTML5 Audio() pattern for this device.'
     // </d>
 
   };
@@ -5048,7 +5048,7 @@ function SoundManager(smURL, smID) {
       if (sm2.useHTML5Audio) {
 
         if (!sm2.html5 || !sm2.html5.canPlayType) {
-          sm2._wD('SoundManager: No HTML5 Audio() support detected.');
+          //sm2._wD('SoundManager: No HTML5 Audio() support detected.');
           sm2.hasHTML5 = false;
         }
 
@@ -5365,7 +5365,7 @@ function SoundManager(smURL, smID) {
           msg = [],
           delimiter = ' + ';
 
-      title = 'SoundManager ' + sm2.version + (!sm2.html5Only && sm2.useHTML5Audio ? (sm2.hasHTML5 ? ' + HTML5 audio' : ', no HTML5 audio support') : '');
+      title = '';//'SoundManager ' + sm2.version + (!sm2.html5Only && sm2.useHTML5Audio ? (sm2.hasHTML5 ? ' + HTML5 audio' : ', no HTML5 audio support') : '');
 
       if (!sm2.html5Only) {
 
@@ -5684,7 +5684,7 @@ function SoundManager(smURL, smID) {
 
     window.setTimeout(function() {
 
-      complain(smc + 'useFlashBlock is false, 100% HTML5 mode is possible. Rebooting with preferFlash: false...');
+      //complain(smc + 'useFlashBlock is false, 100% HTML5 mode is possible. Rebooting with preferFlash: false...');
 
       sm2.setup({
         preferFlash: false
@@ -5744,7 +5744,7 @@ function SoundManager(smURL, smID) {
       // <d>
       if (!didInit) {
 
-        sm2._wD(sm + ': No Flash response within expected time. Likely causes: ' + (p === 0 ? 'SWF load failed, ':'') + 'Flash blocked or JS-Flash security error.' + (sm2.debugFlash?' ' + str('checkSWF'):''), 2);
+        //sm2._wD(sm + ': No Flash response within expected time. Likely causes: ' + (p === 0 ? 'SWF load failed, ':'') + 'Flash blocked or JS-Flash security error.' + (sm2.debugFlash?' ' + str('checkSWF'):''), 2);
 
         if (!overHTTP && p) {
 
@@ -6120,7 +6120,7 @@ function SoundManager(smURL, smID) {
     testHTML5();
 
     if (!hasFlash && needsFlash) {
-      messages.push(strings.needFlash);
+      //messages.push(strings.needFlash);
       // TODO: Fatal here vs. timeout approach, etc.
       // hack: fail sooner.
       sm2.setup({
@@ -6170,7 +6170,7 @@ function SoundManager(smURL, smID) {
       // <d>
       if (!sm2.setupOptions.useHTML5Audio || sm2.setupOptions.preferFlash) {
         // notify that defaults are being changed.
-        messages.push(strings.mobileUA);
+        //messages.push(strings.mobileUA);
       }
       // </d>
 
@@ -6181,7 +6181,7 @@ function SoundManager(smURL, smID) {
         // iOS and Android devices tend to work better with a single audio instance, specifically for chained playback of sounds in sequence.
         // common use case: exiting sound onfinish() -> createSound() -> play()
         // <d>
-        messages.push(strings.globalHTML5);
+        //messages.push(strings.globalHTML5);
         // </d>
         if (is_iDevice) {
           sm2.ignoreFlash = true;
