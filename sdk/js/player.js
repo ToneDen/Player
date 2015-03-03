@@ -23,7 +23,7 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/td-interface', '
                 staticUrl: constants.protocol + '//sd.toneden.io/',
                 togglePause: true, // Default option to toggle pause/play when clicked
                 tracksPerArtist: 10, // How many tracks to load when given an artist SoundCloud URL.
-                useCustomPurchaseTitle: false,
+                useCustomPurchaseTitle: true,
                 visualizerType: 'waves' // Equalizer type. 'waves' or 'bars'
             };
 
