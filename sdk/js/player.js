@@ -603,10 +603,6 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/td-interface', '
                 tdInstance.play();
             }
 
-            function on(evt, callback) {
-                tdInstance.on(evt, callback);
-            }
-
             function mute() {
                 tdInstance.volume(0);
                 container.find('.volume-select i').removeClass('volume-active');
@@ -619,6 +615,10 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/td-interface', '
             // Skip to the next track.
             function next(play) {
                 tdInstance.next(play);
+            }
+
+            function on(evt, callback) {
+                tdInstance.on(evt, callback);
             }
 
             // Jump to the previous track.
@@ -729,6 +729,7 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/td-interface', '
                 getTrack: getTrack,
                 mute: mute,
                 next: next,
+                on: on,
                 parameters: playerParameters,
                 pause: pause,
                 play: play,
