@@ -595,8 +595,8 @@ define(['vendor/soundmanager2', 'jquery', 'vendor/jquery-jsonp', 'vendor/d3', 'v
                     self.trigger('tdplayer.track.paused');
                 },
                 onfinish: function() {
-                    if(self.config.onTrackFinished) {
-                        self.config.onTrackFinished(arguments);
+                    if(self.config.onTrackFinish) {
+                        self.config.onTrackFinish(arguments);
                     }
 
                     self.trigger('tdplayer.track.finished');
