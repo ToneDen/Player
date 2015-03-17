@@ -69,17 +69,18 @@ define(['vendor/soundmanager2', 'jquery', 'vendor/jquery-jsonp', 'vendor/d3', 'v
             cache: true, // Caches the SC track lookup. Browser should handle the audio
             cachePrefix: '', // Prefix to add to cache URLs
             debug: false,
+            flashVersion: 9,
             loop: false,
             loopTrack: false,
+            onTrackFinish: null,
             preload: true, // Prefetch the sc track data
             startOn: 0,
             togglePause: true, //Should pause act as a toggle?
             tracksPerArtist: 10, // When given an artist URL, how many tracks to load?
-            volume: 100,
             useEQData: true,
             useHTML5Audio: true,
-            flashVersion: 9,
-            useWaveformData: false
+            useWaveformData: false,
+            volume: 100
         };
 
         var flashFallback = false;
@@ -594,7 +595,11 @@ define(['vendor/soundmanager2', 'jquery', 'vendor/jquery-jsonp', 'vendor/d3', 'v
                     self.trigger('tdplayer.track.paused');
                 },
                 onfinish: function() {
-                    self.trigger('tdplayer.track.finished', self.config.onTrackFinished);
+                    if(self.config.onTrackFinished) {
+                        self.config.onTrackFinished(arguments);
+                    }
+
+                    self.trigger('tdplayer.track.finished');
                 },
                 onload: function() {
                     self.log('onload');
