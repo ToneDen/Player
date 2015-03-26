@@ -72,7 +72,7 @@ define(['vendor/soundmanager2', 'jquery', 'vendor/jquery-jsonp', 'vendor/d3', 'v
             flashVersion: 9,
             loop: false,
             loopTrack: false,
-            onTrackFinish: null,
+            onTrackFinished: null,
             preload: true, // Prefetch the sc track data
             startOn: 0,
             togglePause: true, //Should pause act as a toggle?
@@ -595,8 +595,8 @@ define(['vendor/soundmanager2', 'jquery', 'vendor/jquery-jsonp', 'vendor/d3', 'v
                     self.trigger('tdplayer.track.paused');
                 },
                 onfinish: function() {
-                    if(self.config.onTrackFinish) {
-                        self.config.onTrackFinish(arguments);
+                    if(self.config.onTrackFinished) {
+                        self.config.onTrackFinished(arguments);
                     }
 
                     self.trigger('tdplayer.track.finished');

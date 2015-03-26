@@ -4003,12 +4003,17 @@ function SoundManager(smURL, smID) {
 
       sm2._wD(s.id + ': canplaythrough');
 
+      // Hack to stop the network request from continuing forever.
+      if(s.playState !== 1) {
+          s._a.play();
+          s._a.pause();
+      }
+
       if (!s.loaded) {
         s._onbufferchange(0);
         s._whileloading(s.bytesLoaded, s.bytesTotal, s._get_html5_duration());
         s._onload(true);
       }
-
     }),
 
     // TODO: Reserved for potential use
