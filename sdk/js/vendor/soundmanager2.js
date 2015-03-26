@@ -4005,8 +4005,10 @@ function SoundManager(smURL, smID) {
 
       // Hack to stop the network request from continuing forever.
       if(s.playState !== 1) {
+          s._a.volume = 0;
           s._a.play();
           s._a.pause();
+          s._a.volume = 1;
       }
 
       if (!s.loaded) {
