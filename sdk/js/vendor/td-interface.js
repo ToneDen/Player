@@ -790,6 +790,14 @@ define(['vendor/soundmanager2', 'jquery', 'vendor/jquery-jsonp', 'vendor/d3', 'v
             // Change the artwork_url to a larger format.
             if(track.artwork_url) {
                 track.artwork_url = track.artwork_url.replace('large.jpg', 't500x500.jpg');
+
+                // SoundCloud uses 4 identical CDN domains to allow concurrently loading more images. Randomly select
+                // one to load from.
+                var between1And4 = Math.round(Math.random() * 3) + 1;
+
+                if(track.artwork_url.indexOf('i1.sndcdn') !== -1) {
+                    track.artwork_url = track.artwork_url.replace('i1.sndcdn', 'i' + between1And4 + '.sndcdn');
+                }
             }
 
             return cb(track);
