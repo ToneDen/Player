@@ -800,6 +800,14 @@ define(['vendor/soundmanager2', 'jquery', 'vendor/jquery-jsonp', 'vendor/d3', 'v
                 }
             }
 
+            if(track.download_url) {
+                if(track.sharing === 'private') {
+                    track.download_url += '&client_id=6f85bdf51b0a19b7ab2df7b969233901';
+                } else {
+                    track.download_url += '?client_id=6f85bdf51b0a19b7ab2df7b969233901';
+                }
+            }
+
             return cb(track);
         };
 
