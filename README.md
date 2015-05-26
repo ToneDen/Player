@@ -1,6 +1,8 @@
 Embeddable Goodness, by ToneDen
 ===
 
+**Note: New versions of Chrome have broken the visualizer functionality. We've temporarily removed the visualizer while we work to find a solution.**
+
 The ToneDen SDK is loaded asynchronously, which means your page doesn't have to wait for the SDK to load before rendering.
 This means that loading it is a little more complicated than just including a `<script>` tag. Don't worry though, we've taken care of all the complicated stuff for you.
 Just copy the snippet below into your HTML page, and replace the commented portion with your code calling the SDK.

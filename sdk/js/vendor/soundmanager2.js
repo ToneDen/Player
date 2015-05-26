@@ -3985,16 +3985,7 @@ function SoundManager(smURL, smID) {
         s._iO._oncanplay();
       }
 
-      if(s._useAdvancedHTML5){
-        // Firefox fails due to cross-origin checks when attempting to get the
-        // waveform.
-        if(s._useMoz || mobileHTML5 || /Chrome\/42.0/.test(navigator.userAgent)) {
-            s._useAdvancedHTML5 = false;
-        } else {
-            s._create_WebAudio_Waveform_Parser();
-        }
-      }
-
+      s._useAdvancedHTML5 = false;
     }),
 
     canplaythrough: html5_event(function() {
