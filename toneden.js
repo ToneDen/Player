@@ -21833,6 +21833,10 @@ ToneDen.define('vendor/td-interface',['vendor/soundmanager2', 'jquery', 'vendor/
         };
 
         /* internal events */
+        if(self.config.onPlaylistPreloaded) {
+            self.on('tdplayer.playlist.preloaded', self.config.onPlaylistPreloaded);
+        }
+
         self.on('tdplayer.track.ready', function(e, cb) {
             self.log('track.onready!!!');
 
@@ -30399,6 +30403,7 @@ ToneDen.define('player',['jquery', 'vendor/simple-slider', 'underscore', 'vendor
                 cachePrefix: new Date().getTime(),
                 consumerKey: '6f85bdf51b0a19b7ab2df7b969233901',
                 debug: playerParameters.debug,
+                onPlaylistPreloaded: onPlaylistPreloaded,
                 preload: true,
                 togglePause: playerParameters.togglePause,
                 tracksPerArtist: playerParameters.tracksPerArtist,
@@ -30436,6 +30441,38 @@ ToneDen.define('player',['jquery', 'vendor/simple-slider', 'underscore', 'vendor
                         console.debug(message);
                     }
                 }
+            }
+
+            function onPlaylistPreloaded(e) {
+                tdInstance.tracks(function(tracks) {
+                    var nowPlaying = tdInstance.track();
+
+                    log(tracks);
+
+                    // If parameters.single is not explicitly set to false and
+                    // there is only one track, render the single-track player.
+                    if(tracks.length === 1 && playerParameters.single !== false && playerParameters.mini == false && playerParameters.feed == false) {
+                       playerParameters.single = true;
+                    }
+
+                    container.find('.tdspinner').hide();
+
+                    rerender({
+                        feed: playerParameters.feed,
+                        mini: playerParameters.mini,
+                        nowPlaying: nowPlaying,
+                        shrink: playerParameters.shrink,
+                        single: playerParameters.single,
+                        skin: playerParameters.skin,
+                        tracks: tracks,
+                        tracksPerArtist: playerParameters.tracksPerArtist,
+                        visualizerType: playerParameters.visualizerType
+                    });
+
+                    if(tdInstance.sound() && !tdInstance.sound().paused) {
+                        changePlayButton(false);
+                    }
+                });
             }
 
             function rerender(parameters) {
@@ -30852,38 +30889,6 @@ ToneDen.define('player',['jquery', 'vendor/simple-slider', 'underscore', 'vendor
                         container.find('.stop-time').empty().append(loader);
                     }
                 }
-            });
-
-            tdInstance.on('tdplayer.playlist.preloaded', function(e) {
-                tdInstance.tracks(function(tracks) {
-                    var nowPlaying = tdInstance.track();
-
-                    log(tracks);
-
-                    // If parameters.single is not explicitly set to false and
-                    // there is only one track, render the single-track player.
-                    if(tracks.length === 1 && playerParameters.single !== false && playerParameters.mini == false && playerParameters.feed == false) {
-                       playerParameters.single = true;
-                    }
-
-                    container.find('.tdspinner').hide();
-
-                    rerender({
-                        feed: playerParameters.feed,
-                        mini: playerParameters.mini,
-                        nowPlaying: nowPlaying,
-                        shrink: playerParameters.shrink,
-                        single: playerParameters.single,
-                        skin: playerParameters.skin,
-                        tracks: tracks,
-                        tracksPerArtist: playerParameters.tracksPerArtist,
-                        visualizerType: playerParameters.visualizerType
-                    });
-
-                    if(tdInstance.sound() && !tdInstance.sound().paused) {
-                        changePlayButton(false);
-                    }
-                });
             });
 
             tdInstance.on('tdplayer.track.ready', function(e) {

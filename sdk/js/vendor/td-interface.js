@@ -952,6 +952,10 @@ define(['vendor/soundmanager2', 'jquery', 'vendor/jquery-jsonp', 'vendor/d3', 'v
         };
 
         /* internal events */
+        if(self.config.onPlaylistPreloaded) {
+            self.on('tdplayer.playlist.preloaded', self.config.onPlaylistPreloaded);
+        }
+
         self.on('tdplayer.track.ready', function(e, cb) {
             self.log('track.onready!!!');
 
