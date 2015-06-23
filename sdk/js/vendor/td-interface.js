@@ -622,22 +622,24 @@ define(['vendor/soundmanager2', 'jquery', 'vendor/jquery-jsonp', 'vendor/d3', 'v
 
             var trackPromise = new $.Deferred();
             var cached = self.getCache(url);
+            var isExternal = url.match(urlregex) && url.search(/soundcloud\.com/i) === -1;
             var _track;
 
-            // allow non SC tracks (watch for bugs)
+            // Allow non SC tracks (watch for bugs)
             // look for a url, but not soundcloud.com
-            if(url.match(urlregex) && url.search(/soundcloud\.com/i) === -1) {
+            if(isExternal) {
                 _track = {
-                    stream_url:url,
+                    duration:0,
                     id:0,
-                    permalink_url:url,
-                    duration:0
+                    permalink_url: url,
+                    streamable: true,
+                    stream_url: url
                 };
 
                 trackPromise.resolve(_track);
             }
 
-            // if we're caching, check cache first
+            // If we're caching, check cache first.
             if(self.config.cache === true && cached) {
                 if(cb) {
                     trackPromise.done(function() {
@@ -651,6 +653,10 @@ define(['vendor/soundmanager2', 'jquery', 'vendor/jquery-jsonp', 'vendor/d3', 'v
                         return cb(_track);
                     }
                 });
+
+                if(isExternal) {
+                    return;
+                }
 
                 var datatype;
                 var resolveUrl;
