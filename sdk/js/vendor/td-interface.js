@@ -7,7 +7,7 @@ define(['vendor/soundmanager2', 'jquery', 'vendor/jquery-jsonp', 'vendor/d3', 'v
     __slice = [].slice;
 
     // Setup soundmanager2.
-    if(typeof soundManager !== 'undefined'){
+    if(typeof soundManager !== 'undefined') {
         soundManager.setup({
             debugMode: false,
             flashVersion: 9,
@@ -62,7 +62,7 @@ define(['vendor/soundmanager2', 'jquery', 'vendor/jquery-jsonp', 'vendor/d3', 'v
 
     //SoundCloud Player class
     //v0.9.6
-    var SoundCloudPlayer = function(tracks, config){
+    var SoundCloudPlayer = function(tracks, config) {
         var defaults = {
             autoplay: false,
             autoswitch: true, // For playlists
@@ -618,16 +618,28 @@ define(['vendor/soundmanager2', 'jquery', 'vendor/jquery-jsonp', 'vendor/d3', 'v
                 return;
             }
 
+            if(typeof url === 'object') {
+                return cb(url);
+            }
+
             url = url.replace(/https?\:\/\/(www\.)?soundcloud\.com/gi, "");
 
             var trackPromise = new $.Deferred();
             var cached = self.getCache(url);
-            var isExternal = url.match(urlregex) && url.search(/soundcloud\.com/i) === -1;
+            var streamSource;
             var _track;
+
+            if(originalUrl.search(/(toneden\.io|toneden\.co|lvho.st)/i) !== -1) {
+                streamSource = 'toneden';
+            } else if(originalUrl.search(/soundcloud\.com/i) !== -1) {
+                streamSource = 'soundcloud';
+            } else if(originalUrl.match(urlregex)) {
+                streamSource = 'external';
+            }
 
             // Allow non SC tracks (watch for bugs)
             // look for a url, but not soundcloud.com
-            if(isExternal) {
+            if(streamSource === 'external') {
                 _track = {
                     duration:0,
                     id:0,
@@ -654,78 +666,89 @@ define(['vendor/soundmanager2', 'jquery', 'vendor/jquery-jsonp', 'vendor/d3', 'v
                     }
                 });
 
-                if(isExternal) {
-                    return;
+                if(streamSource === 'toneden') {
+                    self.resolveToneDenTrack(trackPromise);
+                } else if(streamSource === 'soundcloud') {
+                    self.resolveSoundCloudTrack(trackPromise, url);
                 }
-
-                var datatype;
-                var resolveUrl;
-                var ajaxFunctionName;
-
-                // Safari is stupid, and doesn't follow redirects with json datatype.
-                if(isSafari) {
-                    ajaxFunctionName = 'jsonp';
-                    datatype = 'jsonp';
-                    resolveUrl = scResolveUrl + url +
-                        '&format=json' +
-                        '&consumer_key=' + self.config.consumerKey +
-                        '&callback=?';
-                } else {
-                    ajaxFunctionName = 'ajax';
-                    datatype = 'json';
-                    resolveUrl = scResolveUrl + url +
-                        '&format=json' +
-                        '&consumer_key=' + self.config.consumerKey;
-                }
-
-                $[ajaxFunctionName]({
-                    type: 'GET',
-                    datatype: datatype,
-                    url: resolveUrl,
-                    crossDomain: true,
-                    error: function(jqXHR, textStatus, errorThrown){
-                        var track = {
-                            error: true,
-                            errorMessage: 'We couldn\'t load that track :('
-                        };
-
-                        if(self.config.cache) {
-                            self.setCache(url, track);
-                        }
-
-                        trackPromise.resolve(track);
-                    },
-                    success: function(_track){
-                        // Three types of 'tracks': users, sets, and individual tracks.
-
-                        if(_track.kind === 'user') {
-                            self.getTracksForUser(_track, self.config.tracksPerArtist, function(tracks) {
-                                self.parseTracks(originalUrl, tracks, function(tracks) {
-                                    _track = tracks[0];
-
-                                    trackPromise.resolve(_track);
-                                });
-                            });
-                        } else if(_track.tracks && _track.tracks.length > 0) {
-                            self.parseTracks(originalUrl, _track.tracks, function(tracks) {
-                                _track = tracks[0];
-                                trackPromise.resolve(_track);
-                            });
-                        } else {
-                            // maybe cache the track
-                            self.processTrack(_track, function(track) {
-                                if(self.config.cache) {
-                                    self.setCache(url, track);
-                                }
-
-                                trackPromise.resolve(track);
-                            });
-                        }
-                    }
-                });
             }
 
             return trackPromise;
+        };
+
+        self.resolveToneDenTrack = function(trackPromise, url) {
+            $.ajax({
+                type: 'GET',
+                datatype: 'json',
+                url: url
+            });
+        };
+
+        self.resolveSoundCloudTrack = function(trackPromise, url) {
+            var datatype;
+            var resolveUrl;
+            var ajaxFunctionName;
+
+            // Safari is stupid, and doesn't follow redirects with json datatype.
+            if(isSafari) {
+                ajaxFunctionName = 'jsonp';
+                datatype = 'jsonp';
+                resolveUrl = scResolveUrl + url +
+                    '&format=json' +
+                    '&consumer_key=' + self.config.consumerKey +
+                    '&callback=?';
+            } else {
+                ajaxFunctionName = 'ajax';
+                datatype = 'json';
+                resolveUrl = scResolveUrl + url +
+                    '&format=json' +
+                    '&consumer_key=' + self.config.consumerKey;
+            }
+
+            $[ajaxFunctionName]({
+                type: 'GET',
+                datatype: datatype,
+                url: resolveUrl,
+                crossDomain: true,
+                error: function(jqXHR, textStatus, errorThrown){
+                    var track = {
+                        error: true,
+                        errorMessage: 'We couldn\'t load that track :('
+                    };
+
+                    if(self.config.cache) {
+                        self.setCache(url, track);
+                    }
+
+                    trackPromise.resolve(track);
+                },
+                success: function(_track) {
+                    // Three types of 'tracks': users, sets, and individual tracks.
+                    if(_track.kind === 'user') {
+                        self.getTracksForUser(_track, self.config.tracksPerArtist, function(tracks) {
+                            self.parseTracks(originalUrl, tracks, function(tracks) {
+                                _track = tracks[0];
+
+                                trackPromise.resolve(_track);
+                            });
+                        });
+                    } else if(_track.tracks && _track.tracks.length > 0) {
+                        self.parseTracks(originalUrl, _track.tracks, function(tracks) {
+                            _track = tracks[0];
+                            trackPromise.resolve(_track);
+                        });
+                    } else {
+                        // maybe cache the track
+                        self.processTrack(_track, function(track) {
+                            if(self.config.cache) {
+                                self.setCache(url, track);
+                            }
+
+                            trackPromise.resolve(track);
+                        });
+                    }
+                }
+            });
         };
 
         // Gets tracks for a given user.
