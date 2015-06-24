@@ -101,9 +101,10 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/td-interface', '
                 }
             }
 
+            // 'this' will refer to tdInstance here.
             function onPlaylistPreloaded(e) {
-                tdInstance.tracks(function(tracks) {
-                    var nowPlaying = tdInstance.track();
+                this.getTracks(function(tracks) {
+                    var nowPlaying = this.getTrack();
 
                     log(tracks);
 
@@ -127,10 +128,10 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/td-interface', '
                         visualizerType: playerParameters.visualizerType
                     });
 
-                    if(tdInstance.sound() && !tdInstance.sound().paused) {
+                    if(this.getSound() && !this.getSound().paused) {
                         changePlayButton(false);
                     }
-                });
+                }.bind(this));
             }
 
             function rerender(parameters) {
