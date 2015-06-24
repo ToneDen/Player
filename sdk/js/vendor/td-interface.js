@@ -669,7 +669,7 @@ define(['vendor/soundmanager2', 'jquery', 'vendor/jquery-jsonp', 'vendor/d3', 'v
                 if(streamSource === 'toneden') {
                     self.resolveToneDenTrack(trackPromise);
                 } else if(streamSource === 'soundcloud') {
-                    self.resolveSoundCloudTrack(trackPromise, url);
+                    self.resolveSoundCloudTrack(trackPromise, url, originalUrl);
                 }
             }
 
@@ -684,7 +684,7 @@ define(['vendor/soundmanager2', 'jquery', 'vendor/jquery-jsonp', 'vendor/d3', 'v
             });
         };
 
-        self.resolveSoundCloudTrack = function(trackPromise, url) {
+        self.resolveSoundCloudTrack = function(trackPromise, url, originalUrl) {
             var datatype;
             var resolveUrl;
             var ajaxFunctionName;
