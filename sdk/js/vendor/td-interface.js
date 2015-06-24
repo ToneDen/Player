@@ -762,7 +762,12 @@ define(['vendor/soundmanager2', 'jquery', 'vendor/jquery-jsonp', 'vendor/d3', 'v
                     return cb([]);
                 },
                 success: function(tracks) {
-                    tracks = tracks.slice(0, Math.min(numTracks, tracks.length));
+                    if(tracks instanceof Array) {
+                        tracks = tracks.slice(0, Math.min(numTracks, tracks.length));
+                    } else {
+                        tracks = [];
+                        console.log('Tracks is not an array.', tracks);
+                    }
 
                     return cb(tracks);
                 }
