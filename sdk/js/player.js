@@ -136,7 +136,7 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/td-interface', '
 
             function rerender(parameters) {
                 parameters = JSON.parse(JSON.stringify(parameters));
-                parameters.repeat = tdInstance.config.loopTrack;
+                parameters.repeat = tdInstance && tdInstance.config.loopTrack;
 
                 // Render the empty template if no urls were originally supplied
                 // or if all of the tracks are falsy.
