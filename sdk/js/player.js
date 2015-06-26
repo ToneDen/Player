@@ -59,7 +59,7 @@ define(['jquery', 'vendor/simple-slider', 'underscore', 'vendor/td-interface', '
             var tdInstanceParameters = {
                 cache: true,
                 cachePrefix: new Date().getTime(),
-                consumerKey: '6f85bdf51b0a19b7ab2df7b969233901',
+                consumerKey: '0e545f4886c0c8006a4f95e2036399c0',
                 debug: playerParameters.debug,
                 onPlaylistPreloaded: onPlaylistPreloaded,
                 preload: true,
