@@ -1,6 +1,0 @@
-{
-    "dependencies": {
-        "grunt": "0.4.4",
-        "grunt-contrib": "0.9.0"
-    }
-}

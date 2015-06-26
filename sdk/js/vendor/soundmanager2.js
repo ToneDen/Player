@@ -30,7 +30,7 @@
  * Also, as you may note: Whoa, reliable cross-platform/device audio support is hard! ;)
  */
 
-define(['vendor/dsp'], function(dsp) {
+define(['./dsp'], function(dsp) {
 
 "use strict";
 

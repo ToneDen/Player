@@ -1,3 +1,39 @@
+/**
+ * Thanks to Pete Hunt for the great webpack how-to: https://github.com/petehunt/webpack-howto
+ */
+
+var webpack = require('webpack');
+
+var webpackPlugins = [
+    new webpack.optimize.UglifyJsPlugin({
+        mangle: true
+    }),
+    new webpack.DefinePlugin({
+        'process.env': {
+            NODE_ENV: 'dev'
+        }
+    })
+];
+
+var webpackLoaders = [{
+    loader: 'style-loader!css-loader',
+    test: /\.css$/
+}, {
+    loader: 'jsx-loader',
+    test: /\.jsx$/
+}, {
+    loader: 'url-loader?limit=8192',
+    test: /\.(png|jpg)$/
+}, {
+    loader: 'handlebars-loader?helperDirs[]=' + process.env.PWD + '/sdk/js/templates/helpers',
+    test: /\.hbs$/
+}, {
+    loader: 'jsx-loader',
+    test: /\.jsx$/
+}];
+
+var webpackExtensions = ['', '.hbs', '.js', '.jsx', '.css'];
+
 module.exports = function(grunt) {
     grunt.initConfig({
         // Upload static files from /dist/ENV/* to s3 and delete files from s3 which don't exist anymore.
@@ -62,85 +98,52 @@ module.exports = function(grunt) {
                 resourcePaths: ['/production/toneden.loader.js', '/production/toneden.js']
             }
         },
-        // TODO: Serve with gzip.
-        compress: {
-            options: {
-                mode: 'gzip',
-                pretty: true
-            },
-            main: {
-                files: [
-                    {
-                        src: 'toneden.loader.temp.js',
-                        dest: 'toneden.loader.js.gz'
-                    },
-                    {
-                        src: 'toneden.temp.js',
-                        dest: 'toneden.js.gz'
-                    }
-                ]
+        watch: {
+            toneden: {
+                files: ['loader/**/*', 'sdk/**/*'],
+                tasks: ['webpack']
             }
         },
-        rename: {
-            preLoader: {
-                src: 'toneden.loader.js',
-                dest: 'toneden.loader.temp.js'
-            },
-            preSDK: {
-                src: 'toneden.js',
-                dest: 'toneden.temp.js'
-            },
-            compressedLoader: {
-                src: 'toneden.loader.js.gz',
-                dest: 'toneden.loader.js'
-            },
-            compressedSDK: {
-                src: 'toneden.js.gz',
-                dest: 'toneden.js'
-            },
-            postLoader: {
-                src: 'toneden.loader.temp.js',
-                dest: 'toneden.loader.js'
-            },
-            postSDK: {
-                src: 'toneden.temp.js',
-                dest: 'toneden.js'
+        webpack: {
+            toneden: {
+                entry: {
+                    'toneden.loader': './loader/index.js',
+                    toneden: ['./sdk/js/index.js']
+                },
+                output: {
+                    filename: '[name].js'
+                },
+                module: {
+                    loaders: webpackLoaders
+                },
+                plugins: webpackPlugins,
+                resolve: {
+                    extensions: webpackExtensions
+                }
             }
         }
     });
 
     grunt.loadNpmTasks('grunt-aws-s3');
     grunt.loadNpmTasks('grunt-cloudfront-clear');
-    grunt.loadNpmTasks('grunt-contrib-compress');
-    grunt.loadNpmTasks('grunt-rename');
+    grunt.loadNpmTasks('grunt-contrib-watch');
+    grunt.loadNpmTasks('grunt-webpack');
 
     var env = grunt.option('env') || 'dev';
 
     grunt.registerTask('dev', [
-        'rename:preLoader',
-        'rename:preSDK',
-        'compress',
-        'rename:compressedLoader',
-        'rename:compressedSDK',
+        'webpack',
         'aws_s3:dev',
-        'cloudfront_clear:dev',
-        'rename:postLoader',
-        'rename:postSDK'
+        'cloudfront_clear:dev'
     ]);
 
     grunt.registerTask('production', [
-        'rename:preLoader',
-        'rename:preSDK',
-        'compress',
-        'rename:compressedLoader',
-        'rename:compressedSDK',
+        'webpack',
         'aws_s3:production',
-        'cloudfront_clear:production',
-        'rename:postLoader',
-        'rename:postSDK'
+        'cloudfront_clear:production'
     ]);
 
     grunt.registerTask('default', [
-        'dev'
+        'webpack'
     ]);
 };

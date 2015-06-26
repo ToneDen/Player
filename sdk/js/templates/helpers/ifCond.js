@@ -1,12 +1,12 @@
-define(['hbs/handlebars'], function(Handlebars) {
-	function ifCond(v1, v2, options) {
-		if(v1 || v2) {
-	    return options.fn(this);
-	  }
-	  return options.inverse(this);
-	}
+var Handlebars = require('handlebars/runtime');
 
-	Handlebars.registerHelper('ifCond', ifCond);
+function ifCond(v1, v2, options) {
+    if(v1 || v2) {
+        return options.fn(this);
+    }
+    return options.inverse(this);
+}
 
-	return ifCond;
-});
+Handlebars.registerHelper('ifCond', ifCond);
+
+module.exports = ifCond;

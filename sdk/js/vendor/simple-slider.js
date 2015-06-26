@@ -9,7 +9,7 @@
 var __slice = [].slice,
   __indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; };
 
-define(['jquery'], function($) {
+  var $ = require('jquery');
   var SimpleSlider;
   SimpleSlider = (function() {
 
@@ -326,7 +326,7 @@ define(['jquery'], function($) {
       });
     }
   });
-  return $(function() {
+  module.exports = $(function() {
     return $("[data-slider]").each(function() {
       var $el, allowedValues, settings, x;
       $el = $(this);
@@ -364,4 +364,3 @@ define(['jquery'], function($) {
       return $el.simpleSlider(settings);
     });
   });
-});
