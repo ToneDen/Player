@@ -1557,8 +1557,8 @@ opacity: 0.4;
   .td.player table tr td,
   .td.player table tfoot tr td {
     display: table-cell;
-    line-height: 1.125rem; }
-}
+    line-height: 1.125rem; 
+  }
 
 @media only screen and (min-width: 64.063em) {
   .tdcolumn.tdlarge-centered,

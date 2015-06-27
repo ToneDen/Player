@@ -10,7 +10,9 @@
     "url-loader": "~0.5.6",
     "compression-webpack-plugin": "~0.2.0",
     "grunt-contrib-watch": "~0.6.1",
-    "handlebars-loader": "~1.0.2"
+    "handlebars-loader": "~1.0.2",
+    "style-loader": "~0.12.3",
+    "css-loader": "~0.15.1"
   },
   "dependencies": {
     "node-libs-browser": "~0.5.2",

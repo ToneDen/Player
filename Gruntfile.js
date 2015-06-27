@@ -3,36 +3,31 @@
  */
 
 var webpack = require('webpack');
+var env;
+
+if(process.argv.indexOf('--dev') !== -1) {
+    env = 'staging';
+} else if(process.argv.indexOf('--production') !== -1) {
+    env = 'production';
+} else {
+    env = 'local';
+}
 
 var webpackPlugins = [
-    new webpack.optimize.UglifyJsPlugin({
-        mangle: true
-    }),
     new webpack.DefinePlugin({
-        'process.env': {
-            NODE_ENV: 'dev'
-        }
+        env: JSON.stringify(env)
     })
 ];
 
-var webpackLoaders = [{
-    loader: 'style-loader!css-loader',
-    test: /\.css$/
-}, {
-    loader: 'jsx-loader',
-    test: /\.jsx$/
-}, {
-    loader: 'url-loader?limit=8192',
-    test: /\.(png|jpg)$/
-}, {
-    loader: 'handlebars-loader?helperDirs[]=' + process.env.PWD + '/sdk/js/templates/helpers',
-    test: /\.hbs$/
-}, {
-    loader: 'jsx-loader',
-    test: /\.jsx$/
-}];
-
-var webpackExtensions = ['', '.hbs', '.js', '.jsx', '.css'];
+if(env !== 'local') {
+    webpackPlugins.push(new webpack.optimize.UglifyJsPlugin({
+        compress: {
+            warnings: false
+        },
+        mangle: true,
+        sourceMap: env === 'local'
+    }));
+}
 
 module.exports = function(grunt) {
     grunt.initConfig({
@@ -105,20 +100,34 @@ module.exports = function(grunt) {
             }
         },
         webpack: {
-            toneden: {
-                entry: {
-                    'toneden.loader': './loader/index.js',
-                    toneden: ['./sdk/js/index.js']
-                },
+            loader: {
+                entry: './loader/index.js',
                 output: {
-                    filename: '[name].js'
+                    chunkFilename: 'toneden.js',
+                    crossOriginLoading: 'anonymous',
+                    filename: 'toneden.loader.js'
                 },
                 module: {
-                    loaders: webpackLoaders
+                    loaders: [{
+                        loader: 'style-loader!css-loader',
+                        test: /\.css$/
+                    }, {
+                        loader: 'jsx-loader',
+                        test: /\.jsx$/
+                    }, {
+                        loader: 'url-loader?limit=8192',
+                        test: /\.(png|jpg)$/
+                    }, {
+                        loader: 'handlebars-loader?helperDirs[]=' + process.env.PWD + '/sdk/js/templates/helpers',
+                        test: /\.hbs$/
+                    }, {
+                        loader: 'jsx-loader',
+                        test: /\.jsx$/
+                    }]
                 },
                 plugins: webpackPlugins,
                 resolve: {
-                    extensions: webpackExtensions
+                    extensions: ['', '.hbs', '.js', '.jsx', '.css']
                 }
             }
         }

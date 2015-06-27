@@ -406,19 +406,19 @@
   stroke: white;
 }
 
-.td.player.light .axis path, .td.player.light .axis line,{
+.td.player.light .axis path, .td.player.light .axis line {
   stroke: #000;
 }
 
-.td.player.dark .axis path, .td.player.dark .axis line,{
+.td.player.dark .axis path, .td.player.dark .axis line {
   stroke: white;
 }
 
-.td.player.aurora .axis path, .td.player.aurora .axis line,{
+.td.player.aurora .axis path, .td.player.aurora .axis line {
   stroke: white;
 }
 
-.td.player.mojave .axis path, .td.player.mojave .axis line,{
+.td.player.mojave .axis path, .td.player.mojave .axis line {
   stroke: white;
 }
 

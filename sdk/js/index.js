@@ -1,3 +1,5 @@
+require('../css');
+
 var analytics = require('./analytics');
 var player = require('./player');
 

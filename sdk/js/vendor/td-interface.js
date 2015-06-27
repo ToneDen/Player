@@ -7,7 +7,7 @@ var async = require('async');
 var d3 = require('d3');
 
 var constants = require('../constants');
-var soundmanager2 = require('./soundmanager2');
+var soundManager = require('./soundmanager2');
 
 //define('./jquery-jsonp', ], function(jqueryjsonp) {
 var isSafari = (Object.prototype.toString.call(window.HTMLElement).indexOf('Constructor') > 0) == true;
