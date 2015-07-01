@@ -93,12 +93,6 @@ module.exports = function(grunt) {
                 resourcePaths: ['/production/toneden.loader.js', '/production/toneden.js']
             }
         },
-        watch: {
-            toneden: {
-                files: ['loader/**/*', 'sdk/**/*'],
-                tasks: ['webpack']
-            }
-        },
         webpack: {
             loader: {
                 entry: './loader/index.js',
@@ -128,14 +122,16 @@ module.exports = function(grunt) {
                 plugins: webpackPlugins,
                 resolve: {
                     extensions: ['', '.hbs', '.js', '.jsx', '.css']
-                }
+                },
+                devtool: 'inline-source-map',
+                keepalive: true,
+                watch: true
             }
         }
     });
 
     grunt.loadNpmTasks('grunt-aws-s3');
     grunt.loadNpmTasks('grunt-cloudfront-clear');
-    grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-webpack');
 
     var env = grunt.option('env') || 'dev';

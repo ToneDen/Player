@@ -21,7 +21,6 @@
     "async": "~1.2.1",
     "jquery": "~2.1.4",
     "handlebars": "~3.0.3",
-    "underscore": "~1.8.3",
     "react": "~0.13.3"
   }
 }

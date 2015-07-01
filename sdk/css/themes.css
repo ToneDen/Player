@@ -422,19 +422,19 @@
   stroke: white;
 }
 
-.td.player.light svg rect {
+.td.player.light rect {
   fill: #000;
 }
 
-.td.player.dark svg rect {
+.td.player.dark rect {
   fill: white;
 }
 
-.td.player.aurora svg rect {
+.td.player.aurora rect {
   fill: #02DDA8;
 }
 
-.td.player.mojave svg rect {
+.td.player.mojave rect {
   fill: #F58F86;
 }
 

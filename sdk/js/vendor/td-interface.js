@@ -7,7 +7,7 @@ var async = require('async');
 var d3 = require('d3');
 
 var constants = require('../constants');
-var soundManager = require('./soundmanager2');
+var soundManager = require('./soundManager2');
 
 //define('./jquery-jsonp', ], function(jqueryjsonp) {
 var isSafari = (Object.prototype.toString.call(window.HTMLElement).indexOf('Constructor') > 0) == true;
@@ -552,7 +552,7 @@ var SoundCloudPlayer = function(tracks, config) {
         }
 
         url += 'consumer_key=' + self.config.consumerKey;
-        url = url + "&ts=" + Math.round((new Date()).getTime() / 1000);
+        url = url + '&ts=' + Math.round((new Date()).getTime() / 1000);
 
         // Setup the SM2 sound object.
         self.sound = soundManager.createSound({
