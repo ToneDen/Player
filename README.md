@@ -22,6 +22,9 @@ Just copy the snippet below into your HTML page, and replace the commented porti
 
     ToneDenReady = window.ToneDenReady || [];
     ToneDenReady.push(function() {
+        ToneDen.configure({
+            soundcloudConsumerKey: '<YOUR SOUNDCLOUD CONSUMER KEY HERE>'
+        });
         // call SDK functions (ToneDen.player.create(), etc.)
     });
 </script>
@@ -70,13 +73,17 @@ API
 ---
 
 **ToneDen**
-* **.player**
-  * **.create(params)**
-    Creates and returns a new player instance according to the given parameters object.
+* **.configure**
+  * **configure(params)**
+    Sets global SDK options.
     Parameters:
     * **debug**  
       *default: false*   
       True to output debug messages to the console.  
+* **.player**
+  * **.create(params)**
+    Creates and returns a new player instance according to the given parameters object.
+    Parameters:
     * **feed**   
       *default: false*  
       True to display a simplified version of the player, no bells and whistles here.
@@ -109,9 +116,6 @@ API
     * **skin**  
       *default: 'light'*   
       The player color scheme to render. Options are 'light', 'dark', 'mojave', and 'aurora'.  
-    * **staticUrl**  
-      *default: 'sdkUrl'*   
-      The URL path to load static files from. This should be left as the default, unless you are hosting the SDK yourself.  
     * **tracksPerArtist**  
       *default: 10*   
       How many tracks to load from an artist's SoundCloud account when the artist's SoundCloud URL is specified in the urls parameter.  
@@ -189,20 +193,20 @@ Setup
 ```
 3. Restart Apache.
 4. Install [NPM](https://github.com/npm/npm) and [Grunt](http://gruntjs.com/).
-5. Run `npm install` in the sdk/ directory, and again in the loader directory if you're going to be modifying files there.
+5. Run `npm install` in the root directory.
 6. Navigate to publisher.dev in your browser of choice.
 This will load test/index.html, which includes a script snippet that loads toneden.loader.js from the domain widget.dev to simulate a cross-origin environment.
 
 Building
 ---
 
-After modifying files in either the sdk/ or the loader/ directory, run Grunt to compile that directory's scripts into a single file (toneden.js for the sdk/ directory, and toneden.loader.js for the loader/ directory).
+We use [Webpack](https://webpack.github.io) to compile the player and all of it's dependencies into a single file.
+When you run `grunt` from the root directory, the Webpack dev server will start. From this point on, any changes you make
+to files in the repo will cause Webpack to rebuild /toneden.js and /toneden.loader.js.
 
-`grunt dev` will compile a readable, debug-friendly version of the scripts, while `grunt` will make a minified version.
-You can also run `grunt watch` or `grunt watch dev` to automatically compile the scripts as you make changes to files.
+**Don't use files built by the webpack dev server in production- they're huge! Run grunt --production to build a minified version.**
 
-Note that the build process for the SDK concatenates and minifies all CSS files in the css/ directory,
-then inserts the resulting string as a variable at the top of the compiled SDK script.
+`grunt --dev` will compile a readable, debug-friendly version of the scripts, while `grunt --production` will make a minified version.
 
 Overview
 ---
@@ -210,18 +214,16 @@ Overview
 The loader/ directory contains the scripts that manage (surprise!) loading the SDK when embedded in a webpage.
 You probably won't have to touch anything in this directory, but here's how it works:
 
-The loader script (toneden.loader.js) contains the [requirejs](http://requirejs.org/) source code,
-and uses requirejs to asynchronously load the SDK script (toneden.js) from the ToneDen CDN.
+The loader script (toneden.loader.js) uses webpack to asynchronously load the SDK script (toneden.js) from the ToneDen CDN.
 This system allows embedding pages to include (either asynchronously or synchronously) the relatively small loading script,
 which then loads the much larger SDK files in a non-blocking way.
 When the SDK has been loaded, the loader calls all the functions in the global ToneDenReady array,
 allowing developers to access the functionality of the SDK.
 (Inspired by/copied from the [Shootitlive](https://github.com/shootitlive/widgetloader) folks, who are way smarter than me!)
 
-The sdk/ directory contains all the good stuff. The file toneden.js is the hub of the action.
+The sdk/ directory contains all the good stuff. The file index.js is the hub of the action.
 It loads all the functions of the SDK (currently only the player) as dependencies,
 and returns them so that they can be attached to the global ToneDen object.
-The other important function of toneden.js is to grab the CSS that has been minified and concatenated by Grunt and insert it into the page as a `<style>` element.
 
 Questions?
 ===

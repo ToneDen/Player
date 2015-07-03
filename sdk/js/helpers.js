@@ -1,3 +1,5 @@
+var async = require('async');
+
 module.exports = {
     msToTimestamp: function(milliseconds) {
         var totalSeconds = Math.round(milliseconds / 1000);
@@ -24,5 +26,19 @@ module.exports = {
         } else {
             return '-';
         }
+    },
+    // Hacky way to wait for the dispatcher to finish dispatching the currently active action. Not sure what the best
+    // way to get around this is, as it probably indicates a flaw in our usage of flux. D:
+    waitForCurrentAction: function(interval, callback) {
+        if(typeof interval === 'function') {
+            callback = interval;
+            interval = 50;
+        }
+
+        async.until(function() {
+            return !this.getFlux().dispatcher.currentActionType;
+        }.bind(this), function(done) {
+            return setTimeout(done, interval);
+        }, callback.bind(this));
     }
 };

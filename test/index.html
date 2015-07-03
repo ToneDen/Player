@@ -37,12 +37,16 @@
 
                 ToneDenReady = window.ToneDenReady || [];
                 ToneDenReady.push(function() {
-                    ToneDen.player.create({
+                    ToneDen.configure({
                         debug: true,
+                        soundcloudConsumerKey: 'ae1c0d2a28b3eae3bd0d11eb9e1704a4'
+                    });
+                    ToneDen.player.create({
                         dom: '#player',
                         keyboardEvents: false,
                         urls: [
                             //'http://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3',
+                            'https://soundcloud.com/fightclvb',
                             'https://soundcloud.com/bz-rocks/02-kills',
                             'https://soundcloud.com/liquidcomplex/serum',
                             'https://soundcloud.com/liquidcomplex/london-grammar-metal-and-dust'
@@ -55,7 +59,7 @@
                         visualizerType: 'waves',
                     });
                     ToneDen.player.create({
-                        debug: true,
+                        single: true,
                         dom: '#single-player-demo',
                         keyboardEvents: false,
                         urls: [

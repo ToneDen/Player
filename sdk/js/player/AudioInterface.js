@@ -1,9 +1,9 @@
 var _ = require('lodash');
 var async = require('async');
-var request = require('superagent');
 var soundManager = require('../vendor/soundManager2').soundManager;
 
 var constants = require('../constants');
+var soundcloud = require('./network/soundcloud');
 
 soundManager.setup({
     debugMode: false,
@@ -13,7 +13,8 @@ soundManager.setup({
 var AudioInterface = function(parameters) {
     // Initialize configuration.
     var defaultParameters = {
-        cache: true
+        cache: true,
+        volume: 100
     };
     this.parameters = _.merge(defaultParameters, parameters);
     this.resolveCache = {};
@@ -22,8 +23,6 @@ var AudioInterface = function(parameters) {
 
     var actions = ToneDen.flux.actions;
     var self = this;
-    var soundcloudConsumerKey = '0e545f4886c0c8006a4f95e2036399c0';
-    var soundcloudResolveURL = constants.protocol + '//api.soundcloud.com/resolve?url=http://soundcloud.com';
     var urlRegex = new RegExp(/[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&//=]*)?/gi);
 
     function createSound(track, autoPlay) {
@@ -31,6 +30,9 @@ var AudioInterface = function(parameters) {
             autoLoad: true,
             autoPlay: autoPlay,
             id: track.id,
+            onfinish: function() {
+                actions.player.audioInterface.onTrackFinish(this.id);
+            },
             onload: function() {
                 actions.player.audioInterface.onTrackReady(this.id);
             },
@@ -38,10 +40,6 @@ var AudioInterface = function(parameters) {
                 actions.player.audioInterface.onTrackPlayingChange(this.id, false);
             },
             onplay: function() {
-                if(self.nowPlaying) {
-                    self.nowPlaying.pause();
-                }
-
                 self.nowPlaying = this;
                 actions.player.audioInterface.onTrackPlayStart(this.id);
             },
@@ -49,6 +47,7 @@ var AudioInterface = function(parameters) {
                 actions.player.audioInterface.onTrackPlayingChange(this.id, true);
             },
             url: track.resolved.stream_url,
+            volume: self.parameters.volume,
             whileloading: function() {
                 //actions.player.audioInterface.onTrackLoadAmountChange(this.id, this.bytesLoaded);
             },
@@ -62,8 +61,12 @@ var AudioInterface = function(parameters) {
 
     this.loadTrack = function(track, autoPlay) {
         if(track.sound) {
-            track.sound.setPosition(0);
-            track.sound.play();
+            this.seekTrack(track, 0);
+            track.sound.setVolume(self.parameters.volume);
+
+            if(autoPlay && (track.sound.paused || track.sound.playState === 0)) {
+                track.sound.play();
+            }
         }
 
         async.waterfall([
@@ -71,29 +74,34 @@ var AudioInterface = function(parameters) {
                 if(!track.resolved) {
                     return this.resolveTrack(track, next);
                 } else {
-                    return next(null, track);
+                    return next(null, [track]);
                 }
             }.bind(this),
-            function(track, next) {
-                if(!track.sound) {
-                    track.sound = createSound(track, autoPlay);
+            function(tracks, next) {
+                var trackToPlay = tracks[0];
 
-                    delete track.playing;
+                if(!trackToPlay.sound) {
+                    trackToPlay.sound = createSound(trackToPlay, autoPlay);
 
-                    actions.player.audioInterface.onTrackResolved(track);
+                    actions.player.audioInterface.onTrackSoundAdded(trackToPlay);
                 }
 
-                return next(null, track);
+                return next(null, trackToPlay);
             }
-        ], function(err, track) {
+        ], function(err, trackToPlay) {
             if(err) {
-                actions.player.audioInterface.onTrackError(err);
+                actions.player.audioInterface.onTrackError(trackToPlay.id, err);
             }
         });
     };
 
-    this.resolveTrack = function(track, callback) {
-        var url = track.url || track;
+    this.resolveTrack = function(originalTrack, tracksPerArtist, callback) {
+        var url = originalTrack.url || originalTrack;
+
+        if(typeof tracksPerArtist === 'function') {
+            callback = tracksPerArtist;
+            tracksPerArtist = 10;
+        }
 
         if(self.parameters.cache && self.resolveCache[url]) {
             return callback(null, self.resolveCache[url]);
@@ -102,22 +110,7 @@ var AudioInterface = function(parameters) {
         async.waterfall([
             function(next) {
                 if(url.search(/soundcloud\.com/i) !== -1) {
-                    url = url.replace(/https?\:\/\/(www\.)?soundcloud\.com/gi, '');
-
-                    request.get(soundcloudResolveURL + url)
-                        .query({
-                            consumer_key: soundcloudConsumerKey,
-                            format: 'json'
-                        })
-                        .end(function(err, res) {
-                            if(err) {
-                                return next(err);
-                            } else {
-                                var track = res.body;
-                                track.stream_url += '?consumer_key=' + soundcloudConsumerKey;
-                                return next(null, track);
-                            }
-                        });
+                    return soundcloud.resolve(url, tracksPerArtist, next);
                 } else if(url.match(urlRegex)) {
                     return next(null, {
                         stream_url: url
@@ -126,30 +119,65 @@ var AudioInterface = function(parameters) {
                     return next(new Error('I don\'t know how to deal with that URL.', url));
                 }
             },
-            function(resolvedTrack, next) {
+            function(resolvedTracks, next) {
                 if(self.parameters.cache) {
-                    self.resolveCache[url] = resolvedTrack;
+                    self.resolveCache[url] = resolvedTracks;
                 }
 
-                track.resolved = resolvedTrack;
-                delete track.playing;
+                // Since the single original track object may resolve into multiple tracks (in the case of a user or set
+                // URL), we have to turn that original track into an array of new ones with new IDs.
+                var allTracks = resolvedTracks.map(function(resolvedTrack) {
+                    var track = _.clone(originalTrack);
+                    track.id = _.uniqueId();
+                    track.resolved = resolvedTrack;
+                    delete track.playing;
 
-                actions.player.audioInterface.onTrackResolved(track);
+                    return track;
+                });
 
-                return next(null, track);
+                actions.player.audioInterface.onTrackResolved(originalTrack.id, allTracks);
+
+                return next(null, allTracks);
             }
         ], callback);
     };
 
+    this.seekTrack = function(track, position) {
+        track.sound.setPosition(position);
+        track.sound.options.position = position;
+        actions.player.audioInterface.onTrackPlayPositionChange(track.id, position);
+
+        if(track.sound.paused || track.sound.playState === 0) {
+            track.sound.play();
+        }
+    };
+
+    this.setVolume = function(level) {
+        self.parameters.volume = level;
+
+        if(self.nowPlaying) {
+            self.nowPlaying.setVolume(level);
+        }
+    };
+
     this.togglePause = function(track, paused) {
+        // Prevent soundManager from resetting the track's position.
+        var currentPosition;
+
         if(track.sound) {
+            currentPosition = track.sound.position;
             track.sound.togglePause();
+            track.sound.setPosition(currentPosition);
+        } else {
+            this.loadTrack(track, true);
         }
     };
 
     return {
         loadTrack: this.loadTrack,
         resolveTrack: this.resolveTrack,
+        seekTrack: this.seekTrack,
+        setVolume: this.setVolume,
         togglePause: this.togglePause
     };
 };

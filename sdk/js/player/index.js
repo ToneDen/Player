@@ -38,7 +38,7 @@ module.exports = {
         });
 
         // Set up default parameters.
-        var parameters = {
+        parameters = _.merge({
             container: container,
             debug: false, // Output debug messages?
             feed: false,
@@ -49,6 +49,7 @@ module.exports = {
             onTrackReady: null,
             onTrackFinished: null,
             onPlaylistFinished: null,
+            repeat: false,
             shrink: true, // Default option to shrink player responsively if container is too small
             single: null,
             skin: 'light',
@@ -57,8 +58,9 @@ module.exports = {
             tracksPerArtist: 10, // How many tracks to load when given an artist SoundCloud URL.
             tracks: tracks,
             useCustomPurchaseTitle: true,
-            visualizerType: 'waves' // Equalizer type. 'waves' or 'bars'
-        };
+            visualizerType: 'waves', // Equalizer type. 'waves' or 'bars'
+            volume: 100
+        }, parameters);
 
         var PlayerFactory = React.createFactory(Player);
 

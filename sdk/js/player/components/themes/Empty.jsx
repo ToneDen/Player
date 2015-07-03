@@ -1,16 +1,19 @@
 var React = require('react');
 
+var Columns = require('../Columns');
+var Row = require('../Row');
+
 var Empty = React.createClass({
     render: function() {
         return (
-            <div className={'td tdrow player ' + this.props.skin}>
-                <div class='tdempty tdlarge-12 tdsmall-12 tdsmall-centered tdlarge-centered'>
+            <Row className={'td player ' + this.props.skin}>
+                <Columns large={12} large-centered={true} small-centered={true} className='tdempty'>
                     <a href='https://www.toneden.io' target='_blank' className='icon-td_logo-link'>
-                        <i class='icon-td_logo' />
+                        <i className='icon-td_logo' />
                     </a>
                     There are no tracks to play.
-                </div>
-            </div>
+                </Columns>
+            </Row>
         );
     }
 });

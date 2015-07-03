@@ -25,16 +25,27 @@ if(!flux) {
     flux = new Fluxxor.Flux(require('./flux/stores'), require('./flux/actions'));
 
     // Debug logging.
-    if(constants.env !== 'production') {
-        flux.on('dispatch', function(type, payload) {
-            if(doNotLogEventTypes.indexOf(type) === -1) {
-                console.debug(type + ' event dispatched with payload ', payload);
-            }
-        });
+    flux.on('dispatch', function(type, payload) {
+        if(doNotLogEventTypes.indexOf(type) === -1) {
+            ToneDen.log(type + ' event dispatched with payload ', payload);
+        }
+    });
+}
+
+// Global ToneDen configuration function.
+function configure(parameters) {
+    _.merge(ToneDen.parameters, parameters);
+}
+
+function log() {
+    if(ToneDen.parameters.debug) {
+        console.log.apply(console, arguments);
     }
 }
 
 module.exports = {
+    configure: configure,
+    log: log,
     flux: flux,
     player: player
 };

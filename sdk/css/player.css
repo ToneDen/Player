@@ -420,26 +420,44 @@ opacity: 0.4;
 
 /*Slider*/
 .td.player .slider {
+  -webkit-user-select: none;
+  box-sizing: border-box;
   width: 100%;
   display:table-cell;
   vertical-align: middle;
   line-height: 50px;
+  min-height: 10px;
+  margin-left: 5px;
+  margin-right: 5px;
+  position: relative;
 }
 
-.td.player .slider > .dragger {
+.td.player .slider > .handle {
   -webkit-border-radius: 10px;
+  -webkit-user-select: none;
   -moz-border-radius: 10px;
   border-radius: 10px;
   width: 10px;
   height: 10px;
+  position: absolute;
+  top: 50%;
+  cursor: pointer;
+  margin-top: -5px;
+  margin-left: -5px;
 }
 
 .td.player .slider > .track, .td.player .slider > .highlight-track {
   -webkit-border-radius: 8px;
+  -webkit-user-select: none;
   -moz-border-radius: 8px;
   border-radius: 8px;
   height: 6px;
   border: 1px solid;
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  width: 100%;
+  margin-top: -3px;
 }
 
 /*Equalizer*/

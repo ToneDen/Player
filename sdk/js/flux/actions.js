@@ -19,7 +19,10 @@ module.exports = {
                     error: err
                 });
             },
-            onTrackFinish: function(track) {
+            onTrackFinish: function(trackID) {
+                this.dispatch(events.player.audioInterface.TRACK_FINISHED, {
+                    trackID: trackID
+                });
             },
             onTrackLoadAmountChange: function(trackID, bytesLoaded) {
                 this.dispatch(events.player.audioInterface.TRACK_LOAD_AMOUNT_CHANGED, {
@@ -49,9 +52,18 @@ module.exports = {
                     trackID: trackID
                 });
             },
-            onTrackResolved: function(track) {
-                var payload = normalizr.normalize(track, Track);
+            onTrackResolved: function(trackID, tracks) {
+                var payload = normalizr.normalize(tracks, normalizr.arrayOf(Track));
+                payload.trackID = trackID;
+
                 this.dispatch(events.player.audioInterface.TRACK_RESOLVED, payload);
+            },
+            onTrackSoundAdded: function(track) {
+                // The track may or may not be playing, so don't change it's play state in the store.
+                delete track.playing;
+
+                var payload = normalizr.normalize(track, Track);
+                this.dispatch(events.player.audioInterface.TRACK_UPDATED, payload);
             }
         },
         create: function(player) {
@@ -61,9 +73,9 @@ module.exports = {
             var payload = normalizr.normalize(player, Player);
             this.dispatch(events.player.CREATE, payload);
 
-            player.tracks.forEach(ToneDen.AudioInterface.resolveTrack);
-
-            ToneDen.AudioInterface.loadTrack(player.nowPlaying, player.autoPlay);
+            player.tracks.forEach(function(track) {
+                ToneDen.AudioInterface.resolveTrack(track, player.tracksPerArtist);
+            });
         },
         destroy: function(player) {
         },
@@ -71,7 +83,7 @@ module.exports = {
             queue: function(track, position) {
             },
             seekTo: function(track, position) {
-                track.sound.setPosition(position);
+                ToneDen.AudioInterface.seekTrack(track, position);
             },
             select: function(track) {
                 ToneDen.AudioInterface.loadTrack(track, true);
@@ -83,7 +95,21 @@ module.exports = {
             unqueueIndex: function(index) {
             }
         },
+        setRepeat: function(repeat) {
+            repeat = repeat || false;
+            this.dispatch(events.player.CONFIG_UPDATED, {
+                config: {
+                    repeat: repeat
+                }
+            });
+        },
         setVolume: function(level) {
+            ToneDen.AudioInterface.setVolume(level);
+            this.dispatch(events.player.CONFIG_UPDATED, {
+                config: {
+                    volume: level
+                }
+            });
         }
     }
 };

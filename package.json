@@ -1,7 +1,7 @@
 {
   "devDependencies": {
     "grunt": "0.4.4",
-    "grunt-aws-s3": "~0.8.1",
+    "grunt-aws-s3": "~0.13.1",
     "grunt-cloudfront-clear": "0.0.1",
     "webpack-dev-server": "~1.9.0",
     "grunt-webpack": "~1.0.8",
@@ -9,10 +9,9 @@
     "file-loader": "~0.8.4",
     "url-loader": "~0.5.6",
     "compression-webpack-plugin": "~0.2.0",
-    "grunt-contrib-watch": "~0.6.1",
-    "handlebars-loader": "~1.0.2",
     "style-loader": "~0.12.3",
-    "css-loader": "~0.15.1"
+    "css-loader": "~0.15.1",
+    "grunt-contrib-compress": "~0.13.0"
   },
   "dependencies": {
     "node-libs-browser": "~0.5.2",
@@ -20,7 +19,6 @@
     "d3": "~3.5.5",
     "async": "~1.2.1",
     "jquery": "~2.1.4",
-    "handlebars": "~3.0.3",
     "react": "~0.13.3"
   }
 }

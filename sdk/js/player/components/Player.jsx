@@ -8,16 +8,19 @@ var Feed = require('./themes/Feed');
 var Mini = require('./themes/Mini');
 var Single = require('./themes/Single');
 
+var helpers = require('../../helpers');
+
 var Player = React.createClass({
     mixins: [
-        Fluxxor.FluxMixin(React),
-        Fluxxor.StoreWatchMixin('PlayerInstanceStore', 'TrackStore')
+        Fluxxor.StoreWatchMixin('PlayerInstanceStore', 'TrackStore'),
+        require('./mixins/PlayerControls')
     ],
     getStateFromFlux: function() {
         var PlayerInstanceStore = this.getFlux().store('PlayerInstanceStore');
         var TrackStore = this.getFlux().store('TrackStore');
         var instance = PlayerInstanceStore.getStateByID(this.props.id);
 
+        instance.nextTrack = TrackStore.getTracks(instance.nextTrack);
         instance.nowPlaying = TrackStore.getTracks(instance.nowPlaying);
         instance.tracks = TrackStore.getTracks(instance.tracks);
 
@@ -26,26 +29,52 @@ var Player = React.createClass({
 
         return instance;
     },
+    componentDidMount: function() {
+        if(this.props.keyboardEvents) {
+            document.addEventListener('keydown', this.onKeyDown);
+        }
+    },
+    componentDidUpdate: function(prevProps, prevState) {
+        // If the currently playing track has finished, the nextTrack property will be set. In that case, play it.
+        if(this.state.nextTrack && !prevState.nextTrack) {
+            helpers.waitForCurrentAction.bind(this)(function() {
+                this.getFlux().actions.player.track.select(this.state.nextTrack);
+            });
+        }
+    },
+    componentWillUnmount: function() {
+        if(this.props.keyboardEvents) {
+            document.removeEventListener('keydown', this.onKeyDown);
+        }
+    },
     render: function() {
         var empty = !this.props.tracks ||
             !_.any(this.props.tracks);
 
         var playerContent;
+        var themeClass = '';
 
         if(empty) {
             playerContent = <Empty {...this.state} />;
-        } else if(this.props.single === true) {
+        } else if(this.state.single === true) {
             playerContent = <Single {...this.state} />;
-        } else if(this.props.mini === true) {
+            themeClass = 'solo';
+        } else if(this.state.mini === true) {
             playerContent = <Mini {...this.state} />;
-        } else if(this.props.feed === true) {
+            themeClass = 'mini';
+        } else if(this.state.feed === true) {
             playerContent = <Feed {...this.state} />;
+            themeClass = 'feed';
         } else {
             playerContent = <Default {...this.state} />;
+
+            if(this.state.shrink && this.state.container.height() < 500) {
+                themeClass = 'shrink';
+            }
         }
 
         return (
-            <div className={'td tdrow player ' + this.props.skin}>
+            <div className={'td tdrow player ' + this.state.skin + ' ' + themeClass}>
                 {playerContent}
             </div>
         );

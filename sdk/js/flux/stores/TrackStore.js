@@ -12,22 +12,26 @@ var TrackStore = Fluxxor.createStore({
         this.tracks = {};
 
         this.bindActions(
+            events.player.audioInterface.TRACK_ERROR, this.onTrackError,
             events.player.audioInterface.TRACK_LOAD_AMOUNT_CHANGED, this.onTrackLoadAmountChanged,
             events.player.audioInterface.TRACK_PLAY_POSITION_CHANGED, this.onTrackPlayPositionChanged,
             events.player.audioInterface.TRACK_PLAYING_CHANGED, this.onTrackPlayingChanged,
             events.player.audioInterface.TRACK_PLAY_START, this.onTrackPlayStart,
             events.player.audioInterface.TRACK_READY, this.onTrackReady,
-            events.player.audioInterface.TRACK_RESOLVED, this.onTrackLoaded,
-            events.player.CREATE, this.onTrackLoaded,
+            events.player.audioInterface.TRACK_RESOLVED, this.onTrackUpdated,
+            events.player.audioInterface.TRACK_UPDATED, this.onTrackUpdated,
+            events.player.CREATE, this.onTrackUpdated,
             events.player.track.TOGGLE_PAUSE, this.onTrackTogglePause
         );
     },
     getTracks: function(trackIDs) {
-        var returnArray = true;;
+        var returnArray = true;
 
         if(typeof trackIDs === 'number' || typeof trackIDs === 'string') {
             returnArray = false;
             trackIDs = [trackIDs].map(Number);
+        } else if(!trackIDs) {
+            return;
         }
 
         var tracks = trackIDs.map(function(id) {
@@ -40,12 +44,15 @@ var TrackStore = Fluxxor.createStore({
             return tracks[0];
         }
     },
-    onTrackLoadAmountChanged: function(payload) {
-        this.tracks[payload.trackID].loading = true;
+    onTrackError: function(payload) {
+        this.tracks[payload.trackID].loading = false;
+        this.tracks[payload.trackID].playing = false;
+        this.tracks[payload.trackID].error = payload.error;
+
         this.emit('change');
     },
-    onTrackLoaded: function(payload) {
-        _.merge(this.tracks, payload.entities.tracks);
+    onTrackLoadAmountChanged: function(payload) {
+        this.tracks[payload.trackID].loading = true;
         this.emit('change');
     },
     onTrackPlayingChanged: function(payload) {
@@ -57,7 +64,8 @@ var TrackStore = Fluxxor.createStore({
         var currentPosition = this.tracks[trackID].playbackPosition || 0;
         var newPosition = payload.position;
 
-        if(Math.abs(newPosition - currentPosition) > 250) {
+        // Only fire an update if the last update occurred more than 100ms ago.
+        if(Math.abs(newPosition - currentPosition) > 100) {
             this.tracks[trackID].playbackPosition = newPosition;
             this.emit('change');
         }
@@ -81,6 +89,10 @@ var TrackStore = Fluxxor.createStore({
         var track = this.tracks[payload.trackID];
         track.playing = !track.playing;
 
+        this.emit('change');
+    },
+    onTrackUpdated: function(payload) {
+        _.merge(this.tracks, payload.entities.tracks);
         this.emit('change');
     }
 });

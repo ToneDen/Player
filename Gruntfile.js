@@ -3,53 +3,50 @@
  */
 
 var webpack = require('webpack');
-var env;
+var webpackEnv;
 
 if(process.argv.indexOf('--dev') !== -1) {
-    env = 'staging';
+    webpackEnv = 'staging';
 } else if(process.argv.indexOf('--production') !== -1) {
-    env = 'production';
+    webpackEnv = 'production';
 } else {
-    env = 'local';
+    webpackEnv = 'local';
 }
 
 var webpackPlugins = [
     new webpack.DefinePlugin({
-        env: JSON.stringify(env)
+        env: JSON.stringify(webpackEnv)
     })
 ];
 
-if(env !== 'local') {
+if(webpackEnv !== 'local') {
     webpackPlugins.push(new webpack.optimize.UglifyJsPlugin({
         compress: {
             warnings: false
         },
         mangle: true,
-        sourceMap: env === 'local'
+        sourceMap: webpackEnv === 'local'
     }));
 }
 
 module.exports = function(grunt) {
     grunt.initConfig({
-        // Upload static files from /dist/ENV/* to s3 and delete files from s3 which don't exist anymore.
         aws_s3: {
             options: {
                 accessKeyId: process.env.AWS_ACCESS_KEY_ID,
                 secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
                 bucket: 'toneden-sdk',
-                debug: false
+                debug: true
             },
             dev: {
                 options: {
-                    params: {
-                        ContentEncoding: 'gzip'
-                    }
+                    gzipRename: true
                 },
                 files: [
                     {
                         expand: true,
                         src: ['toneden.loader.js', 'toneden.js'],
-                        dest: 'dev/',
+                        dest: 'dev/v2/',
                         options: {
                             params: {
                                 ContentEncoding: 'gzip',
@@ -61,14 +58,12 @@ module.exports = function(grunt) {
             },
             production: {
                 options: {
-                    params: {
-                        ContentEncoding: 'gzip'
-                    }
+                    gzipRename: true
                 },
                 files: [
                     {
                         src: ['toneden.loader.js', 'toneden.js'],
-                        dest: 'production/',
+                        dest: 'production/v2/',
                         options: {
                             params: {
                                 ContentEncoding: 'gzip',
@@ -84,17 +79,29 @@ module.exports = function(grunt) {
                 access_key: process.env.AWS_ACCESS_KEY_ID,
                 secret_key: process.env.AWS_SECRET_ACCESS_KEY,
                 dist: 'E3SYREX4SS26L7',
-                resourcePaths: ['/dev/toneden.loader.js', '/dev/toneden.js']
+                resourcePaths: ['/dev/v2/toneden.loader.js', '/dev/v2/toneden.js']
             },
             production: {
                 access_key: process.env.AWS_ACCESS_KEY_ID,
                 secret_key: process.env.AWS_SECRET_ACCESS_KEY,
                 dist: 'E3SYREX4SS26L7',
-                resourcePaths: ['/production/toneden.loader.js', '/production/toneden.js']
+                resourcePaths: ['/production/v2/toneden.loader.js', '/production/v2/toneden.js']
+            }
+        },
+        compress: {
+            sdk: {
+                files: [{
+                    dest: 'toneden.js.gz',
+                    src: 'toneden.js'
+                }, {
+                    dest: 'toneden.loader.js.gz',
+                    src: 'toneden.loader.js'
+                }],
+                pretty: true
             }
         },
         webpack: {
-            loader: {
+            sdk: {
                 entry: './loader/index.js',
                 output: {
                     chunkFilename: 'toneden.js',
@@ -112,9 +119,6 @@ module.exports = function(grunt) {
                         loader: 'url-loader?limit=8192',
                         test: /\.(png|jpg)$/
                     }, {
-                        loader: 'handlebars-loader?helperDirs[]=' + process.env.PWD + '/sdk/js/templates/helpers',
-                        test: /\.hbs$/
-                    }, {
                         loader: 'jsx-loader',
                         test: /\.jsx$/
                     }]
@@ -123,32 +127,31 @@ module.exports = function(grunt) {
                 resolve: {
                     extensions: ['', '.hbs', '.js', '.jsx', '.css']
                 },
-                devtool: 'inline-source-map',
-                keepalive: true,
-                watch: true
+                devtool: webpackEnv === 'local' ? 'inline-source-map' : undefined,
+                keepalive: webpackEnv === 'local',
+                watch: webpackEnv === 'local'
             }
         }
     });
 
     grunt.loadNpmTasks('grunt-aws-s3');
     grunt.loadNpmTasks('grunt-cloudfront-clear');
+    grunt.loadNpmTasks('grunt-contrib-compress');
     grunt.loadNpmTasks('grunt-webpack');
 
-    var env = grunt.option('env') || 'dev';
+    grunt.registerTask('default', 'webpack');
 
-    grunt.registerTask('dev', [
+    grunt.registerTask('deploy-dev', [
         'webpack',
+        'compress:sdk',
         'aws_s3:dev',
         'cloudfront_clear:dev'
     ]);
 
-    grunt.registerTask('production', [
+    grunt.registerTask('deploy-production', [
         'webpack',
+        'compress:sdk',
         'aws_s3:production',
         'cloudfront_clear:production'
-    ]);
-
-    grunt.registerTask('default', [
-        'webpack'
     ]);
 };

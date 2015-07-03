@@ -9,7 +9,7 @@ if(typeof window !== 'undefined') {
     ToneDen = window.ToneDen;
 }
 
-if(env === 'local') {
+if(env === 'local' || window.location.host === 'publisher.dev') {
     __webpack_public_path__ = '//widget.dev/';
 } else if(env === 'staging') {
     __webpack_public_path__ = '//sd.toneden.io/dev/';
@@ -19,6 +19,7 @@ if(env === 'local') {
 
 require.ensure([], function() {
     window.ToneDen = require('../sdk/js/index');
+    window.ToneDen.parameters = window.ToneDen.parameters || {};
 
     if(window.ToneDenReady && window.ToneDenReady.length > 0) {
         for(var i = 0; i < ToneDenReady.length; i++) {
