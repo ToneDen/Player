@@ -37,6 +37,13 @@ module.exports = {
             return url;
         });
 
+        if(parameters.soundcloudConsumerKey || parameters.debug) {
+            ToneDen.configure({
+                debug: parameters.debug,
+                soundcloudConsumerKey: parameters.soundcloudConsumerKey
+            });
+        }
+
         // Set up default parameters.
         parameters = _.merge({
             container: container,

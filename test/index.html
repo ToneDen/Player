@@ -37,10 +37,6 @@
 
                 ToneDenReady = window.ToneDenReady || [];
                 ToneDenReady.push(function() {
-                    ToneDen.configure({
-                        debug: true,
-                        soundcloudConsumerKey: 'ae1c0d2a28b3eae3bd0d11eb9e1704a4'
-                    });
                     ToneDen.player.create({
                         dom: '#player',
                         keyboardEvents: false,
@@ -54,6 +50,7 @@
                         single: false,
                         mini: false,
                         skin: 'light',
+                        soundcloudConsumerKey: 'ae1c0d2a28b3eae3bd0d11eb9e1704a4',
                         staticUrl: '//widget.dev/sdk/',
                         tracksPerArtist: 4,
                         visualizerType: 'waves',
