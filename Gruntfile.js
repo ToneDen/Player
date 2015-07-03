@@ -5,9 +5,9 @@
 var webpack = require('webpack');
 var webpackEnv;
 
-if(process.argv.indexOf('--production') !== -1) {
+if(process.argv.indexOf('--production') !== -1 || process.argv.indexOf('deploy-production') !== -1) {
     webpackEnv = 'production';
-} else if(process.argv.indexOf('--dev') !== -1) {
+} else if(process.argv.indexOf('--dev') !== -1 || process.argv.indexOf('deploy-dev') !== -1) {
     webpackEnv = 'staging';
 } else {
     webpackEnv = 'local';

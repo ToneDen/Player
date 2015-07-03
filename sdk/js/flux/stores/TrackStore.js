@@ -13,6 +13,7 @@ var TrackStore = Fluxxor.createStore({
 
         this.bindActions(
             events.player.audioInterface.TRACK_ERROR, this.onTrackError,
+            events.player.audioInterface.TRACK_FINISHED, this.onTrackFinished,
             events.player.audioInterface.TRACK_LOAD_AMOUNT_CHANGED, this.onTrackLoadAmountChanged,
             events.player.audioInterface.TRACK_PLAY_POSITION_CHANGED, this.onTrackPlayPositionChanged,
             events.player.audioInterface.TRACK_PLAYING_CHANGED, this.onTrackPlayingChanged,
@@ -49,6 +50,10 @@ var TrackStore = Fluxxor.createStore({
         this.tracks[payload.trackID].playing = false;
         this.tracks[payload.trackID].error = payload.error;
 
+        this.emit('change');
+    },
+    onTrackFinished: function(payload) {
+        this.tracks[payload.trackID].playing = false;
         this.emit('change');
     },
     onTrackLoadAmountChanged: function(payload) {
