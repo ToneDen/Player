@@ -11,7 +11,8 @@
     "compression-webpack-plugin": "~0.2.0",
     "style-loader": "~0.12.3",
     "css-loader": "~0.15.1",
-    "grunt-contrib-compress": "~0.13.0"
+    "grunt-contrib-compress": "~0.13.0",
+    "grunt-contrib-clean": "~0.6.0"
   },
   "dependencies": {
     "node-libs-browser": "~0.5.2",

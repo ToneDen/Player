@@ -5,7 +5,8 @@ Embeddable Goodness, by ToneDen
 
 The ToneDen SDK is loaded asynchronously, which means your page doesn't have to wait for the SDK to load before rendering.
 This means that loading it is a little more complicated than just including a `<script>` tag. Don't worry though, we've taken care of all the complicated stuff for you.
-Just copy the snippet below into your HTML page, and replace the commented portion with your code calling the SDK.
+Just copy the snippet below into your HTML page, enter your SoundCloud consumer key, and replace the commented portion with your code calling the SDK.
+If you don't have a SoundCloud consumer key, you can create one [here](http://soundcloud.com/you/apps).
 
 ```
 <script>
@@ -14,7 +15,7 @@ Just copy the snippet below into your HTML page, and replace the commented porti
 
         script.type = "text/javascript";
         script.async = true;
-        script.src = "//sd.toneden.io/production/toneden.loader.js"
+        script.src = "//sd.toneden.io/production/v2/toneden.loader.js"
 
         var entry = document.getElementsByTagName("script")[0];
         entry.parentNode.insertBefore(script, entry);
@@ -47,7 +48,7 @@ Sample Embed Code:
 
         script.type = "text/javascript";
         script.async = true;
-        script.src = "//sd.toneden.io/production/toneden.loader.js"
+        script.src = "//sd.toneden.io/production/v2/toneden.loader.js"
 
         var entry = document.getElementsByTagName("script")[0];
         entry.parentNode.insertBefore(script, entry);
