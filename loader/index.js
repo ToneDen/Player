@@ -12,9 +12,9 @@ if(typeof window !== 'undefined') {
 if(env === 'local' || window.location.host === 'publisher.dev') {
     __webpack_public_path__ = '//widget.dev/';
 } else if(env === 'staging') {
-    __webpack_public_path__ = '//sd.toneden.io/dev/';
+    __webpack_public_path__ = '//sd.toneden.io/dev/v2/';
 } else if(env === 'production') {
-    __webpack_public_path__ = '//sd.toneden.io/';
+    __webpack_public_path__ = '//sd.toneden.io/v2/';
 }
 
 require.ensure([], function() {
