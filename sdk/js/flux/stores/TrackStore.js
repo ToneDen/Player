@@ -70,7 +70,7 @@ var TrackStore = Fluxxor.createStore({
         var newPosition = payload.position;
 
         // Only fire an update if the last update occurred more than 100ms ago.
-        if(Math.abs(newPosition - currentPosition) > 100) {
+        if(Math.abs(newPosition - currentPosition) > 200) {
             this.tracks[trackID].playbackPosition = newPosition;
             this.emit('change');
         }

@@ -26,4 +26,6 @@ require.ensure([], function() {
             ToneDenReady[i]();
         }
     }
+
+    window.ToneDen.ready = true;
 }, 'toneden');

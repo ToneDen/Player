@@ -1,6 +1,7 @@
 require('../css');
 
 var Fluxxor = require('fluxxor');
+var ReactInjection = require('react/lib/ReactInjection');
 
 var analytics = require('./analytics');
 var constants = require('./constants');
@@ -13,6 +14,11 @@ analytics('ToneDenTracker.send', {
     eventCategory: 'sdk',
     eventAction: 'loaded',
     eventLabel: window.location.href
+});
+
+// Override default React rootID.
+ReactInjection.RootIndex.injectCreateReactRootIndex(function() {
+    return Math.floor(Math.random() * 10000 + 1);
 });
 
 var flux = ToneDen.flux;
