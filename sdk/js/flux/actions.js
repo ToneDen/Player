@@ -59,7 +59,7 @@ module.exports = {
                 this.dispatch(events.player.audioInterface.TRACK_RESOLVED, payload);
             },
             onTrackSoundAdded: function(track) {
-                // The track may or may not be playing, so don't change it's play state in the store.
+                // The track may or may not be playing, so don't change its play state in the store.
                 delete track.playing;
 
                 var payload = normalizr.normalize(track, Track);
@@ -78,6 +78,9 @@ module.exports = {
             });
         },
         destroy: function(player) {
+            this.dispatch(events.player.DESTROY, {
+                playerID: player.id
+            });
         },
         track: {
             queue: function(track, position) {

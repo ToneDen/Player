@@ -14,6 +14,7 @@ module.exports = {
         },
         CONFIG_UPDATED: 'player.config_updated',
         CREATE: 'player.create',
+        DESTROY: 'player.destroy',
         track: {
             SELECTED: 'player.track.selected',
             TOGGLE_PAUSE: 'player.track.toggle_pause'

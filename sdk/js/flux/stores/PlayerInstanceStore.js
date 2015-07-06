@@ -17,6 +17,7 @@ var PlayerInstanceStore = Fluxxor.createStore({
             events.player.audioInterface.TRACK_RESOLVED, this.onTrackResolved,
             events.player.CONFIG_UPDATED, this.onConfigUpdated,
             events.player.CREATE, this.onPlayerCreate,
+            events.player.DESTROY, this.onPlayerDestroy,
             events.player.track.SELECTED, this.onTrackSelected
         );
     },
@@ -35,8 +36,8 @@ var PlayerInstanceStore = Fluxxor.createStore({
 
         return _.clone(state);
     },
-    getNextTrackForInstance: function(instanceID) {
-        var instance = this.instances[instanceID];
+    getNextTrackForInstance: function(playerID) {
+        var instance = this.instances[playerID];
         var nowPlayingIndex = instance.tracks.indexOf(instance.nowPlaying);
         var nextTrack;
 
@@ -61,14 +62,18 @@ var PlayerInstanceStore = Fluxxor.createStore({
         _.merge(this.instances, payload.entities.players);
         this.emit('change');
     },
+    onPlayerDestroy: function(payload) {
+        delete this.instances[payload.playerID];
+        this.emit('change');
+    },
     onTrackFinished: function(payload) {
         var trackID = payload.trackID;
         var onTrackFinishedCalled;
 
         this.waitFor(['TrackStore'], function(TrackStore) {
-            _.forIn(this.instances, function(player, instanceID) {
+            _.forIn(this.instances, function(player, playerID) {
                 if(player.nowPlaying === trackID) {
-                    player.nextTrack = this.getNextTrackForInstance(instanceID);
+                    player.nextTrack = this.getNextTrackForInstance(playerID);
 
                     if(player.onTrackFinished && !onTrackFinishedCalled) {
                         onTrackFinishedCalled = true;
@@ -111,7 +116,9 @@ var PlayerInstanceStore = Fluxxor.createStore({
             }
         });
 
-        this.emit('change');
+        this.waitFor(['TrackStore'], function() {
+            this.emit('change');
+        });
     },
     onTrackSelected: function(payload) {
         _.forIn(this.instances, function(player) {

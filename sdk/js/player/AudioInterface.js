@@ -104,7 +104,9 @@ var AudioInterface = function(parameters) {
         }
 
         if(self.parameters.cache && self.resolveCache[url]) {
-            return callback(null, self.resolveCache[url]);
+            return async.nextTick(function() {
+                return actions.player.audioInterface.onTrackResolved(originalTrack.id, self.resolveCache[url]);
+            });
         }
 
         async.waterfall([
@@ -120,13 +122,9 @@ var AudioInterface = function(parameters) {
                 }
             },
             function(resolvedTracks, next) {
-                if(self.parameters.cache) {
-                    self.resolveCache[url] = resolvedTracks;
-                }
-
                 // Since the single original track object may resolve into multiple tracks (in the case of a user or set
                 // URL), we have to turn that original track into an array of new ones with new IDs.
-                var allTracks = resolvedTracks.map(function(resolvedTrack) {
+                resolvedTracks = resolvedTracks.map(function(resolvedTrack) {
                     var track = _.clone(originalTrack);
                     track.id = _.uniqueId();
                     track.resolved = resolvedTrack;
@@ -135,9 +133,13 @@ var AudioInterface = function(parameters) {
                     return track;
                 });
 
-                actions.player.audioInterface.onTrackResolved(originalTrack.id, allTracks);
+                if(self.parameters.cache) {
+                    self.resolveCache[url] = resolvedTracks;
+                }
 
-                return next(null, allTracks);
+                actions.player.audioInterface.onTrackResolved(originalTrack.id, resolvedTracks);
+
+                return next(null, resolvedTracks);
             }
         ], callback);
     };

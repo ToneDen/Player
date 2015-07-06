@@ -4,14 +4,11 @@ var React = require('react');
 
 var AudioInterface = require('./AudioInterface');
 var constants = require('../constants');
-//var tdPlayer = require('../vendor/td-interface');
 
 var Player = require('./components/Player');
 
 module.exports = {
     create: function(urls, dom, parameters) {
-        ToneDen.AudioInterface = ToneDen.AudioInterface || new AudioInterface();
-
         if(arguments.length === 1) {
             parameters = urls;
             urls = null;
@@ -19,6 +16,11 @@ module.exports = {
 
         urls = urls || parameters.urls || [];
         dom = dom || parameters.dom;
+
+        ToneDen.AudioInterface = ToneDen.AudioInterface || new AudioInterface({
+            cache: parameters.cache,
+            volume: parameters.volume
+        });
 
         var container = $(dom);
 
@@ -76,5 +78,27 @@ module.exports = {
         if(container) {
             React.render(PlayerFactory(parameters), container[0]);
         }
+
+        return {
+            destroy: function() {
+                var instance = ToneDen.flux.store('PlayerInstanceStore').instances[parameters.id];
+                var nowPlaying;
+
+                if(instance) {
+                    nowPlaying = ToneDen.flux.store('TrackStore').tracks[instance.nowPlaying];
+                    ToneDen.flux.actions.player.destroy(instance);
+
+                    if(nowPlaying && nowPlaying.playing) {
+                        ToneDen.flux.actions.player.track.togglePause(nowPlaying);
+                    }
+                }
+            },
+            getSound: function() {
+                var instance = ToneDen.flux.store('PlayerInstanceStore').instances[parameters.id];
+                var nowPlaying = instance && ToneDen.flux.store('TrackStore').tracks[instance.nowPlaying];
+
+                return nowPlaying && nowPlaying.sound;
+            }
+        };
     }
 };

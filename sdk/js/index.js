@@ -45,7 +45,7 @@ function configure(parameters) {
 
 function log() {
     if(ToneDen.parameters.debug) {
-        console.log.apply(console, arguments);
+        console.debug.apply(console, arguments);
     }
 }
 
