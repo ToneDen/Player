@@ -48,8 +48,7 @@ var Player = React.createClass({
         }
     },
     render: function() {
-        var empty = !this.state.tracks ||
-            !_.any(this.state.tracks);
+        var empty = (!this.state.tracks || !_.any(this.state.tracks)) && !this.state.nowPlaying;
 
         var playerContent;
         var themeClass = '';

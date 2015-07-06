@@ -83,7 +83,13 @@ module.exports = {
             });
         },
         track: {
-            queue: function(track, position) {
+            queue: function(track, index) {
+                ToneDen.AudioInterface.resolveTrack(track);
+
+                this.dispatch(events.player.track.QUEUE, {
+                    index: index,
+                    trackID: track.id
+                });
             },
             seekTo: function(track, position) {
                 ToneDen.AudioInterface.seekTrack(track, position);
@@ -96,6 +102,9 @@ module.exports = {
                 ToneDen.AudioInterface.togglePause(track);
             },
             unqueueIndex: function(index) {
+                this.dispatch(events.player.track.UNQUEUE, {
+                    index: index
+                });
             }
         },
         setRepeat: function(repeat) {

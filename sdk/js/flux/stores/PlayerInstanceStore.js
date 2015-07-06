@@ -13,6 +13,7 @@ var PlayerInstanceStore = Fluxxor.createStore({
 
         this.bindActions(
             events.player.audioInterface.TRACK_FINISHED, this.onTrackFinished,
+            events.player.audioInterface.TRACK_PLAY_START, this.onTrackPlayStart,
             events.player.audioInterface.TRACK_READY, this.onTrackReady,
             events.player.audioInterface.TRACK_RESOLVED, this.onTrackResolved,
             events.player.CONFIG_UPDATED, this.onConfigUpdated,
@@ -36,13 +37,15 @@ var PlayerInstanceStore = Fluxxor.createStore({
 
         return _.clone(state);
     },
-    getNextTrackForInstance: function(playerID) {
+    getNextTrackForInstance: function(playerID, TrackQueueStore) {
         var instance = this.instances[playerID];
         var nowPlayingIndex = instance.tracks.indexOf(instance.nowPlaying);
         var nextTrack;
 
         if(instance.repeat) {
             nextTrack = instance.nowPlaying;
+        } else if(instance.playFromQueue) {
+            nextTrack = TrackQueueStore.queue[0];
         } else if(instance.tracks[nowPlayingIndex + 1]) {
             nextTrack = instance.tracks[nowPlayingIndex + 1];
         } else {
@@ -63,17 +66,34 @@ var PlayerInstanceStore = Fluxxor.createStore({
         this.emit('change');
     },
     onPlayerDestroy: function(payload) {
-        delete this.instances[payload.playerID];
-        this.emit('change');
+        var instance = this.instances[payload.playerID];
+        this.waitFor(['TrackStore'], function(TrackStore) {
+            var nowPlaying = instance && TrackStore.tracks[instance.nowPlaying];
+            var isPlayingInOtherPlayer = false;
+
+            _.forIn(this.instances, function(player) {
+                if(player.nowPlaying === nowPlaying) {
+                    isPlayingInOtherPlayer = true;
+                }
+            });
+
+            // Kind of anti-fluxy here.
+            if(nowPlaying && nowPlaying.sound && !isPlayingInOtherPlayer) {
+                //nowPlaying.sound.destroy();
+            }
+
+            delete this.instances[payload.playerID];
+            this.emit('change');
+        });
     },
     onTrackFinished: function(payload) {
         var trackID = payload.trackID;
         var onTrackFinishedCalled;
 
-        this.waitFor(['TrackStore'], function(TrackStore) {
+        this.waitFor(['TrackStore', 'TrackQueueStore'], function(TrackStore, TrackQueueStore) {
             _.forIn(this.instances, function(player, playerID) {
                 if(player.nowPlaying === trackID) {
-                    player.nextTrack = this.getNextTrackForInstance(playerID);
+                    player.nextTrack = this.getNextTrackForInstance(playerID, TrackQueueStore);
 
                     if(player.onTrackFinished && !onTrackFinishedCalled) {
                         onTrackFinishedCalled = true;
@@ -85,7 +105,18 @@ var PlayerInstanceStore = Fluxxor.createStore({
                     }
                 }
             }.bind(this));
+
+            this.emit('change');
         }.bind(this));
+    },
+    onTrackPlayStart: function(payload) {
+        var trackID = payload.trackID;
+
+        _.forIn(this.instances, function(player) {
+            if(player.global) {
+                player.nowPlaying = trackID;
+            }
+        });
 
         this.emit('change');
     },
@@ -122,7 +153,7 @@ var PlayerInstanceStore = Fluxxor.createStore({
     },
     onTrackSelected: function(payload) {
         _.forIn(this.instances, function(player) {
-            if(player.tracks.indexOf(payload.result) !== -1) {
+            if(player.tracks.indexOf(payload.result) !== -1 || player.global) {
                 player.nowPlaying = payload.result;
             }
 

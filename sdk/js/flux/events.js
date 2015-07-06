@@ -16,8 +16,10 @@ module.exports = {
         CREATE: 'player.create',
         DESTROY: 'player.destroy',
         track: {
+            QUEUE: 'player.track.queue',
             SELECTED: 'player.track.selected',
-            TOGGLE_PAUSE: 'player.track.toggle_pause'
+            TOGGLE_PAUSE: 'player.track.toggle_pause',
+            UNQUEUE: 'player.track.unqueue'
         }
     }
 };

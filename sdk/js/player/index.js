@@ -7,6 +7,21 @@ var constants = require('../constants');
 
 var Player = require('./components/Player');
 
+function processUrlInput(url) {
+    var id = _.uniqueId();
+
+    if(typeof url === 'object') {
+        url.id = id;
+    } else if(typeof url === 'string') {
+        url = {
+            id: id,
+            url: url
+        };
+    }
+
+    return url;
+}
+
 module.exports = {
     create: function(urls, dom, parameters) {
         if(arguments.length === 1) {
@@ -24,20 +39,7 @@ module.exports = {
 
         var container = $(dom);
 
-        var tracks = urls.map(function(url) {
-            var id = _.uniqueId();
-
-            if(typeof url === 'object') {
-                url.id = id;
-            } else if(typeof url === 'string') {
-                url = {
-                    id: id,
-                    url: url
-                };
-            }
-
-            return url;
-        });
+        var tracks = urls.map(processUrlInput);
 
         if(parameters.soundcloudConsumerKey || parameters.debug) {
             ToneDen.configure({
@@ -52,12 +54,14 @@ module.exports = {
             debug: false, // Output debug messages?
             feed: false,
             flux: ToneDen.flux,
+            global: false, // Should this player show what is playing on any player in the page?
             keyboardEvents: false, // Should we listen to keyboard events?
             id: _.uniqueId(),
             mini: false,
             onTrackReady: null,
             onTrackFinished: null,
             onPlaylistFinished: null,
+            playFromQueue: false,
             repeat: false,
             shrink: true, // Default option to shrink player responsively if container is too small
             single: null,
@@ -87,10 +91,6 @@ module.exports = {
                 if(instance) {
                     nowPlaying = ToneDen.flux.store('TrackStore').tracks[instance.nowPlaying];
                     ToneDen.flux.actions.player.destroy(instance);
-
-                    if(nowPlaying && nowPlaying.playing) {
-                        ToneDen.flux.actions.player.track.togglePause(nowPlaying);
-                    }
                 }
             },
             getSound: function() {
@@ -100,5 +100,11 @@ module.exports = {
                 return nowPlaying && nowPlaying.sound;
             }
         };
+    },
+    queueTrack: function(track, index) {
+        ToneDen.flux.actions.player.track.queue(processUrlInput(track), index);
+    },
+    unqueueIndex: function(index) {
+        ToneDen.actions.player.track.unqueueIndex(index);
     }
 };
