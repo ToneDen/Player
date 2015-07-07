@@ -14,9 +14,10 @@ var events = require('./events');
 module.exports = {
     player: {
         audioInterface: {
-            onTrackError: function(err) {
+            onTrackError: function(trackID, err) {
                 this.dispatch(events.player.audioInterface.TRACK_ERROR, {
-                    error: err
+                    error: err,
+                    trackID: trackID
                 });
             },
             onTrackFinish: function(trackID) {

@@ -12,6 +12,7 @@ var PlayerInstanceStore = Fluxxor.createStore({
         this.instances = {};
 
         this.bindActions(
+            events.player.audioInterface.TRACK_ERROR, this.onTrackError,
             events.player.audioInterface.TRACK_FINISHED, this.onTrackFinished,
             events.player.audioInterface.TRACK_PLAY_START, this.onTrackPlayStart,
             events.player.audioInterface.TRACK_READY, this.onTrackReady,
@@ -86,6 +87,11 @@ var PlayerInstanceStore = Fluxxor.createStore({
             this.emit('change');
         });
     },
+    onTrackError: function(payload) {
+        this.waitFor(['TrackStore'], function() {
+            this.emit('change');
+        });
+    },
     onTrackFinished: function(payload) {
         var trackID = payload.trackID;
         var onTrackFinishedCalled;
@@ -94,15 +100,6 @@ var PlayerInstanceStore = Fluxxor.createStore({
             _.forIn(this.instances, function(player, playerID) {
                 if(player.nowPlaying === trackID) {
                     player.nextTrack = this.getNextTrackForInstance(playerID, TrackQueueStore);
-
-                    if(player.onTrackFinished && !onTrackFinishedCalled) {
-                        onTrackFinishedCalled = true;
-                        player.onTrackFinished(TrackStore.tracks[trackID]);
-                    }
-
-                    if(player.tracks.indexOf(trackID) === player.tracks.length - 1 && player.onPlaylistFinished) {
-                        player.onPlaylistFinished();
-                    }
                 }
             }.bind(this));
 
@@ -121,7 +118,7 @@ var PlayerInstanceStore = Fluxxor.createStore({
         this.emit('change');
     },
     onTrackReady: function(payload) {
-        var trackID = payload.trackID;
+        /*var trackID = payload.trackID;
 
         this.waitFor(['TrackStore'], function(TrackStore) {
             _.forIn(this.instances, function(player) {
@@ -129,7 +126,7 @@ var PlayerInstanceStore = Fluxxor.createStore({
                     player.onTrackReady(TrackStore.tracks[payload.trackID]);
                 }
             });
-        }.bind(this));
+        }.bind(this));*/
     },
     onTrackResolved: function(payload) {
         var originalTrackID = payload.trackID;

@@ -5,6 +5,7 @@
  * http://stackoverflow.com/questions/20926551/recommended-way-of-making-react-component-div-draggable
  */
 
+var $ = require('jquery');
 var Fluxxor = require('fluxxor');
 var React = require('react');
 
@@ -154,7 +155,8 @@ var Scrubber = React.createClass({
                         </div>
                     </Columns>
                     <Columns large={2} className='stop-time'>
-                        {helpers.msToTimestamp(nowPlaying.resolved.duration - (nowPlaying.playbackPosition || 0))}
+                        {!nowPlaying.loading && 
+                            helpers.msToTimestamp(nowPlaying.resolved.duration - (nowPlaying.playbackPosition || 0))}
                         {nowPlaying.loading && <i className='tdicon-circle-o-notch spin tdloader' />}
                     </Columns>
                 </Columns>

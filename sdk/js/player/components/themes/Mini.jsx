@@ -54,7 +54,7 @@ var Mini = React.createClass({
                         </Columns>
                     </Columns>
                 )}
-                {(nowPlaying.error && nowPlaying.resolved.streamable) && (
+                {(!nowPlaying.error && nowPlaying.resolved.streamable) && (
                     <Columns large={3} small={12} className='mini-scrubber'>
                         <Scrubber nowPlaying={nowPlaying} />
                     </Columns>

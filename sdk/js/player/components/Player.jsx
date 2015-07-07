@@ -25,7 +25,9 @@ var Player = React.createClass({
         instance.tracks = TrackStore.getTracks(instance.tracks);
 
         // The player will appear once every track is ready to be displayed.
-        instance.loading = !_.every(instance.tracks, 'resolved');
+        instance.loading = !_.every(instance.tracks, function(track) {
+            return track.resolved || track.error;
+        });
 
         return instance;
     },
@@ -49,7 +51,6 @@ var Player = React.createClass({
     },
     render: function() {
         var empty = (!this.state.tracks || !_.any(this.state.tracks)) && !this.state.nowPlaying;
-
         var playerContent;
         var themeClass = '';
 

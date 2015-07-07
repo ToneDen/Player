@@ -22,6 +22,7 @@ var TrackStore = Fluxxor.createStore({
             events.player.audioInterface.TRACK_RESOLVED, this.onTrackResolved,
             events.player.audioInterface.TRACK_UPDATED, this.onTrackUpdated,
             events.player.CREATE, this.onTrackUpdated,
+            events.player.track.SELECTED, this.onTrackSelected,
             events.player.track.TOGGLE_PAUSE, this.onTrackTogglePause
         );
     },
@@ -46,14 +47,21 @@ var TrackStore = Fluxxor.createStore({
         }
     },
     onTrackError: function(payload) {
-        this.tracks[payload.trackID].loading = false;
-        this.tracks[payload.trackID].playing = false;
-        this.tracks[payload.trackID].error = payload.error;
+        var track = this.tracks[payload.trackID];
+        track.loading = false;
+        track.playing = false;
+        track.error = true;
+        track.errorMessage = payload.error.message;
+        track.resolved = {
+            user: {}
+        };
 
         this.emit('change');
     },
     onTrackFinished: function(payload) {
         this.tracks[payload.trackID].playing = false;
+
+        ToneDen.player.emit('track.finished', this.tracks[payload.trackID]);
         this.emit('change');
     },
     onTrackLoadAmountChanged: function(payload) {
@@ -62,6 +70,13 @@ var TrackStore = Fluxxor.createStore({
     },
     onTrackPlayingChanged: function(payload) {
         this.tracks[payload.trackID].playing = payload.isPlaying;
+
+        if(payload.isPlaying) {
+            ToneDen.player.emit('track.played', this.tracks[payload.trackID]);
+        } else {
+            ToneDen.player.emit('track.paused', this.tracks[payload.trackID]);
+        }
+
         this.emit('change');
     },
     onTrackPlayPositionChanged: function(payload) {
@@ -84,6 +99,8 @@ var TrackStore = Fluxxor.createStore({
             }
         });
 
+        ToneDen.player.emit('track.started', this.tracks[payload.trackID]);
+
         this.emit('change');
     },
     onTrackReady: function(payload) {
@@ -92,8 +109,11 @@ var TrackStore = Fluxxor.createStore({
     },
     onTrackResolved: function(payload) {
         _.merge(this.tracks, payload.entities.tracks);
-        delete this.tracks[payload.trackID];
 
+        this.emit('change');
+    },
+    onTrackSelected: function(payload) {
+        this.tracks[payload.result].loading = true;
         this.emit('change');
     },
     onTrackTogglePause: function(payload) {

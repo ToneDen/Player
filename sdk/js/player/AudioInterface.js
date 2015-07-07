@@ -96,7 +96,7 @@ var AudioInterface = function(parameters) {
     };
 
     this.resolveTrack = function(originalTrack, tracksPerArtist, callback) {
-        var url = originalTrack.url || originalTrack;
+        var url = originalTrack.stream_url || originalTrack;
 
         if(typeof tracksPerArtist === 'function') {
             callback = tracksPerArtist;
@@ -124,9 +124,16 @@ var AudioInterface = function(parameters) {
             function(resolvedTracks, next) {
                 // Since the single original track object may resolve into multiple tracks (in the case of a user or set
                 // URL), we have to turn that original track into an array of new ones with new IDs.
-                resolvedTracks = resolvedTracks.map(function(resolvedTrack) {
+                resolvedTracks = resolvedTracks.map(function(resolvedTrack, index) {
                     var track = _.clone(originalTrack);
-                    track.id = _.uniqueId();
+                    var randomID = _.uniqueId('track_');
+
+                    if(index === 0) {
+                        track.id = originalTrack.id || randomID;
+                    } else {
+                        track.id = randomID;
+                    }
+
                     track.resolved = resolvedTrack;
                     delete track.playing;
 
@@ -141,7 +148,25 @@ var AudioInterface = function(parameters) {
 
                 return next(null, resolvedTracks);
             }
-        ], callback);
+        ], function(err, result) {
+            if(err) {
+                if(err.status === 404) {
+                    err = {
+                        message: 'We couldn\'t find this track.'
+                    };
+                } else {
+                    err = {
+                        message: err.message
+                    };
+                }
+
+                actions.player.audioInterface.onTrackError(originalTrack.id, err);
+            }
+
+            if(typeof callback === 'function') {
+                return callback(err, result);
+            }
+        });
     };
 
     this.seekTrack = function(track, position) {
