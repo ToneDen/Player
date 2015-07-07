@@ -115,7 +115,7 @@ module.exports = function(grunt) {
                 },
                 module: {
                     loaders: [{
-                        loader: 'style-loader!css-loader',
+                        loader: 'style-loader?insertAt=start!css-loader',
                         test: /\.css$/
                     }, {
                         loader: 'jsx-loader',
@@ -145,7 +145,7 @@ module.exports = function(grunt) {
                 },
                 module: {
                     loaders: [{
-                        loader: 'style-loader!css-loader',
+                        loader: 'style-loader?insertAt=start!css-loader',
                         test: /\.css$/
                     }, {
                         loader: 'jsx-loader',

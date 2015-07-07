@@ -9,7 +9,6 @@
     "file-loader": "~0.8.4",
     "url-loader": "~0.5.6",
     "compression-webpack-plugin": "~0.2.0",
-    "style-loader": "~0.12.3",
     "css-loader": "~0.15.1",
     "grunt-contrib-compress": "~0.13.0",
     "grunt-contrib-clean": "~0.6.0"
