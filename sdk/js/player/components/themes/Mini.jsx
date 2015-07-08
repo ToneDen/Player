@@ -49,17 +49,7 @@ var Mini = React.createClass({
                         </Columns>
                     </Columns>
                 )}
-                {(!nowPlaying.get('error') && !resolved.get('streamable')) && (
-                    <Columns large={3} small={12}>
-                        <Columns large={12} small={12} className='track-error-box'>
-                            <span className='track-error-box-span'>
-                                <i className='tdicon-warning' />
-                                This track is not streamable.
-                            </span>
-                        </Columns>
-                    </Columns>
-                )}
-                {(!nowPlaying.get('error') && resolved.get('streamable')) && (
+                {!nowPlaying.get('error') && (
                     <Columns large={3} small={12} className='mini-scrubber'>
                         <Scrubber nowPlaying={nowPlaying} />
                     </Columns>

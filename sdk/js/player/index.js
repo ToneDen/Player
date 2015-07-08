@@ -47,7 +47,12 @@ function ToneDenPlayer() {
             volume: parameters.volume
         });
 
-        var container = document.querySelectorAll(dom)[0];
+        // Escape first number in css selector.
+        if(dom.charAt(0) === '#' && !isNaN(dom.charAt(1))) {
+            dom = '#\\' + dom.charCodeAt(1).toString(16) + ' ' + dom.substring(2);
+        }
+
+        var container = document.querySelector(dom);
 
         var tracks = urls.map(processUrlInput);
 

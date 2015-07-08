@@ -106,21 +106,9 @@ var Single = React.createClass({
                             </Columns>
                         </Row>
                     )}
-                    {resolved.get('streamable') && (
+                    {!nowPlaying.get('error') && (
                         <Row className='scrubber' style={{display: isSmallContainer ? 'none' : ''}}>
                             <Scrubber nowPlaying={nowPlaying} />
-                        </Row>
-                    )}
-                    {!resolved.get('streamable') && (
-                        <Row>
-                            <Columns>
-                                <Columns className='track-error-box'>
-                                    <span className='track-error-box-span'>
-                                        <i className='tdicon-warning' />
-                                        This track is not streamable.
-                                    </span>
-                                </Columns>
-                            </Columns>
                         </Row>
                     )}
                     <Row className='social'>

@@ -65,7 +65,7 @@ var AudioInterface = function(parameters) {
     this.loadTrack = function(track, autoPlay, callback) {
         if(track.sound) {
             this.seekTrack(track, 0);
-            track.sound.setVolume(self.parameters.volume);
+            track.sound._a && track.sound.setVolume(self.parameters.volume);
 
             if(autoPlay && (track.sound.paused || track.sound.playState === 0)) {
                 track.sound.play();
@@ -123,58 +123,51 @@ var AudioInterface = function(parameters) {
                 if(url.search(/soundcloud\.com/i) !== -1) {
                     return soundcloud.resolve(url, tracksPerArtist, next);
                 } else if(url.match(urlRegex)) {
-                    return next(null, {
+                    return next(null, [{
                         stream_url: url
-                    });
+                    }]);
                 } else {
                     return next(new Error('I don\'t know how to deal with that URL.', url));
                 }
-            },
-            function(resolvedTracks, next) {
-                // Since the single original track object may resolve into multiple tracks (in the case of a user or set
-                // URL), we have to turn that original track into an array of new ones with new IDs.
-                resolvedTracks = resolvedTracks.map(function(resolvedTrack, index) {
-                    var track = _clone(originalTrack);
-                    var randomID = _uniqueId('track_');
-
-                    if(index === 0) {
-                        track.id = originalTrack.id || randomID;
-                    } else {
-                        track.id = randomID;
-                    }
-
-                    track.id = String(track.id);
-                    track.resolved = resolvedTrack;
-                    delete track.playing;
-
-                    return track;
-                });
-
-                if(self.parameters.cache) {
-                    self.resolveCache[url] = resolvedTracks;
-                }
-
-                actions.player.audioInterface.onTrackResolved(originalTrack.id, resolvedTracks);
-
-                return next(null, resolvedTracks);
             }
-        ], function(err, result) {
-            if(err) {
-                if(err.status === 404) {
-                    err = {
-                        message: 'We couldn\'t find this track.'
-                    };
+        ], function(err, resolvedTracks) {
+            // Since the single original track object may resolve into multiple tracks (in the case of a user or set
+            // URL), we have to turn that original track into an array of new ones with new IDs.
+            resolvedTracks = resolvedTracks.map(function(resolvedTrack, index) {
+                var track = _clone(originalTrack);
+                var randomID = _uniqueId('track_');
+
+                if(index === 0) {
+                    track.id = originalTrack.id || randomID;
                 } else {
-                    err = {
-                        message: err.message
-                    };
+                    track.id = randomID;
                 }
 
-                actions.player.audioInterface.onTrackError(originalTrack.id, err);
+                track.id = String(track.id);
+                track.resolved = resolvedTrack;
+                delete track.playing;
+
+                if(err) {
+                    track.error = true;
+
+                    if(err.status === 404) {
+                        track.errorMessage = 'We couldn\'t find this track.'
+                    } else {
+                        track.errorMessage = err.message;
+                    }
+                }
+
+                return track;
+            });
+
+            if(self.parameters.cache) {
+                self.resolveCache[url] = resolvedTracks;
             }
+
+            actions.player.audioInterface.onTrackResolved(originalTrack.id, resolvedTracks);
 
             if(typeof callback === 'function') {
-                return callback(err, result);
+                return callback(err, resolvedTracks);
             }
         });
     };

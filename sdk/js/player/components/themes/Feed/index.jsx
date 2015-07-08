@@ -69,18 +69,6 @@ var Feed = React.createClass({
                             </Columns>
                         </Row>
                     )}
-                    {!nowPlaying.get('error') && !resolved.get('streamable') && (
-                        <Row>
-                            <Columns>
-                                <Columns className='track-error-box'>
-                                    <span className='track-error-box-span'>
-                                        <i className='tdicon-warning' />
-                                        This track is not streamable.
-                                    </span>
-                                </Columns>
-                            </Columns>
-                        </Row>
-                    )}
                     <SocialInfo nowPlaying={nowPlaying} />
                 </Columns>
             </Columns>

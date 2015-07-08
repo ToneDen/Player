@@ -22,12 +22,13 @@ function resolve(url, tracksPerArtist, callback) {
             var item = res.body;
 
             if(item.kind === 'track') {
-                item = [processTrack(item)];
-                return next(null, item);
+                return processTrack(item, function(err, track) {
+                    return next(err, [track]);
+                });
             } else if(item.kind === 'set') {
-                return next(null, item.tracks.map(processTrack));
+                return async.map(item.tracks, processTrack, next);
             } else if(item.kind === 'user') {
-                getTracksForUser(item, tracksPerArtist, next);
+                return getTracksForUser(item, tracksPerArtist, next);
             }
         }
     ], callback);
@@ -48,11 +49,13 @@ function getTracksForUser(user, limit, callback) {
 
             var tracks = res.body;
 
-            return callback(null, tracks.map(processTrack));
+            return async.map(tracks, processTrack, callback);
         });
 }
 
-function processTrack(track) {
+function processTrack(track, callback) {
+    var err = null;
+
     track.stream_url += '?consumer_key=' + ToneDen.parameters.soundcloudConsumerKey;
 
     if(track.artwork_url) {
@@ -75,7 +78,11 @@ function processTrack(track) {
         }
     }
 
-    return track;
+    if(!track.streamable) {
+        err = new Error('This track is not streamable.');
+    }
+
+    return callback(err, track);
 }
 
 module.exports = {
