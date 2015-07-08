@@ -1,7 +1,9 @@
+var Fluxxor = require('fluxxor');
 var React = require('react');
 
 var RepeatButton = React.createClass({
     mixins: [
+        Fluxxor.FluxMixin(React),
         require('../../mixins/PlayerControls')
     ],
     render: function() {

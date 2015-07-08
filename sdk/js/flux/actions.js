@@ -1,3 +1,4 @@
+var Immutable = require('immutable');
 var normalizr = require('normalizr');
 
 // Define schema for nested items in actions.
@@ -62,6 +63,7 @@ module.exports = {
             onTrackSoundAdded: function(track) {
                 // The track may or may not be playing, so don't change its play state in the store.
                 delete track.playing;
+                track.loading = !track.sound.loaded;
 
                 var payload = normalizr.normalize(track, Track);
                 this.dispatch(events.player.audioInterface.TRACK_UPDATED, payload);
@@ -78,9 +80,9 @@ module.exports = {
                 ToneDen.AudioInterface.resolveTrack(track, player.tracksPerArtist);
             });
         },
-        destroy: function(player) {
+        destroy: function(playerID) {
             this.dispatch(events.player.DESTROY, {
-                playerID: player.id
+                playerID: playerID
             });
         },
         track: {

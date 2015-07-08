@@ -7,34 +7,34 @@ var helpers = require('../../../../helpers');
 
 var SocialInfo = React.createClass({
     render: function() {
-        var nowPlaying = this.props.nowPlaying;
+        var resolved = this.props.nowPlaying.get('resolved');
 
         return (
             <Row className='social'>
                 <Columns className='current-song-info'>
                     <Columns large={10} small={10} className='track-info-plays'>
                         <i className='tdicon-play-circle-fill current-song-social-icon' />
-                        {helpers.numberToCommaString(nowPlaying.resolved.playback_count)}
+                        {helpers.numberToCommaString(resolved.get('playback_count'))}
                     </Columns>
                     <Columns large={2} small={2} className='feed-buttons'>
                         <Columns
-                            large={nowPlaying.resolved.purchase_url || nowPlaying.resolved.download_url ? 6 : 12}
+                            large={resolved.get('purchase_url') || resolved.get('download_url') ? 6 : 12}
                             small={12}
                             className='follow'
                         >
                             <a
                                 className='tdbutton expand follow-link'
-                                href={nowPlaying.resolved.permalink_url}
+                                href={resolved.get('permalink_url')}
                                 target='_blank'
                             >
                                 <i className='tdicon-soundcloud playlist-social-icon' />
                             </a>
                         </Columns>
-                        {(nowPlaying.resolved.purchase_url || nowPlaying.resolved.download_url) && (
+                        {(resolved.get('purchase_url') || resolved.get('download_url')) && (
                             <Columns large={6} small={12} className='buy'>
                                 <a
                                     className='tdbutton expand buy-link'
-                                    href={nowPlaying.resolved.purchase_url || nowPlaying.resolved.download_url}
+                                    href={resolved.get('purchase_url') || resolved.get('download_url')}
                                     target='_blank'
                                 >
                                     <i className='tdicon-file-download playlist-social-icon' />

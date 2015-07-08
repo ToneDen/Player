@@ -10,22 +10,19 @@ var Playlist = React.createClass({
     mixins: [
         Fluxxor.FluxMixin(React)
     ],
-    onTrackRowClick: function(trackID) {
-        var trackToPlay = _.find(this.props.tracks, {
-            id: trackID
-        });
-
-        this.getFlux().actions.player.track.select(trackToPlay);
+    onTrackClick: function(track) {
+        this.getFlux().actions.player.track.select(track);
     },
     render: function() {
-        var nowPlaying = this.props.nowPlaying;
+        var player = this.props.player.toJS();
+        var nowPlaying = player.nowPlaying;
 
-        var playlist = this.props.tracks.map(function(track, index) {
+        var playlist = player.tracks.map(function(track, index) {
             return (
                 <tr
                     className={track.playing ? 'playing' : 'track-info'}
                     key={track.id}
-                    onClick={this.onTrackRowClick.bind(null, track.id)}
+                    onClick={this.onTrackClick.bind(null, track)}
                 >
                     {track.id === nowPlaying.id && (
                         <td width='20'>
@@ -44,7 +41,7 @@ var Playlist = React.createClass({
                     </td>
                     <td
                         className='track-info-stats'
-                        style={{width: '40%', display: this.props.container.width() < 500 ? 'none' : ''}}
+                        style={{width: '40%', display: player.container.offsetWidth < 500 ? 'none' : ''}}
                     >
                         <Columns className='track-info-social'>
                             <Columns large={4} className='track-info-plays'>

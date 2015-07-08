@@ -5,7 +5,6 @@
  * http://stackoverflow.com/questions/20926551/recommended-way-of-making-react-component-div-draggable
  */
 
-var $ = require('jquery');
 var Fluxxor = require('fluxxor');
 var React = require('react');
 
@@ -40,11 +39,10 @@ var Scrubber = React.createClass({
     },
     getHandlePosition: function(e) {
         var scrubber = this.refs.scrubber.getDOMNode();
-        var scrubberOffset = $(scrubber).offset().left;
 
         var minPosition = 0;
         var maxPosition = scrubber.offsetWidth;
-        var position = e.pageX - $(scrubber).offset().left;
+        var position = e.pageX - helpers.getElementOffset(scrubber).left;
 
         if(position < minPosition) {
             return minPosition;
@@ -73,9 +71,9 @@ var Scrubber = React.createClass({
 
         var nowPlaying = this.props.nowPlaying;
         var value = this.state.handlePosition / this.refs.scrubber.getDOMNode().offsetWidth * 
-            nowPlaying.resolved.duration;
+            nowPlaying.getIn(['resolved', 'duration']);
 
-        this.getFlux().actions.player.track.seekTo(nowPlaying, value);
+        this.getFlux().actions.player.track.seekTo(nowPlaying.toJS(), value);
 
         e.preventDefault()
     },
@@ -92,29 +90,30 @@ var Scrubber = React.createClass({
     },
     onScrubberTrackClick: function(e) {
         var track = this.refs.track.getDOMNode();
-        var locationToWidthRatio = (e.pageX - $(track).offset().left) / track.offsetWidth;
-        var milliseconds = locationToWidthRatio * this.props.nowPlaying.resolved.duration;
+        var locationToWidthRatio = (e.pageX - helpers.getElementOffset(track).left) / track.offsetWidth;
+        var milliseconds = locationToWidthRatio * this.props.nowPlaying.getIn(['resolved', 'duration']);
 
-        this.getFlux().actions.player.track.seekTo(this.props.nowPlaying, milliseconds);
+        this.getFlux().actions.player.track.seekTo(this.props.nowPlaying.toJS(), milliseconds);
     },
     render: function() {
         var nowPlaying = this.props.nowPlaying;
+        var resolved = nowPlaying.get('resolved');
         var handlePosition;
 
-        if(nowPlaying.error) {
+        if(nowPlaying.get('error')) {
             return (
                 <Row>
                     <Columns>
                         <Columns className='track-error-box'>
                             <span className='track-error-box-span'>
                                 <i className='tdicon-warning' />
-                                {nowPlaying.errorMessage}
+                                {nowPlaying.get('errorMessage')}
                             </span>
                         </Columns>
                     </Columns>
                 </Row>
             );
-        } else if(!nowPlaying.resolved.streamable) {
+        } else if(!resolved.get('streamable')) {
             return (
                 <Row>
                     <Columns>
@@ -129,7 +128,7 @@ var Scrubber = React.createClass({
             );
         } else {
             if(this.refs.scrubber && !this.state.dragging) {
-                handlePosition = nowPlaying.playbackPosition / nowPlaying.resolved.duration * 
+                handlePosition = nowPlaying.get('playbackPosition') / resolved.get('duration') * 
                     this.refs.scrubber.getDOMNode().offsetWidth;
             } else {
                 handlePosition = this.state.handlePosition;
@@ -138,7 +137,7 @@ var Scrubber = React.createClass({
             return (
                 <Columns className='scrubber-box'>
                     <Columns large={2} className='start-time'>
-                        {helpers.msToTimestamp(nowPlaying.playbackPosition || 0)}
+                        {helpers.msToTimestamp(nowPlaying.get('playbackPosition') || 0)}
                     </Columns>
                     <Columns large={8} className='scrub-bar-box'>
                         <div
@@ -155,9 +154,9 @@ var Scrubber = React.createClass({
                         </div>
                     </Columns>
                     <Columns large={2} className='stop-time'>
-                        {!nowPlaying.loading && 
-                            helpers.msToTimestamp(nowPlaying.resolved.duration - (nowPlaying.playbackPosition || 0))}
-                        {nowPlaying.loading && <i className='tdicon-circle-o-notch spin tdloader' />}
+                        {!nowPlaying.get('loading') && 
+                            helpers.msToTimestamp(resolved.get('duration') - (nowPlaying.get('playbackPosition') || 0))}
+                        {nowPlaying.get('loading') && <i className='tdicon-circle-o-notch spin tdloader' />}
                     </Columns>
                 </Columns>
             );

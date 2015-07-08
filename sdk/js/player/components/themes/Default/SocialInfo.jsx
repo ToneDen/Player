@@ -7,9 +7,10 @@ var helpers = require('../../../../helpers');
 
 var SocialInfo = React.createClass({
     render: function() {
-        var nowPlaying = this.props.nowPlaying;
+        var player = this.props.player.toJS();
+        var nowPlaying = player.nowPlaying;
         var sizeHideStyle = {
-            display: this.props.container.width() < 500 ? 'none' : ''
+            display: player.container.offsetWidth < 500 ? 'none' : ''
         };
 
         return (
@@ -24,7 +25,7 @@ var SocialInfo = React.createClass({
                         <i className='tdicon-soundcloud playlist-social-icon'></i>
                     </a>
                 </Columns>
-                <Columns large={this.props.container.width() < 500 ? 12 : 6} small={12} className='current-song-info'>
+                <Columns large={player.container.offsetWidth < 500 ? 12 : 6} small={12} className='current-song-info'>
                     <Columns large={6} small={6} className='track-info-plays'>
                         <i className='tdicon-play-circle-fill current-song-social-icon'></i>
                         {helpers.numberToCommaString(nowPlaying.resolved.playback_count)}
@@ -37,7 +38,7 @@ var SocialInfo = React.createClass({
                 {nowPlaying.resolved.purchase_url && (
                     <Columns large={3} small={12} className='buy' style={sizeHideStyle}>
                         <a className='tdbutton expand  buy-link' href='{{purchase_url}}' target='_blank'>
-                            {this.props.useCustomPurchaseTitle && nowPlaying.resolved.purchase_title || 'BUY'}
+                            {player.useCustomPurchaseTitle && nowPlaying.resolved.purchase_title || 'BUY'}
                         </a>
                     </Columns>
                 )}

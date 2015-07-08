@@ -1,4 +1,3 @@
-var _ = require('lodash');
 var Fluxxor = require('fluxxor');
 var React = require('react');
 
@@ -23,10 +22,11 @@ var Default = React.createClass({
         };
     },
     render: function() {
-        var nowPlaying = this.props.nowPlaying;
-        var tracks = this.props.tracks;
+        var player = this.props.player;
+        var nowPlaying = player.get('nowPlaying');
+        var tracks = player.get('tracks');
 
-        if(this.props.loading || !nowPlaying.resolved || !tracks) {
+        if(player.get('loading')) {
             return <Loader />;
         }
 

@@ -2,6 +2,8 @@
  * Thanks to Pete Hunt for the great webpack how-to: https://github.com/petehunt/webpack-howto
  */
 
+var fs = require('fs');
+
 var webpack = require('webpack');
 var webpackEnv;
 
@@ -115,11 +117,8 @@ module.exports = function(grunt) {
                 },
                 module: {
                     loaders: [{
-                        loader: 'style-loader?insertAt=start!css-loader',
+                        loader: 'style-loader?insertAt=top!css-loader',
                         test: /\.css$/
-                    }, {
-                        loader: 'jsx-loader',
-                        test: /\.jsx$/
                     }, {
                         loader: 'url-loader?limit=8192',
                         test: /\.(png|jpg)$/
@@ -130,7 +129,7 @@ module.exports = function(grunt) {
                 },
                 plugins: webpackPlugins,
                 resolve: {
-                    extensions: ['', '.hbs', '.js', '.jsx', '.css']
+                    extensions: ['', '.js', '.jsx', '.css']
                 },
                 devtool: 'inline-source-map',
                 keepalive: true,
@@ -145,7 +144,7 @@ module.exports = function(grunt) {
                 },
                 module: {
                     loaders: [{
-                        loader: 'style-loader?insertAt=start!css-loader',
+                        loader: 'style-loader?insertAt=top!css-loader',
                         test: /\.css$/
                     }, {
                         loader: 'jsx-loader',
@@ -153,15 +152,13 @@ module.exports = function(grunt) {
                     }, {
                         loader: 'url-loader?limit=8192',
                         test: /\.(png|jpg)$/
-                    }, {
-                        loader: 'jsx-loader',
-                        test: /\.jsx$/
                     }]
                 },
                 plugins: webpackPlugins,
                 resolve: {
-                    extensions: ['', '.hbs', '.js', '.jsx', '.css']
-                }
+                    extensions: ['', '.js', '.jsx', '.css']
+                },
+                storeStatsTo: 'webpackStats'
             }
         }
     });
@@ -172,10 +169,14 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-compress');
     grunt.loadNpmTasks('grunt-webpack');
 
+    grunt.registerTask('writeWebpackStats', 'Writes webpack stats to webpack.json.', function() {
+        grunt.file.write('webpack.json', JSON.stringify(grunt.config.getRaw('webpackStats')));
+    });
+
     if(webpackEnv === 'local') {
         grunt.registerTask('default', 'webpack:watch');
     } else {
-        grunt.registerTask('default', 'webpack:build');
+        grunt.registerTask('default', ['webpack:build', 'writeWebpackStats']);
     }
 
     function getBuildConfig(env) {

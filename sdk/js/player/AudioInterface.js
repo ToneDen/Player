@@ -1,4 +1,7 @@
-var _ = require('lodash');
+var _clone = require('lodash/lang/clone');
+var _merge = require('lodash/object/merge');
+var _uniqueId = require('lodash/utility/uniqueId');
+
 var async = require('async');
 var soundManager = require('../vendor/soundManager2').soundManager;
 
@@ -16,7 +19,7 @@ var AudioInterface = function(parameters) {
         cache: true,
         volume: 100
     };
-    this.parameters = _.merge(defaultParameters, parameters);
+    this.parameters = _merge(defaultParameters, parameters);
     this.resolveCache = {};
     this.soundCache = {};
     this.nowPlaying = null;
@@ -59,7 +62,7 @@ var AudioInterface = function(parameters) {
         return sound;
     }
 
-    this.loadTrack = function(track, autoPlay) {
+    this.loadTrack = function(track, autoPlay, callback) {
         if(track.sound) {
             this.seekTrack(track, 0);
             track.sound.setVolume(self.parameters.volume);
@@ -83,7 +86,9 @@ var AudioInterface = function(parameters) {
                 if(!trackToPlay.sound) {
                     trackToPlay.sound = createSound(trackToPlay, autoPlay);
 
-                    actions.player.audioInterface.onTrackSoundAdded(trackToPlay);
+                    async.nextTick(function() {
+                        actions.player.audioInterface.onTrackSoundAdded(trackToPlay);
+                    });
                 }
 
                 return next(null, trackToPlay);
@@ -91,6 +96,10 @@ var AudioInterface = function(parameters) {
         ], function(err, trackToPlay) {
             if(err) {
                 actions.player.audioInterface.onTrackError(trackToPlay.id, err);
+            }
+
+            if(typeof callback === 'function') {
+                return callback(err);
             }
         });
     };
@@ -125,8 +134,8 @@ var AudioInterface = function(parameters) {
                 // Since the single original track object may resolve into multiple tracks (in the case of a user or set
                 // URL), we have to turn that original track into an array of new ones with new IDs.
                 resolvedTracks = resolvedTracks.map(function(resolvedTrack, index) {
-                    var track = _.clone(originalTrack);
-                    var randomID = _.uniqueId('track_');
+                    var track = _clone(originalTrack);
+                    var randomID = _uniqueId('track_');
 
                     if(index === 0) {
                         track.id = originalTrack.id || randomID;
@@ -134,6 +143,7 @@ var AudioInterface = function(parameters) {
                         track.id = randomID;
                     }
 
+                    track.id = String(track.id);
                     track.resolved = resolvedTrack;
                     delete track.playing;
 
@@ -170,13 +180,27 @@ var AudioInterface = function(parameters) {
     };
 
     this.seekTrack = function(track, position) {
-        track.sound.setPosition(position);
-        track.sound.options.position = position;
-        actions.player.audioInterface.onTrackPlayPositionChange(track.id, position);
+        async.waterfall([
+            function(next) {
+                if(!track.sound) {
+                    return this.loadTrack(track, true, next);
+                } else {
+                    return next();
+                }
+            }.bind(this)
+        ], function(err) {
+            if(err) {
+                return;
+            }
 
-        if(track.sound.paused || track.sound.playState === 0) {
-            track.sound.play();
-        }
+            track.sound.setPosition(position);
+            track.sound.options.position = position;
+            actions.player.audioInterface.onTrackPlayPositionChange(track.id, position);
+
+            if(track.sound.paused || track.sound.playState === 0) {
+                track.sound.play();
+            }
+        });
     };
 
     this.setVolume = function(level) {

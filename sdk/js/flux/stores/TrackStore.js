@@ -2,14 +2,14 @@
  * Stores all tracks that have been loaded on the page.
  */
 
-var _ = require('lodash');
 var Fluxxor = require('fluxxor');
+var Immutable = require('immutable');
 
 var events = require('../events');
 
 var TrackStore = Fluxxor.createStore({
     initialize: function() {
-        this.tracks = {};
+        this.tracks = Immutable.Map();
 
         this.bindActions(
             events.player.audioInterface.TRACK_ERROR, this.onTrackError,
@@ -27,103 +27,97 @@ var TrackStore = Fluxxor.createStore({
         );
     },
     getTracks: function(trackIDs) {
-        var returnArray = true;
-
-        if(typeof trackIDs === 'number' || typeof trackIDs === 'string') {
-            returnArray = false;
-            trackIDs = [trackIDs].map(Number);
+        if(typeof trackIDs === 'string' || typeof trackIDs === 'number') {
+            trackIDs = [String(trackIDs)];
+        } else if(trackIDs instanceof Array || trackIDs instanceof Immutable.List) {
+            trackIDs = trackIDs.map(String);
         } else if(!trackIDs) {
-            return;
+            return Immutable.List();
         }
 
-        var tracks = trackIDs.map(function(id) {
-            return _.clone(this.tracks[id]);
-        }.bind(this));
+        trackIDs = Immutable.List(trackIDs);
 
-        if(returnArray) {
-            return tracks;
-        } else {
-            return tracks[0];
-        }
+        return trackIDs.map(function(id) {
+            return this.tracks.get(id);
+        }.bind(this)).toList();
     },
     onTrackError: function(payload) {
-        var track = this.tracks[payload.trackID];
-        track.loading = false;
-        track.playing = false;
-        track.error = true;
-        track.errorMessage = payload.error.message;
-        track.resolved = {
-            user: {}
-        };
+        this.tracks = this.tracks.mergeDeepIn([payload.trackID], {
+            error: true,
+            errorMessage: payload.error.message,
+            loading: false,
+            playing: false,
+            resolved: {
+                user: {}
+            }
+        });
 
         this.emit('change');
     },
     onTrackFinished: function(payload) {
-        this.tracks[payload.trackID].playing = false;
+        this.tracks = this.tracks.setIn([payload.trackID, 'playing'], false);
+        this.tracks = this.tracks.setIn([payload.trackID, 'playbackPosition'], 0);
 
         ToneDen.player.emit('track.finished', this.tracks[payload.trackID]);
         this.emit('change');
     },
     onTrackLoadAmountChanged: function(payload) {
-        this.tracks[payload.trackID].loading = true;
+        this.tracks = this.tracks.setIn([payload.trackID, 'loading'], true);
         this.emit('change');
     },
     onTrackPlayingChanged: function(payload) {
-        this.tracks[payload.trackID].playing = payload.isPlaying;
+        this.tracks = this.tracks.setIn([payload.trackID, 'playing'], payload.isPlaying);
 
         if(payload.isPlaying) {
-            ToneDen.player.emit('track.played', this.tracks[payload.trackID]);
+            ToneDen.player.emit('track.played', this.tracks.get(payload.trackID).toJS());
         } else {
-            ToneDen.player.emit('track.paused', this.tracks[payload.trackID]);
+            ToneDen.player.emit('track.paused', this.tracks.get(payload.trackID).toJS());
         }
 
         this.emit('change');
     },
     onTrackPlayPositionChanged: function(payload) {
         var trackID = payload.trackID;
-        var currentPosition = this.tracks[trackID].playbackPosition || 0;
+        var currentPosition = this.tracks.getIn([trackID, 'playbackPosition']) || 0;
         var newPosition = payload.position;
 
         // Only fire an update if the last update occurred more than 100ms ago.
         if(Math.abs(newPosition - currentPosition) > 200) {
-            this.tracks[trackID].playbackPosition = newPosition;
+            this.tracks = this.tracks.setIn([trackID, 'playbackPosition'], newPosition);
             this.emit('change');
         }
     },
     onTrackPlayStart: function(payload) {
-        _.forIn(this.tracks, function(track, id) {
-            if(track.id === payload.trackID) {
-                track.playing = true;
+        this.tracks = this.tracks.map(function(track, id) {
+            if(id === payload.trackID) {
+                return track.set('playing', true);
             } else {
-                track.playing = false;
+                return track.set('playing', false);
             }
         });
 
-        ToneDen.player.emit('track.started', this.tracks[payload.trackID]);
+        ToneDen.player.emit('track.started', this.tracks.get(payload.trackID).toJS());
 
         this.emit('change');
     },
     onTrackReady: function(payload) {
-        this.tracks[payload.trackID].loading = false;
+        this.tracks = this.tracks.setIn([payload.trackID, 'loading'], false);
         this.emit('change');
     },
     onTrackResolved: function(payload) {
-        _.merge(this.tracks, payload.entities.tracks);
-
+        this.tracks = this.tracks.mergeDeep(payload.entities.tracks);
         this.emit('change');
     },
     onTrackSelected: function(payload) {
-        this.tracks[payload.result].loading = true;
+        this.tracks = this.tracks.setIn([payload.result, 'loading'], true);
         this.emit('change');
     },
     onTrackTogglePause: function(payload) {
-        var track = this.tracks[payload.trackID];
-        track.playing = !track.playing;
-
+        this.tracks = this.tracks.setIn([payload.trackID, 'playing'], !this.tracks.getIn([payload.trackID, 'playing']));
         this.emit('change');
     },
     onTrackUpdated: function(payload) {
-        _.merge(this.tracks, payload.entities.tracks);
+        this.tracks = this.tracks.mergeDeep(payload.entities.tracks);
         this.emit('change');
     }
 });

@@ -1,21 +1,17 @@
-var _ = require('lodash');
 var Fluxxor = require('fluxxor');
 var React = require('react');
 
 module.exports = {
-    mixins: [
-        Fluxxor.FluxMixin(React)
-    ],
     getInitialState: function() {
         return {
             showVolumeOptions: false
         };
     },
-    propsOrState: function() {
-        if(this.state.tracks) {
-            return this.state;
+    getPlayer: function() {
+        if(this.state && this.state.player) {
+            return this.state.player;
         } else {
-            return this.props;
+            return this.props.player;
         }
     },
     onKeyDown: function(e) {
@@ -31,49 +27,50 @@ module.exports = {
         }
     },
     onNextButtonClick: function() {
-        var propsOrState = this.propsOrState();
+        var player = this.getPlayer();
+        var nowPlayingID = player.getIn(['nowPlaying', 'id']);
 
-        var currentIndex = _.findIndex(propsOrState.tracks, {
-            id: propsOrState.nowPlaying.id
+        var currentIndex = player.get('tracks').findIndex(function(track) {
+            return track.get('id') === nowPlayingID;
         });
-        var trackToPlay = propsOrState.tracks[currentIndex + 1];
+        var trackToPlay = player.getIn(['tracks', currentIndex + 1]);
 
         if(trackToPlay) {
-            this.getFlux().actions.player.track.select(trackToPlay);
+            this.getFlux().actions.player.track.select(trackToPlay.toJS());
         }
     },
     onPlayButtonClick: function() {
-        this.getFlux().actions.player.track.togglePause(this.propsOrState().nowPlaying);
+        this.getFlux().actions.player.track.togglePause(this.getPlayer().get('nowPlaying').toJS());
     },
     onPreviousButtonClick: function() {
-        var propsOrState = this.propsOrState();
+        var player = this.getPlayer();
+        var nowPlayingID = player.getIn(['nowPlaying', 'id']);
 
-        if(propsOrState.nowPlaying.playbackPosition < 4000) {
-            var currentIndex = _.findIndex(propsOrState.tracks, {
-                id: propsOrState.nowPlaying.id
+        if(player.getIn(['nowPlaying', 'playbackPosition']) < 4000) {
+            var currentIndex = player.get('tracks').findIndex(function(track) {
+                return track.get('id') === nowPlayingID;
             });
-            var trackToPlay = propsOrState.tracks[currentIndex - 1];
+            var trackToPlay = player.getIn(['tracks', currentIndex - 1]);
 
             if(trackToPlay) {
-                this.getFlux().actions.player.track.select(trackToPlay);
+                this.getFlux().actions.player.track.select(trackToPlay.toJS());
             }
         } else {
-            this.getFlux().actions.player.track.seekTo(propsOrState.nowPlaying, 0);
+            this.getFlux().actions.player.track.seekTo(player.get('nowPlaying').toJS(), 0);
         }
     },
     onRepeatClick: function() {
-        this.getFlux().actions.player.setRepeat(!this.propsOrState().repeat);
+        this.getFlux().actions.player.setRepeat(!this.getPlayer().get('repeat'));
     },
     onSetVolumeClick: function(volume) {
         this.setState({
             showVolumeOptions: false
         });
-
         this.getFlux().actions.player.setVolume(volume);
     },
     onShowVolumeControlsClick: function() {
         this.setState({
-            showVolumeOptions: true
+            showVolumeOptions: false
         });
     }
 };

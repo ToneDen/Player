@@ -1,3 +1,4 @@
+var Fluxxor = require('fluxxor');
 var React = require('react');
 
 var Columns = require('../../Columns');
@@ -7,18 +8,21 @@ var SocialInfo = require('./SocialInfo');
 
 var Feed = React.createClass({
     mixins: [
+        Fluxxor.FluxMixin(React),
         require('../../mixins/PlayerControls')
     ],
     render: function() {
-        var nowPlaying = this.props.nowPlaying;
+        var player = this.props.player;
 
-        if(this.props.loading) {
+        if(player.get('loading')) {
             return <Loader />
         }
 
+        var nowPlaying = player.get('nowPlaying');
+        var resolved = nowPlaying.get('resolved');
         var playButtonClass;
 
-        if(nowPlaying.playing) {
+        if(nowPlaying.get('playing')) {
             playButtonClass = 'tdicon-pause-circle-outline player-play play';
         } else {
             playButtonClass = 'tdicon-play-circle-outline player-play play';
@@ -29,7 +33,7 @@ var Feed = React.createClass({
                 <Columns large={2} small={12} className='header'>
                     <Columns className='cover'>
                         <div className='feed-cover'>
-                            <img src={nowPlaying.resolved.artwork_url || nowPlaying.resolved.user.avatar_url} />
+                            <img src={resolved.get('artwork_url') || resolved.getIn(['user', 'avatar_url'])} />
                         </div>
                         <div className='controls'>
                             <Columns className='buttons'>
@@ -42,30 +46,30 @@ var Feed = React.createClass({
                     <Row className='tdrow info-feed'>
                         <Columns className='info'>
                             <Columns className='song-name'>
-                                <a href={nowPlaying.resolved.permalink_url} target='_blank'>
-                                    {nowPlaying.resolved.title}
+                                <a href={resolved.get('permalink_url')} target='_blank'>
+                                    {resolved.get('title')}
                                 </a>
                             </Columns>
                             <Columns className='artist-name'>
-                                <a href={nowPlaying.resolved.user.permalink_url} target='_blank'>
-                                    {nowPlaying.resolved.user.username}
+                                <a href={resolved.getIn(['user', 'permalink_url'])} target='_blank'>
+                                    {resolved.getIn(['user', 'username'])}
                                 </a>
                             </Columns>
                         </Columns>
                     </Row>
-                    {nowPlaying.error && (
+                    {nowPlaying.get('error') && (
                         <Row>
                             <Columns>
                                 <Columns className='track-error-box'>
                                     <span className='track-error-box-span'>
                                         <i className='tdicon-warning' />
-                                        {nowPlaying.errorMessage}
+                                        {nowPlaying.get('errorMessage')}
                                     </span>
                                 </Columns>
                             </Columns>
                         </Row>
                     )}
-                    {!nowPlaying.error && !nowPlaying.resolved.streamable && (
+                    {!nowPlaying.get('error') && !resolved.get('streamable') && (
                         <Row>
                             <Columns>
                                 <Columns className='track-error-box'>

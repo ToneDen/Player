@@ -1,5 +1,6 @@
-var _ = require('lodash');
-var $ = require('jquery');
+var _merge = require('lodash/object/merge');
+var _uniqueId = require('lodash/utility/uniqueId');
+
 var EventEmitter = require('events').EventEmitter;
 var inherits = require('util').inherits;
 var React = require('react');
@@ -10,7 +11,7 @@ var constants = require('../constants');
 var Player = require('./components/Player');
 
 function processUrlInput(url) {
-    var id = _.uniqueId('track_');
+    var id = _uniqueId('track_');
 
     if(typeof url === 'object') {
         url = {
@@ -23,6 +24,8 @@ function processUrlInput(url) {
             stream_url: url
         };
     }
+
+    url.id = String(url.id);
 
     return url;
 }
@@ -44,7 +47,7 @@ function ToneDenPlayer() {
             volume: parameters.volume
         });
 
-        var container = $(dom);
+        var container = document.querySelectorAll(dom)[0];
 
         var tracks = urls.map(processUrlInput);
 
@@ -62,7 +65,7 @@ function ToneDenPlayer() {
 
                 if(instance) {
                     nowPlaying = ToneDen.flux.store('TrackStore').tracks[instance.nowPlaying];
-                    ToneDen.flux.actions.player.destroy(instance);
+                    ToneDen.flux.actions.player.destroy(parameters.id);
                 }
             },
             getSound: function() {
@@ -74,14 +77,14 @@ function ToneDenPlayer() {
         };
 
         // Set up default parameters.
-        parameters = _.merge({
+        parameters = _merge({
             container: container,
             debug: false, // Output debug messages?
             feed: false,
             flux: ToneDen.flux,
             global: false, // Should this player show what is playing on any player in the page?
             keyboardEvents: false, // Should we listen to keyboard events?
-            id: _.uniqueId('player_'),
+            id: _uniqueId('player_'),
             instance: instance,
             mini: false,
             playFromQueue: false,
@@ -103,7 +106,9 @@ function ToneDenPlayer() {
         ToneDen.flux.actions.player.create(parameters);
 
         if(container) {
-            React.render(PlayerFactory(parameters), container[0]);
+            React.render(PlayerFactory(parameters), container);
+        } else {
+            console.error('The dom component specified by "' + dom + '" does not exist.');
         }
     };
     this.queueTrack = function(track, index) {

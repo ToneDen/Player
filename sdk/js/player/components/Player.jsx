@@ -1,5 +1,5 @@
-var _ = require('lodash');
 var Fluxxor = require('fluxxor');
+var Immutable = require('immutable');
 var React = require('react');
 
 var Default = require('./themes/Default');
@@ -12,7 +12,8 @@ var helpers = require('../../helpers');
 
 var Player = React.createClass({
     mixins: [
-        Fluxxor.StoreWatchMixin('PlayerInstanceStore', 'TrackStore'),
+        Fluxxor.FluxMixin(React),
+        Fluxxor.StoreWatchMixin('PlayerInstanceStore'),
         require('./mixins/PlayerControls')
     ],
     getStateFromFlux: function() {
@@ -20,16 +21,34 @@ var Player = React.createClass({
         var TrackStore = this.getFlux().store('TrackStore');
         var instance = PlayerInstanceStore.getStateByID(this.props.id);
 
-        instance.nextTrack = TrackStore.getTracks(instance.nextTrack);
-        instance.nowPlaying = TrackStore.getTracks(instance.nowPlaying);
-        instance.tracks = TrackStore.getTracks(instance.tracks);
-
-        // The player will appear once every track is ready to be displayed.
-        instance.loading = !_.every(instance.tracks, function(track) {
-            return track.resolved || track.error;
+        instance = instance.merge({
+            nextTrack: TrackStore.getTracks(instance.get('nextTrack')).get(0),
+            nowPlaying: TrackStore.getTracks(instance.get('nowPlaying')).get(0),
+            tracks: TrackStore.getTracks(instance.get('tracks'))
         });
 
-        return instance;
+        var tracks = instance.get('tracks');
+
+        var empty = !instance.get('nowPlaying') && (!tracks.size || !tracks.every(function(track) {
+            return track;
+        }));
+
+        var loading = tracks && !tracks.every(function(track) {
+            return track.get('resolved') || track.get('error');
+        });
+
+        // The player will appear once every track is ready to be displayed.
+        instance = instance.merge({
+            empty: empty,
+            loading: loading
+        });
+
+        return {
+            player: instance
+        };
+    },
+    shouldComponentUpdate: function(nextProps, nextState) {
+        return !Immutable.is(nextState.player, this.state.player) || !Immutable.is(nextProps, this.props);
     },
     componentDidMount: function() {
         if(this.props.keyboardEvents) {
@@ -38,9 +57,9 @@ var Player = React.createClass({
     },
     componentDidUpdate: function(prevProps, prevState) {
         // If the currently playing track has finished, the nextTrack property will be set. In that case, play it.
-        if(this.state.nextTrack && !prevState.nextTrack) {
+        if(this.state.player.get('nextTrack') && !prevState.player.get('nextTrack')) {
             helpers.waitForCurrentAction.bind(this)(function() {
-                this.getFlux().actions.player.track.select(this.state.nextTrack);
+                this.getFlux().actions.player.track.select(this.state.player.get('nextTrack').toJS());
             });
         }
     },
@@ -50,31 +69,30 @@ var Player = React.createClass({
         }
     },
     render: function() {
-        var empty = (!this.state.tracks || !_.any(this.state.tracks)) && !this.state.nowPlaying;
         var playerContent;
         var themeClass = '';
 
-        if(empty) {
+        if(this.state.player.get('empty')) {
             playerContent = <Empty {...this.state} />;
-        } else if(this.state.single === true) {
+        } else if(this.state.player.get('single')) {
             playerContent = <Single {...this.state} />;
             themeClass = 'solo';
-        } else if(this.state.mini === true) {
+        } else if(this.state.player.get('mini')) {
             playerContent = <Mini {...this.state} />;
             themeClass = 'mini';
-        } else if(this.state.feed === true) {
+        } else if(this.state.player.get('feed')) {
             playerContent = <Feed {...this.state} />;
             themeClass = 'feed';
         } else {
             playerContent = <Default {...this.state} />;
 
-            if(this.state.shrink && this.state.container.height() < 500) {
+            if(this.state.player.get('shrink') && this.state.player.getIn(['container', 'offsetHeight']) < 500) {
                 themeClass = 'shrink';
             }
         }
 
         return (
-            <div className={'td tdrow player ' + this.state.skin + ' ' + themeClass}>
+            <div className={'td tdrow player ' + this.state.player.get('skin') + ' ' + themeClass}>
                 {playerContent}
             </div>
         );

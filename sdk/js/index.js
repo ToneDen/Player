@@ -1,5 +1,6 @@
 require('../css');
 
+var _merge = require('lodash/object/merge');
 var Fluxxor = require('fluxxor');
 var ReactInjection = require('react/lib/ReactInjection');
 
@@ -40,7 +41,7 @@ if(!flux) {
 
 // Global ToneDen configuration function.
 function configure(parameters) {
-    _.merge(ToneDen.parameters, parameters);
+    _merge(ToneDen.parameters, parameters);
 }
 
 function log() {

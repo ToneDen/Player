@@ -12,7 +12,7 @@ if(typeof window !== 'undefined') {
 if(env === 'local' || window.location.host === 'publisher.dev' || window.location.host === 'lvho.st') {
     __webpack_public_path__ = '//widget.dev/';
 } else if(env === 'staging') {
-    __webpack_public_path__ = '//sd.toneden.io/dev/v2/';
+    __webpack_public_path__ = '//s3-us-west-1.amazonaws.com/toneden-sdk/dev/v2/';
 } else if(env === 'production') {
     __webpack_public_path__ = '//sd.toneden.io/production/v2/';
 }

@@ -11,81 +11,82 @@ var Volume = require('./common/Volume');
 var helpers = require('../../../helpers');
 
 var Single = React.createClass({
-    componentDidMount: function() {
-        var container = this.props.container;
-
-        if(this.props.tracks.length > 1){
-            container.find('.prev').show();
-            container.find('.next').show();
-        } else {
-            container.find('.prev').hide();
-            container.find('.next').hide();
-        }
-
-        //container responsiveness
-        if(container.width() < 400) {
-            container.find('.header').addClass('header-small').css('width', '100%');
-            container.find('.solo-container').addClass('solo-container-small').css('width', '100%').prependTo(container.find('.solo-buttons'));
-            container.find('.scrubber').hide();
-        }
-    },
     render: function() {
-        if(this.props.loading) {
+        var player = this.props.player;
+        var isSmallContainer = player.getIn(['container', 'offsetWidth']) < 400;
+
+        if(player.get('loading')) {
             return <Loader />;
         }
 
-        var nowPlaying = this.props.nowPlaying;
+        var nowPlaying = player.get('nowPlaying');
+        var resolved = nowPlaying.get('resolved');
 
         return (
             <Columns large-centered={true} small-centered={true}>
                 <a href='https://www.toneden.io' target='_blank' className='tdicon-td_logo-link'>
                     <i className='tdicon-td_logo' />
                 </a>
-                <Columns large={4} small={12} className='header'>
+                <Columns
+                    className={'header ' + (isSmallContainer ? 'header-small' : '')}
+                    large={4}
+                    small={12}
+                    style={{width: isSmallContainer ? '100%' : undefined}}
+                >
                     <Columns className='cover'>
                         <div className='solo-cover'>
-                            <img src={nowPlaying.resolved.artwork_url || nowPlaying.resolved.user.avatar_url} />
+                            <img src={resolved.get('artwork_url') || resolved.getIn(['user', 'avatar_url'])} />
                         </div>
                         <div className='controls'>
-                            <PlaybackButtons className='buttons' {...this.props} />
+                            <PlaybackButtons
+                                className='buttons'
+                                ref='playbackButtons'
+                                showNextAndPrevious={player.get('tracks').size > 1}
+                                {...this.props}
+                            />
                         </div>
                     </Columns>
                     <Columns className='solo-buttons'>
                         <Columns
-                            large={nowPlaying.resolved.purchase_url || nowPlaying.resolved.download_url ? 6 : 12}
+                            large={resolved.get('purchase_url') || resolved.get('download_url') ? 6 : 12}
                             small={12}
                             className='follow'
                         >
-                            <a className='tdbutton expand follow-link' href={nowPlaying.resolved.permalink_url} target='_blank'>
+                            <a className='tdbutton expand follow-link' href={resolved.get('permalink_url')} target='_blank'>
                                 <i className='tdicon-soundcloud playlist-social-icon' />
                             </a>
                         </Columns>
                         <Columns large={6} small={12} className='buy'>
                             <a
                                 className='tdbutton expand buy-link'
-                                href={nowPlaying.resolved.purchase_url || nowPlaying.resolved.download_url}
+                                href={resolved.get('purchase_url') || resolved.get('download_url')}
                                 target='_blank'
                             >
-                                {this.props.useCustomPurchaseTitle ? nowPlaying.resolved.purchase_title : 'BUY'}
-                                {!nowPlaying.resolved.purchase_url && 'DOWNLOAD'}
+                                {this.props.useCustomPurchaseTitle ? resolved.get('purchase_title') : 'BUY'}
+                                {!resolved.get('purchase_url') && 'DOWNLOAD'}
                             </a>
                         </Columns>
                     </Columns>
                 </Columns>
-                <Columns large={8} small={12} className='solo-container'>
+                <Columns
+                    className={'solo-container ' + (isSmallContainer ? 'solo-container-small' : '')}
+                    large={8}
+                    small={12}
+                    style={{width: isSmallContainer ? '100%' : ''}}
+                >
                     <Row className='info-solo'>
                         <Columns large={2} small={12} className='repeat-column'>
                             <RepeatButton repeat={this.props.repeat} />
                         </Columns>
                         <Columns large={8} small={12} className='info'>
                             <Columns className='song-name'>
-                                <a href={nowPlaying.resolved.permalink_url} target='_blank'>
-                                    {nowPlaying.resolved.title}
+                                <a href={resolved.get('permalink_url')} target='_blank'>
+                                    {resolved.get('title')}
                                 </a>
                             </Columns>
                             <Columns className='artist-name'>
-                                <a href={nowPlaying.resolved.user.permalink_url} target='_blank'>
-                                    {nowPlaying.resolved.user.username}
+                                <a href={resolved.getIn(['user', 'permalink_url'])} target='_blank'>
+                                    {resolved.getIn(['user', 'username'])}
                                 </a>
                             </Columns>
                         </Columns>
@@ -93,24 +94,24 @@ var Single = React.createClass({
                             <Volume volume={this.props.volume} />
                         </Columns>
                     </Row>
-                    {nowPlaying.error && (
+                    {nowPlaying.get('error') && (
                         <Row>
                             <Columns>
                                 <Columns className='track-error-box'>
                                     <span className='track-error-box-span'>
                                         <i className='tdicon-warning' />
-                                        {nowPlaying.errorMessage}
+                                        {nowPlaying.get('errorMessage')}
                                     </span>
                                 </Columns>
                             </Columns>
                         </Row>
                     )}
-                    {nowPlaying.resolved.streamable && (
-                        <Row className='scrubber'>
+                    {resolved.get('streamable') && (
+                        <Row className='scrubber' style={{display: isSmallContainer ? 'none' : ''}}>
                             <Scrubber nowPlaying={nowPlaying} />
                         </Row>
                     )}
-                    {!nowPlaying.resolved.streamable && (
+                    {!resolved.get('streamable') && (
                         <Row>
                             <Columns>
                                 <Columns className='track-error-box'>
@@ -126,11 +127,11 @@ var Single = React.createClass({
                         <Columns className='current-song-info'>
                             <Columns large={6} className='track-info-plays'>
                                 <i className='tdicon-play-circle-fill current-song-social-icon'></i>
-                                {helpers.numberToCommaString(nowPlaying.resolved.playback_count)}
+                                {helpers.numberToCommaString(resolved.get('playback_count'))}
                             </Columns>
                             <Columns large={6} className='track-info-favorites'>
                                 <i className='tdicon-heart current-song-social-icon' />
-                                {helpers.numberToCommaString(nowPlaying.resolved.favoritings_count)}
+                                {helpers.numberToCommaString(resolved.get('favoritings_count'))}
                             </Columns>
                         </Columns>
                     </Row>

@@ -1,6 +1,13 @@
 var async = require('async');
 
 module.exports = {
+    getElementOffset: function(element) {
+        var rect = element.getBoundingClientRect();
+        return {
+            left: rect.left + document.body.scrollLeft,
+            top: rect.top + document.body.scrollTop
+        };
+    },
     msToTimestamp: function(milliseconds) {
         var totalSeconds = Math.round(milliseconds / 1000);
         var minutes = Math.floor(totalSeconds / 60);
