@@ -44,7 +44,7 @@ var Feed = React.createClass({
                 </Columns>
                 <Columns large={10} small={12} className='feed-container'>
                     <Row className='tdrow info-feed'>
-                        <Columns className='info'>
+                        <Columns className='info' large={nowPlaying.get('error') ? 4 : 12}>
                             <Columns className='song-name'>
                                 <a href={resolved.get('permalink_url')} target='_blank'>
                                     {resolved.get('title')}
@@ -56,19 +56,15 @@ var Feed = React.createClass({
                                 </a>
                             </Columns>
                         </Columns>
-                    </Row>
-                    {nowPlaying.get('error') && (
-                        <Row>
-                            <Columns>
-                                <Columns className='track-error-box'>
-                                    <span className='track-error-box-span'>
-                                        <i className='tdicon-warning' />
-                                        {nowPlaying.get('errorMessage')}
-                                    </span>
-                                </Columns>
+                        {nowPlaying.get('error') && (
+                            <Columns large={8} className='track-error-box'>
+                                <span className='track-error-box-span'>
+                                    <i className='tdicon-warning' />
+                                    {nowPlaying.get('errorMessage')}
+                                </span>
                             </Columns>
-                        </Row>
-                    )}
+                        )}
+                    </Row>
                     <SocialInfo nowPlaying={nowPlaying} />
                 </Columns>
             </Columns>

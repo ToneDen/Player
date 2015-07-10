@@ -58,7 +58,7 @@ var TrackStore = Fluxxor.createStore({
         this.tracks = this.tracks.setIn([payload.trackID, 'playing'], false);
         this.tracks = this.tracks.setIn([payload.trackID, 'playbackPosition'], 0);
 
-        ToneDen.player.emit('track.finished', this.tracks[payload.trackID]);
+        ToneDen.player.emit('track.finished', this.tracks.get(payload.trackID).toJS());
         this.emit('change');
     },
     onTrackLoadAmountChanged: function(payload) {

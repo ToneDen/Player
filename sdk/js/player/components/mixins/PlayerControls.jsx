@@ -27,40 +27,22 @@ module.exports = {
         }
     },
     onNextButtonClick: function() {
-        var player = this.getPlayer();
-        var nowPlayingID = player.getIn(['nowPlaying', 'id']);
-
-        var currentIndex = player.get('tracks').findIndex(function(track) {
-            return track.get('id') === nowPlayingID;
-        });
-        var trackToPlay = player.getIn(['tracks', currentIndex + 1]);
-
-        if(trackToPlay) {
-            this.getFlux().actions.player.track.select(trackToPlay.toJS());
-        }
+        this.getFlux().actions.player.nextTrack(this.getPlayer().get('id'));
     },
     onPlayButtonClick: function() {
         this.getFlux().actions.player.track.togglePause(this.getPlayer().get('nowPlaying').toJS());
     },
     onPreviousButtonClick: function() {
         var player = this.getPlayer();
-        var nowPlayingID = player.getIn(['nowPlaying', 'id']);
 
         if(player.getIn(['nowPlaying', 'playbackPosition']) < 4000) {
-            var currentIndex = player.get('tracks').findIndex(function(track) {
-                return track.get('id') === nowPlayingID;
-            });
-            var trackToPlay = player.getIn(['tracks', currentIndex - 1]);
-
-            if(trackToPlay) {
-                this.getFlux().actions.player.track.select(trackToPlay.toJS());
-            }
+            this.getFlux().actions.player.previousTrack(player.get('id'));
         } else {
             this.getFlux().actions.player.track.seekTo(player.get('nowPlaying').toJS(), 0);
         }
     },
     onRepeatClick: function() {
-        this.getFlux().actions.player.setRepeat(!this.getPlayer().get('repeat'));
+        this.getFlux().actions.player.setRepeat(!this.props.repeat);
     },
     onSetVolumeClick: function(volume) {
         this.setState({
@@ -70,7 +52,7 @@ module.exports = {
     },
     onShowVolumeControlsClick: function() {
         this.setState({
-            showVolumeOptions: false
+            showVolumeOptions: true
         });
     }
 };

@@ -64,7 +64,7 @@ var AudioInterface = function(parameters) {
 
     this.loadTrack = function(track, autoPlay, callback) {
         if(track.sound) {
-            this.seekTrack(track, 0);
+            this.seekTrack(track, 0, true);
             track.sound._a && track.sound.setVolume(self.parameters.volume);
 
             if(autoPlay && (track.sound.paused || track.sound.playState === 0)) {
@@ -83,7 +83,7 @@ var AudioInterface = function(parameters) {
             function(tracks, next) {
                 var trackToPlay = tracks[0];
 
-                if(!trackToPlay.sound) {
+                if(!trackToPlay.sound && !trackToPlay.error) {
                     trackToPlay.sound = createSound(trackToPlay, autoPlay);
 
                     async.nextTick(function() {
@@ -133,6 +133,7 @@ var AudioInterface = function(parameters) {
         ], function(err, resolvedTracks) {
             // Since the single original track object may resolve into multiple tracks (in the case of a user or set
             // URL), we have to turn that original track into an array of new ones with new IDs.
+            resolvedTracks = resolvedTracks || [originalTrack];
             resolvedTracks = resolvedTracks.map(function(resolvedTrack, index) {
                 var track = _clone(originalTrack);
                 var randomID = _uniqueId('track_');
@@ -172,7 +173,7 @@ var AudioInterface = function(parameters) {
         });
     };
 
-    this.seekTrack = function(track, position) {
+    this.seekTrack = function(track, position, triggerTrackPlayStarted) {
         async.waterfall([
             function(next) {
                 if(!track.sound) {
@@ -188,10 +189,15 @@ var AudioInterface = function(parameters) {
 
             track.sound.setPosition(position);
             track.sound.options.position = position;
+
             actions.player.audioInterface.onTrackPlayPositionChange(track.id, position);
 
             if(track.sound.paused || track.sound.playState === 0) {
                 track.sound.play();
+            }
+
+            if(triggerTrackPlayStarted) {
+                actions.player.audioInterface.onTrackPlayStart(track.id);
             }
         });
     };

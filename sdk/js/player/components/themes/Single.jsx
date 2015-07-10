@@ -76,7 +76,7 @@ var Single = React.createClass({
                 >
                     <Row className='info-solo'>
                         <Columns large={2} small={12} className='repeat-column'>
-                            <RepeatButton repeat={this.props.repeat} />
+                            <RepeatButton repeat={player.get('repeat')} />
                         </Columns>
                         <Columns large={8} small={12} className='info'>
                             <Columns className='song-name'>
@@ -91,7 +91,7 @@ var Single = React.createClass({
                             </Columns>
                         </Columns>
                         <Columns large={2} small={12} className='volume-controls'>
-                            <Volume volume={this.props.volume} />
+                            <Volume volume={player.get('volume')} />
                         </Columns>
                     </Row>
                     {nowPlaying.get('error') && (

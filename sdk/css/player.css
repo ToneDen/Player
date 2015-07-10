@@ -21,7 +21,7 @@
   line-height: normal;
 }
 
-.td.player .controls, .td.player .buttons{
+.td.player .controls:not(.mini-controls), .td.player .buttons{
   width: 100%;
 }
 
@@ -766,10 +766,6 @@ opacity: 0.4;
   vertical-align: middle;
   z-index: 1;
   border-radius: 50px;
-}
-
-.td.player.mini .controls, .td.player.mini .buttons{
-  width: initial;
 }
 
 .td.player.mini .mini-controls {

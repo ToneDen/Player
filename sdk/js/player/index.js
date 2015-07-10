@@ -115,12 +115,17 @@ function ToneDenPlayer() {
         } else {
             console.error('The dom component specified by "' + dom + '" does not exist.');
         }
+
+        return instance;
+    };
+    this.setDefaultTracks = function(tracks, insertLocation) {
+        ToneDen.flux.actions.player.queue.setDefaultTracks(tracks.map(processUrlInput), insertLocation);
     };
     this.queueTrack = function(track, index) {
-        ToneDen.flux.actions.player.track.queue(processUrlInput(track), index);
+        ToneDen.flux.actions.player.queue.queueTrack(processUrlInput(track), index);
     };
     this.unqueueIndex = function(index) {
-        ToneDen.actions.player.track.unqueueIndex(index);
+        ToneDen.actions.player.queue.unqueueIndex(index);
     };
 };
 

@@ -16,7 +16,13 @@ function resolve(url, tracksPerArtist, callback) {
                     consumer_key: ToneDen.parameters.soundcloudConsumerKey,
                     format: 'json'
                 })
-                .end(next);
+                .end(function(err, res) {
+                    if(err) {
+                        return next(err);
+                    } else {
+                        return next(null, res);
+                    }
+                });
         },
         function(res, next) {
             var item = res.body;

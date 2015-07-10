@@ -10,9 +10,10 @@ var events = require('../events');
 var PlayerInstanceStore = Fluxxor.createStore({
     initialize: function() {
         this.instances = Immutable.Map();
+        this.playHistory = Immutable.List();
 
         this.bindActions(
-            events.player.audioInterface.TRACK_ERROR, this.onTrackError,
+            events.player.audioInterface.TRACK_ERROR, this.emitChangeAfterTrackStore,
             events.player.audioInterface.TRACK_FINISHED, this.onTrackFinished,
             events.player.audioInterface.TRACK_LOAD_AMOUNT_CHANGED, this.emitChangeAfterTrackStore,
             events.player.audioInterface.TRACK_PLAY_POSITION_CHANGED, this.emitChangeAfterTrackStore,
@@ -23,6 +24,8 @@ var PlayerInstanceStore = Fluxxor.createStore({
             events.player.CONFIG_UPDATED, this.onConfigUpdated,
             events.player.CREATE, this.onPlayerCreate,
             events.player.DESTROY, this.onPlayerDestroy,
+            events.player.NEXT_TRACK, this.onPlayerNextTrack,
+            events.player.PREVIOUS_TRACK, this.onPlayerPreviousTrack,
             events.player.track.SELECTED, this.onTrackSelected,
             events.player.track.TOGGLE_PAUSE, this.emitChangeAfterTrackStore
         );
@@ -47,23 +50,52 @@ var PlayerInstanceStore = Fluxxor.createStore({
 
         return state;
     },
-    getNextTrackForInstance: function(instance, TrackQueueStore) {
+    addGlobalNowPlayingToPlayHistory: function() {
+        var globalPlayer = this.instances.find(function(player) {
+            return player.get('global');
+        });
+        var globalNowPlaying = globalPlayer && globalPlayer.get('nowPlaying');
+        var lastPlayed = this.playHistory.get(this.playHistory.size - 1);
+
+        if(globalNowPlaying && globalNowPlaying !== lastPlayed) {
+            this.playHistory = this.playHistory.push(globalNowPlaying);
+        }
+    },
+    getNextTrackForInstance: function(instance, TrackStore, TrackQueueStore, previousAttemptedTrack) {
         var instanceTracks = instance.get('tracks');
         var nowPlayingID = instance.get('nowPlaying');
         var nowPlayingIndex = instanceTracks.indexOf(nowPlayingID);
+        var getFromDefaultQueue = !TrackQueueStore.queue.get(0);
+        var nextTrackID;
         var nextTrack;
 
         if(instance.get('repeat')) {
-            nextTrack = nowPlayingID;
+            nextTrackID = nowPlayingID;
         } else if(instance.get('playFromQueue')) {
-            nextTrack = TrackQueueStore.queue.get(0);
+            if(getFromDefaultQueue) {
+                nextTrackID = TrackQueueStore.defaultQueue.get(0);
+            } else {
+                nextTrackID = TrackQueueStore.queue.get(0)
+            }
         } else if(instanceTracks.get(nowPlayingIndex + 1)) {
-            nextTrack = instanceTracks.get(nowPlayingIndex + 1);
+            nextTrackID = instanceTracks.get(nowPlayingIndex + 1);
         } else {
-            nextTrack = null;
+            nextTrackID = null;
         }
 
-        return nextTrack;
+        nextTrack = TrackStore.tracks.get(nextTrackID);
+
+        if(nextTrack && nextTrack.get('error') && previousAttemptedTrack !== nextTrack) {
+            if(getFromDefaultQueue) {
+                TrackQueueStore.defaultQueue = TrackQueueStore.defaultQueue.splice(0, 1);
+            } else {
+                TrackQueueStore.queue = TrackQueueStore.queue.splice(0, 1);
+            }
+
+            return this.getNextTrackForInstance(instance, TrackStore, TrackQueueStore, nextTrack);
+        } else {
+            return nextTrackID;
+        }
     },
     onConfigUpdated: function(payload) {
         this.instances = this.instances.map(function(instance) {
@@ -93,19 +125,50 @@ var PlayerInstanceStore = Fluxxor.createStore({
             this.emit('change');
         }.bind(this));
     },
-    onTrackError: function(payload) {
-        this.waitFor(['TrackStore'], function() {
+    onPlayerNextTrack: function(payload) {
+        var player = this.instances.get(payload.playerID);
+
+        this.addGlobalNowPlayingToPlayHistory();
+
+        this.waitFor(['TrackStore', 'TrackQueueStore'], function(TrackStore, TrackQueueStore) {
+            var nextTrack = this.getNextTrackForInstance(player, TrackStore, TrackQueueStore);
+            this.instances = this.instances.setIn([payload.playerID, 'nextTrack'], nextTrack);
+
             this.emit('change');
-        });
+        }.bind(this));
+    },
+    onPlayerPreviousTrack: function(payload) {
+        var player = this.instances.get(payload.playerID);
+        var nowPlaying = player.get('nowPlaying');
+        var previousIndex = player.get('tracks').indexOf(nowPlaying) - 1;
+        var nextTrack;
+
+        this.waitFor(['TrackStore'], function() {
+            if(player.get('global')) {
+                nextTrack = this.playHistory.get(this.playHistory.size - 1);
+                this.playHistory = this.playHistory.pop();
+            } else {
+                if(previousIndex < 0) {
+                    nextTrack = nowPlaying;
+                }
+
+                nextTrack = this.instances.getIn([payload.playerID, 'tracks', previousIndex]);
+            }
+
+            this.instances = this.instances.setIn([payload.playerID, 'nextTrack'], nextTrack);
+            this.emit('change');
+        }.bind(this));
     },
     onTrackFinished: function(payload) {
         var trackID = payload.trackID;
         var onTrackFinishedCalled;
 
+        this.addGlobalNowPlayingToPlayHistory();
+
         this.waitFor(['TrackStore', 'TrackQueueStore'], function(TrackStore, TrackQueueStore) {
             this.instances = this.instances.map(function(player) {
                 if(player.get('nowPlaying')) {
-                    player = player.set('nextTrack', this.getNextTrackForInstance(player, TrackQueueStore));
+                    player = player.set('nextTrack', this.getNextTrackForInstance(player, TrackStore, TrackQueueStore));
                 }
 
                 return player;
@@ -153,17 +216,25 @@ var PlayerInstanceStore = Fluxxor.createStore({
         });
     },
     onTrackSelected: function(payload) {
-        this.instances = this.instances.map(function(player) {
-            if(player.get('tracks').contains(payload.result) || player.get('global')) {
-                player = player.set('nowPlaying', payload.result);
+        this.waitFor(['TrackStore'], function(TrackStore) {
+            var selectedTrack = TrackStore.tracks.get(payload.result);
+
+            if(selectedTrack.get('error')) {
+                return;
             }
 
-            player = player.delete('nextTrack');
+            this.instances = this.instances.map(function(player) {
+                if(player.get('tracks').contains(payload.result) || player.get('global')) {
+                    player = player.set('nowPlaying', payload.result);
+                }
 
-            return player;
+                player = player.delete('nextTrack');
+
+                return player;
+            });
+
+            this.emit('change');
         });
-
-        this.emit('change');
     }
 });
 

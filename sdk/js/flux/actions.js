@@ -85,15 +85,38 @@ module.exports = {
                 playerID: playerID
             });
         },
-        track: {
-            queue: function(track, index) {
-                ToneDen.AudioInterface.resolveTrack(track);
-
-                this.dispatch(events.player.track.QUEUE, {
+        nextTrack: function(playerID) {
+            this.dispatch(events.player.NEXT_TRACK, {
+                playerID: playerID
+            });
+        },
+        previousTrack: function(playerID) {
+            this.dispatch(events.player.PREVIOUS_TRACK, {
+                playerID: playerID
+            });
+        },
+        queue: {
+            queueTrack: function(track, index) {
+                this.dispatch(events.player.queue.QUEUE_TRACK, {
                     index: index,
                     trackID: track.id
                 });
+
+                ToneDen.AudioInterface.resolveTrack(track);
             },
+            setDefaultTracks: function(tracks) {
+                var payload = normalizr.normalize(tracks, normalizr.arrayOf(Track));
+                this.dispatch(events.player.queue.SET_DEFAULTS, payload);
+
+                tracks.forEach(ToneDen.AudioInterface.resolveTrack);
+            },
+            unqueueIndex: function(index) {
+                this.dispatch(events.player.queue.UNQUEUE_INDEX, {
+                    index: index
+                });
+            }
+        },
+        track: {
             seekTo: function(track, position) {
                 ToneDen.AudioInterface.seekTrack(track, position);
             },
@@ -103,11 +126,6 @@ module.exports = {
             },
             togglePause: function(track) {
                 ToneDen.AudioInterface.togglePause(track);
-            },
-            unqueueIndex: function(index) {
-                this.dispatch(events.player.track.UNQUEUE, {
-                    index: index
-                });
             }
         },
         setRepeat: function(repeat) {

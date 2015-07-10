@@ -32,7 +32,7 @@ var Mini = React.createClass({
 
         return (
             <span>
-                <Columns large={1} small={12} className='controls mini-controls'>
+                <Columns large={2} small={12} className='controls mini-controls'>
                     <Columns className='buttons mini-buttons'>
                         <i className='tdicon-angle-double-left player-prev prev' onClick={this.onPreviousButtonClick} />
                         <i className={playButtonClass} onClick={this.onPlayButtonClick} />
@@ -68,7 +68,7 @@ var Mini = React.createClass({
                         </Columns>
                     </Columns>
                 </Columns>
-                <ul className='tdlarge-3 tdsmall-12 tdcolumns mini-social'>
+                <ul className='tdlarge-1 tdsmall-12 tdcolumns mini-social'>
                     <li className='track-info-plays'>
                         <i className='tdicon-play-circle-fill current-song-social-icon' />
                         {helpers.numberToCommaString(resolved.get('playback_count'))}
@@ -78,7 +78,7 @@ var Mini = React.createClass({
                         {helpers.numberToCommaString(resolved.get('favoritings_count'))}
                     </li>
                 </ul>
-                <Columns large={1} small={12} className='mini-connect'>
+                <Columns large={2} small={12} className='mini-connect'>
                     {resolved.get('purchase_url') && (
                         <Columns large={8} small={6} className='buy'>
                             <a className='button expand buy-link' href={resolved.get('permalink_url')} target='_blank'>

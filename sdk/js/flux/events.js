@@ -15,11 +15,16 @@ module.exports = {
         CONFIG_UPDATED: 'player.config_updated',
         CREATE: 'player.create',
         DESTROY: 'player.destroy',
+        NEXT_TRACK: 'player.next_track',
+        PREVIOUS_TRACK: 'player.previous_track',
+        queue: {
+            SET_DEFAULTS: 'player.queue.set_defaults',
+            QUEUE_TRACK: 'player.queue.queue_track',
+            UNQUEUE_INDEX: 'player.queue.unqueue_index'
+        },
         track: {
-            QUEUE: 'player.track.queue',
             SELECTED: 'player.track.selected',
-            TOGGLE_PAUSE: 'player.track.toggle_pause',
-            UNQUEUE: 'player.track.unqueue'
+            TOGGLE_PAUSE: 'player.track.toggle_pause'
         }
     }
 };
