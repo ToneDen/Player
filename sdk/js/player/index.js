@@ -121,6 +121,9 @@ function ToneDenPlayer() {
     this.setDefaultTracks = function(tracks, insertLocation) {
         ToneDen.flux.actions.player.queue.setDefaultTracks(tracks.map(processUrlInput), insertLocation);
     };
+    this.playTrack = function(url) {
+        ToneDen.flux.actions.player.track.select(processUrlInput(url));
+    };
     this.queueTrack = function(track, index) {
         ToneDen.flux.actions.player.queue.queueTrack(processUrlInput(track), index);
     };

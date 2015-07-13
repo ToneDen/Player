@@ -32,7 +32,7 @@ var Mini = React.createClass({
 
         return (
             <span>
-                <Columns large={2} small={12} className='controls mini-controls'>
+                <Columns large={1} small={12} className='controls mini-controls'>
                     <Columns className='buttons mini-buttons'>
                         <i className='tdicon-angle-double-left player-prev prev' onClick={this.onPreviousButtonClick} />
                         <i className={playButtonClass} onClick={this.onPlayButtonClick} />
@@ -68,7 +68,7 @@ var Mini = React.createClass({
                         </Columns>
                     </Columns>
                 </Columns>
-                <ul className='tdlarge-1 tdsmall-12 tdcolumns mini-social'>
+                <ul className='tdlarge-2 tdsmall-12 tdcolumns mini-social'>
                     <li className='track-info-plays'>
                         <i className='tdicon-play-circle-fill current-song-social-icon' />
                         {helpers.numberToCommaString(resolved.get('playback_count'))}

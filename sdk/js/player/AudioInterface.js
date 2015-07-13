@@ -114,7 +114,11 @@ var AudioInterface = function(parameters) {
 
         if(self.parameters.cache && self.resolveCache[url]) {
             return async.nextTick(function() {
-                return actions.player.audioInterface.onTrackResolved(originalTrack.id, self.resolveCache[url]);
+                actions.player.audioInterface.onTrackResolved(originalTrack.id, self.resolveCache[url]);
+
+                if(typeof callback === 'function') {
+                    return callback(null, self.resolveCache[url]);
+                }
             });
         }
 
