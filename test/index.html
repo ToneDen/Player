@@ -51,7 +51,7 @@
                         ],
                         single: false,
                         mini: false,
-                        skin: 'light',
+                        skin: 'slate',
                         soundcloudConsumerKey: 'ae1c0d2a28b3eae3bd0d11eb9e1704a4',
                         staticUrl: '//widget.dev/sdk/',
                         tracksPerArtist: 4,
@@ -73,6 +73,7 @@
                 <div class="large-4 small-12 large-centered small-centered columns skin-change-container">
                     <a href="#" class="skin-change-btn active" id="light-btn" data-theme="light"></a>
                     <a href="#" class="skin-change-btn" id="dark-btn" data-theme="dark"></a>
+                    <a href="#" class="skin-change-btn" id="slate-btn" data-theme="slate"></a>
                     <a href="#" class="skin-change-btn" id="aurora-btn" data-theme="aurora"></a>
                     <a href="#" class="skin-change-btn" id="mojave-btn" data-theme="mojave"></a>
                 </div>
@@ -195,7 +196,7 @@ ToneDenReady.push(function() {
                         urls = JSON.parse(JSON.stringify(oldPlayer.parameters.urls));
                         oldPlayer.destroy();
                     }
-                    
+
                     ToneDen.player.create({
                         debug: true,
                         dom: '#player',

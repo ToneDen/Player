@@ -74,6 +74,10 @@ body {
 	background: rgba(0,0,0,0.85);
 }
 
+#slate-btn {
+	background: #6E727E;
+}
+
 #aurora-btn {
 	background: #02DDA8;
 }
