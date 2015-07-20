@@ -5,6 +5,7 @@ var Columns = require('../Columns');
 var Loader = require('../Loader');
 var Row = require('../Row');
 var Scrubber = require('./common/Scrubber');
+var Volume = require('./common/Volume');
 
 var helpers = require('../../../helpers');
 
@@ -33,11 +34,14 @@ var Mini = React.createClass({
         return (
             <span>
                 <Columns large={1} small={12} className='controls mini-controls'>
-                    <Columns className='buttons mini-buttons'>
+                    <div className='buttons mini-buttons' style={{display:'inline-block'}}>
                         <i className='tdicon-angle-double-left player-prev prev' onClick={this.onPreviousButtonClick} />
                         <i className={playButtonClass} onClick={this.onPlayButtonClick} />
                         <i className='tdicon-angle-double-right player-next next' onClick={this.onNextButtonClick} />
-                    </Columns>
+                    </div>
+                    <div className='volume-controls' style={{display:'inline-block'}}>
+                        <Volume volume={player.get('volume')} />
+                    </div>
                 </Columns>
                 {nowPlaying.get('error') && (
                     <Columns large={3} small={12}>
@@ -58,12 +62,7 @@ var Mini = React.createClass({
                     <Columns className='mini-song-info'>
                         <Columns className='song-name'>
                             <a href={resolved.get('permalink_url')} target='_blank'>
-                                {resolved.get('title')}
-                            </a>
-                        </Columns>
-                        <Columns className='artist-name'>
-                            <a href={resolved.get('user').permalink_url} target='_blank'>
-                                {resolved.get('user').username}
+                                {resolved.get('title')} - {resolved.getIn(['user', 'username'])}
                             </a>
                         </Columns>
                     </Columns>

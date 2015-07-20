@@ -56,7 +56,7 @@ var Single = React.createClass({
                                 <i className='tdicon-soundcloud playlist-social-icon' />
                             </a>
                         </Columns>
-                        <Columns large={6} small={12} className='buy'>
+                        <Columns large={6} small={12} className='buy' style={{display: resolved.get('purchase_url') || resolved.get('download_url') ? 'block' : 'none'}}>
                             <a
                                 className='tdbutton expand buy-link'
                                 href={resolved.get('purchase_url') || resolved.get('download_url')}

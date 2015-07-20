@@ -1,7 +1,7 @@
 /**
  * Draggable scrubber component to allow quick movement through the song.
  *
- * Thanks to Jared Forsyth: 
+ * Thanks to Jared Forsyth:
  * http://stackoverflow.com/questions/20926551/recommended-way-of-making-react-component-div-draggable
  */
 
@@ -70,7 +70,7 @@ var Scrubber = React.createClass({
         });
 
         var nowPlaying = this.props.nowPlaying;
-        var value = this.state.handlePosition / this.refs.scrubber.getDOMNode().offsetWidth * 
+        var value = this.state.handlePosition / this.refs.scrubber.getDOMNode().offsetWidth *
             nowPlaying.getIn(['resolved', 'duration']);
 
         this.getFlux().actions.player.track.seekTo(nowPlaying.toJS(), value);
@@ -128,7 +128,7 @@ var Scrubber = React.createClass({
             );
         } else {
             if(this.refs.scrubber && !this.state.dragging) {
-                handlePosition = nowPlaying.get('playbackPosition') / resolved.get('duration') * 
+                handlePosition = nowPlaying.get('playbackPosition') / resolved.get('duration') *
                     this.refs.scrubber.getDOMNode().offsetWidth;
             } else {
                 handlePosition = this.state.handlePosition;
@@ -146,6 +146,11 @@ var Scrubber = React.createClass({
                         >
                             <div className='track' onClick={this.onScrubberTrackClick} ref='track' />
                             <div
+                                className='highlight-track'
+                                style={{width: handlePosition}}
+                                ref='highlight-track'
+                            />
+                            <div
                                 className='handle'
                                 ref='handle'
                                 style={{left: handlePosition}}
@@ -154,7 +159,7 @@ var Scrubber = React.createClass({
                         </div>
                     </Columns>
                     <Columns large={2} className='stop-time'>
-                        {!nowPlaying.get('loading') && 
+                        {!nowPlaying.get('loading') &&
                             helpers.msToTimestamp(resolved.get('duration') - (nowPlaying.get('playbackPosition') || 0))}
                         {nowPlaying.get('loading') && <i className='tdicon-circle-o-notch spin tdloader' />}
                     </Columns>
