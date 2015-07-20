@@ -220,6 +220,7 @@ var PlayerInstanceStore = Fluxxor.createStore({
             var selectedTrack = TrackStore.tracks.get(payload.result);
 
             if(selectedTrack.get('error')) {
+                ToneDen.player.emit('track.error', selectedTrack.get('errorMessage'));
                 return;
             }
 
