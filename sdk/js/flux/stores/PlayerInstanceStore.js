@@ -22,12 +22,13 @@ var PlayerInstanceStore = Fluxxor.createStore({
             events.player.audioInterface.TRACK_RESOLVED, this.onTrackResolved,
             events.player.audioInterface.TRACK_UPDATED, this.emitChangeAfterTrackStore,
             events.player.CONFIG_UPDATED, this.onConfigUpdated,
-            events.player.CREATE, this.onPlayerCreate,
+            events.player.CREATE, this.onPlayerUpdate,
             events.player.DESTROY, this.onPlayerDestroy,
             events.player.NEXT_TRACK, this.onPlayerNextTrack,
             events.player.PREVIOUS_TRACK, this.onPlayerPreviousTrack,
             events.player.track.SELECTED, this.onTrackSelected,
-            events.player.track.TOGGLE_PAUSE, this.emitChangeAfterTrackStore
+            events.player.track.TOGGLE_PAUSE, this.emitChangeAfterTrackStore,
+            events.player.UPDATE, this.onPlayerUpdate
         );
     },
     emitChangeAfterTrackStore: function() {
@@ -38,10 +39,12 @@ var PlayerInstanceStore = Fluxxor.createStore({
     getStateByID: function(id) {
         var TrackStore = this.flux.store('TrackStore');
         var instance = this.instances.get(id);
+        var empty = !instance.get('nowPlaying') && !instance.getIn(['tracks', 'size']);;
+
         var state;
 
         if(instance) {
-            state = instance;
+            state = instance.set('empty', empty);
         } else {
             state = Immutable.Map({
                 loading: true
@@ -104,7 +107,7 @@ var PlayerInstanceStore = Fluxxor.createStore({
 
         this.emit('change');
     },
-    onPlayerCreate: function(payload) {
+    onPlayerUpdate: function(payload) {
         this.instances = this.instances.mergeDeep(payload.entities.players);
         this.emit('change');
     },

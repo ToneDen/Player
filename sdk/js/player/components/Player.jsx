@@ -29,19 +29,11 @@ var Player = React.createClass({
 
         var tracks = instance.get('tracks');
 
-        var empty = !instance.get('nowPlaying') && (!tracks.size || !tracks.every(function(track) {
-            return track;
-        }));
-
-        var loading = tracks && !tracks.every(function(track) {
-            return track.get('resolved') || track.get('error');
+        var loading = !tracks.every(function(track) {
+            return track && (track.get('resolved') || track.get('error'));
         });
 
-        // The player will appear once every track is ready to be displayed.
-        instance = instance.merge({
-            empty: empty,
-            loading: loading
-        });
+        instance = instance.set('loading', loading);
 
         return {
             player: instance

@@ -70,7 +70,6 @@ module.exports = {
             }
         },
         create: function(player) {
-            player.loading = true;
             player.nowPlaying = player.tracks[0];
 
             var payload = normalizr.normalize(player, Player);
@@ -143,6 +142,19 @@ module.exports = {
                     volume: level
                 }
             });
+        },
+        update: function(playerID, params) {
+            params.id = playerID;
+
+            if(params.tracks) {
+                params.nowPlaying = params.tracks[0];
+                params.tracks.forEach(function(track) {
+                    ToneDen.AudioInterface.resolveTrack(track, params.tracksPerArtist);
+                });
+            }
+
+            var payload = normalizr.normalize(params, Player);
+            this.dispatch(events.player.UPDATE, payload);
         }
     }
 };

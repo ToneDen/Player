@@ -25,6 +25,7 @@ module.exports = {
         track: {
             SELECTED: 'player.track.selected',
             TOGGLE_PAUSE: 'player.track.toggle_pause'
-        }
+        },
+        UPDATE: 'player.update'
     }
 };

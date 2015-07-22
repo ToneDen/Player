@@ -61,8 +61,15 @@ function getTracksForUser(user, limit, callback) {
 
 function processTrack(track, callback) {
     var err = null;
+    var queryStringPrefix;
 
-    track.stream_url += '?consumer_key=' + ToneDen.parameters.soundcloudConsumerKey;
+    if(track.stream_url.indexOf('?') === -1) {
+        queryStringPrefix = '?';
+    } else {
+        queryStringPrefix = '&';
+    }
+
+    track.stream_url += queryStringPrefix + 'consumer_key=' + ToneDen.parameters.soundcloudConsumerKey;
 
     if(track.artwork_url) {
         track.artwork_url = track.artwork_url.replace('large.jpg', 't500x500.jpg');

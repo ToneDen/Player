@@ -65,19 +65,20 @@ function ToneDenPlayer() {
 
         var instance = {
             destroy: function() {
-                var instance = ToneDen.flux.store('PlayerInstanceStore').instances[parameters.id];
+                var instance = ToneDen.flux.store('PlayerInstanceStore').instances.get(parameters.id);
                 var nowPlaying;
 
                 if(instance) {
-                    nowPlaying = ToneDen.flux.store('TrackStore').tracks[instance.nowPlaying];
+                    nowPlaying = ToneDen.flux.store('TrackStore').tracks.get(instance.get(nowPlaying));
                     ToneDen.flux.actions.player.destroy(parameters.id);
                 }
             },
-            getSound: function() {
-                var instance = ToneDen.flux.store('PlayerInstanceStore').instances[parameters.id];
-                var nowPlaying = instance && ToneDen.flux.store('TrackStore').tracks[instance.nowPlaying];
+            update: function(newParameters) {
+                if(newParameters.urls) {
+                    newParameters.tracks = newParameters.urls.map(processUrlInput);
+                }
 
-                return nowPlaying && nowPlaying.sound;
+                ToneDen.flux.actions.player.update(parameters.id, newParameters);
             }
         };
 
