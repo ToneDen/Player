@@ -5,7 +5,6 @@ var EventEmitter = require('events').EventEmitter;
 var inherits = require('util').inherits;
 var React = require('react');
 
-var AudioInterface = require('./AudioInterface');
 var constants = require('../constants');
 
 var Player = require('./components/Player');
@@ -42,7 +41,7 @@ function ToneDenPlayer() {
         urls = urls || parameters.urls || [];
         dom = dom || parameters.dom;
 
-        ToneDen.AudioInterface = ToneDen.AudioInterface || new AudioInterface({
+        _merge(ToneDen.AudioInterface.parameters, {
             cache: parameters.cache,
             volume: parameters.volume
         });

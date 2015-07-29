@@ -5,9 +5,9 @@ var Fluxxor = require('fluxxor');
 var ReactInjection = require('react/lib/ReactInjection');
 
 var analytics = require('./analytics');
+var AudioInterface = require('./player/AudioInterface');
 var constants = require('./constants');
 var events = require('./flux/events');
-var player = require('./player');
 
 // Record initial load event.
 analytics('ToneDenTracker.send', {
@@ -23,9 +23,12 @@ ReactInjection.RootIndex.injectCreateReactRootIndex(function() {
 });
 
 var flux = ToneDen.flux;
+var audioInterface = ToneDen.AudioInterface;
+
 var doNotLogEventTypes = [
     events.player.audioInterface.TRACK_LOAD_AMOUNT_CHANGED,
-    events.player.audioInterface.TRACK_PLAY_POSITION_CHANGED
+    events.player.audioInterface.TRACK_PLAY_POSITION_CHANGED,
+    events.player.audioInterface.TRACK_RESOLVED
 ];
 
 if(!flux) {
@@ -37,6 +40,13 @@ if(!flux) {
             ToneDen.log(type + ' event dispatched with payload ', payload);
         }
     });
+
+    ToneDen.flux = flux;
+}
+
+if(!audioInterface) {
+    audioInterface = new AudioInterface();
+    ToneDen.AudioInterface = audioInterface;
 }
 
 // Global ToneDen configuration function.
@@ -51,8 +61,9 @@ function log() {
 }
 
 module.exports = {
+    AudioInterface: audioInterface,
     configure: configure,
     log: log,
     flux: flux,
-    player: player
+    player: require('./player')
 };
