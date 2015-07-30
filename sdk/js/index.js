@@ -17,11 +17,6 @@ analytics('ToneDenTracker.send', {
     eventLabel: window.location.href
 });
 
-// Override default React rootID.
-ReactInjection.RootIndex.injectCreateReactRootIndex(function() {
-    return Math.floor(Math.random() * 10000 + 1);
-});
-
 var flux = ToneDen.flux;
 var audioInterface = ToneDen.AudioInterface;
 
@@ -67,3 +62,8 @@ module.exports = {
     flux: flux,
     player: require('./player')
 };
+
+// Override default React rootID.
+ReactInjection.RootIndex.injectCreateReactRootIndex(function() {
+    return Math.floor(Math.random() * 10000 + 1);
+});

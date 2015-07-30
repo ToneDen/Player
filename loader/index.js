@@ -14,7 +14,11 @@ if(env === 'local' || window.location.host === 'publisher.dev' || window.locatio
 } else if(env === 'staging') {
     __webpack_public_path__ = '//s3-us-west-1.amazonaws.com/toneden-sdk/dev/v2/';
 } else if(env === 'production') {
-    __webpack_public_path__ = '//sd.toneden.io/production/v2/';
+    if(beta) {
+        __webpack_public_path__ = '//s3-us-west-1.amazonaws.com/toneden-sdk/production/v2/';
+    } else {
+        __webpack_public_path__ = '//sd.toneden.io/production/v2/';
+    }
 }
 
 require.ensure([], function() {
