@@ -6,12 +6,22 @@ var constants = require('../../constants');
 var soundcloudApiUrl = constants.protocol + '//api.soundcloud.com/';
 var soundcloudResolveUrl = soundcloudApiUrl + 'resolve?url=http://soundcloud.com';
 
-function resolve(url, tracksPerArtist, callback) {
-    url = url.replace(/https?\:\/\/(www\.)?soundcloud\.com/gi, '');
+function resolve(track, tracksPerArtist, callback) {
+    var streamUrl = track.stream_url;
+
+    streamUrl = streamUrl.replace(/https?\:\/\/(www\.)?soundcloud\.com/gi, '');
 
     async.waterfall([
         function(next) {
-            request.get(soundcloudResolveUrl + url)
+            var url;
+
+            if(track.stream_id) {
+                url = soundcloudApiUrl + 'tracks/' + track.stream_id;
+            } else {
+                url = soundcloudResolveUrl + streamUrl;
+            }
+
+            request.get(url)
                 .query({
                     consumer_key: ToneDen.parameters.soundcloudConsumerKey,
                     format: 'json'

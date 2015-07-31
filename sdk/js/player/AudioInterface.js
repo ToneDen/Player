@@ -105,30 +105,38 @@ var AudioInterface = function(parameters) {
     };
 
     this.resolveTrack = function(originalTrack, tracksPerArtist, callback) {
-        var url = originalTrack.stream_url || originalTrack;
+        var streamUrl;
+
+        if(typeof originalTrack === 'object') {
+            streamUrl = originalTrack.stream_url;
+        } else if(typeof originalTrack === 'string') {
+            streamUrl = originalTrack;
+        } else {
+            return callback('Unrecognized track passed to resolveTrack: ' + originalTrack);
+        }
 
         if(typeof tracksPerArtist === 'function') {
             callback = tracksPerArtist;
             tracksPerArtist = 10;
         }
 
-        if(self.parameters.cache && self.resolveCache[url]) {
+        if(self.parameters.cache && self.resolveCache[streamUrl]) {
             return async.nextTick(function() {
-                actions.player.audioInterface.onTrackResolved(originalTrack.id, self.resolveCache[url]);
+                actions.player.audioInterface.onTrackResolved(originalTrack.id, self.resolveCache[streamUrl]);
 
                 if(typeof callback === 'function') {
-                    return callback(null, self.resolveCache[url]);
+                    return callback(null, self.resolveCache[streamUrl]);
                 }
             });
         }
 
         async.waterfall([
             function(next) {
-                if(url.search(/soundcloud\.com/i) !== -1) {
-                    return soundcloud.resolve(url, tracksPerArtist, next);
-                } else if(url.match(urlRegex)) {
+                if(streamUrl.search(/soundcloud\.com/i) !== -1) {
+                    return soundcloud.resolve(originalTrack, tracksPerArtist, next);
+                } else if(streamUrl.match(urlRegex)) {
                     return next(null, [{
-                        stream_url: url
+                        stream_url: streamUrl
                     }]);
                 } else {
                     return next(new Error('I don\'t know how to deal with that URL.', url));
@@ -166,7 +174,7 @@ var AudioInterface = function(parameters) {
             });
 
             if(self.parameters.cache) {
-                self.resolveCache[url] = resolvedTracks;
+                self.resolveCache[streamUrl] = resolvedTracks;
             }
 
             actions.player.audioInterface.onTrackResolved(originalTrack.id, resolvedTracks);
