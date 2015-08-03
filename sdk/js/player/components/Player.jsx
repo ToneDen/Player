@@ -29,6 +29,11 @@ var Player = React.createClass({
 
         var tracks = instance.get('tracks');
 
+        // Global instances may not have the nowPlaying track in their tracks array.
+        if(instance.get('global')) {
+            tracks = tracks.push(instance.get('nowPlaying'));
+        }
+
         var loading = !tracks.every(function(track) {
             return track && (track.get('resolved') || track.get('error'));
         });
