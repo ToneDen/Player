@@ -119,31 +119,69 @@ function ToneDenPlayer() {
 
         return instance;
     };
-    this.setDefaultTracks = function(tracks, insertLocation) {
-        ToneDen.flux.actions.player.queue.setDefaultTracks(tracks.map(processUrlInput), insertLocation);
-    };
-    this.pause = function() {
+    this.nowPlaying = function() {
         var globalPlayer = ToneDen.flux.store('PlayerInstanceStore').getGlobalInstance();
-        var track = ToneDen.flux.store('TrackStore').tracks.get(globalPlayer.get('nowPlaying')).toJS();
+        var track;
 
+        if(globalPlayer) {
+            track = ToneDen.flux.store('TrackStore').tracks.get(globalPlayer.get('nowPlaying'));
+
+            if(track) {
+                track = track.toJS();
+                track.id = Number(track.id);
+
+                return track;
+            } else {
+                return false;
+            }
+        } else {
+            console.error(
+                'There is no global player instance on the page.\n' +
+                'It only makes sense to call functions on ToneDen.player when there is a global player!'
+            );
+
+            return false;
+        }
+    };
+    /**
+     * Pauses the currently playing track in the global player.
+     */
+    this.pause = function() {
+        var track = this.nowPlaying();
         if(track) {
             ToneDen.flux.actions.player.track.togglePause(track, true);
         }
     };
+    /**
+     * Plays the currently playing track in the global player.
+     */
     this.play = function() {
-        var globalPlayer = ToneDen.flux.store('PlayerInstanceStore').getGlobalInstance();
-        var track = ToneDen.flux.store('TrackStore').tracks.get(globalPlayer.get('nowPlaying')).toJS();
-
+        var track = this.nowPlaying();
         if(track) {
             ToneDen.flux.actions.player.track.togglePause(track, false);
         }
     };
+    /**
+     * Loads and plays a track in the global player.
+     */
     this.playTrack = function(url) {
         ToneDen.flux.actions.player.track.select(processUrlInput(url));
     };
+    /**
+     * Adds a single track to the global player's queue.
+     */
     this.queueTrack = function(track, index) {
         ToneDen.flux.actions.player.queue.queueTrack(processUrlInput(track), index);
     };
+    /**
+     * Sets the default list of tracks to be played if the global player's queue runs out of tracks.
+     */
+    this.setDefaultTracks = function(tracks, insertLocation) {
+        ToneDen.flux.actions.player.queue.setDefaultTracks(tracks.map(processUrlInput), insertLocation);
+    };
+    /**
+     * Removes a track from the queue at the specified index.
+     */
     this.unqueueIndex = function(index) {
         ToneDen.actions.player.queue.unqueueIndex(index);
     };
