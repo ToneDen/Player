@@ -122,6 +122,22 @@ function ToneDenPlayer() {
     this.setDefaultTracks = function(tracks, insertLocation) {
         ToneDen.flux.actions.player.queue.setDefaultTracks(tracks.map(processUrlInput), insertLocation);
     };
+    this.pause = function() {
+        var globalPlayer = ToneDen.flux.store('PlayerInstanceStore').getGlobalInstance();
+        var track = ToneDen.flux.store('TrackStore').tracks.get(globalPlayer.get('nowPlaying')).toJS();
+
+        if(track) {
+            ToneDen.flux.actions.player.track.togglePause(track, true);
+        }
+    };
+    this.play = function() {
+        var globalPlayer = ToneDen.flux.store('PlayerInstanceStore').getGlobalInstance();
+        var track = ToneDen.flux.store('TrackStore').tracks.get(globalPlayer.get('nowPlaying')).toJS();
+
+        if(track) {
+            ToneDen.flux.actions.player.track.togglePause(track, false);
+        }
+    };
     this.playTrack = function(url) {
         ToneDen.flux.actions.player.track.select(processUrlInput(url));
     };

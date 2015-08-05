@@ -36,6 +36,11 @@ var PlayerInstanceStore = Fluxxor.createStore({
             this.emit('change');
         });
     },
+    getGlobalInstance: function() {
+        return this.instances.find(function(player) {
+            return player.get('global');
+        });
+    },
     getStateByID: function(id) {
         var TrackStore = this.flux.store('TrackStore');
         var instance = this.instances.get(id);
@@ -54,9 +59,7 @@ var PlayerInstanceStore = Fluxxor.createStore({
         return state;
     },
     addGlobalNowPlayingToPlayHistory: function() {
-        var globalPlayer = this.instances.find(function(player) {
-            return player.get('global');
-        });
+        var globalPlayer = this.getGlobalInstance();
         var globalNowPlaying = globalPlayer && globalPlayer.get('nowPlaying');
         var lastPlayed = this.playHistory.get(this.playHistory.size - 1);
 

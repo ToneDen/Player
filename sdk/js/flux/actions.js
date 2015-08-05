@@ -123,8 +123,8 @@ module.exports = {
                 ToneDen.AudioInterface.loadTrack(track, true);
                 this.dispatch(events.player.track.SELECTED, normalizr.normalize(track, Track));
             },
-            togglePause: function(track) {
-                ToneDen.AudioInterface.togglePause(track);
+            togglePause: function(track, paused) {
+                ToneDen.AudioInterface.togglePause(track, paused);
             }
         },
         setRepeat: function(repeat) {
