@@ -82,13 +82,21 @@ var AudioInterface = function(parameters) {
             }.bind(this),
             function(tracks, next) {
                 var trackToPlay = tracks[0];
+                var trackSound = trackToPlay.sound;
 
-                if(!trackToPlay.sound && !trackToPlay.error) {
-                    trackToPlay.sound = createSound(trackToPlay, autoPlay);
+                if(!trackToPlay.error) {
+                    if(!trackSound) {
+                        trackToPlay.sound = createSound(trackToPlay, autoPlay);
 
-                    async.nextTick(function() {
-                        actions.player.audioInterface.onTrackSoundAdded(trackToPlay);
-                    });
+                        async.nextTick(function() {
+                            actions.player.audioInterface.onTrackSoundAdded(trackToPlay);
+                        });
+                    } else if(autoPlay) {
+                        var oldPosition = trackSound.position;
+
+                        trackSound.play();
+                        trackSound.setPosition(oldPosition);
+                    }
                 }
 
                 return next(null, trackToPlay);
