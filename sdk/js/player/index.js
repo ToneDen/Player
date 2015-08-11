@@ -135,11 +135,6 @@ function ToneDenPlayer() {
                 return false;
             }
         } else {
-            console.error(
-                'There is no global player instance on the page.\n' +
-                'It only makes sense to call functions on ToneDen.player when there is a global player!'
-            );
-
             return false;
         }
     };
