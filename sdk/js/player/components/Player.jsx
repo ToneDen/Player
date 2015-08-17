@@ -83,7 +83,7 @@ var Player = React.createClass({
         } else {
             playerContent = <Default {...this.state} />;
 
-            if(this.state.player.get('shrink') && this.state.player.getIn(['container', 'offsetHeight']) < 500) {
+            if(this.state.player.get('shrink') && this.state.player.get('container').offsetHeight < 500) {
                 themeClass = 'shrink';
             }
         }
