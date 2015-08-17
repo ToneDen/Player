@@ -24,7 +24,8 @@ function resolve(track, tracksPerArtist, callback) {
             request.get(url)
                 .query({
                     consumer_key: ToneDen.parameters.soundcloudConsumerKey,
-                    format: 'json'
+                    format: 'json',
+                    secret_token: track.stream_secret
                 })
                 .end(function(err, res) {
                     if(err) {

@@ -16,6 +16,7 @@ function processUrlInput(url) {
         url = {
             id: url.id || id,
             stream_id: url.stream_id,
+            stream_secret: url.stream_secret,
             stream_url: url.stream_url
         };
     } else if(typeof url === 'string') {

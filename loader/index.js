@@ -31,5 +31,5 @@ require.ensure([], function() {
         }
     }
 
-    window.ToneDen.ready = true;
+    ToneDen.ready = true;
 }, 'toneden');

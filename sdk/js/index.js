@@ -55,12 +55,14 @@ function log() {
     }
 }
 
+var player = require('./player');
+
 module.exports = {
     AudioInterface: audioInterface,
     configure: configure,
-    log: log,
     flux: flux,
-    player: require('./player')
+    log: log,
+    player: player
 };
 
 // Override default React rootID.
