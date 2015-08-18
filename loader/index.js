@@ -25,11 +25,13 @@ require.ensure([], function() {
     window.ToneDen = require('../sdk/js/index');
     window.ToneDen.parameters = window.ToneDen.parameters || {};
 
-    if(window.ToneDenReady && window.ToneDenReady.length > 0) {
-        for(var i = 0; i < ToneDenReady.length; i++) {
-            ToneDenReady[i]();
+    setTimeout(function() {
+        if(window.ToneDenReady && window.ToneDenReady.length > 0) {
+            for(var i = 0; i < ToneDenReady.length; i++) {
+                ToneDenReady[i]();
+            }
         }
-    }
+    }, 1);
 
     ToneDen.ready = true;
 }, 'toneden');
