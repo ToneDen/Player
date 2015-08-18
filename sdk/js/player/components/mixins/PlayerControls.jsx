@@ -30,7 +30,11 @@ module.exports = {
         this.getFlux().actions.player.nextTrack(this.getPlayer().get('id'));
     },
     onPlayButtonClick: function() {
-        this.getFlux().actions.player.track.togglePause(this.getPlayer().get('nowPlaying').toJS());
+        var nowPlaying = this.getPlayer().get('nowPlaying');
+
+        if(nowPlaying) {
+            this.getFlux().actions.player.track.togglePause(nowPlaying.toJS());
+        }
     },
     onPreviousButtonClick: function() {
         var player = this.getPlayer();
