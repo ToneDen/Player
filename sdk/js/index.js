@@ -35,13 +35,10 @@ if(!flux) {
             ToneDen.log(type + ' event dispatched with payload ', payload);
         }
     });
-
-    ToneDen.flux = flux;
 }
 
 if(!audioInterface) {
-    audioInterface = new AudioInterface();
-    ToneDen.AudioInterface = audioInterface;
+    audioInterface = new AudioInterface(flux);
 }
 
 // Global ToneDen configuration function.
@@ -62,10 +59,13 @@ module.exports = {
     configure: configure,
     flux: flux,
     log: log,
-    player: player
+    player: player,
+    ready: true
 };
 
 // Override default React rootID.
 ReactInjection.RootIndex.injectCreateReactRootIndex(function() {
     return Math.floor(Math.random() * 10000 + 1);
 });
+
+ToneDen.ready = true;

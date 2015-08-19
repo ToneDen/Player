@@ -11,27 +11,17 @@ if(typeof window !== 'undefined') {
 
 if(env === 'local' || window.location.host === 'publisher.dev' || window.location.host === 'lvho.st') {
     __webpack_public_path__ = '//widget.dev/';
-} else if(env === 'staging') {
-    __webpack_public_path__ = '//s3-us-west-1.amazonaws.com/toneden-sdk/dev/v2/';
 } else if(env === 'production') {
-    if(beta) {
-        __webpack_public_path__ = '//s3-us-west-1.amazonaws.com/toneden-sdk/production/v2/';
-    } else {
-        __webpack_public_path__ = '//sd.toneden.io/production/v2/';
-    }
+    __webpack_public_path__ = '//sd.toneden.io/production/v2/';
 }
 
-require.ensure([], function() {
+require.ensure(['../sdk/js/index'], function(ToneDen) {
     window.ToneDen = require('../sdk/js/index');
     window.ToneDen.parameters = window.ToneDen.parameters || {};
 
-    setTimeout(function() {
-        if(window.ToneDenReady && window.ToneDenReady.length > 0) {
-            for(var i = 0; i < ToneDenReady.length; i++) {
-                ToneDenReady[i]();
-            }
+    if(window.ToneDenReady && window.ToneDenReady.length > 0) {
+        for(var i = 0; i < ToneDenReady.length; i++) {
+            ToneDenReady[i]();
         }
-    }, 1);
-
-    ToneDen.ready = true;
+    }
 }, 'toneden');

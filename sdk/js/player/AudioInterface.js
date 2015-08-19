@@ -13,7 +13,7 @@ soundManager.setup({
     forceUseGlobalHTML5Audio: true
 });
 
-var AudioInterface = function(parameters) {
+var AudioInterface = function(flux, parameters) {
     // Initialize configuration.
     var defaultParameters = {
         cache: true,
@@ -24,7 +24,7 @@ var AudioInterface = function(parameters) {
     this.soundCache = {};
     this.nowPlaying = null;
 
-    var actions = ToneDen.flux.actions;
+    var actions = flux.actions;
     var self = this;
     var urlRegex = new RegExp(/[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&//=]*)?/gi);
 
