@@ -1,8 +1,6 @@
 Embeddable Goodness, by ToneDen
 ===
 
-**Note: New versions of Chrome have broken the visualizer functionality. We've temporarily removed the visualizer while we work to find a solution.**
-
 The ToneDen SDK is loaded asynchronously, which means your page doesn't have to wait for the SDK to load before rendering.
 This means that loading it is a little more complicated than just including a `<script>` tag. Don't worry though, we've taken care of all the complicated stuff for you.
 Just copy the snippet below into your HTML page, enter your SoundCloud consumer key, and replace the commented portion with your code calling the SDK.
@@ -56,6 +54,9 @@ Sample Embed Code:
 
     ToneDenReady = window.ToneDenReady || [];
     ToneDenReady.push(function() {
+        ToneDen.configure({
+            soundcloudConsumerKey: '<YOUR SOUNDCLOUD CONSUMER KEY HERE>'
+        });
         // This is where all the action happens:
         ToneDen.player.create({
             dom: "#player",
@@ -70,6 +71,10 @@ Sample Embed Code:
 </script>
 ```
 
+Global Player and Play Queues
+---
+Documentation coming soon!
+
 API
 ---
 
@@ -81,8 +86,12 @@ API
     * **debug**  
       *default: false*   
       True to output debug messages to the console.  
+    * **soundcloudConsumerKey**  
+      You now have to provide your own SoundCloud consumer key in order to stream tracks.  
+      Because of [SoundCloud's new daily stream limits](https://developers.soundcloud.com/blog/limits), we can't afford to use a single consumer key for everyone using the player.  
+      Sorry for the inconvenience!  
 * **.player**
-  * **.create(params)**
+  * **.create(params)**  
     Creates and returns a new player instance according to the given parameters object.
     Parameters:
     * **feed**   
@@ -96,15 +105,6 @@ API
       *default: false*   
       True to use the 'mini' version of the player. This renders as a narrower bar with controls laid out horizontally.
       For an example, check out the player on [ToneDen OneSheets](https://apedrums.toneden.io/onesheet).
-    * **onPlaylistFinished**  
-      *default: 'null'*   
-      A callback function to be executed when the playlist has finished playing.
-    * **onTrackFinished**  
-      *default: 'null'*   
-      A callback function to be executed when the track has finished playing.
-    * **onTrackReady**  
-      *default: 'null'*   
-      A callback function to be executed when the track is ready to play.
     * **shrink**  
       *default: true*   
       By default, the player shrinks to the size of its parent container.
@@ -123,43 +123,41 @@ API
     * **useCustomPurchaseTitle**  
       *default: true*   
       Whether to use tracks' custom purchase titles. If false, the purchase link text will be 'BUY'.  
-    * **visualizerType**  
-      *default: 'waves'*   
-      What type of visualizer to show. Can be 'bars' or 'waves' to show those types of visualizers.  
-      Any falsy value or 'none' will hide the visualizer.  
   * **.getInstanceByDom(dom)**  
-      Returns the player instance that is associated with the given dom item.  
-      The dom argument can be either a selector string (will be passed to jQuery) or a jQuery dom object.
+      Returns the player instance that is associated with the given dom selector string.  
+  * **.setRepeat(repeat)**  
+      Sets whether players should repeat their songs.
+  * **.setVolume(level)**  
+      Sets the volume level on all players. Level should be an integer between 0 and 100, inclusive.
+  * **.global**  
+      These functions act on the page's global player instance, if one exists.  
+    * **.nowPlaying()**  
+      Returns the track that the global player is currently playing.  
+    * **.playTrack(url)**  
+      Loads and starts playing a track in the global player.  
+    * **.queueTrack(track, index)**  
+      Adds a track to the global player's queue.  
+    * **.setDefaultTracks(tracks, insertLocation)  
+      Sets the default list of tracks to be played if the global player's queue runs out of tracks.  
+    * **.togglePause(paused)**  
+      Sets the play state of the global player.  
+    * **.unqueueIndex(index)**  
+      Removes a track from the global play queue at the specified index.  
+
 
 **Player Instance**
-* **id**
+* **id**  
   Randomly generated ID, unique to the player instance.
-* **.parameters**  
-  The parameters object that the player is using.  
-* **.addTracks(urls)**  
-  Adds the given urls to the end of the current playlist, and returns the new array of URLs.
 * **.destroy()**  
   Destroys the player instance and clears the containing element's HTML.
-* **.getAllTracks()**  
-  Returns all of the URLs loaded into the player as an array.
-* **.getSound()**  
-  Gets the sound object of the current track.
-* **.getTrack()**  
-  Gets information for the current track.
-* **.mute()**  
-  Mutes the player.
 * **.next(play)**  
   Skip to the next track, and play it if `play` is true.
-* **.pause()**  
-  Pauses the track being played by the player.
-* **.play()**  
-  Play the currently selected track. 
-* **.prev(play)**  
-  Jumps to the previous track, and play it if `play` is true.
-* **.removeTracks(index, howMany)**  
-  Removes `howMany` tracks from the playlist, starting at `index`.
-* **.skipTo(index, play)**  
-  Jumps to track number `index`, and plays it if `play` is true.
+* **.prev()**  
+  Jumps to the previous track.
+* **.skipTo(index)**  
+  Jumps to track number `index`.
+* **.togglePause(paused)**  
+  Toggles the paused state of the player, or sets it to the value of the 'paused' argument if provided.
 * **.update(params)**  
   Updates the player with the given parameters. All parameters are supported except 'dom'.
 

@@ -44,9 +44,14 @@ var PlayerInstanceStore = Fluxxor.createStore({
     getStateByID: function(id) {
         var TrackStore = this.flux.store('TrackStore');
         var instance = this.instances.get(id);
-        var empty = !instance.get('nowPlaying') && !instance.getIn(['tracks', 'size']);;
-
+        var empty;
         var state;
+
+        if(!instance) {
+            return null;
+        }
+
+        empty = !instance.get('nowPlaying') && !instance.getIn(['tracks', 'size']);;
 
         if(instance) {
             state = instance.set('empty', empty);
@@ -111,6 +116,19 @@ var PlayerInstanceStore = Fluxxor.createStore({
         this.emit('change');
     },
     onPlayerUpdate: function(payload) {
+        // Custom merger function which replaces arrays instead of concatenating them.
+        function merger(a, b, key) {
+            if(Immutable.List.isList(a) && Immutable.List.isList(b)) {
+                return b;
+            } else if(a && a.mergeDeepWith) {
+                return a.mergeDeepWith(merger, b);
+            } else {
+                return b;
+            }
+        }
+
+        this.instances = this.instances.mergeDeepWith(merger, Immutable.fromJS(payload.entities.players));
+
         this.instances = this.instances.mergeDeep(payload.entities.players);
         this.emit('change');
     },
@@ -124,10 +142,10 @@ var PlayerInstanceStore = Fluxxor.createStore({
 
             // Kind of anti-fluxy here.
             if(nowPlaying && nowPlaying.sound && !isPlayingInOtherPlayer) {
-                //nowPlaying.sound.destroy();
+                nowPlaying.sound.destroy();
             }
 
-            this.instances.delete(payload.playerID);
+            this.instances = this.instances.delete(payload.playerID);
             this.emit('change');
         }.bind(this));
     },

@@ -37,7 +37,7 @@
 
                 ToneDenReady = window.ToneDenReady || [];
                 ToneDenReady.push(function() {
-                    ToneDen.player.create({
+                    window.instance1 = ToneDen.player.create({
                         debug: true,
                         dom: '#player',
                         keyboardEvents: false,

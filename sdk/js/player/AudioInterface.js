@@ -147,7 +147,7 @@ var AudioInterface = function(flux, parameters) {
                         stream_url: streamUrl
                     }]);
                 } else {
-                    return next(new Error('I don\'t know how to deal with that URL.', url));
+                    return next(new Error('I don\'t know how to deal with that URL.', streamUrl));
                 }
             }
         ], function(err, resolvedTracks) {
@@ -236,7 +236,15 @@ var AudioInterface = function(flux, parameters) {
 
         if(track.sound) {
             currentPosition = track.sound.position;
-            track.sound.togglePause();
+
+            if(typeof paused === 'undefined') {
+                track.sound.togglePause();
+            } else if(paused) {
+                track.sound.pause();
+            } else {
+                track.sound.play();
+            }
+
             track.sound.setPosition(currentPosition);
         } else {
             this.loadTrack(track, true);

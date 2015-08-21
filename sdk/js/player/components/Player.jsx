@@ -21,6 +21,11 @@ var Player = React.createClass({
         var TrackStore = this.getFlux().store('TrackStore');
         var instance = PlayerInstanceStore.getStateByID(this.props.id);
 
+        if(!instance) {
+            React.unmountComponentAtNode(this.refs.root.getDOMNode().parentElement);
+            return;
+        }
+
         instance = instance.merge({
             nextTrack: TrackStore.getTracks(instance.get('nextTrack')).get(0),
             nowPlaying: TrackStore.getTracks(instance.get('nowPlaying')).get(0),
@@ -89,7 +94,7 @@ var Player = React.createClass({
         }
 
         return (
-            <div className={'td tdrow player ' + this.state.player.get('skin') + ' ' + themeClass}>
+            <div className={'td tdrow player ' + this.state.player.get('skin') + ' ' + themeClass} ref='root'>
                 {playerContent}
             </div>
         );
