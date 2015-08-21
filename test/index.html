@@ -51,7 +51,7 @@
                         ],
                         single: false,
                         mini: false,
-                        skin: 'slate',
+                        skin: 'light',
                         soundcloudConsumerKey: 'ae1c0d2a28b3eae3bd0d11eb9e1704a4',
                         staticUrl: '//widget.dev/sdk/',
                         tracksPerArtist: 4,
@@ -187,23 +187,10 @@ ToneDenReady.push(function() {
             $(document).ready(function() {
                 $('.skin-change-btn').on('click', function() {
                     var id = $(this).attr('id');
-                    var urls = [];
-                    var tracksPerArtist = 1;
-                    var oldPlayer = ToneDen.player.getInstanceByDom('#player');
+                    var skin = $(this).attr('data-theme');
 
-                    if(oldPlayer) {
-                        tracksPerArtist = oldPlayer.parameters.tracksPerArtist;
-                        urls = JSON.parse(JSON.stringify(oldPlayer.parameters.urls));
-                        oldPlayer.destroy();
-                    }
-
-                    ToneDen.player.create({
-                        debug: true,
-                        dom: '#player',
-                        urls: urls,
-                        skin: $(this).attr('data-theme'),
-                        tracksPerArtist: tracksPerArtist,
-                        visualizerType: 'bars'
+                    window.instance1.update({
+                        skin: skin
                     });
 
                     $('.skin-change-btn').removeClass('active');
