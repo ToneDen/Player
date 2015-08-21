@@ -15,6 +15,12 @@ module.exports = {
         }
     },
     onKeyDown: function(e) {
+        // Ignore if we're in a textarea or text input.
+        var targetTag = e.target.tagName.toLowerCase();
+        if(targetTag === 'input' || targetTag === 'textarea') {
+            return;
+        }
+
         if(e.keyCode === 32) {
             this.onPlayButtonClick();
             e.preventDefault();
