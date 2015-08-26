@@ -1,12 +1,12 @@
 var async = require('async');
+var jsonp = require('jsonp');
+var encodeQuerystring = require('querystring/encode');
 var request = require('superagent');
 
 var constants = require('../../constants');
 
 var soundcloudApiUrl = constants.protocol + '//api.soundcloud.com/';
 var soundcloudResolveUrl = soundcloudApiUrl + 'resolve?url=http://soundcloud.com';
-
-require('superagent-jsonp')(request);
 
 var userAgent = navigator.userAgent;
 var isSafari = false;
@@ -18,40 +18,56 @@ if(userAgent.indexOf('Safari') !== -1 && userAgent.indexOf('Chrome') === -1) {
 function makeSoundCloudRequest(method, url, params, callback) {
     params = params || {};
 
-    var requestCreator = request[method](url);
-
     // Avoid this problem: http://stackoverflow.com/questions/24175638/remove-cors-accept-encoding-header-on-safari
     if(isSafari) {
-        requestCreator.jsonp();
-    }
-
-    if(method === 'get') {
-        requestCreator.query(params);
+        var query = encodeQuerystring(params);
+        return jsonp(url + '?' + query, function(err, body) {
+            if(err) {
+                return callback(err);
+            } else {
+                return callback(null, {
+                    body: body
+                });
+            }
+        });
     } else {
-        requestCreator.send(params);
-    }
+        var requestCreator = request[method](url);
 
-    requestCreator.end(callback);
+        if(method === 'get') {
+            requestCreator.query(params);
+        } else {
+            requestCreator.send(params);
+        }
+
+        return requestCreator.end(function(err, res) {
+            if(err) {
+                return callback(err, null);
+            } else {
+                return callback(null, res);
+            }
+        });
+    }
 }
 
 function resolve(track, tracksPerArtist, callback) {
-    var streamUrl = track.stream_url;
-
-    streamUrl = streamUrl.replace(/https?\:\/\/(www\.)?soundcloud\.com/gi, '');
-
     async.waterfall([
         function(next) {
             var query = {
                 consumer_key: ToneDen.parameters.soundcloudConsumerKey,
                 format: 'json',
-                secret_token: track.stream_secret
             };
             var url;
+
+            if(track.stream_secret) {
+                query.secret_token = track.stream_secret
+            }
+
 
             if(track.stream_id) {
                 url = soundcloudApiUrl + 'tracks/' + track.stream_id;
             } else {
-                url = soundcloudResolveUrl + streamUrl;
+                url = soundcloudApiUrl + 'resolve';
+                query.url = track.stream_url;
             }
 
             return makeSoundCloudRequest('get', url, query, next);
