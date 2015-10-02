@@ -110,6 +110,10 @@ function processTrack(track, callback) {
     var err = null;
     var queryStringPrefix;
 
+    if(!track.streamable) {
+        return callback(new Error('This track is not streamable.'));
+    }
+
     if(track.stream_url.indexOf('?') === -1) {
         queryStringPrefix = '?';
     } else {
@@ -138,11 +142,7 @@ function processTrack(track, callback) {
         }
     }
 
-    if(!track.streamable) {
-        err = new Error('This track is not streamable.');
-    }
-
-    return callback(err, track);
+    return callback(null, track);
 }
 
 module.exports = {
