@@ -13,6 +13,8 @@ if(env === 'local' || window.location.host === 'publisher.dev' || window.locatio
     __webpack_public_path__ = '//widget.dev/';
 } else if(env === 'production') {
     __webpack_public_path__ = '//sd.toneden.io/production/v2/';
+} else if(env === 'staging') {
+    __webpack_public_path__ = '//sd.toneden.io/staging/v2/';
 }
 
 require.ensure(['../sdk/js/index'], function(ToneDen) {
