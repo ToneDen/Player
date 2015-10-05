@@ -14,7 +14,7 @@ if(env === 'local' || window.location.host === 'publisher.dev' || window.locatio
 } else if(env === 'production') {
     __webpack_public_path__ = '//sd.toneden.io/production/v2/';
 } else if(env === 'staging') {
-    __webpack_public_path__ = '//sd.toneden.io/staging/v2/';
+    __webpack_public_path__ = '//sd.toneden.io/dev/v2/';
 }
 
 require.ensure(['../sdk/js/index'], function(ToneDen) {
