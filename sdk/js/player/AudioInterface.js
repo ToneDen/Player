@@ -3,7 +3,7 @@ var _merge = require('lodash/object/merge');
 var _uniqueId = require('lodash/utility/uniqueId');
 
 var async = require('async');
-var soundManager = require('../vendor/soundManager2').soundManager;
+var soundManager = require('../vendor/soundmanager2').soundManager;
 
 var constants = require('../constants');
 var soundcloud = require('./network/soundcloud');
