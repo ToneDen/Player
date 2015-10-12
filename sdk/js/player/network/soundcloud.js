@@ -79,7 +79,7 @@ function resolve(track, tracksPerArtist, callback) {
                 return processTrack(item, function(err, track) {
                     return next(err, [track]);
                 });
-            } else if(item.kind === 'set') {
+            } else if(item.kind === 'playlist') {
                 return async.map(item.tracks, processTrack, next);
             } else if(item.kind === 'user') {
                 return getTracksForUser(item, tracksPerArtist, next);
