@@ -1,6 +1,7 @@
 require('../css');
 
 var _merge = require('lodash/object/merge');
+var BatchingStrategy = require('react/lib/ReactDefaultBatchingStrategy');
 var Fluxxor = require('fluxxor');
 var ReactInjection = require('react/lib/ReactInjection');
 
@@ -28,6 +29,14 @@ var doNotLogEventTypes = [
 
 if(!flux) {
     flux = new Fluxxor.Flux(require('./flux/stores'), require('./flux/actions'));
+
+    // Custom dispatch wrapper to prevent errors when dispatching actions in componentDidMount method:
+    // https://github.com/BinaryMuse/fluxxor/pull/100
+    flux.setDispatchInterceptor(function(action, dispatch) {
+        BatchingStrategy.batchedUpdates(function() {
+            dispatch(action);
+        });
+    });
 
     // Debug logging.
     flux.on('dispatch', function(type, payload) {

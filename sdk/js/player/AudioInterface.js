@@ -140,9 +140,9 @@ var AudioInterface = function(flux, parameters) {
 
         async.waterfall([
             function(next) {
-                if(streamUrl.search(/soundcloud\.com/i) !== -1) {
+                if(streamUrl && streamUrl.search(/soundcloud\.com/i) !== -1) {
                     return soundcloud.resolve(originalTrack, tracksPerArtist, next);
-                } else if(streamUrl.match(urlRegex)) {
+                } else if(streamUrl && streamUrl.match(urlRegex)) {
                     return next(null, [{
                         stream_url: streamUrl
                     }]);
