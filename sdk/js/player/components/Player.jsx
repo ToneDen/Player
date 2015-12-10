@@ -20,6 +20,7 @@ var Player = React.createClass({
         var PlayerInstanceStore = this.getFlux().store('PlayerInstanceStore');
         var TrackStore = this.getFlux().store('TrackStore');
         var instance = PlayerInstanceStore.getStateByID(this.props.id);
+        var nextTrackID = instance.get('nextTrack');
 
         if(!instance) {
             React.unmountComponentAtNode(this.refs.root.getDOMNode().parentElement);
@@ -27,7 +28,7 @@ var Player = React.createClass({
         }
 
         instance = instance.merge({
-            nextTrack: TrackStore.getTracks(instance.get('nextTrack')).get(0),
+            nextTrack: nextTrackID === 'end' ? nextTrackID : TrackStore.getTracks(nextTrackID).get(0),
             nowPlaying: TrackStore.getTracks(instance.get('nowPlaying')).get(0),
             tracks: TrackStore.getTracks(instance.get('tracks'))
         });
@@ -58,10 +59,16 @@ var Player = React.createClass({
         }
     },
     componentDidUpdate: function(prevProps, prevState) {
+        var nextTrack = this.state.player.get('nextTrack');
+
         // If the currently playing track has finished, the nextTrack property will be set. In that case, play it.
-        if(this.state.player.get('nextTrack') && !prevState.player.get('nextTrack')) {
+        if(nextTrack && !prevState.player.get('nextTrack')) {
             helpers.waitForCurrentAction.bind(this)(function() {
-                this.getFlux().actions.player.track.select(this.state.player.get('nextTrack').toJS());
+                if(nextTrack === 'end') {
+                    this.getFlux().actions.player.track.togglePause(this.state.player.get('nowPlaying').toJS());
+                } else {
+                    this.getFlux().actions.player.track.select(nextTrack.toJS());
+                }
             });
         }
     },

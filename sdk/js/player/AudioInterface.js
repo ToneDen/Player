@@ -6,6 +6,7 @@ var async = require('async');
 var soundManager = require('../vendor/soundManager2').soundManager;
 
 var constants = require('../constants');
+var helpers = require('../helpers');
 var soundcloud = require('./network/soundcloud');
 
 soundManager.setup({
@@ -19,6 +20,7 @@ var AudioInterface = function(flux, parameters) {
         cache: true,
         volume: 100
     };
+
     this.parameters = _merge(defaultParameters, parameters);
     this.resolveCache = {};
     this.soundCache = {};

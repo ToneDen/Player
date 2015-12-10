@@ -105,7 +105,7 @@ var PlayerInstanceStore = Fluxxor.createStore({
 
             return this.getNextTrackForInstance(instance, TrackStore, TrackQueueStore, nextTrack);
         } else {
-            return nextTrackID;
+            return nextTrackID || 'end';
         }
     },
     onConfigUpdated: function(payload) {
@@ -156,7 +156,12 @@ var PlayerInstanceStore = Fluxxor.createStore({
 
         this.waitFor(['TrackStore', 'TrackQueueStore'], function(TrackStore, TrackQueueStore) {
             var nextTrack = this.getNextTrackForInstance(player, TrackStore, TrackQueueStore);
+            console.log(nextTrack);
             this.instances = this.instances.setIn([payload.playerID, 'nextTrack'], nextTrack);
+
+            if(nextTrack === 'end') {
+                ToneDen.player.emit('queue.finished');
+            }
 
             this.emit('change');
         }.bind(this));
@@ -184,15 +189,17 @@ var PlayerInstanceStore = Fluxxor.createStore({
         }.bind(this));
     },
     onTrackFinished: function(payload) {
-        var trackID = payload.trackID;
-        var onTrackFinishedCalled;
-
         this.addGlobalNowPlayingToPlayHistory();
 
         this.waitFor(['TrackStore', 'TrackQueueStore'], function(TrackStore, TrackQueueStore) {
             this.instances = this.instances.map(function(player) {
                 if(player.get('nowPlaying')) {
-                    player = player.set('nextTrack', this.getNextTrackForInstance(player, TrackStore, TrackQueueStore));
+                    var nextTrack = this.getNextTrackForInstance(player, TrackStore, TrackQueueStore);
+                    player = player.set('nextTrack', nextTrack);
+
+                    if(nextTrack === 'end') {
+                        ToneDen.player.emit('queue.finished');
+                    }
                 }
 
                 return player;
