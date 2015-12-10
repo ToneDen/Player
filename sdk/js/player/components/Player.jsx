@@ -20,12 +20,13 @@ var Player = React.createClass({
         var PlayerInstanceStore = this.getFlux().store('PlayerInstanceStore');
         var TrackStore = this.getFlux().store('TrackStore');
         var instance = PlayerInstanceStore.getStateByID(this.props.id);
-        var nextTrackID = instance.get('nextTrack');
 
         if(!instance) {
             React.unmountComponentAtNode(this.refs.root.getDOMNode().parentElement);
             return;
         }
+
+        var nextTrackID = instance.get('nextTrack');
 
         instance = instance.merge({
             nextTrack: nextTrackID === 'end' ? nextTrackID : TrackStore.getTracks(nextTrackID).get(0),
