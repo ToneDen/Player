@@ -65,8 +65,14 @@ var Player = React.createClass({
         // If the currently playing track has finished, the nextTrack property will be set. In that case, play it.
         if(nextTrack && !prevState.player.get('nextTrack')) {
             helpers.waitForCurrentAction.bind(this)(function() {
+                var nowPlaying;
+
                 if(nextTrack === 'end') {
-                    this.getFlux().actions.player.track.togglePause(this.state.player.get('nowPlaying').toJS());
+                    nowPlaying = this.stage.player.get('nowPlaying');
+
+                    if(nowPlaying) {
+                        this.getFlux().actions.player.track.togglePause(nowPlaying.toJS());
+                    }
                 } else {
                     this.getFlux().actions.player.track.select(nextTrack.toJS());
                 }
