@@ -44,11 +44,12 @@ module.exports = {
     },
     onPreviousButtonClick: function() {
         var player = this.getPlayer();
+        var nowPlaying = player.get('nowPlaying');
 
         if(player.getIn(['nowPlaying', 'playbackPosition']) < 4000) {
             this.getFlux().actions.player.previousTrack(player.get('id'));
-        } else {
-            this.getFlux().actions.player.track.seekTo(player.get('nowPlaying').toJS(), 0);
+        } else if(nowPlaying) {
+            this.getFlux().actions.player.track.seekTo(nowPlaying, 0);
         }
     },
     onRepeatClick: function() {

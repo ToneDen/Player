@@ -68,7 +68,7 @@ var Player = React.createClass({
                 var nowPlaying;
 
                 if(nextTrack === 'end') {
-                    nowPlaying = this.stage.player.get('nowPlaying');
+                    nowPlaying = this.state.player.get('nowPlaying');
 
                     if(nowPlaying) {
                         this.getFlux().actions.player.track.togglePause(nowPlaying.toJS());

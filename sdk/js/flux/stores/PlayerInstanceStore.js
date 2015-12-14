@@ -156,7 +156,6 @@ var PlayerInstanceStore = Fluxxor.createStore({
 
         this.waitFor(['TrackStore', 'TrackQueueStore'], function(TrackStore, TrackQueueStore) {
             var nextTrack = this.getNextTrackForInstance(player, TrackStore, TrackQueueStore);
-            console.log(nextTrack);
             this.instances = this.instances.setIn([payload.playerID, 'nextTrack'], nextTrack);
 
             if(nextTrack === 'end') {
