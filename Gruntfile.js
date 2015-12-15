@@ -142,7 +142,7 @@ module.exports = function(grunt) {
                     chunkFilename: 'toneden.js',
                     crossOriginLoading: 'anonymous',
                     filename: 'toneden.loader.js',
-                    jsonpFunction: 'TDSDKjsonp'
+                    library: 'ToneDenSDK'
                 },
                 module: {
                     loaders: [{
