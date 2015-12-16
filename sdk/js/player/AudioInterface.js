@@ -170,6 +170,10 @@ var AudioInterface = function(flux, parameters) {
                 track.resolved = resolvedTrack;
                 delete track.playing;
 
+                if(track.title) {
+                    resolvedTrack.title = track.title;
+                }
+
                 if(err) {
                     track.error = true;
 
