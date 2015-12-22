@@ -11,40 +11,18 @@ var Feed = React.createClass({
         Fluxxor.FluxMixin(React),
         require('../../mixins/PlayerControls')
     ],
-    render: function() {
+    renderFeedInfo: function() {
         var player = this.props.player;
-
-        if(player.get('loading')) {
-            return <Loader />
-        }
-
         var nowPlaying = player.get('nowPlaying');
         var resolved = nowPlaying.get('resolved');
-        var playButtonClass;
+        var hasError = nowPlaying.get('error');
+        var hasTitle = resolved.get('title');
 
-        if(nowPlaying.get('playing')) {
-            playButtonClass = 'tdicon-pause-circle-outline player-play play';
-        } else {
-            playButtonClass = 'tdicon-play-circle-outline player-play play';
-        }
-
-        return (
-            <Columns large-centered={true} small-centered={true}>
-                <Columns large={2} small={12} className='header'>
-                    <Columns className='cover'>
-                        <div className='feed-cover'>
-                            <img src={resolved.get('artwork_url') || resolved.getIn(['user', 'avatar_url'])} />
-                        </div>
-                        <div className='controls'>
-                            <Columns className='buttons'>
-                                <i className={playButtonClass} onClick={this.onPlayButtonClick} />
-                            </Columns>
-                        </div>
-                    </Columns>
-                </Columns>
-                <Columns large={10} small={12} className='feed-container'>
-                    <Row className='tdrow info-feed'>
-                        {!nowPlaying.get('error') && (
+        if(hasError) {
+            if(hasTitle) {
+                return (
+                    <Columns large={12} small={12} className='feed-container'>
+                        <Row className='tdrow info-feed'>
                             <Columns className='info'>
                                 <Columns className='song-name'>
                                     <a href={resolved.get('permalink_url')} target='_blank'>
@@ -57,18 +35,80 @@ var Feed = React.createClass({
                                     </a>
                                 </Columns>
                             </Columns>
-                        )}
-                        {nowPlaying.get('error') && (
-                            <Columns large={8} className='track-error-box'>
+                        </Row>
+                        <SocialInfo nowPlaying={nowPlaying} />
+                    </Columns>
+                );
+            } else {
+                return (
+                    <Columns large={12} small={12} className='feed-container'>
+                        <Row className='tdrow info-feed'>
+                            <Columns large={12} small={12} className='track-error-box'>
                                 <span className='track-error-box-span'>
                                     <i className='tdicon-warning' />
                                     {nowPlaying.get('errorMessage')}
                                 </span>
                             </Columns>
-                        )}
+                        </Row>
+                        <SocialInfo nowPlaying={nowPlaying} />
+                    </Columns>
+                );
+            }
+        } else {
+            return (
+                <Columns large={10} small={12} className='feed-container'>
+                    <Row className='tdrow info-feed'>
+                        <Columns className='info'>
+                            <Columns className='song-name'>
+                                <a href={resolved.get('permalink_url')} target='_blank'>
+                                    {resolved.get('title')}
+                                </a>
+                            </Columns>
+                            <Columns className='artist-name'>
+                                <a href={resolved.getIn(['user', 'permalink_url'])} target='_blank'>
+                                    {resolved.getIn(['user', 'username'])}
+                                </a>
+                            </Columns>
+                        </Columns>
                     </Row>
                     <SocialInfo nowPlaying={nowPlaying} />
                 </Columns>
+            );
+        }
+    },
+    render: function() {
+        var player = this.props.player;
+        var nowPlaying = player.get('nowPlaying');
+        var resolved = nowPlaying.get('resolved');
+        var playButtonClass;
+
+        if(player.get('loading')) {
+            return <Loader />
+        }
+
+        if(nowPlaying.get('playing')) {
+            playButtonClass = 'tdicon-pause-circle-outline player-play play';
+        } else {
+            playButtonClass = 'tdicon-play-circle-outline player-play play';
+        }
+
+        return (
+            <Columns large-centered={true} small-centered={true}>
+                {!nowPlaying.get('error') &&
+                    <Columns large={2} small={12} className='header'>
+                        <Columns className='cover'>
+                            <div className='feed-cover'>
+                                <img src={resolved.get('artwork_url') || resolved.getIn(['user', 'avatar_url'])} />
+                            </div>
+                            <div className='controls'>
+                                <Columns className='buttons'>
+                                    <i className={playButtonClass} onClick={this.onPlayButtonClick} />
+                                </Columns>
+                            </div>
+                        </Columns>
+                    </Columns>
+                }
+                {this.renderFeedInfo()}
             </Columns>
         );
     }
