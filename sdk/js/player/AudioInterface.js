@@ -178,7 +178,7 @@ var AudioInterface = function(flux, parameters) {
                     track.error = true;
 
                     if(err.status === 404) {
-                        track.errorMessage = 'We can\'t stream this track.'
+                        track.errorMessage = 'We couldn\'t find this track.'
                     } else {
                         track.errorMessage = err.message;
                     }
