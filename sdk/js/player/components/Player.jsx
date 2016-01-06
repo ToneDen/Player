@@ -7,6 +7,7 @@ var Empty = require('./themes/Empty');
 var Feed = require('./themes/Feed');
 var Mini = require('./themes/Mini');
 var Single = require('./themes/Single');
+var Full = require('./themes/Full');
 
 var helpers = require('../../helpers');
 
@@ -99,9 +100,11 @@ var Player = React.createClass({
         } else if(this.state.player.get('feed')) {
             playerContent = <Feed {...this.state} />;
             themeClass = 'feed';
+        } else if (this.state.player.get('full')) {
+            playerContent = <Full {...this.state} />;
+            themeClass = 'full';
         } else {
             playerContent = <Default {...this.state} />;
-
             if(this.state.player.get('shrink') && this.state.player.get('container').offsetHeight < 500) {
                 themeClass = 'shrink';
             }
