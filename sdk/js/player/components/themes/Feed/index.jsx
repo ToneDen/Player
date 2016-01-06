@@ -57,12 +57,13 @@ var Feed = React.createClass({
     render: function() {
         var player = this.props.player;
         var nowPlaying = player.get('nowPlaying');
-        var resolved = nowPlaying.get('resolved');
         var playButtonClass;
 
-        if(player.get('loading')) {
+        if(player.get('loading') || !nowPlaying) {
             return <Loader />
         }
+
+        var resolved = nowPlaying.get('resolved');
 
         if(nowPlaying.get('playing')) {
             playButtonClass = 'tdicon-pause-circle-outline player-play play';
