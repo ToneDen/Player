@@ -18,45 +18,23 @@ var Feed = React.createClass({
         var hasError = nowPlaying.get('error');
         var hasTitle = resolved.get('title');
 
-        if(hasError) {
-            if(hasTitle) {
-                return (
-                    <Columns large={12} small={12} className='feed-container'>
-                        <Row className='tdrow info-feed'>
-                            <Columns className='info'>
-                                <Columns className='song-name'>
-                                    <a href={resolved.get('permalink_url')} target='_blank'>
-                                        {resolved.get('title')}
-                                    </a>
-                                </Columns>
-                                <Columns className='artist-name'>
-                                    <a href={resolved.getIn(['user', 'permalink_url'])} target='_blank'>
-                                        {resolved.getIn(['user', 'username'])}
-                                    </a>
-                                </Columns>
-                            </Columns>
-                        </Row>
-                        <SocialInfo nowPlaying={nowPlaying} />
-                    </Columns>
-                );
-            } else {
-                return (
-                    <Columns large={12} small={12} className='feed-container'>
-                        <Row className='tdrow info-feed'>
-                            <Columns large={12} small={12} className='track-error-box'>
-                                <span className='track-error-box-span'>
-                                    <i className='tdicon-warning' />
-                                    {nowPlaying.get('errorMessage')}
-                                </span>
-                            </Columns>
-                        </Row>
-                        <SocialInfo nowPlaying={nowPlaying} />
-                    </Columns>
-                );
-            }
+        if(hasError && !hasTitle) {
+            return (
+                <Columns large={12} small={12} className='feed-container'>
+                    <Row className='tdrow info-feed'>
+                        <Columns large={12} small={12} className='track-error-box'>
+                            <span className='track-error-box-span'>
+                                <i className='tdicon-warning' />
+                                {nowPlaying.get('errorMessage')}
+                            </span>
+                        </Columns>
+                    </Row>
+                    <SocialInfo nowPlaying={nowPlaying} />
+                </Columns>
+            );
         } else {
             return (
-                <Columns large={10} small={12} className='feed-container'>
+                <Columns large={hasError ? 12 : 10} small={12} className='feed-container'>
                     <Row className='tdrow info-feed'>
                         <Columns className='info'>
                             <Columns className='song-name'>
