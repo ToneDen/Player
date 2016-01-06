@@ -68,6 +68,7 @@ text-align: center;
   right: 0;
   top:0;
   font-size: 12px;
+  padding: 10px;
   color: #222;
 }
 
@@ -1110,6 +1111,25 @@ text-align: center;
   margin-right: 5px;
   vertical-align: top;
 }
+
+/*Full Player*/
+.td.player.full {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    border: 0;
+    z-index: auto;
+    max-width: 100%;
+}
+
+.td.player.full div, .td.player.full ul {
+    border: 0;
+}
+
 
 /*Container Responsiveness*/
 .td.player .follow-small,
