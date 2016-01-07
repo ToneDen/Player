@@ -170,15 +170,11 @@ var AudioInterface = function(flux, parameters) {
                 track.resolved = resolvedTrack;
                 delete track.playing;
 
-                if(track.title) {
-                    resolvedTrack.title = track.title;
-                }
-
                 if(err) {
                     track.error = true;
 
                     if(err.status === 404) {
-                        track.errorMessage = 'We can\'t stream this track.'
+                        track.errorMessage = 'We couldn\'t find this track.'
                     } else {
                         track.errorMessage = err.message;
                     }
