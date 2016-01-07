@@ -147,7 +147,8 @@ var AudioInterface = function(flux, parameters) {
                 } else if(streamUrl && streamUrl.match(urlRegex)) {
                     return next(null, [{
                         streamable: true,
-                        stream_url: streamUrl
+                        stream_url: streamUrl,
+                        user: originalTrack.user
                     }]);
                 } else {
                     return next(new Error('I don\'t know how to deal with that URL.', streamUrl));

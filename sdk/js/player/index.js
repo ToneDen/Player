@@ -19,7 +19,8 @@ function processUrlInput(url) {
             stream_id: url.stream_id,
             stream_secret: url.stream_secret,
             stream_url: url.stream_url,
-            title: url.title
+            title: url.title,
+            user: url.user
         };
     } else if(typeof url === 'string') {
         url = {
