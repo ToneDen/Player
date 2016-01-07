@@ -39,7 +39,7 @@ var AudioInterface = function(flux, parameters) {
                 actions.player.audioInterface.onTrackFinish(this.id);
             },
             onload: function() {
-                actions.player.audioInterface.onTrackReady(this.id);
+                actions.player.audioInterface.onTrackReady(this.id, this);
             },
             onpause: function() {
                 actions.player.audioInterface.onTrackPlayingChange(this.id, false);
@@ -146,6 +146,7 @@ var AudioInterface = function(flux, parameters) {
                     return soundcloud.resolve(originalTrack, tracksPerArtist, next);
                 } else if(streamUrl && streamUrl.match(urlRegex)) {
                     return next(null, [{
+                        streamable: true,
                         stream_url: streamUrl
                     }]);
                 } else {

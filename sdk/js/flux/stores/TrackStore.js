@@ -102,6 +102,8 @@ var TrackStore = Fluxxor.createStore({
     },
     onTrackReady: function(payload) {
         this.tracks = this.tracks.setIn([payload.trackID, 'loading'], false);
+        this.tracks = this.tracks.setIn([payload.trackID, 'resolved', 'duration'], payload.sound.duration);
+
         this.emit('change');
     },
     onTrackResolved: function(payload) {

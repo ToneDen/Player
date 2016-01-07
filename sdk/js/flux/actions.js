@@ -49,8 +49,9 @@ module.exports = {
                     trackID: trackID
                 });
             },
-            onTrackReady: function(trackID) {
+            onTrackReady: function(trackID, sound) {
                 this.dispatch(events.player.audioInterface.TRACK_READY, {
+                    sound: sound,
                     trackID: trackID
                 });
             },
