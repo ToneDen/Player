@@ -1,6 +1,7 @@
 @font-face {
 	font-family: 'td-player';
-	src:url('//sd.toneden.io/resources/fonts/td-player.woff') format('woff'),
+	src:
+        url('//sd.toneden.io/resources/fonts/td-player.woff') format('woff'),
 	    url('//sd.toneden.io/resources/fonts/td-player.eot') format('embedded-opentype'),
 		url('//sd.toneden.io/resources/fonts/td-player.ttf') format('truetype'),
 		url('//sd.toneden.io/resources/fonts/td-player.svg') format('svg');
