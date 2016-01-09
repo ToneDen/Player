@@ -6,3 +6,5 @@ npm-debug.log
 webpack.json
 toneden.js
 toneden.loader.js
+.idea
+dist
