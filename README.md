@@ -163,9 +163,9 @@ API
 
 Sample API Usage:
 ``` 
-ToneDen.player.getInstanceByDom("#player").play();
-ToneDen.player.getInstanceByDom("#player").pause();
-ToneDen.player.getInstanceByDom("#player").getTrack();
+ToneDen.player.getInstanceByDom("#player").togglePause(false); // The player will start playing, if it isn't already.
+ToneDen.player.getInstanceByDom("#player").togglePause(true); // The player will pause.
+ToneDen.player.getInstanceByDom("#player").next(); // Play the next track in the list.
 ```
 
 Development
