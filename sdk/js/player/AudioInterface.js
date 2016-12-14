@@ -255,7 +255,7 @@ var AudioInterface = function(flux, parameters) {
 
             track.sound.setPosition(currentPosition);
         } else {
-            this.loadTrack(track, paused === true || typeof paused === 'undefined');
+            this.loadTrack(track, paused === false || typeof paused === 'undefined');
         }
     };
 
