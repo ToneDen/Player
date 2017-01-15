@@ -4,7 +4,7 @@ I apologize for not updating this repo earlier. We recently received notice from
 
 **Every user of a custom SoundCloud player, ours included, will need to switch to [their embedded player](https://developers.soundcloud.com/docs/widget) in order to stream songs from SoundCloud.**
 
-It's disappointing that we have to be the ones to break this news to developers, and I'm sorry for the inconvenience it's caused the users of our player. I'll leave this repo up and add this message to the top of the README so that others become aware of the situation.
+It's disappointing that we have to be the ones to break this news to developers, and I'm sorry for the inconvenience it's caused the users of our player. I'll leave this repo up so that others become aware of the situation.
 
 Embeddable Goodness, by ToneDen
 ===
