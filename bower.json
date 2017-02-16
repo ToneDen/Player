@@ -1,0 +1,26 @@
+{
+  "name": "ToneDen",
+  "version": "2.0.1",
+  "homepage": "https://github.com/ZhiguoZhang/toneden-sdk",
+  "authors": [
+    "Nick Elsbree <nick@toneden.io>",
+    "Folk by Zhiguo Zhang for Bower"
+  ],
+  "description": "A pure JS customizable audio player for SoundCloud.",
+  "main": [
+    "dist/toneden.js",
+    "dist/toneden.loader.js"
+  ],
+  "keywords": [
+    "SoundCloud",
+    "Player"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
